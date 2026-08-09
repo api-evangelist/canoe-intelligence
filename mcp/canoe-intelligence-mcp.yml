@@ -1,0 +1,256 @@
+generated: '2026-08-09'
+method: derived
+status: candidate
+source: openapi/canoe-intelligence-api-openapi.yml
+searched:
+  result: none
+  evidence:
+  - url: https://api.canoesoftware.com/mcp
+    status: 500
+  - url: https://api.canoesoftware.com/sse
+    status: 500
+  - url: https://api.canoesoftware.com/.well-known/mcp.json
+    status: 404
+  - url: https://canoeintelligence.com/llms.txt
+    status: 200
+    note: No MCP server referenced
+  note: Canoe publishes no hosted or remote MCP server as of this probe.
+server:
+  name: canoe-intelligence
+  transport: http
+  url: null
+  note: Candidate only — no server is published. Tools below are derived one-per-OpenAPI-operation.
+auth:
+  type: oauth2-bearer
+  header: 'Authorization: Bearer {token}'
+  note: Every tool inherits the API bearer token; access tokens expire after 24 hours.
+tools:
+- name: GetAllocation
+  description: Get Allocations
+  method: GET
+  path: /v1/allocations
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetAllocation
+- name: CreateSingleAllocation
+  description: Create A Single Allocation
+  method: POST
+  path: /v1/allocations
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#CreateSingleAllocation
+- name: UpdateSingleAllocation
+  description: Update A Single Allocation
+  method: PUT
+  path: /v1/allocations/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#UpdateSingleAllocation
+- name: DeleteSingleAllocation
+  description: Delete A Single Allocation
+  method: DELETE
+  path: /v1/allocations/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DeleteSingleAllocation
+- name: GetDocuments
+  description: Get Document Data
+  method: GET
+  path: /v1/documents/data
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetDocuments
+- name: GetDocumentsType
+  description: Get Document Types
+  method: GET
+  path: /v1/documents/types
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetDocumentsType
+- name: GetDocumentTags
+  description: Get Document Tags
+  method: GET
+  path: /v1/documents/tags
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetDocumentTags
+- name: GetDocumentAllocationTags
+  description: Get Document Allocation Tags
+  method: GET
+  path: /v1/documents/allocation-tags
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetDocumentAllocationTags
+- name: DeleteMultipleDocuments
+  description: Delete Multiple Documents
+  method: POST
+  path: /v1/documents/delete-documents
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DeleteMultipleDocuments
+- name: GetASingleDocument
+  description: Get A Single Document
+  method: GET
+  path: /v1/documents/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetASingleDocument
+- name: DeleteDocument
+  description: Delete A Single Document
+  method: DELETE
+  path: /v1/documents/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DeleteDocument
+- name: BulkSetDocumentMetadata
+  description: Bulk Set Document Metadata
+  method: POST
+  path: /v1/documents/metadata
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#BulkSetDocumentMetadata
+- name: SetDocumentMetadata
+  description: Set Document Metadata
+  method: PUT
+  path: /v1/documents/{id}/metadata
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#SetDocumentMetadata
+- name: DownloadDocuments
+  description: Download Documents
+  method: GET
+  path: /v1/documents
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DownloadDocuments
+- name: UploadDocuments
+  description: Upload A Single Document
+  method: POST
+  path: /v1/documents
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#UploadDocuments
+- name: GetFunds
+  description: Get Funds
+  method: GET
+  path: /v1/funds
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetFunds
+- name: CreateSingleFund
+  description: Create A Single Fund
+  method: POST
+  path: /v1/funds
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#CreateSingleFund
+- name: DeleteMultipleFunds
+  description: Delete Multiple Funds
+  method: DELETE
+  path: /v1/funds
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DeleteMultipleFunds
+- name: GetFundsDetailedData
+  description: Get Detailed Fund Data
+  method: GET
+  path: /v1/funds/details
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetFundsDetailedData
+- name: GetSingleFunds
+  description: Get A Single Fund
+  method: GET
+  path: /v1/funds/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetSingleFunds
+- name: UpdateSingleFund
+  description: Update A Single Fund
+  method: PUT
+  path: /v1/funds/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#UpdateSingleFund
+- name: DeleteSingleFund
+  description: Delete A Single Fund
+  method: DELETE
+  path: /v1/funds/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DeleteSingleFund
+- name: GetSingleFundsDocumentdata
+  description: Get A Single Fund's Document Data
+  method: GET
+  path: /v1/funds/{id}/document-data
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetSingleFundsDocumentdata
+- name: DownloadSingleFundsDocumentdata
+  description: Download A Single Fund's Documents
+  method: GET
+  path: /v1/funds/{id}/documents
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DownloadSingleFundsDocumentdata
+- name: GetSingleFundsDocumentId
+  description: Get A Single Fund's Document IDs
+  method: GET
+  path: /v1/funds/{id}/document-ids
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetSingleFundsDocumentId
+- name: Organizations
+  description: Get Organizations
+  method: GET
+  path: /v1/organizations
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#Organizations
+- name: FindById
+  description: Get A Single Organization
+  method: GET
+  path: /v1/organizations/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#FindById
+- name: FindBySingleOrganizationId
+  description: Get A Single Organization's Document Data
+  method: GET
+  path: /v1/organizations/{id}/document-data
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#FindBySingleOrganizationId
+- name: DownloadOrganizationDocuments
+  description: Download A Single Organization's Documents
+  method: GET
+  path: /v1/organizations/{id}/documents
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DownloadOrganizationDocuments
+- name: DownloadBySingleOrganizationId
+  description: Get A Single Organization's Document IDs
+  method: GET
+  path: /v1/organizations/{id}/document-ids
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DownloadBySingleOrganizationId
+- name: CreateASingleEntity
+  description: Create A Single Entity
+  method: POST
+  path: /v1/organizations/entities
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#CreateASingleEntity
+- name: UpdateASingleEntity
+  description: Update A Single Entity
+  method: PUT
+  path: /v1/organizations/entities/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#UpdateASingleEntity
+- name: CreateASingleAccount
+  description: Create A Single Account
+  method: POST
+  path: /v1/organizations/accounts
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#CreateASingleAccount
+- name: UpdateASingleAccount
+  description: Update A Single Account
+  method: PUT
+  path: /v1/organizations/accounts/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#UpdateASingleAccount
+- name: GetCustomFields
+  description: Get Custom Fields
+  method: GET
+  path: /v1/custom_fields
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetCustomFields
+- name: User
+  description: Get Your API User Information
+  method: GET
+  path: /v1/user
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#User
+- name: createUser
+  description: Create User
+  method: POST
+  path: /v1/user
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#createUser
+- name: findByTags
+  description: Get Users Within Your Organization
+  method: GET
+  path: /v1/users
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#findByTags
+- name: GetTerms
+  description: Get Terms
+  method: GET
+  path: /v1/terms
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#GetTerms
+- name: CreateSingleTerm
+  description: Create A Single Term
+  method: POST
+  path: /v1/terms
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#CreateSingleTerm
+- name: UpdateSingleTerm
+  description: Update A Single Term
+  method: PUT
+  path: /v1/terms/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#UpdateSingleTerm
+- name: DeleteSingleTerm
+  description: Delete A Single Term
+  method: DELETE
+  path: /v1/terms/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#DeleteSingleTerm
+- name: updateAllocationTags
+  description: Update Allocation Tags
+  method: PATCH
+  path: /v1/documents/{allocationId}/allocation-tags
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#updateAllocationTags
+- name: updateUser
+  description: Update User
+  method: PUT
+  path: /v1/users/{id}
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#updateUser
+- name: getUserRoles
+  description: Get User Roles
+  method: GET
+  path: /v1/users/roles
+  source_operation: openapi/canoe-intelligence-api-openapi.yml#getUserRoles
+coverage:
+  tools: 45
+  rest_operations: 50
+  excluded: 4 token/OAuth-client operations excluded — credential issuance is not an agent tool

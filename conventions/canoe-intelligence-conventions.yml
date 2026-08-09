@@ -1,0 +1,139 @@
+generated: '2026-08-09'
+method: searched
+source: https://api.canoesoftware.com/docs
+derived_from: openapi/canoe-intelligence-api-openapi.yml
+api: Canoe API v1
+base_url: https://api.canoesoftware.com
+transport:
+  https_only: true
+  ports:
+  - 443
+  - 9443
+  note: Canoe documents that calling the API may require opening ports 443 and 9443, and that client networks may
+    need to allowlist Canoe IP ranges published in the (authenticated) knowledge base.
+media_types:
+  request:
+  - application/json
+  - multipart/form-data
+  response:
+  - application/json
+authentication:
+  style: oauth2-bearer
+  header: 'Authorization: Bearer {token}'
+  token_lifetime: 24 hours
+  grants:
+  - authorization_code
+  - refresh_token
+  - client_credentials
+  - password (via /v1/tokens)
+  client_management: https://client.canoesoftware.com/api_configuration
+  artifact: authentication/canoe-intelligence-authentication.yml
+required_headers:
+- name: Authorization
+  value: Bearer {token}
+  required: true
+- name: Accept
+  value: application/json
+  required: true
+- name: X-Requested-With
+  value: XMLHttpRequest
+  required: true
+  note: Present in every published code sample for all 47 sampled operations.
+- name: X-API-VERSION
+  value: <date>
+  required: false
+  note: Opts an operation into its dated behaviour train. Required to enable pagination on several collection endpoints.
+idempotency:
+  supported: false
+  evidence: No Idempotency-Key header, parameter, or idempotency guidance appears anywhere in the published OpenAPI
+    or the developer documentation.
+  note: Retries of POST/PUT/PATCH are not de-duplicated by the API. Callers must reconcile with a GET before retrying
+    a write.
+pagination:
+  style: page-number
+  opt_in: true
+  opt_in_mechanism: X-API-VERSION request header set to the dated version for that resource
+  params:
+  - name: page
+    in: query
+    default: 1
+  - name: limit
+    in: query
+    default: 100
+    max: 100
+    note: Used by documents, tags, organizations, users, custom fields.
+  - name: perPage
+    in: query
+    default: 100
+    max: 100
+    note: Used by allocations, funds, fund details, terms.
+  response_signal: headers
+  response_fields:
+  - total
+  - first
+  - next
+  - prev
+  - last
+  note: 'Pagination is delivered in response HEADERS, not the body: total result count plus first/next/prev/last
+    page links. Two different page-size parameter names are in use across resources (limit vs perPage).'
+field_selection:
+  supported: true
+  param: fields
+  style: comma-separated allowlist of response field names
+  operations:
+  - GetDocuments
+  - DownloadDocuments
+  - GetSingleFundsDocumentdata
+  - FindBySingleOrganizationId
+  - GetTerms
+filtering:
+  style: query parameters, comma-separated for multi-value
+  note: Most collection endpoints accept exact-match id filters (allocation_id, entity_id, investment_id, account_id,
+    fund_id, document_id) where multiple values are comma-separated, plus date-range pairs (*_start / *_end) and
+    a custom_field indexed filter.
+versioning:
+  scheme: uri-path major + dated behaviour train via header
+  uri_version: v1
+  header: X-API-VERSION
+  header_format: YYYY-MM-DD
+  known_versions:
+  - '2022-02-24'
+  - '2022-09-19'
+  - '2023-08-07'
+  - '2024-10-07'
+  - '2024-12-12'
+  note: 'The dated header is per-resource, not global: /v1/funds pagination requires 2022-02-24, /v1/documents requires
+    2022-09-19, /v1/organizations 2023-08-07, fund and organization document-data 2024-10-07, and /v1/users 2024-12-12.
+    Omitting the header keeps the original unpaginated behaviour.'
+  artifact: lifecycle/canoe-intelligence-lifecycle.yml
+errors:
+  envelope: plain application/json
+  rfc9457: false
+  authentication_error_fields:
+  - error_code
+  - error_description
+  - hint
+  - retry_after
+  artifact: errors/canoe-intelligence-problem-types.yml
+rate_limiting:
+  documented: true
+  scope: authentication endpoints
+  signal: HTTP 429 with error_code RATE_LIMIT_EXCEEDED and a retry_after value in seconds
+  headers: null
+  published_quotas: null
+  note: Canoe documents brute-force rate limiting on the authentication endpoints and instructs callers to honour
+    retry_after with exponential backoff. No numeric quota, no X-RateLimit-* headers, and no per-resource limits
+    are published, so no rate-limits artifact is emitted rather than inventing numbers.
+request_tracing:
+  supported: false
+  evidence: No request-id/correlation-id header is documented or present in the spec.
+metadata:
+  supported: true
+  note: Documents carry client-settable metadata (PUT /v1/documents/{id}/metadata, POST /v1/documents/metadata for
+    bulk) and tenant-defined custom fields (GET /v1/custom_fields, custom_field query filter).
+cross_links:
+  authentication: authentication/canoe-intelligence-authentication.yml
+  scopes: scopes/canoe-intelligence-scopes.yml
+  errors: errors/canoe-intelligence-problem-types.yml
+  lifecycle: lifecycle/canoe-intelligence-lifecycle.yml
+  data_model: data-model/canoe-intelligence-data-model.yml

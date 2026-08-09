@@ -1,0 +1,78 @@
+generated: '2026-08-09'
+method: searched
+source:
+- openapi/canoe-intelligence-api-openapi.yml
+- https://api.canoesoftware.com/docs
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+  default_security: 'bearerAuth (applied at the OpenAPI document root; token endpoints opt out with security: [])'
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: 'Enter your Bearer token in the format: Bearer {token}'
+  sources:
+  - openapi/canoe-intelligence-api-openapi.yml
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.canoesoftware.com/oauth/authorize
+    tokenUrl: https://api.canoesoftware.com/oauth/token
+    scopes: 0
+  - flow: clientCredentials
+    tokenUrl: https://api.canoesoftware.com/v1/tokens
+    scopes: 0
+  description: OAuth 2.0 authentication
+  sources:
+  - openapi/canoe-intelligence-api-openapi.yml
+docs: https://api.canoesoftware.com/docs
+token:
+  lifetime: 24 hours
+  type: JWT bearer
+  header: 'Authorization: Bearer {token}'
+  issuance_endpoints:
+  - operationId: RequestingTokensAuthCodes
+    path: /oauth/token
+    grant: authorization_code
+  - operationId: RequestingTokensRefreshToken
+    path: /oauth/token/refresh
+    grant: refresh_token
+  - operationId: RequestingTokensClientCredentials
+    path: /oauth/token/client-credentials
+    grant: client_credentials
+  - operationId: Tokens
+    path: /v1/tokens
+    grant: password
+    note: Takes API user credentials rather than a token — one of the few endpoints authenticated with user credentials.
+  authorize_url: https://api.canoesoftware.com/oauth/authorize
+  client_registration: https://client.canoesoftware.com/api_configuration
+  client_management_operation: ManageAuthClient (GET /oauth/clients)
+additional_controls:
+- control: IP allowlisting
+  direction: inbound
+  note: Canoe can restrict which client IPs may call the API, on request.
+- control: IP allowlisting
+  direction: outbound
+  note: Client networks may need to allowlist Canoe's published IP ranges; the list is in the authenticated knowledge
+    base.
+- control: Ports
+  note: The API uses ports 443 and 9443.
+- control: 'X-Requested-With: XMLHttpRequest'
+  note: Sent on every published code sample; treat as required.
+authorization_model:
+  scopes: false
+  note: Both OAuth 2.0 flows declare an empty scopes map. Authorization is by purchased Canoe services plus per-user
+    permissions, surfaced as HTTP 403, not by OAuth scope.
+errors:
+  artifact: errors/canoe-intelligence-problem-types.yml
+  codes:
+  - INVALID_CREDENTIALS
+  - MALFORMED_JWT
+  - RATE_LIMIT_EXCEEDED

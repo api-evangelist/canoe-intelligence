@@ -1,0 +1,90 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Canoe API v1
+  version: 1.0.0
+extends: openapi/canoe-intelligence-api-openapi.yml
+x-generated: '2026-08-09'
+x-method: generated
+x-source: https://api.canoesoftware.com/api/docs.json
+actions:
+- target: $.info
+  description: Fill the empty contact/licence surface and record provenance.
+  update:
+    x-apievangelist-profile: https://apievangelist.com/providers/canoe-intelligence
+    x-apievangelist-harvested: '2026-08-09'
+    x-apievangelist-source: https://api.canoesoftware.com/api/docs.json
+    x-apievangelist-rating-artifacts:
+    - authentication/canoe-intelligence-authentication.yml
+    - conventions/canoe-intelligence-conventions.yml
+    - errors/canoe-intelligence-problem-types.yml
+    - lifecycle/canoe-intelligence-lifecycle.yml
+    - data-model/canoe-intelligence-data-model.yml
+- target: $.info
+  description: Canoe publishes API Terms of Use but no machine-readable licence object.
+  update:
+    x-terms-of-service-note: https://canoeintelligence.com/api-terms-of-use/ — access to any Canoe API requires
+      a separate agreement; the portal terms grant documentation access only.
+- target: $.tags
+  description: The Custom Fields tag is used by GET /v1/custom_fields but is never declared in tags[].
+  update:
+  - name: Custom Fields
+    description: Tenant-defined custom field definitions.
+- target: $.components.securitySchemes['oauth2'].flows.authorizationCode
+  description: Record that the declared scopes map is empty — authorization is by purchased service and user permission,
+    not OAuth scope.
+  update:
+    x-apievangelist-scopes-note: Empty scopes map. Canoe gates access by purchased services and per-user permissions
+      rather than OAuth scopes.
+- target: $.paths
+  description: Record the cross-cutting request headers every published code sample sends but which no operation
+    declares as parameters.
+  update:
+    x-apievangelist-required-headers:
+    - name: Authorization
+      value: Bearer {token}
+    - name: Accept
+      value: application/json
+    - name: X-Requested-With
+      value: XMLHttpRequest
+    - name: X-API-VERSION
+      value: YYYY-MM-DD
+      note: Opt-in dated behaviour train; required to enable pagination on several collection endpoints.
+- target: $.paths
+  description: Record the pagination response contract, which is delivered in headers and is absent from every response
+    definition.
+  update:
+    x-apievangelist-pagination:
+      style: page-number
+      request_params:
+      - page
+      - limit
+      - perPage
+      response_headers:
+      - total
+      - first
+      - next
+      - prev
+      - last
+      max_page_size: 100
+      opt_in_header: X-API-VERSION
+- target: $.paths
+  description: Record the documented error envelope, which appears in the docs narrative but in no response schema.
+  update:
+    x-apievangelist-error-envelope:
+      content_type: application/json
+      rfc9457: false
+      fields:
+      - error_code
+      - error_description
+      - hint
+      - retry_after
+      known_codes:
+      - INVALID_CREDENTIALS
+      - MALFORMED_JWT
+      - RATE_LIMIT_EXCEEDED
+- target: $.paths
+  description: Record that the API has no idempotency contract, so agents must not blind-retry writes.
+  update:
+    x-apievangelist-idempotency:
+      supported: false
+      guidance: Reconcile with a GET before retrying any POST/PUT/PATCH; Canoe does not de-duplicate writes.

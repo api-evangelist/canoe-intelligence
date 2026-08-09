@@ -1,0 +1,240 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/canoe-intelligence-api-openapi.yml
+docs: https://api.canoesoftware.com/docs
+note: Entity graph derived from components.schemas property names and id-reference fields in the published OpenAPI.
+  Canoe uses opaque string ids with no type prefix; relationships are inferred from *_id fields and from nested
+  arrays.
+entities:
+- name: Organization
+  schema: GetOrganization
+  endpoints:
+  - /v1/organizations
+  - /v1/organizations/{id}
+  id_field: id
+  key_fields:
+  - parent_id
+  - status
+  - type
+  - name
+  - aliases
+  - downstream_ids
+  - custom_fields
+  description: A fund sponsor / manager. Self-referencing via parent_id to model organization hierarchies.
+- name: Entity
+  schema: SingleEntity
+  endpoints:
+  - /v1/organizations/entities
+  - /v1/organizations/entities/{id}
+  id_field: id
+  key_fields:
+  - parent_id
+  - name
+  - aliases
+  - status
+  - downstream_ids
+  - custom_fields
+  description: An investing legal entity (the LP side). Self-referencing via parent_id.
+- name: Account
+  endpoints:
+  - /v1/organizations/accounts
+  - /v1/organizations/accounts/{id}
+  id_field: id
+  description: An account grouping under an entity; referenced from allocations by account_id.
+- name: Fund
+  schema: GetFunds
+  endpoints:
+  - /v1/funds
+  - /v1/funds/{id}
+  - /v1/funds/details
+  id_field: id
+  key_fields:
+  - organization_id
+  - term_id
+  - type
+  - status
+  - name
+  - sponsor
+  - start_date
+  - aliases
+  - legal_name
+  - custom_fields
+  description: An investment vehicle mastered by Canoe.
+- name: Term
+  schema: GetTerms
+  endpoints:
+  - /v1/terms
+  - /v1/terms/{id}
+  id_field: id
+  key_fields:
+  - fund_id
+  - organization_id
+  - designation
+  - aliases
+  - date_format
+  - extraction_status
+  - custom_fields
+  description: A share class / investment term of a fund; the extraction unit fund data is keyed against.
+- name: Allocation
+  schema: Allocations
+  endpoints:
+  - /v1/allocations
+  - /v1/allocations/{id}
+  id_field: id
+  key_fields:
+  - entity_id
+  - investment_id
+  - account_id
+  - term_id
+  - status
+  - initial_date
+  - initial_amount
+  - custom_allocation_id
+  - downstream_ids
+  - extraction_status
+  description: The join between an investing entity/account and a fund term — the LP position Canoe extracts against.
+- name: Document
+  schema: Document
+  endpoints:
+  - /v1/documents
+  - /v1/documents/{id}
+  - /v1/documents/data
+  id_field: id
+  key_fields:
+  - client_document_id
+  - document_status
+  - category
+  - document_type
+  - source
+  - file_type
+  - document_tags
+  - reporting_frequency
+  - document_approval
+  - is_locked
+  - allocations
+  description: A source PDF or statement retrieved from a GP portal or uploaded, and the extracted data attached
+    to it.
+- name: DocumentTag
+  endpoints:
+  - /v1/documents/tags
+  - /v1/documents/allocation-tags
+  - /v1/documents/{allocationId}/allocation-tags
+  description: Tenant-defined labels on documents, and allocation-scoped tags applied to a document.
+- name: CustomField
+  endpoints:
+  - /v1/custom_fields
+  description: Tenant-defined field definitions that appear as custom_fields on organizations, entities, funds,
+    terms and allocations.
+- name: User
+  schema: Users
+  endpoints:
+  - /v1/user
+  - /v1/users
+  - /v1/users/{id}
+  - /v1/users/roles
+  id_field: user_id
+  key_fields:
+  - status
+  - email
+  - phone
+  - first_name
+  - last_name
+  - created_at
+  description: An API/platform user within the calling organization, with a role from /v1/users/roles.
+- name: Token
+  schema: Token
+  endpoints:
+  - /v1/tokens
+  - /oauth/token
+  - /oauth/token/refresh
+  - /oauth/token/client-credentials
+  key_fields:
+  - token_type
+  - expires_in
+  - access_token
+  - refresh_token
+  description: OAuth 2.0 access token, 24-hour lifetime.
+- name: OAuthClient
+  endpoints:
+  - /oauth/clients
+  description: A registered API client (Client ID / Client Secret), managed at https://client.canoesoftware.com/api_configuration.
+relationships:
+- from: Organization
+  to: Organization
+  kind: has_many
+  via: parent_id
+  evidence: GetOrganization.parent_id
+- from: Fund
+  to: Organization
+  kind: belongs_to
+  via: organization_id
+  evidence: GetFunds.organization_id
+- from: Fund
+  to: Term
+  kind: has_many
+  via: term_id
+  evidence: GetFunds.term_id / FundDetailedData.term_id
+- from: Term
+  to: Fund
+  kind: belongs_to
+  via: fund_id
+  evidence: GetTerms.fund_id
+- from: Term
+  to: Organization
+  kind: belongs_to
+  via: organization_id
+  evidence: GetTerms.organization_id
+- from: Entity
+  to: Entity
+  kind: has_many
+  via: parent_id
+  evidence: SingleEntity.parent_id
+- from: Allocation
+  to: Entity
+  kind: belongs_to
+  via: entity_id
+  evidence: Allocations.entity_id
+- from: Allocation
+  to: Account
+  kind: belongs_to
+  via: account_id
+  evidence: Allocations.account_id
+- from: Allocation
+  to: Term
+  kind: belongs_to
+  via: term_id
+  evidence: Allocations.term_id
+- from: Allocation
+  to: Fund
+  kind: belongs_to
+  via: investment_id
+  evidence: Allocations.investment_id / investment
+- from: Document
+  to: Allocation
+  kind: has_many
+  via: allocations
+  evidence: Document.allocations array
+- from: Fund
+  to: Document
+  kind: has_many
+  via: /v1/funds/{id}/documents
+  evidence: GetSingleFundsDocumentId returns {total, ids}
+- from: Organization
+  to: Document
+  kind: has_many
+  via: /v1/organizations/{id}/documents
+  evidence: GetSingleOrganizationId returns {total, ids}
+- from: Document
+  to: DocumentTag
+  kind: has_many
+  via: document_tags
+  evidence: Document.document_tags
+- from: Organization
+  to: CustomField
+  kind: has_many
+  via: custom_fields
+  evidence: custom_fields present on organizations, entities, funds, terms, allocations
+external_identifiers:
+  field: downstream_ids
+  note: Key-value pairs mapping a Canoe record to its identifier in a downstream system; present on Allocation,
+    Fund, Organization and Entity, and usable as a document filter.

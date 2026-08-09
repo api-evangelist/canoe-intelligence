@@ -1,0 +1,22 @@
+generated: '2026-08-09'
+method: searched
+source:
+- openapi/canoe-intelligence-api-openapi.yml
+- https://api.canoesoftware.com/docs
+schemes:
+- name: oauth2
+  source: openapi/canoe-intelligence-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.canoesoftware.com/oauth/authorize
+    tokenUrl: https://api.canoesoftware.com/oauth/token
+  - flow: clientCredentials
+    tokenUrl: https://api.canoesoftware.com/v1/tokens
+  description: OAuth 2.0 authentication
+scopes: []
+docs: https://api.canoesoftware.com/docs
+note: Canoe declares OAuth 2.0 authorizationCode and clientCredentials flows but publishes NO scopes — both flows
+  carry an empty scopes map, no operation declares a scoped security requirement, and the documentation contains
+  no scopes or permissions reference. An access token grants "access to all other endpoints within the API"; what
+  a caller can actually reach is decided by the Canoe services their tenant purchased and by per-user permissions,
+  and is signalled at call time with HTTP 403. This is an accurate zero, not a harvest miss.

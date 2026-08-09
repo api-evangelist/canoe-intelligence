@@ -1,0 +1,78 @@
+generated: '2026-08-09'
+method: probed
+source: live GET of /.well-known/* on every apis.yml + OpenAPI servers[] host
+hosts:
+- host: https://api.canoesoftware.com
+  note: API host from OpenAPI servers[]. No /.well-known/ documents are served.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 500
+  - path: /.well-known/oauth-authorization-server
+    status: 500
+  - path: /.well-known/oauth-protected-resource
+    status: 500
+  - path: /.well-known/api-catalog
+    status: 500
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+- host: https://canoeintelligence.com
+  note: Corporate/marketing host. Serves a real llms.txt and llms-full.txt; no /.well-known/ documents.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 200
+    file: ../llms/canoe-intelligence-llms.txt
+    content_type: text/plain
+    bytes: 1653
+  - path: /robots.txt
+    status: 200
+    note: Explicitly Allows oai-searchbot, chatgpt-user, claude-web, claude-searchbot, perplexity-user, youbot,
+      applebot; Crawl-delay 5 for *
+- host: https://client.canoesoftware.com
+  note: 'Customer web app. REJECTED as a well-known source: the single-page app answers HTTP 200 with the same 8171-byte
+    HTML shell for EVERY /.well-known/* path, including /.well-known/agent-card.json. This is an SPA catch-all,
+    not a published discovery document.'
+  documents:
+  - path: /.well-known/*
+    status: 200
+    valid: false
+    reason: spa-catch-all-html
+- host: https://trust.canoeintelligence.com
+  note: 'Vanta-hosted trust center. REJECTED as a well-known source for the same reason: identical 6625-byte HTML
+    shell returned 200 for every /.well-known/* path.'
+  documents:
+  - path: /.well-known/*
+    status: 200
+    valid: false
+    reason: spa-catch-all-html
+summary:
+  security_txt: false
+  openid_configuration: false
+  oauth_authorization_server: false
+  api_catalog: false
+  ai_plugin: false
+  agent_card: false
+  llms_txt: true

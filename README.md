@@ -42,5 +42,41 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Canoe Intelligence is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/canoe-intelligence_stock/
+Canoe Intelligence is an alternative-investment data infrastructure platform that automates the
+collection, extraction, and validation of private-markets documents for institutional allocators,
+fund-of-funds, family offices, RIAs, fund administrators, and asset servicers.
+
+- Company: https://canoeintelligence.com/
+- API documentation: https://api.canoesoftware.com/docs
+- OpenAPI (live): https://api.canoesoftware.com/api/docs.json
+- API Terms of Use: https://canoeintelligence.com/api-terms-of-use/
+- Trust center: https://trust.canoeintelligence.com/
+
+## What is in this repo
+
+| Artifact | What it holds |
+|---|---|
+| `openapi/` | Canoe API v1 — OpenAPI 3.0.0, 39 paths / 50 operations, harvested verbatim from the live docs host |
+| `authentication/` | OAuth 2.0 profile: bearer/JWT, four grants, 24-hour tokens |
+| `scopes/` | The honest zero — both OAuth flows declare an empty scopes map |
+| `conventions/` | Headers, opt-in dated pagination, `fields` selection, versioning, rate-limit signalling |
+| `errors/` | Documented status codes plus the `error_code` / `error_description` / `hint` auth envelope |
+| `lifecycle/` | `X-API-VERSION` date train, and the status page / changelog that do not exist |
+| `data-model/` | Organization → Entity → Account → Fund → Term → Allocation → Document graph |
+| `examples/` | Index of the `x-codeSamples` (5 languages) and parameter examples Canoe ships in-spec |
+| `conformance/` | Standards asserted and denied, each with evidence |
+| `security/` | Probed TLS/DNS posture, the Vanta trust center, and the absent disclosure program |
+| `well-known/` | Every `/.well-known/` probe, including the SPA catch-alls that were rejected |
+| `llms/` | Canoe's own `llms.txt`, saved verbatim |
+| `mcp/` | Candidate tool surface derived from the OpenAPI — Canoe ships no MCP server |
+| `skills/` | Three agent skills grounded in verified `operationId`s |
+| `agentic-access/`, `overlays/` | Generated governance and enhancement layers |
+
+## The notable finding
+
+Canoe's machine-readable contract is public and complete, but it is not where a crawler would look.
+`api.canoesoftware.com` returns `500` at the root and `404` for `/openapi.json`; the real OpenAPI
+sits at `https://api.canoesoftware.com/api/docs.json`, referenced only from a `SwaggerUIBundle`
+call inside the `/docs` HTML. Nothing on `canoeintelligence.com` links to it. The company also
+publishes an `llms.txt` and an `llms-full.txt` that describe the product in detail and never mention
+the API at all.

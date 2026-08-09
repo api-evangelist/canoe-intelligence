@@ -1,0 +1,146 @@
+generated: '2026-08-09'
+method: searched
+source: https://api.canoesoftware.com/docs
+derived_from: openapi/canoe-intelligence-api-openapi.yml
+format: proprietary-json
+notes: Canoe does not use RFC 9457 application/problem+json. Every response, including errors, is a plain application/json
+  object. Authentication errors carry a documented three-field envelope; resource errors are signalled by HTTP status
+  code with a JSON body.
+envelope:
+  content_type: application/json
+  authentication_errors:
+    fields:
+    - name: error_code
+      type: string
+      description: Machine-readable error code identifying the specific type of error.
+    - name: error_description
+      type: string
+      description: Human-readable description of what went wrong.
+    - name: hint
+      type: string
+      description: Actionable guidance on how to resolve the error.
+    - name: retry_after
+      type: integer
+      description: Seconds to wait before retrying. Present on RATE_LIMIT_EXCEEDED.
+    source: https://api.canoesoftware.com/docs (Authentication Error Responses)
+error_codes:
+- code: INVALID_CREDENTIALS
+  status: 400
+  description: The user credentials were incorrect.
+  hint: Please verify your client_id and client_secret are correct.
+- code: MALFORMED_JWT
+  status: 401
+  description: Token structure is invalid.
+  hint: 'JWT tokens must have format: header.payload.signature'
+- code: RATE_LIMIT_EXCEEDED
+  status: 429
+  description: Too many failed authentication attempts.
+  hint: Check your credentials and wait for retry_after seconds before trying again.
+problems:
+- status: 400
+  title: Bad Request
+  description: The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed
+    parameter.
+  documented_in_spec: true
+  documented_in_docs: true
+  operation_count: 18
+  source_operations:
+  - openapi/canoe-intelligence-api-openapi.yml#GetFunds
+  - openapi/canoe-intelligence-api-openapi.yml#DeleteMultipleFunds
+  - openapi/canoe-intelligence-api-openapi.yml#GetFundsDetailedData
+  - openapi/canoe-intelligence-api-openapi.yml#GetSingleFunds
+  - openapi/canoe-intelligence-api-openapi.yml#DeleteSingleFund
+  - openapi/canoe-intelligence-api-openapi.yml#GetSingleFundsDocumentdata
+  - openapi/canoe-intelligence-api-openapi.yml#Organizations
+  - openapi/canoe-intelligence-api-openapi.yml#FindById
+  - openapi/canoe-intelligence-api-openapi.yml#FindBySingleOrganizationId
+  - openapi/canoe-intelligence-api-openapi.yml#DownloadOrganizationDocuments
+  - openapi/canoe-intelligence-api-openapi.yml#DownloadBySingleOrganizationId
+  - openapi/canoe-intelligence-api-openapi.yml#CreateASingleEntity
+- status: 401
+  title: Unauthorized
+  description: The API authentication credentials or access token are missing or incorrect.
+  documented_in_spec: true
+  documented_in_docs: true
+  operation_count: 1
+  source_operations:
+  - openapi/canoe-intelligence-api-openapi.yml#SetDocumentMetadata
+- status: 403
+  title: Forbidden
+  description: The credentials or access token are authenticated, but you do not have access to the requested resource.
+  documented_in_spec: true
+  documented_in_docs: true
+  operation_count: 19
+  source_operations:
+  - openapi/canoe-intelligence-api-openapi.yml#GetAllocation
+  - openapi/canoe-intelligence-api-openapi.yml#CreateSingleAllocation
+  - openapi/canoe-intelligence-api-openapi.yml#UpdateSingleAllocation
+  - openapi/canoe-intelligence-api-openapi.yml#DeleteSingleAllocation
+  - openapi/canoe-intelligence-api-openapi.yml#GetDocuments
+  - openapi/canoe-intelligence-api-openapi.yml#GetASingleDocument
+  - openapi/canoe-intelligence-api-openapi.yml#DeleteDocument
+  - openapi/canoe-intelligence-api-openapi.yml#SetDocumentMetadata
+  - openapi/canoe-intelligence-api-openapi.yml#CreateSingleFund
+  - openapi/canoe-intelligence-api-openapi.yml#GetFundsDetailedData
+  - openapi/canoe-intelligence-api-openapi.yml#UpdateSingleFund
+  - openapi/canoe-intelligence-api-openapi.yml#DownloadSingleFundsDocumentdata
+- status: 404
+  title: Not Found
+  description: The requested resource is invalid or the resource requested, such as a Fund, does not exist.
+  documented_in_spec: true
+  documented_in_docs: true
+  operation_count: 13
+  source_operations:
+  - openapi/canoe-intelligence-api-openapi.yml#GetFunds
+  - openapi/canoe-intelligence-api-openapi.yml#GetFundsDetailedData
+  - openapi/canoe-intelligence-api-openapi.yml#GetSingleFunds
+  - openapi/canoe-intelligence-api-openapi.yml#GetSingleFundsDocumentdata
+  - openapi/canoe-intelligence-api-openapi.yml#Organizations
+  - openapi/canoe-intelligence-api-openapi.yml#FindById
+  - openapi/canoe-intelligence-api-openapi.yml#FindBySingleOrganizationId
+  - openapi/canoe-intelligence-api-openapi.yml#DownloadOrganizationDocuments
+  - openapi/canoe-intelligence-api-openapi.yml#DownloadBySingleOrganizationId
+  - openapi/canoe-intelligence-api-openapi.yml#CreateASingleEntity
+  - openapi/canoe-intelligence-api-openapi.yml#UpdateASingleEntity
+  - openapi/canoe-intelligence-api-openapi.yml#updateAllocationTags
+- status: 405
+  title: Method Not Allowed
+  description: The request tried to use an HTTP method that the resource does not allow.
+  documented_in_spec: false
+  documented_in_docs: true
+- status: 422
+  title: Unprocessable Entity
+  description: Validation failed on one or more supplied fields.
+  documented_in_spec: true
+  documented_in_docs: true
+  operation_count: 19
+  source_operations:
+  - openapi/canoe-intelligence-api-openapi.yml#CreateSingleAllocation
+  - openapi/canoe-intelligence-api-openapi.yml#UpdateSingleAllocation
+  - openapi/canoe-intelligence-api-openapi.yml#BulkSetDocumentMetadata
+  - openapi/canoe-intelligence-api-openapi.yml#SetDocumentMetadata
+  - openapi/canoe-intelligence-api-openapi.yml#UploadDocuments
+  - openapi/canoe-intelligence-api-openapi.yml#GetFunds
+  - openapi/canoe-intelligence-api-openapi.yml#CreateSingleFund
+  - openapi/canoe-intelligence-api-openapi.yml#GetSingleFunds
+  - openapi/canoe-intelligence-api-openapi.yml#UpdateSingleFund
+  - openapi/canoe-intelligence-api-openapi.yml#GetSingleFundsDocumentdata
+  - openapi/canoe-intelligence-api-openapi.yml#Organizations
+  - openapi/canoe-intelligence-api-openapi.yml#FindById
+- status: 429
+  title: Too Many Requests
+  description: You have exceeded the rate limit for this endpoint. Wait for the time specified in the retry_after
+    response field before retrying.
+  documented_in_spec: false
+  documented_in_docs: true
+- status: 500
+  title: Internal Server Error
+  description: There are internal or API-related errors on Canoe's side. Additional requests will not resolve the
+    issue.
+  documented_in_spec: false
+  documented_in_docs: true
+- status: 503
+  title: Service Unavailable
+  description: The Canoe servers are up, but overloaded with requests. Try again later.
+  documented_in_spec: false
+  documented_in_docs: true

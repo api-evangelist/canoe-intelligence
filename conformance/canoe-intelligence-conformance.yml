@@ -1,0 +1,85 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/canoe-intelligence-api-openapi.yml
+docs: https://api.canoesoftware.com/docs
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Provider publishes OpenAPI 3.0.0 at https://api.canoesoftware.com/api/docs.json (39 paths, 50 operations)
+- id: oauth2
+  conforms: true
+  evidence: components.securitySchemes declares an oauth2 scheme with authorizationCode and clientCredentials flows
+- id: oauth2-authorization-code
+  conforms: true
+  evidence: authorizationUrl https://api.canoesoftware.com/oauth/authorize, tokenUrl https://api.canoesoftware.com/oauth/token
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: tokenUrl https://api.canoesoftware.com/v1/tokens
+- id: oauth2-refresh-token
+  conforms: true
+  evidence: POST /oauth/token/refresh documented in the OpenAPI
+- id: rfc6750-bearer-token
+  conforms: true
+  evidence: bearerAuth http/bearer scheme with bearerFormat JWT, applied at the document root
+- id: rfc7519-jwt
+  conforms: true
+  evidence: 'bearerFormat: JWT; MALFORMED_JWT error documents header.payload.signature structure'
+- id: oidc
+  conforms: false
+  evidence: No openIdConnect securityScheme; /.well-known/openid-configuration returns 500 on the API host
+- id: oauth2-scopes
+  conforms: false
+  evidence: Both oauth2 flows declare an empty scopes map; access is governed by purchased services and user permissions,
+    not scopes
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: false
+  evidence: /.well-known/oauth-authorization-server returns 500 on api.canoesoftware.com
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No application/problem+json anywhere in the spec; errors are plain application/json
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on canoeintelligence.com and api.canoesoftware.com
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset or Deprecation header documented
+- id: idempotency-key
+  conforms: false
+  evidence: No idempotency key header or parameter in spec or docs
+- id: pagination
+  conforms: true
+  evidence: page + limit/perPage query params with total/first/next/prev/last response headers, opt-in via X-API-VERSION
+- id: json-api
+  conforms: false
+  evidence: Responses are bare JSON objects/arrays, not JSON:API documents
+- id: asyncapi
+  conforms: false
+  evidence: No event, streaming or webhook surface is published; the OpenAPI declares no callbacks or webhooks
+- id: llms-txt
+  conforms: true
+  evidence: https://canoeintelligence.com/llms.txt returns 200 text/plain with a conformant llms.txt structure,
+    plus /llms-full.txt
+- id: a2a-agent-card
+  conforms: false
+  evidence: /.well-known/agent-card.json and /.well-known/agent.json return 404 on canoeintelligence.com and api.canoesoftware.com
+- id: soc2-type-ii
+  conforms: true
+  evidence: Canoe publishes a Vanta-hosted trust center at https://trust.canoeintelligence.com/ and references SOC
+    2 Type II key-management alignment in its published llms-full.txt technical reference
+compliance_program:
+  trust_center: https://trust.canoeintelligence.com/
+  platform: Vanta
+  public_page: https://canoeintelligence.com/implementation-data-security/
+  published_controls:
+  - SOC 2 Type II alignment
+  - RBAC
+  - SSO / SAML 2.0
+  - MFA enforced
+  - audit logging
+  - TLS 1.2+ in transit
+  - AES-256 at rest
+  - network and web application penetration testing
+  - cloud infrastructure vulnerability scanning
+  - data residency controls
+  note: Certification artifacts themselves sit behind the Vanta trust center request flow; the control list above
+    is taken verbatim from pages Canoe publishes anonymously.

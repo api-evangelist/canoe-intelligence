@@ -1,0 +1,54 @@
+generated: '2026-08-09'
+method: searched
+source: https://api.canoesoftware.com/docs
+versioning:
+  scheme: uri-path major (v1) plus dated X-API-VERSION behaviour train
+  current: v1
+  dated_versions:
+  - '2022-02-24'
+  - '2022-09-19'
+  - '2023-08-07'
+  - '2024-10-07'
+  - '2024-12-12'
+  docs: https://api.canoesoftware.com/docs
+deprecation:
+  policy_url: null
+  sunset_header: null
+  deprecation_header: null
+  note: 'No deprecation policy, Sunset (RFC 8594) or Deprecation header support is published, and no operation in
+    the OpenAPI carries deprecated: true. Old behaviour is retained by NOT sending X-API-VERSION, which is a de-facto
+    additive-only posture but is not stated as a policy.'
+sla:
+  url: null
+  uptime_target: null
+status_page: null
+status_page_evidence:
+- url: https://status.canoeintelligence.com
+  status: 0
+  note: DNS does not resolve
+- url: https://canoeintelligence.statuspage.io
+  status: 200
+  valid: false
+  note: Soft 404 — redirects to atlassian.com/software/statuspage marketing page, byte-identical to a control probe
+    of a nonexistent subdomain
+- url: https://canoe.statuspage.io
+  status: 200
+  valid: false
+  note: 'Belongs to a different company (title: "Raw Engineering Backend Status")'
+- url: https://canoeintelligence.com/status/
+  status: 404
+changelog: null
+changelog_evidence:
+- url: https://canoeintelligence.com/changelog/
+  status: 404
+- url: https://canoeintelligence.com/release-notes/
+  status: 404
+- url: https://client.canoesoftware.com/knowledge-base
+  status: 200
+  valid: false
+  note: Redirects to /auth/login — release notes exist only inside the authenticated customer knowledge base
+deprecated_operations: []
+token_lifecycle:
+  access_token_ttl: 24 hours
+  refresh_token: true
+  source: https://api.canoesoftware.com/docs

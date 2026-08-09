@@ -1,23 +1,177 @@
 aid: canoe-intelligence
 name: Canoe Intelligence
-description: 'Canoe Intelligence is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: Canoe Intelligence is an alternative-investment data infrastructure platform that automates the collection,
+  extraction, and validation of private-markets documents for institutional allocators, fund-of-funds, family offices,
+  RIAs, fund administrators, and asset servicers. The platform retrieves capital call notices, distribution notices,
+  capital account statements, K-1 tax documents, and related fund communications from GP portals and email, applies
+  AI-based extraction across 50+ document types and a 2,586-field data library, validates the results against fund
+  and LP records, and delivers structured data downstream. Canoe publishes a public REST API (Canoe API v1) at api.canoesoftware.com
+  covering documents, funds, terms, organizations, entities, accounts, allocations, custom fields, and user management,
+  documented with a public OpenAPI 3.0 definition and authenticated with OAuth 2.0 bearer/JWT access tokens.
+accessModel:
+  pricing: contact-sales
+  onboarding: sales-gate
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise sales gate
+  confidence: high
+  source:
+  - https://canoeintelligence.com/api-terms-of-use/
+  - https://canoeintelligence.com/demo-request/
+  evidence: 'The API Developer Portal Terms of Use state: "NOTHING IN THESE TERMS GRANTS YOU ANY RIGHT OR LICENSE
+    TO ACCESS OR USE ANY CANOE API. IF YOU WOULD LIKE TO ACCESS AND USE ANY CANOE API, A SEPARATE AGREEMENT IS REQUIRED."
+    No pricing page exists (/pricing/ returns 404); the only entry point is a demo request form. The OpenAPI and
+    reference are, however, fully public and anonymous.'
+  generated: '2026-08-09'
+  method: searched
+image: https://canoeintelligence.com/wp-content/uploads/2024/07/canoe-OG.jpg
 url: https://raw.githubusercontent.com/api-evangelist/canoe-intelligence/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-09'
 modified: '2026-08-09'
 tags:
-- Company
-apis: []
+- alternative-investments
+- private-markets
+- document-automation
+- data-extraction
+- fund-administration
+- capital-calls
+- k-1-tax-documents
+- portfolio-reporting
+- financial-services
+- fintech
+- wealth-management
+- institutional-investors
+apis:
+- name: Canoe API v1
+  description: 'REST API for retrieving Canoe-extracted alternative-investment data and the documents it was extracted
+    from. Covers document upload, download, metadata, types, tags and allocation tags; funds and fund detail data;
+    terms; organizations, entities and accounts; allocations; custom fields; and API user/role management. JSON
+    over HTTPS on ports 443 and 9443, page/perPage pagination, standard HTTP status codes, and OAuth 2.0 access
+    tokens presented as Authorization: Bearer {token}.'
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - alternative-investments
+  - private-markets
+  - document-automation
+  - data-extraction
+  - fund-administration
+  - capital-calls
+  - portfolio-reporting
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-api-openapi.yml
+  - type: OpenAPI
+    url: https://api.canoesoftware.com/api/docs.json
+  - type: Documentation
+    url: https://api.canoesoftware.com/docs
+  - type: APIReference
+    url: https://api.canoesoftware.com/docs
+  - type: Authentication
+    url: authentication/canoe-intelligence-authentication.yml
+  - type: OAuthScopes
+    url: scopes/canoe-intelligence-scopes.yml
+  - type: Conventions
+    url: conventions/canoe-intelligence-conventions.yml
+  - type: ErrorCatalog
+    url: errors/canoe-intelligence-problem-types.yml
+  - type: DataModel
+    url: data-model/canoe-intelligence-data-model.yml
+  - type: Overlay
+    url: overlays/canoe-intelligence-api-overlay.yaml
+  - type: TermsOfService
+    url: https://canoeintelligence.com/api-terms-of-use/
+  - type: Examples
+    url: examples/canoe-intelligence-examples.yml
+  - type: AgenticAccess
+    url: agentic-access/canoe-intelligence-agentic-access.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/canoe-intelligence-agentic-access.yml
+- type: DomainSecurity
+  url: security/canoe-intelligence-domain-security.yml
 - type: Website
-  url: https://forgeglobal.com/canoe-intelligence_stock/
+  url: https://canoeintelligence.com/
+- type: DeveloperPortal
+  url: https://api.canoesoftware.com/docs
+- type: Documentation
+  url: https://api.canoesoftware.com/docs
+- type: APIReference
+  url: https://api.canoesoftware.com/docs
+- type: Login
+  url: https://client.canoesoftware.com/auth/login
+- type: Support
+  url: https://canoeintelligence.com/contact-us/
+- type: Blog
+  url: https://canoeintelligence.com/category/insights/
+- type: BlogRSS
+  url: https://canoeintelligence.com/feed/
+- type: TermsOfService
+  url: https://canoeintelligence.com/api-terms-of-use/
+- type: PrivacyPolicy
+  url: https://canoeintelligence.com/privacy-policy/
+- type: TrustCenter
+  url: https://trust.canoeintelligence.com/
+- type: Compliance
+  url: https://canoeintelligence.com/implementation-data-security/
+- type: LLMsTxt
+  url: llms/canoe-intelligence-llms.txt
+- type: LLMsTxt
+  url: https://canoeintelligence.com/llms.txt
+- type: Authentication
+  url: authentication/canoe-intelligence-authentication.yml
+- type: OAuthScopes
+  url: scopes/canoe-intelligence-scopes.yml
+- type: Conventions
+  url: conventions/canoe-intelligence-conventions.yml
+- type: ErrorCatalog
+  url: errors/canoe-intelligence-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/canoe-intelligence-lifecycle.yml
+- type: Conformance
+  url: conformance/canoe-intelligence-conformance.yml
+- type: DataModel
+  url: data-model/canoe-intelligence-data-model.yml
+- type: WellKnown
+  url: well-known/canoe-intelligence-well-known.yml
+- type: ToolCrosswalk
+  url: mcp/canoe-intelligence-tool-crosswalk.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/canoe-intelligence-api-overlay.yaml
+- type: Examples
+  url: examples/canoe-intelligence-examples.yml
+x-pointer-notes:
+  Idempotency: Not emitted. No Idempotency-Key header, parameter or guidance exists in the OpenAPI or the docs.
+  MCPServer: 'Not emitted. mcp/canoe-intelligence-mcp.yml is status: candidate — Canoe publishes no MCP server (/mcp
+    and /sse return 500).'
+  SDKs/Packages: Not emitted. No first-party client library on npm, PyPI, Maven, NuGet, RubyGems, Packagist or crates.io,
+    and no public GitHub organization (github.com/canoeintelligence redirects to an enterprise SSO gate).
+  StatusPage: Not emitted. No status page exists; canoeintelligence.statuspage.io is a soft 404 that redirects to
+    Atlassian marketing, and canoe.statuspage.io belongs to a different company.
+  ChangeLog: Not emitted. Release notes live only inside the authenticated customer knowledge base at client.canoesoftware.com.
+  Security/VulnerabilityDisclosure: Not emitted. No security.txt, no disclosure page, no bug bounty. See security/canoe-intelligence-vulnerability-disclosure.yml.
+  AgentCard: Not emitted. /.well-known/agent-card.json and /.well-known/agent.json return 404 on every real host;
+    the 200s on client.canoesoftware.com and trust.canoeintelligence.com are SPA catch-alls.
+  AsyncAPI/Webhooks: Not emitted. Canoe publishes no event, streaming or webhook surface; the OpenAPI declares no
+    callbacks or webhooks.
+  Postman: Not emitted. The docs reference a Postman collection but it is not publicly downloadable (every candidate
+    path 404s).
+  GraphQL: Not emitted. https://api.canoesoftware.com/graphql exists but returns 401 "Unauthorized." to anonymous
+    GET and POST introspection, and is undocumented.
+  Pricing/SignUp: Not emitted. /pricing/ returns 404; the only entry point is a demo request form.
+x-enrichment:
+  date: '2026-08-09'
+  status: enriched
+  artifacts_added: 24
+  pass: local-v1

@@ -1,0 +1,52 @@
+# Canoe Intelligence
+
+> Canoe Intelligence is the leading Alternative Investment Data Infrastructure platform, providing AI-powered document processing, K-1/Capital Call Automation, and data extraction for institutional investors. As a SoftwareApplication and FinancialService, Canoe supports $11T+ in assets under administration across 525+ clients in 30 countries.
+
+## Key Statistics
+
+| Metric | Value |
+|---|---|
+| Assets Under Administration Supported | $11T+ |
+| Documents Processed Per Month | 1.6 million |
+| LP Positions Optimized | 800,000+ |
+| Funds Mastered | 44,000+ |
+| GP Portals Connected | 3,000+ |
+| Total LPs Served (incl. end clients) | 18,000+ |
+| Clients | 525+ |
+| Countries | 30 |
+| Supported Document Types | 50+ |
+| Fields in Data Library | 2,586+ |
+| Data Points Extracted (All Time) | 200 million |
+| Straight-Through Processing Accuracy | 97% |
+| Document Retrieval Time | Sub-24 hours |
+| Reporting Time Reduction | 94% faster |
+| Total Dataset Validations | 100+ million |
+
+## Integrations
+
+### Standard Extracts
+- Addepar
+- Black Diamond
+- QPLIX
+
+### Partner-Built APIs
+- Apliqo
+- Archway
+- ATLAS by Holland Mountain
+- Atomic Insights
+- Backstop
+- Bipsync
+- Exchangelodge
+- iPaladin
+
+### Automated Data Share
+- Snowflake
+
+## Reference Links
+
+- **Website:** https://canoeintelligence.com/
+- **Trust & Security Center:** https://trust.canoeintelligence.com/
+- **API Terms of Use:** https://canoeintelligence.com/api-terms-of-use/
+- **G2 Reviews:** https://www.g2.com/products/canoe-intelligence-canoe/reviews
+- **LinkedIn:** https://www.linkedin.com/company/canoe-intelligence
+- **Full Technical Reference:** /llms-full.txt

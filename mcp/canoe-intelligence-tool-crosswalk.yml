@@ -1,0 +1,410 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/canoe-intelligence-api-openapi.yml
+note: Canoe publishes no MCP server and no GraphQL surface, so this crosswalk records the REST operations that a
+  Canoe MCP server would bind to, derived one-to-one from the published OpenAPI. It is a mapping of a candidate
+  tool surface, not a record of a shipped one.
+surfaces:
+  openapi:
+    url: openapi/canoe-intelligence-api-openapi.yml
+    live: https://api.canoesoftware.com/api/docs.json
+    gated: false
+    operations: 50
+  graphql:
+    endpoint: https://api.canoesoftware.com/graphql
+    gated: true
+    evidence: POST/GET returns HTTP 401 with body "Unauthorized." — introspection is auth-gated, schema not captured,
+      nothing fabricated
+  mcp:
+    url: null
+    published: false
+    evidence: /mcp and /sse return 500, /.well-known/mcp.json returns 404 on api.canoesoftware.com
+crosswalk:
+- tool: GetAllocation
+  category: allocations
+  rest:
+  - GetAllocation
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: CreateSingleAllocation
+  category: allocations
+  rest:
+  - CreateSingleAllocation
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: UpdateSingleAllocation
+  category: allocations
+  rest:
+  - UpdateSingleAllocation
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DeleteSingleAllocation
+  category: allocations
+  rest:
+  - DeleteSingleAllocation
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetDocuments
+  category: documents
+  rest:
+  - GetDocuments
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetDocumentsType
+  category: documents
+  rest:
+  - GetDocumentsType
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetDocumentTags
+  category: documents
+  rest:
+  - GetDocumentTags
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetDocumentAllocationTags
+  category: documents
+  rest:
+  - GetDocumentAllocationTags
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DeleteMultipleDocuments
+  category: documents
+  rest:
+  - DeleteMultipleDocuments
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetASingleDocument
+  category: documents
+  rest:
+  - GetASingleDocument
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DeleteDocument
+  category: documents
+  rest:
+  - DeleteDocument
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: BulkSetDocumentMetadata
+  category: documents
+  rest:
+  - BulkSetDocumentMetadata
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: SetDocumentMetadata
+  category: documents
+  rest:
+  - SetDocumentMetadata
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DownloadDocuments
+  category: documents
+  rest:
+  - DownloadDocuments
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: UploadDocuments
+  category: documents
+  rest:
+  - UploadDocuments
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetFunds
+  category: funds
+  rest:
+  - GetFunds
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: CreateSingleFund
+  category: funds
+  rest:
+  - CreateSingleFund
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DeleteMultipleFunds
+  category: funds
+  rest:
+  - DeleteMultipleFunds
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetFundsDetailedData
+  category: funds
+  rest:
+  - GetFundsDetailedData
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetSingleFunds
+  category: funds
+  rest:
+  - GetSingleFunds
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: UpdateSingleFund
+  category: funds
+  rest:
+  - UpdateSingleFund
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DeleteSingleFund
+  category: funds
+  rest:
+  - DeleteSingleFund
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetSingleFundsDocumentdata
+  category: funds
+  rest:
+  - GetSingleFundsDocumentdata
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DownloadSingleFundsDocumentdata
+  category: funds
+  rest:
+  - DownloadSingleFundsDocumentdata
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetSingleFundsDocumentId
+  category: funds
+  rest:
+  - GetSingleFundsDocumentId
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: Organizations
+  category: organizations
+  rest:
+  - Organizations
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: FindById
+  category: organizations
+  rest:
+  - FindById
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: FindBySingleOrganizationId
+  category: organizations
+  rest:
+  - FindBySingleOrganizationId
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DownloadOrganizationDocuments
+  category: organizations
+  rest:
+  - DownloadOrganizationDocuments
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DownloadBySingleOrganizationId
+  category: organizations
+  rest:
+  - DownloadBySingleOrganizationId
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: CreateASingleEntity
+  category: organizations
+  rest:
+  - CreateASingleEntity
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: UpdateASingleEntity
+  category: organizations
+  rest:
+  - UpdateASingleEntity
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: CreateASingleAccount
+  category: organizations
+  rest:
+  - CreateASingleAccount
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: UpdateASingleAccount
+  category: organizations
+  rest:
+  - UpdateASingleAccount
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetCustomFields
+  category: custom-fields
+  rest:
+  - GetCustomFields
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: User
+  category: users
+  rest:
+  - User
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: createUser
+  category: users
+  rest:
+  - createUser
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: findByTags
+  category: users
+  rest:
+  - findByTags
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: GetTerms
+  category: terms
+  rest:
+  - GetTerms
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: CreateSingleTerm
+  category: terms
+  rest:
+  - CreateSingleTerm
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: UpdateSingleTerm
+  category: terms
+  rest:
+  - UpdateSingleTerm
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: DeleteSingleTerm
+  category: terms
+  rest:
+  - DeleteSingleTerm
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: updateAllocationTags
+  category: documents
+  rest:
+  - updateAllocationTags
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: updateUser
+  category: users
+  rest:
+  - updateUser
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+- tool: getUserRoles
+  category: users
+  rest:
+  - getUserRoles
+  binding: rest
+  confidence: high
+  note: 1:1 derived binding — the tool IS the OpenAPI operation, so it inherits that operation parameters and requestBody
+    verbatim as its inputSchema.
+mcp_only: []
+rest_only:
+- operationId: Tokens
+  path: /v1/tokens
+  method: POST
+  reason: credential issuance / OAuth client management — deliberately excluded from the agent tool surface
+- operationId: ManageAuthClient
+  path: /oauth/clients
+  method: GET
+  reason: credential issuance / OAuth client management — deliberately excluded from the agent tool surface
+- operationId: RequestingTokensAuthCodes
+  path: /oauth/token
+  method: POST
+  reason: credential issuance / OAuth client management — deliberately excluded from the agent tool surface
+- operationId: RequestingTokensRefreshToken
+  path: /oauth/token/refresh
+  method: POST
+  reason: credential issuance / OAuth client management — deliberately excluded from the agent tool surface
+- operationId: RequestingTokensClientCredentials
+  path: /oauth/token/client-credentials
+  method: POST
+  reason: credential issuance / OAuth client management — deliberately excluded from the agent tool surface
+coverage:
+  tools_named: 45
+  tools_bound: 45
+  mcp_only: 0
+  rest_ops_total: 50
+  rest_ops_with_tool: 45

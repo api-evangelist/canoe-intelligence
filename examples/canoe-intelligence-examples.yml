@@ -1,0 +1,503 @@
+generated: '2026-08-09'
+method: derived
+source: openapi/canoe-intelligence-api-openapi.yml
+note: 'Canoe ships examples inside its own OpenAPI: per-parameter example values and x-codeSamples in five languages
+  on nearly every operation. This index records what the provider publishes; the values themselves live verbatim
+  in the spec.'
+summary:
+  operations: 50
+  operations_with_code_samples: 47
+  operations_with_parameter_examples: 47
+  code_sample_languages:
+    bash: 47
+    javascript: 47
+    php: 47
+    python: 47
+    csharp: 47
+  extension: x-codeSamples
+operations:
+- operationId: GetAllocation
+  method: GET
+  path: /v1/allocations
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: CreateSingleAllocation
+  method: POST
+  path: /v1/allocations
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: UpdateSingleAllocation
+  method: PUT
+  path: /v1/allocations/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DeleteSingleAllocation
+  method: DELETE
+  path: /v1/allocations/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetDocuments
+  method: GET
+  path: /v1/documents/data
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetDocumentsType
+  method: GET
+  path: /v1/documents/types
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetDocumentTags
+  method: GET
+  path: /v1/documents/tags
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetDocumentAllocationTags
+  method: GET
+  path: /v1/documents/allocation-tags
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DeleteMultipleDocuments
+  method: POST
+  path: /v1/documents/delete-documents
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetASingleDocument
+  method: GET
+  path: /v1/documents/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DeleteDocument
+  method: DELETE
+  path: /v1/documents/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: BulkSetDocumentMetadata
+  method: POST
+  path: /v1/documents/metadata
+  code_sample_languages: null
+  parameter_examples: true
+- operationId: SetDocumentMetadata
+  method: PUT
+  path: /v1/documents/{id}/metadata
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DownloadDocuments
+  method: GET
+  path: /v1/documents
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: UploadDocuments
+  method: POST
+  path: /v1/documents
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetFunds
+  method: GET
+  path: /v1/funds
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: CreateSingleFund
+  method: POST
+  path: /v1/funds
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DeleteMultipleFunds
+  method: DELETE
+  path: /v1/funds
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: false
+- operationId: GetFundsDetailedData
+  method: GET
+  path: /v1/funds/details
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetSingleFunds
+  method: GET
+  path: /v1/funds/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: UpdateSingleFund
+  method: PUT
+  path: /v1/funds/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DeleteSingleFund
+  method: DELETE
+  path: /v1/funds/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetSingleFundsDocumentdata
+  method: GET
+  path: /v1/funds/{id}/document-data
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DownloadSingleFundsDocumentdata
+  method: GET
+  path: /v1/funds/{id}/documents
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetSingleFundsDocumentId
+  method: GET
+  path: /v1/funds/{id}/document-ids
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: Organizations
+  method: GET
+  path: /v1/organizations
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: FindById
+  method: GET
+  path: /v1/organizations/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: FindBySingleOrganizationId
+  method: GET
+  path: /v1/organizations/{id}/document-data
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DownloadOrganizationDocuments
+  method: GET
+  path: /v1/organizations/{id}/documents
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DownloadBySingleOrganizationId
+  method: GET
+  path: /v1/organizations/{id}/document-ids
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: CreateASingleEntity
+  method: POST
+  path: /v1/organizations/entities
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: false
+- operationId: UpdateASingleEntity
+  method: PUT
+  path: /v1/organizations/entities/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: CreateASingleAccount
+  method: POST
+  path: /v1/organizations/accounts
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: UpdateASingleAccount
+  method: PUT
+  path: /v1/organizations/accounts/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetCustomFields
+  method: GET
+  path: /v1/custom_fields
+  code_sample_languages: null
+  parameter_examples: true
+- operationId: User
+  method: GET
+  path: /v1/user
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: false
+- operationId: createUser
+  method: POST
+  path: /v1/user
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: findByTags
+  method: GET
+  path: /v1/users
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: Tokens
+  method: POST
+  path: /v1/tokens
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: ManageAuthClient
+  method: GET
+  path: /oauth/clients
+  code_sample_languages: null
+  parameter_examples: true
+- operationId: RequestingTokensAuthCodes
+  method: POST
+  path: /oauth/token
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: RequestingTokensRefreshToken
+  method: POST
+  path: /oauth/token/refresh
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: RequestingTokensClientCredentials
+  method: POST
+  path: /oauth/token/client-credentials
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: GetTerms
+  method: GET
+  path: /v1/terms
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: CreateSingleTerm
+  method: POST
+  path: /v1/terms
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: UpdateSingleTerm
+  method: PUT
+  path: /v1/terms/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: DeleteSingleTerm
+  method: DELETE
+  path: /v1/terms/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: updateAllocationTags
+  method: PATCH
+  path: /v1/documents/{allocationId}/allocation-tags
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: updateUser
+  method: PUT
+  path: /v1/users/{id}
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
+- operationId: getUserRoles
+  method: GET
+  path: /v1/users/roles
+  code_sample_languages:
+  - bash
+  - javascript
+  - php
+  - python
+  - csharp
+  parameter_examples: true
