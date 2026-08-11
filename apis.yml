@@ -46,27 +46,16 @@ tags:
 - wealth-management
 - institutional-investors
 apis:
-- name: Canoe API v1
-  description: 'REST API for retrieving Canoe-extracted alternative-investment data and the documents it was extracted
-    from. Covers document upload, download, metadata, types, tags and allocation tags; funds and fund detail data;
-    terms; organizations, entities and accounts; allocations; custom fields; and API user/role management. JSON
-    over HTTPS on ports 443 and 9443, page/perPage pagination, standard HTTP status codes, and OAuth 2.0 access
-    tokens presented as Authorization: Bearer {token}.'
+- aid: canoe-intelligence:canoe-intelligence-allocations-api
+  name: Canoe Intelligence Allocations API
+  description: The Allocations API from Canoe Intelligence — 2 operation(s) for allocations.
   humanURL: https://api.canoesoftware.com/docs
   baseURL: https://api.canoesoftware.com
   tags:
-  - alternative-investments
-  - private-markets
-  - document-automation
-  - data-extraction
-  - fund-administration
-  - capital-calls
-  - portfolio-reporting
+  - Allocations
   properties:
   - type: OpenAPI
-    url: openapi/canoe-intelligence-api-openapi.yml
-  - type: OpenAPI
-    url: https://api.canoesoftware.com/api/docs.json
+    url: openapi/canoe-intelligence-allocations-api-openapi.yml
   - type: Documentation
     url: https://api.canoesoftware.com/docs
   - type: APIReference
@@ -81,8 +70,247 @@ apis:
     url: errors/canoe-intelligence-problem-types.yml
   - type: DataModel
     url: data-model/canoe-intelligence-data-model.yml
-  - type: Overlay
-    url: overlays/canoe-intelligence-api-overlay.yaml
+  - type: TermsOfService
+    url: https://canoeintelligence.com/api-terms-of-use/
+  - type: Examples
+    url: examples/canoe-intelligence-examples.yml
+  - type: AgenticAccess
+    url: agentic-access/canoe-intelligence-agentic-access.yml
+- aid: canoe-intelligence:canoe-intelligence-authentication-api
+  name: Canoe Intelligence Authentication API
+  description: The Authentication API from Canoe Intelligence — 4 operation(s) for authentication.
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://api.canoesoftware.com/docs
+  - type: APIReference
+    url: https://api.canoesoftware.com/docs
+  - type: Authentication
+    url: authentication/canoe-intelligence-authentication.yml
+  - type: OAuthScopes
+    url: scopes/canoe-intelligence-scopes.yml
+  - type: Conventions
+    url: conventions/canoe-intelligence-conventions.yml
+  - type: ErrorCatalog
+    url: errors/canoe-intelligence-problem-types.yml
+  - type: DataModel
+    url: data-model/canoe-intelligence-data-model.yml
+  - type: TermsOfService
+    url: https://canoeintelligence.com/api-terms-of-use/
+  - type: Examples
+    url: examples/canoe-intelligence-examples.yml
+  - type: AgenticAccess
+    url: agentic-access/canoe-intelligence-agentic-access.yml
+- aid: canoe-intelligence:canoe-intelligence-custom-fields-api
+  name: Canoe Intelligence Custom Fields API
+  description: The Custom Fields API from Canoe Intelligence — 1 operation(s) for custom fields.
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - Custom Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-custom-fields-api-openapi.yml
+  - type: Documentation
+    url: https://api.canoesoftware.com/docs
+  - type: APIReference
+    url: https://api.canoesoftware.com/docs
+  - type: Authentication
+    url: authentication/canoe-intelligence-authentication.yml
+  - type: OAuthScopes
+    url: scopes/canoe-intelligence-scopes.yml
+  - type: Conventions
+    url: conventions/canoe-intelligence-conventions.yml
+  - type: ErrorCatalog
+    url: errors/canoe-intelligence-problem-types.yml
+  - type: DataModel
+    url: data-model/canoe-intelligence-data-model.yml
+  - type: TermsOfService
+    url: https://canoeintelligence.com/api-terms-of-use/
+  - type: Examples
+    url: examples/canoe-intelligence-examples.yml
+  - type: AgenticAccess
+    url: agentic-access/canoe-intelligence-agentic-access.yml
+- aid: canoe-intelligence:canoe-intelligence-documents-api
+  name: Canoe Intelligence Documents API
+  description: The Documents API from Canoe Intelligence — 10 operation(s) for documents.
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-documents-api-openapi.yml
+  - type: Documentation
+    url: https://api.canoesoftware.com/docs
+  - type: APIReference
+    url: https://api.canoesoftware.com/docs
+  - type: Authentication
+    url: authentication/canoe-intelligence-authentication.yml
+  - type: OAuthScopes
+    url: scopes/canoe-intelligence-scopes.yml
+  - type: Conventions
+    url: conventions/canoe-intelligence-conventions.yml
+  - type: ErrorCatalog
+    url: errors/canoe-intelligence-problem-types.yml
+  - type: DataModel
+    url: data-model/canoe-intelligence-data-model.yml
+  - type: TermsOfService
+    url: https://canoeintelligence.com/api-terms-of-use/
+  - type: Examples
+    url: examples/canoe-intelligence-examples.yml
+  - type: AgenticAccess
+    url: agentic-access/canoe-intelligence-agentic-access.yml
+- aid: canoe-intelligence:canoe-intelligence-funds-api
+  name: Canoe Intelligence Funds API
+  description: The Funds API from Canoe Intelligence — 6 operation(s) for funds.
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - Funds
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-funds-api-openapi.yml
+  - type: Documentation
+    url: https://api.canoesoftware.com/docs
+  - type: APIReference
+    url: https://api.canoesoftware.com/docs
+  - type: Authentication
+    url: authentication/canoe-intelligence-authentication.yml
+  - type: OAuthScopes
+    url: scopes/canoe-intelligence-scopes.yml
+  - type: Conventions
+    url: conventions/canoe-intelligence-conventions.yml
+  - type: ErrorCatalog
+    url: errors/canoe-intelligence-problem-types.yml
+  - type: DataModel
+    url: data-model/canoe-intelligence-data-model.yml
+  - type: TermsOfService
+    url: https://canoeintelligence.com/api-terms-of-use/
+  - type: Examples
+    url: examples/canoe-intelligence-examples.yml
+  - type: AgenticAccess
+    url: agentic-access/canoe-intelligence-agentic-access.yml
+- aid: canoe-intelligence:canoe-intelligence-organizations-api
+  name: Canoe Intelligence Organizations API
+  description: The Organizations API from Canoe Intelligence — 9 operation(s) for organizations.
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-organizations-api-openapi.yml
+  - type: Documentation
+    url: https://api.canoesoftware.com/docs
+  - type: APIReference
+    url: https://api.canoesoftware.com/docs
+  - type: Authentication
+    url: authentication/canoe-intelligence-authentication.yml
+  - type: OAuthScopes
+    url: scopes/canoe-intelligence-scopes.yml
+  - type: Conventions
+    url: conventions/canoe-intelligence-conventions.yml
+  - type: ErrorCatalog
+    url: errors/canoe-intelligence-problem-types.yml
+  - type: DataModel
+    url: data-model/canoe-intelligence-data-model.yml
+  - type: TermsOfService
+    url: https://canoeintelligence.com/api-terms-of-use/
+  - type: Examples
+    url: examples/canoe-intelligence-examples.yml
+  - type: AgenticAccess
+    url: agentic-access/canoe-intelligence-agentic-access.yml
+- aid: canoe-intelligence:canoe-intelligence-password-grant-tokens-api
+  name: Canoe Intelligence Password Grant Tokens API
+  description: >-
+    The Password Grant Tokens API from Canoe Intelligence — 1 operation(s) for password grant tokens.
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - Password Grant Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-password-grant-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://api.canoesoftware.com/docs
+  - type: APIReference
+    url: https://api.canoesoftware.com/docs
+  - type: Authentication
+    url: authentication/canoe-intelligence-authentication.yml
+  - type: OAuthScopes
+    url: scopes/canoe-intelligence-scopes.yml
+  - type: Conventions
+    url: conventions/canoe-intelligence-conventions.yml
+  - type: ErrorCatalog
+    url: errors/canoe-intelligence-problem-types.yml
+  - type: DataModel
+    url: data-model/canoe-intelligence-data-model.yml
+  - type: TermsOfService
+    url: https://canoeintelligence.com/api-terms-of-use/
+  - type: Examples
+    url: examples/canoe-intelligence-examples.yml
+  - type: AgenticAccess
+    url: agentic-access/canoe-intelligence-agentic-access.yml
+- aid: canoe-intelligence:canoe-intelligence-terms-api
+  name: Canoe Intelligence Terms API
+  description: The Terms API from Canoe Intelligence — 2 operation(s) for terms.
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - Terms
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-terms-api-openapi.yml
+  - type: Documentation
+    url: https://api.canoesoftware.com/docs
+  - type: APIReference
+    url: https://api.canoesoftware.com/docs
+  - type: Authentication
+    url: authentication/canoe-intelligence-authentication.yml
+  - type: OAuthScopes
+    url: scopes/canoe-intelligence-scopes.yml
+  - type: Conventions
+    url: conventions/canoe-intelligence-conventions.yml
+  - type: ErrorCatalog
+    url: errors/canoe-intelligence-problem-types.yml
+  - type: DataModel
+    url: data-model/canoe-intelligence-data-model.yml
+  - type: TermsOfService
+    url: https://canoeintelligence.com/api-terms-of-use/
+  - type: Examples
+    url: examples/canoe-intelligence-examples.yml
+  - type: AgenticAccess
+    url: agentic-access/canoe-intelligence-agentic-access.yml
+- aid: canoe-intelligence:canoe-intelligence-user-api
+  name: Canoe Intelligence User API
+  description: The User API from Canoe Intelligence — 4 operation(s) for user.
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - User
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-user-api-openapi.yml
+  - type: Documentation
+    url: https://api.canoesoftware.com/docs
+  - type: APIReference
+    url: https://api.canoesoftware.com/docs
+  - type: Authentication
+    url: authentication/canoe-intelligence-authentication.yml
+  - type: OAuthScopes
+    url: scopes/canoe-intelligence-scopes.yml
+  - type: Conventions
+    url: conventions/canoe-intelligence-conventions.yml
+  - type: ErrorCatalog
+    url: errors/canoe-intelligence-problem-types.yml
+  - type: DataModel
+    url: data-model/canoe-intelligence-data-model.yml
   - type: TermsOfService
     url: https://canoeintelligence.com/api-terms-of-use/
   - type: Examples
