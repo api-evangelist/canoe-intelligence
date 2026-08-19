@@ -1,0 +1,41 @@
+{
+  "provider": "canoe-intelligence",
+  "sources": [
+    "canoe-intelligence-allocations-api-openapi.yml",
+    "canoe-intelligence-authentication-api-openapi.yml",
+    "canoe-intelligence-custom-fields-api-openapi.yml",
+    "canoe-intelligence-documents-api-openapi.yml",
+    "canoe-intelligence-funds-api-openapi.yml",
+    "canoe-intelligence-organizations-api-openapi.yml",
+    "canoe-intelligence-password-grant-tokens-api-openapi.yml",
+    "canoe-intelligence-terms-api-openapi.yml",
+    "canoe-intelligence-user-api-openapi.yml"
+  ],
+  "outputs": [
+    "canoe-intelligence-allocations-api-openapi.yml",
+    "canoe-intelligence-authentication-api-openapi.yml",
+    "canoe-intelligence-custom-fields-api-openapi.yml",
+    "canoe-intelligence-documents-api-openapi.yml",
+    "canoe-intelligence-funds-api-openapi.yml",
+    "canoe-intelligence-organizations-api-openapi.yml",
+    "canoe-intelligence-password-grant-tokens-api-openapi.yml",
+    "canoe-intelligence-terms-api-openapi.yml",
+    "canoe-intelligence-user-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "canoe-intelligence-allocations-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "canoe-intelligence-authentication-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "canoe-intelligence-custom-fields-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "canoe-intelligence-documents-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "canoe-intelligence-funds-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "canoe-intelligence-organizations-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "canoe-intelligence-password-grant-tokens-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "canoe-intelligence-terms-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "canoe-intelligence-user-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

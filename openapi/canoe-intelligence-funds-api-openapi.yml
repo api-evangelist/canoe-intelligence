@@ -1,0 +1,1425 @@
+openapi: 3.2.0
+info:
+  title: Canoe API v1 Funds API
+  version: 1.0.0
+  description: "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n"
+  contact:
+    name: Canoe Support
+    url: https://canoeintelligence.com
+  termsOfService: https://canoeintelligence.com/api-terms-of-use/
+servers:
+- url: https://api.canoesoftware.com
+  description: Production API
+security:
+- bearerAuth: []
+tags:
+- name: Funds
+  description: ''
+paths:
+  /v1/funds:
+    get:
+      tags:
+      - Funds
+      summary: Get Funds
+      description: "Fetch all funds accessible by the current API user.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2022-02-24.\n</span>"
+      operationId: GetFunds
+      parameters:
+      - name: page
+        in: query
+        description: This is the page number. For example, if you specify "2" you will see all funds on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2022-02-24.</u>
+        required: false
+        schema:
+          type: string
+        examples:
+          page 1:
+            value: '1'
+          page 5 multiple:
+            value: '5'
+      - name: perPage
+        in: query
+        description: The number of funds for each page. The maximum number of funds as well as the default is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2022-02-24.</u>
+        required: false
+        schema:
+          type: string
+        examples:
+          3 per page:
+            value: '3'
+          50 per page:
+            value: '50'
+      - name: name
+        in: query
+        description: The name of the fund you wish to retrieve records for. This can either be the formal fund name or any of its associated aliases. To search based on a part of the fund name or alias, just append an "*" character anywhere within the name parameter.
+        required: false
+        schema:
+          type: string
+        examples:
+          name:
+            value: Sample Hedge Fund Detail 1
+      - name: custom_field
+        in: query
+        description: An indexed string of one or more custom field IDs, which relate to fund specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s). When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/funds?custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2&custom_field[867e4563-c2b5-e788-d050-4ce151dec635]=value1
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_field:
+            value: custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2
+      - name: fund_id
+        in: query
+        description: Returns exact fund for a specific id. Multiple IDs are separated by a comma.
+        required: false
+        schema:
+          type: string
+        examples:
+          fund_id single:
+            value: fund_id_1
+          fund_id multiple:
+            value: fund_id_1,fund_id_2,fund_id_3
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetFunds'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/funds?name=Sample Hedge Fund Detail 1\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/funds\"\n      );\n\n      let params = {\n          \"name\": \"Sample Hedge Fund Detail 1\"\n      }\n\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]))\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/funds',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'name' => 'Sample Hedge Fund Detail 1'\n              ] \n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      params = {\n        'name': 'Sample Hedge Fund Detail 1'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"name\", \"Sample Hedge Fund Detail 1\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+    post:
+      tags:
+      - Funds
+      summary: Create A Single Fund
+      description: Create a new fund based on the input parameters.
+      operationId: CreateSingleFund
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The fund's investment type. It can be drawdown_fund, hedge_fund, direct_investment, real_estate, or special_situation.
+                  example: hedge_fund
+                status:
+                  type: string
+                  description: Indicates whether or not a fund is active. The status can be active, pending, retired, or transitional.
+                  example: retired
+                name:
+                  type: string
+                  description: The name of the fund.
+                  example: Sample fund 1
+                sponsor:
+                  type: string
+                  description: The sponsor of the fund.
+                  example: Sample sponsor 1
+                start_date:
+                  type: string
+                  description: Fund Inception Date. The date on which the fund began its operations. Its format is yyyy-mm-dd.
+                  example: '2021-01-01T00:00:00.000Z'
+                aliases:
+                  type: string
+                  description: Aliases of the investment name. These are user-created. If there are multiple aliases, they should be separated by commas.
+                  example: Sample alias 1, Sample alias 2
+                legal_name:
+                  type: string
+                  description: The legal name of the fund.
+                  example: Sample Fund V
+                custom_fields:
+                  type: array
+                  description: The array of objects that contain the id of an existing custom field and a new value
+                  example:
+                  - id: 1
+                    value: 1000
+                currency:
+                  type: string
+                  description: The ISO 4217 currency code representing the base currency of the fund (e.g. USD, EUR, GBP). Lowercase values are accepted and normalized to uppercase. Pass null to clear an existing value.
+                  example: USD
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SingleFund'
+        '403':
+          description: Failed to create the fund with a corresponding term.
+        '422':
+          description: Failed to create the fund with a corresponding term.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X POST \\\n      \"https://api.canoesoftware.com/v1/funds\" \\\n      -H \"Authorization: Bearer {token}\" \\\n      -H \"Accept: application/json\" \\\n      -H \"X-Requested-With: XMLHttpRequest\" \\\n      -H \"Content-Type: application/json\" \\\n      -d '{\"type\":\"drawdown_fund.\",\"status\":\"active\",\"name\":\"Sample fund 1\",\"sponsor\":\"Sample sponsor 1\",\"start_date\":\"2021-01-01\",\"aliases\":\"Sample alias 1, Sample alias 2\",\"legal_name\":\"Sample Fund V\",\"custom_fields\":[{\"id\":\"1\",\"value\":\"1000\"}]}'"
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\"\n          https://api.canoesoftware.com/v1/funds\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"type\": \"drawdown_fund\",\n          \"status\": \"active\",\n          \"name\": \"Sample fund 1\",\n          \"sponsor\": \"Sample sponsor 1\",\n          \"start_date\": \"2021-01-01\",\n          \"aliases\": \"Sample alias 1, Sample alias 2\",\n          \"legal_name\": \"Sample Fund V\",\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n\n      fetch(url, {\n          method: \"POST\",\n          headers: headers,\n          body: body\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/funds',\n        [\n            'headers' => [\n                'Authorization' => 'Bearer {token}',\n                'Accept' => 'application/json',\n                'X-Requested-With' => 'XMLHttpRequest',\n                'Content-Type' => 'application/json',\n            ],\n            'json' => [\n                'type' => 'drawdown_fund',\n                'status' => 'active',\n                'name' => 'Sample fund 1',\n                'sponsor' => 'Sample sponsor 1',\n                'start_date' => '2021-01-01',\n                'aliases' => 'Sample alias 1, Sample alias 2',\n                'legal_name' => 'Sample Fund V',\n                'custom_fields' => [\n                    [\n                        'id' => '1',\n                        'value' => '1000',\n                    ],\n                ],\n            ],\n        ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds'\n      payload = {\n          \"type\": \"drawdown_fund\",\n          \"status\": \"active\",\n          \"name\": \"Sample fund 1\",\n          \"sponsor\": \"Sample sponsor 1\",\n          \"start_date\": \"2021-01-01\",\n          \"aliases\": \"Sample alias 1, Sample alias 2\",\n          \"legal_name\": \"Sample Fund V\",\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('POST', url, headers=headers, json=payload)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader)\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {   \n          type = \"drawdown_fund\",\n          status = \"active\",\n          name = \"Sample fund 1\",\n          sponsor = \"Sample sponsor 1\"\n          start_date = \"2021-01-01\",\n          aliases = \"Sample Alias 1, Sample Alias 2\",\n          legal_name = \"Sample Fund V,Sample Capital LP\"\n      };\n      request.AddJsonBody(body);\n      request.AddParameter(\"custom_fields\", custom_fields);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+    delete:
+      tags:
+      - Funds
+      summary: Delete Multiple Funds
+      description: 'Bulk delete up to 100 funds at once based on fund ids. WARNING: This will delete all funds associated with the ids passed in, as well as their related documents, allocations, and terms.'
+      operationId: DeleteMultipleFunds
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeleteFunds'
+        '400':
+          description: Cannot delete more than 100 records at one time. Request includes 305 items.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X DELETE \\\n          \"https://api.canoesoftware.com/v1/funds\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"fund_id\":\"id_1,id_2,id_3\",\"status\":\"active,pending\",\"type\":\"drawdown_fund,hedge_fund\"}'"
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/funds\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"fund_id\": \"id_1,id_2,id_3\"\n      }\n\n      fetch(url, {\n          method: \"DELETE\",\n          headers: headers,\n          body: body\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->delete(\n          'https://api.canoesoftware.com/v1/funds',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'fund_id' => 'id_1,id_2,id_3'\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds'\n      payload = {\n          \"fund_id\": \"id_1,id_2,id_3\"\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('DELETE', url, headers=headers, json=payload)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      request.AddParameter(\"fund_id\",\"id_1,id_2,id_3\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+  /v1/funds/details:
+    get:
+      tags:
+      - Funds
+      summary: Get Detailed Fund Data
+      description: "Fetch detailed fund information including terms, allocations, and related entities. This endpoint provides more comprehensive fund data than the standard /v1/funds endpoint, including allocation data with entity relationships.\n\n<span name=\"doc-alert-info\">\nThis endpoint supports pagination. \nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.\n</span>"
+      operationId: GetFundsDetailedData
+      parameters:
+      - name: page
+        in: query
+        description: The page number for pagination. By default, this is set to 1.
+        required: false
+        schema:
+          type: integer
+        examples:
+          page 1:
+            value: 1
+          page 5:
+            value: 5
+      - name: perPage
+        in: query
+        description: The number of results per page. The maximum number of results as well as the default is 100.
+        required: false
+        schema:
+          type: integer
+        examples:
+          25 per page:
+            value: 25
+          50 per page:
+            value: 50
+      - name: name
+        in: query
+        description: Filter by fund name. Supports partial matching with wildcard character (*).
+        required: false
+        schema:
+          type: string
+        examples:
+          fund name:
+            value: Sample Fund
+      - name: fund_id
+        in: query
+        description: Filter by specific fund ID(s). Multiple IDs can be separated by commas.
+        required: false
+        schema:
+          type: string
+        examples:
+          single fund:
+            value: fund_id_1
+          multiple funds:
+            value: fund_id_1,fund_id_2
+      - name: account_id
+        in: query
+        description: Filter allocations by account ID(s). Multiple IDs can be separated by commas.
+        required: false
+        schema:
+          type: string
+        examples:
+          single account:
+            value: account_id_1
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FundDetailedData'
+        '400':
+          description: Bad request - Invalid parameters
+        '403':
+          description: Forbidden - Insufficient permissions
+        '404':
+          description: Resource Not Found
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/funds/details?page=1&perPage=25\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/funds/details\"\n      );\n\n      let params = {\n          \"page\": \"1\",\n          \"perPage\": \"25\"\n      }\n\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]))\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/funds/details',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'page' => '1',\n                  'perPage' => '25'\n              ]\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds/details'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      params = {\n        'page': '1',\n        'perPage': '25'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/details\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"perPage\", \"25\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+  /v1/funds/{id}:
+    get:
+      tags:
+      - Funds
+      summary: Get A Single Fund
+      description: Fetch a specific fund by the fund's ID.
+      operationId: GetSingleFunds
+      parameters:
+      - name: id
+        in: path
+        description: The id of the fund.
+        required: true
+        schema:
+          type: string
+          example: '1'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SingleFund'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/funds/1\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/funds/1\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/funds/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds/1'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+    put:
+      tags:
+      - Funds
+      summary: Update A Single Fund
+      description: Update an existing fund based on the input parameters.
+      operationId: UpdateSingleFund
+      parameters:
+      - name: id
+        in: path
+        description: The id of the fund
+        required: true
+        schema:
+          type: string
+          example: '1'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: The fund's investment type. It can be drawdown_fund, hedge_fund, direct_investment, real_estate, or special_situation.
+                  example: drawdown_fund, hedge_fund
+                status:
+                  type: string
+                  description: Indicates whether or not a fund is active. The status can be active, pending, retired, or transitional.
+                  example: active, retired
+                name:
+                  type: string
+                  description: The name of the fund.
+                  example: Sample fund 1, Sample fund 2
+                sponsor:
+                  type: string
+                  description: The sponsor of the fund.
+                  example: Sample sponsor 1, Sample sponsor 2
+                start_date:
+                  type: string
+                  description: Fund Inception Date. The date on which the fund began its operations. Its format is yyyy-mm-dd.
+                  example: 2021-01-01, 2010-12-30
+                aliases:
+                  type: string
+                  description: Aliases of the investment name. These are user-created. If there are multiple aliases, they should be separated by commas.
+                  example: Sample alias 1, Sample alias 2
+                legal_name:
+                  type: string
+                  description: The legal name of the fund.
+                  example: Sample Fund V, Sample Capital LP
+                custom_fields:
+                  type: array
+                  description: The array of objects that contain the id of an existing custom field and a new value
+                  example:
+                  - id: 1
+                    value: 1000
+                currency:
+                  type: string
+                  description: The ISO 4217 currency code representing the base currency of the fund (e.g. USD, EUR, GBP). Lowercase values are accepted and normalized to uppercase. Pass null to clear an existing value.
+                  example: USD
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SingleFund'
+        '403':
+          description: Failed to create the fund with a corresponding term.
+        '422':
+          description: Failed to create the fund with a corresponding term.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X PUT \\\n          \"https://api.canoesoftware.com/v1/funds/1\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"type\":\"drawdown_fund.\",\"status\":\"active\",\"name\":\"Sample fund 1\",\"sponsor\":\"Sample sponsor 1\",\"start_date\":\"2021-01-01\",\"aliases\":\"Sample alias 1,Sample alias 2\",\"legal_name\":\"Sample Fund V,Sample Capital LP\",\"custom_fields\":[{\"id\":\"1\",\"value\":\"1000\"}]}'"
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/funds/1\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"type\": \"drawdown_fund.\",\n          \"status\": \"active\",\n          \"name\": \"Sample fund 1\",\n          \"sponsor\": \"Sample sponsor 1\",\n          \"start_date\": \"2021-01-01\",\n          \"aliases\": \"Sample alias 1,Sample alias 2\",\n          \"legal_name\": \"Sample Fund V,Sample Capital LP\",\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n\n      fetch(url, {\n          method: \"PUT\",\n          headers: headers,\n          body: body\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->put(\n          'https://api.canoesoftware.com/v1/funds/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'type' => 'drawdown_fund.',\n                  'status' => 'active',\n                  'name' => 'Sample fund 1',\n                  'sponsor' => 'Sample sponsor 1',\n                  'start_date' => '2021-01-01',\n                  'aliases' => 'Sample alias 1,Sample alias 2',\n                  'legal_name' => 'Sample Fund V,Sample Capital LP',\n                  'custom_fields' => [\n                      [\n                          'id' => '1',\n                          'value' => '1000',\n                      ],\n                  ],\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds'\n      payload = {\n          \"type\": \"drawdown_fund, hedge_fund.\",\n          \"status\": \"active, retired\",\n          \"name\": \"Sample fund 1, Sample fund 2\",\n          \"sponsor\": \"Sample sponsor 1, Sample sponsor 2\",\n          \"start_date\": \"2021-01-01, 2010-12-30\",\n          \"aliases\": \"Sample alias 1, Sample alias 2\",\n          \"legal_name\": \"Sample Fund V, Sample Capital LP\",\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('POST', url, headers=headers, json=payload)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {   \n          type = \"drawdown_fund\",\n          status = \"active\",\n          name = \"Sample fund 1\",\n          sponsor = \"Sample sponsor 1\"\n          start_date = \"2021-01-01\",\n          aliases = \"Sample Alias 1, Sample Alias 2\",\n          legal_name = \"Sample Fund V,Sample Capital LP\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+    delete:
+      tags:
+      - Funds
+      summary: Delete A Single Fund
+      description: 'Delete a single fund based on the fund''s id. WARNING: This will delete the fund, as well as it''s associated documents, allocations, and terms.'
+      operationId: DeleteSingleFund
+      parameters:
+      - name: id
+        in: path
+        description: The id of the fund to be deleted.
+        required: true
+        schema:
+          type: string
+          example: '1'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeleteFund'
+        '400':
+          description: Cannot delete more than 100 records at one time. Request includes 305 items.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X DELETE \\\n      \"https://api.canoesoftware.com/v1/funds/1\" \\\n      -H \"Authorization: Bearer {token}\" \\\n      -H \"Accept: application/json\" \\\n      -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\"\n          https://api.canoesoftware.com/v1/funds/1\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"DELETE\",\n          headers: headers,\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->delete(\n          'https://api.canoesoftware.com/v1/funds/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds/1'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('DELETE', url, headers=headers)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+  /v1/funds/{id}/document-data:
+    get:
+      tags:
+      - Funds
+      summary: Get A Single Fund's Document Data
+      description: 'Fetch the extracted data and metadata of a single fund''s documents.
+
+
+        By default, Canoe''s server sends back the full representation of each document object after processing requests. For better performance, you can have the server send only the fields you specify.
+
+
+        <span name="doc-alert-info">
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+        <br><br>
+
+        When using pagination, the response will contain headers defining the <code>total</code> number of results,
+
+        as well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.
+
+        </span>'
+      operationId: GetSingleFundsDocumentdata
+      parameters:
+      - name: id
+        in: path
+        description: The id of the fund.
+        required: true
+        schema:
+          type: string
+          example: '1'
+      - name: page
+        in: query
+        description: 'This page number. For example, if you specify "2" you will see all documents on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-10-07.</u> Example: 1'
+        required: false
+        schema:
+          type: integer
+        examples:
+          page 1:
+            value: 1
+          page 5:
+            value: 5
+      - name: limit
+        in: query
+        description: 'The number of documents for each page. The maximum number of documents limit is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-10-07.</u> Example: 50'
+        required: false
+        schema:
+          type: integer
+        examples:
+          limit:
+            value: 50
+      - name: fields
+        in: query
+        description: The fields you need in the partial response. The value of the fields parameter MUST be a comma-separated (U+002C COMMA, ",") list that refers to the name(s) of the fields to be returned.
+        required: true
+        schema:
+          type: string
+        examples:
+          fields:
+            value: '1'
+      - name: category
+        in: query
+        description: The category of the document. Our current categories are:<br><br><li>Capital Activity</li><br><li>Email & System Messages</li><br><li>Financial Statements & Performance</li><br><li>Investment & Transactional</li><br><li>Investor Administration & Communication</li><br><li>Legal, Compliance & Regulatory</li><br><li>Other</li><br><li>Tax</li><br><br>Multiple categories can be passed as a comma-delimited list (e.g. <code>Capital Activity,Tax</code>).
+        required: false
+        schema:
+          type: string
+        examples:
+          category:
+            value: Capital Activity, Email
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FundDocumentData'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/funds/1/document-data?fields=name%2Cvalidated_data&category=Capital%20Activity\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/funds/1/document-data\"\n      );\n\n      let params = {\n          \"fields\": \"name,validated_data\",\n          \"category\": \"Capital Activity\"\n      };\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/funds/1/document-data',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'fields' => 'name,validated_data',\n                  'category'=> 'Capital Activity'\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds/1/document-data'\n      params = {\n        'fields': 'name,validated_data',\n        'category': 'Capital Activity'\n\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1/document-data\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"fields\", \"name,validated_data\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+  /v1/funds/{id}/documents:
+    get:
+      tags:
+      - Funds
+      summary: Download A Single Fund's Documents
+      description: Download a specific Fund's documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.
+      operationId: DownloadSingleFundsDocumentdata
+      parameters:
+      - name: id
+        in: path
+        description: The id of the fund.
+        required: true
+        schema:
+          type: string
+          example: '1'
+      - name: start_time
+        in: query
+        description: All documents downloaded will have an uploaded timestamp <strong>greater than or equal to</strong> the given start_time. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: true
+        schema:
+          type: string
+        examples:
+          start_time:
+            value: '2019-03-30T04:00:00Z'
+      - name: page
+        in: query
+        description: This page number corresponds with the pagination in Canoe's Intelligent Document Center. There are up to 100 documents on each page. For example, if you specify "2" you will see all of a Fund's documents on page 2. By default, this is set to 1.
+        required: false
+        schema:
+          type: string
+        examples:
+          page:
+            value: '1'
+      - name: limit
+        in: query
+        description: The number of documents for each download. The maximum number of documents as well as the default is 100.
+        required: false
+        schema:
+          type: string
+        examples:
+          limit:
+            value: '50'
+      - name: file_name_type
+        in: query
+        description: The document attribute to use for the file name. Available options are name, original_file_name and id. The default value for this is name.
+        required: false
+        schema:
+          type: string
+        examples:
+          file_name_type:
+            value: original_file_name
+      responses:
+        '200':
+          description: Success
+        '403':
+          description: No access to the fund documents.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/funds/1/documents?start_time=2019-03-30T04%3A00%3A00Z&page=1&limit=50&file_name_type=original_file_name\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/funds/1/documents\"\n      );\n\n      let params = {\n          \"start_time\": \"2019-03-30T04:00:00Z\",\n          \"page\": \"1\",\n          \"limit\": \"50\",\n          \"file_name_type\": \"original_file_name\",\n      };\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/funds/1/documents',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'start_time' => '2019-03-30T04:00:00Z',\n                  'page' => '1',\n                  'limit' => '50',\n                  'file_name_type' => 'original_file_name',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds/1/documents'\n      params = {\n        'start_time': '2019-03-30T04:00:00Z',\n        'page': '1',\n        'limit': '50',\n        'file_name_type': 'original_file_name'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1/documents\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader)\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"50\");\n      request.AddQueryParameter(\"file_name_type\", \"original_file_name\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }"
+  /v1/funds/{id}/document-ids:
+    get:
+      tags:
+      - Funds
+      summary: Get A Single Fund's Document IDs
+      description: Get a specific fund's documents IDs for downloading the documents one by one.
+      operationId: GetSingleFundsDocumentId
+      parameters:
+      - name: id
+        in: path
+        description: The id of the fund.
+        required: true
+        schema:
+          type: string
+          example: '1'
+      - name: start_time
+        in: query
+        description: All document IDs returned will have an uploaded timestamp greater than or equal to the given start_time. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the ISO 8601 format for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          start_time:
+            value: '2019-03-30T04:00:00Z'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FundDocumentId'
+        '403':
+          description: No access to the fund documents.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/funds/1/document-ids?start_time=2019-03-30T04%3A00%3A00Z\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/funds/1/document-ids\"\n      );\n\n      let params = {\n          \"start_time\": \"2019-03-30T04:00:00Z\",\n      };\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/funds/1/document-ids',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'start_time' => '2019-03-30T04:00:00Z',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/funds/1/document-ids'\n      params = {\n        'start_time': '2019-03-30T04:00:00Z'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1/document-ids\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+components:
+  schemas:
+    SingleFund:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The fund's ID.
+          example: '1'
+        organization_id:
+          type: string
+          description: The ID of the organization that the fund is associated with.
+          example: '12'
+        type:
+          type: string
+          description: The fund's investment type.
+          example: direct_investment
+        status:
+          type: string
+          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
+          example: active
+        name:
+          type: string
+          description: The name of the fund.
+          example: Sample Direct Deal 1
+        sponsor:
+          type: string
+          description: The sponsor of the fund.
+          example: Sample Sponsor 1
+        start_date:
+          type: string
+          description: Fund Inception Date. The date on which the fund began its operations.
+          example: '2015-11-10'
+        aliases:
+          type: array
+          description: Aliases of the investment name. These are user-created.
+          items:
+            type: string
+          example:
+          - Sample Direct 1
+          - SDD1
+        legal_name:
+          type: string
+          description: The legal name of the fund.
+          example: Sample Direct Deal 1 LP
+        updated_at:
+          type: string
+          description: A timestamp of when the fund was updated.
+          example: '2018-04-30 20:40:19'
+        created_at:
+          type: string
+          description: A timestamp of when the fund was created.
+          example: '2018-04-30 20:40:19'
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the fund.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              ID:
+                type: string
+                description: The ID of the custom field.
+          example:
+          - name: CLIENT_ID
+            value: BOX1
+            ID: '1'
+        fund_name:
+          type: string
+          description: The name of the fund.
+          example: Sample Direct Deal 1
+        requirements_preference:
+          type: object
+          description: The requirements preference of the fund.
+          properties:
+            account_statements:
+              type: object
+              properties:
+                balance:
+                  type: string
+                  description: Either ending_balance or price_units.
+          example:
+          - account_statements:
+              balance: price_units
+        term_id:
+          type: string
+          description: The ID of the term that is associated with the fund.
+          example: '123'
+        term_name:
+          type: string
+          description: The name of the term
+          example: Deal 1
+    DeleteFunds:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: An array of fund IDs that were deleted.
+          items:
+            type: string
+          example:
+          - id_1
+          - id_2
+          - id_3
+        deleted:
+          type: integer
+          description: The total number of funds deleted.
+          example: 3
+    FundDocumentData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the document in Canoe.
+          example: '1'
+        client_document_id:
+          type: string
+          description: The custom document ID.
+          example: custom_id_1
+        name:
+          type: string
+          description: The name of the document. This contains the Investment Name (and its corresponding Entity Name), the Document Type, as well as the Data Date.
+          example: Sample Hedge Fund Deal 1 - Entity A - Account Statement - 12/31/16
+        document_status:
+          type: string
+          description: This is the validation status determined by Canoe.
+          example: Complete
+        category:
+          type: string
+          description: The category of the document.
+          example: Capital Activity
+        document_type:
+          type: string
+          description: The document type. For example, Capital Call Notice and Account Statement are examples of two document types.
+          example: Account Statement
+        source:
+          type: string
+          description: How the document entered Canoe.
+          example: Upload Engine
+        file_type:
+          type: string
+          description: A document's file type, such as .PDF or .DOC. Canoe only supports extraction and validation of PDFs.
+          example: .pdf
+        original_file_type:
+          type: string
+          description: Original type of the file before any conversion (e.g., ".docx")
+          example: .docx
+        original_file_name:
+          type: string
+          description: The document's original file name including the file type extension.
+          example: Entity A - Sample HF Deal.pdf
+        document_tags:
+          type: array
+          description: The list of tag objects (name, ID) assigned to the document.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The id of the tag.
+                example: '1'
+              name:
+                type: string
+                description: The name of the tag.
+                example: tag_1
+          example:
+          - id: '1'
+            name: tag_1
+          - id: '2'
+            name: tag_2
+        reporting_frequency:
+          type: string
+          description: The reporting frequency (monthly, quarterly, or yearly) of the document, as determined based on the extracted fields.
+          example: Monthly
+        uploaded:
+          type: object
+          description: The datetime of when the document was uploaded into Canoe.
+          properties:
+            date:
+              type: string
+              description: The date of the upload.
+              example: '2018-04-30 20:51:38.000000'
+            timezone_type:
+              type: integer
+              description: The timezone type.
+              example: 3
+            timezone:
+              type: string
+              description: The timezone of the upload.
+              example: America/New_York
+          example:
+            date: '2018-04-30 20:51:38.000000'
+            timezone_type: 3
+            timezone: America/New_York
+        last_modified:
+          type: object
+          description: The datetime of when the document was last updated.
+          properties:
+            date:
+              type: string
+              description: The date of the last modification.
+              example: '2019-09-16 11:38:47.000000'
+            timezone_type:
+              type: integer
+              description: The timezone type.
+              example: 3
+            timezone:
+              type: string
+              description: The timezone of the last modification.
+              example: America/New_York
+          example:
+            date: '2019-09-16 11:38:47.000000'
+            timezone_type: 3
+            timezone: America/New_York
+        last_modified_by:
+          type: object
+          description: The user who last updated the document.
+          properties:
+            user_id:
+              type: string
+              description: The user ID of the user.
+              example: user_canoe
+            name:
+              type: string
+              description: The name of the user.
+              example: canoe software
+            email:
+              type: string
+              description: The email address of the user.
+              example: info@canoesoftware.com
+          example:
+            user_id: user_canoe
+            name: canoe software
+            email: info@canoesoftware.com
+        is_locked:
+          type: boolean
+          description: The is_locked status of the document in Canoe.
+          example: false
+        number_of_pages:
+          type: string
+          description: The number of pages of the document.
+          example: '1'
+        file_size:
+          type: integer
+          description: The file size of the document.
+          example: 2000
+        allocations:
+          type: object
+          description: The investment allocation data of the document.
+          properties:
+            allocation_id:
+              type: string
+              description: The ID of the allocation record
+              example: allocation_1
+            data_date:
+              type: string
+              description: The effective date of the document.
+              example: '2016-12-31'
+            dataset_type:
+              type: string
+              description: The dataset type. For example, Capital Call Notice and Account Statement are examples of two dataset types.
+              example: Account Statement
+            investment:
+              type: string
+              description: The name of the investment that's associated with the document.
+              example: Sample Hedge Fund Deal 1
+            fund_sponsor:
+              type: string
+              description: The name of the fund sponsor that's associated with the document.
+              example: Sample Sponsor 1
+            custom_allocation_id:
+              type: string
+              description: The custom ID of the investment entity allocation that's associated with the document. This is user-created.
+              example: '123'
+            investment_id:
+              type: string
+              description: The ID of the investment that's associated with the document.
+              example: '1'
+            investment_legal_name:
+              type: string
+              description: The legal name of the investment that's associated with the document.
+              example: Sample Hedge Fund Deal One
+            investment_extraction_aliases:
+              type: array
+              description: The aliases of the investment that are associated with the document. These are user-created.
+              items:
+                type: string
+              example:
+              - Sample Hedge Fund Deal 1 alias 1
+              - Sample Hedge Fund Deal 1 alias 2
+            investment_structure:
+              type: string
+              description: The asset type of the fund that's associated with the document.
+              example: hedge_fund
+            entity:
+              type: string
+              description: The name of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
+              example: Entity A
+            entity_id:
+              type: string
+              description: The ID of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
+              example: '1'
+            entity_extraction_aliases:
+              type: array
+              description: The aliases of the entity that are associated with the document. These are user-created.
+              items:
+                type: string
+              example:
+              - Entity A alias 1
+              - Entity A alias 2
+            account:
+              type: string
+              description: The name of the account that's associated with the document.
+              example: Demo
+            account_id:
+              type: string
+              description: The ID of the account that's associated with the document.
+              example: '3'
+            extracted_data:
+              type: object
+              description: An object of the raw extracted data from the document.
+              example:
+                entity: Entity A
+                fundName: Sample Hedge Fund Deal 1
+                endingDate: 12/31/2016
+                beginningDate: 11/30/2016
+                endingBalance: 4,111,305
+                beginningBalance: 4,036,960
+                otherFeesMTD: '395'
+            validated_data:
+              type: object
+              description: An object of the formatted and validated data of the document. If the sign handling setting of the tenant is "standard", some data fields will be formatted and normalized. If the setting is "as reported", all data fields will only be formatted.
+              example:
+                entity: Entity A
+                fundName: Sample Hedge Fund Deal 1
+                endingDate: '2016-12-31'
+                beginningDate: '2016-11-30'
+                endingBalance: 4111305
+                beginningBalance: 4036960
+                otherFeesMTD: 395
+            validation_errors:
+              type: object
+              description: An object of the document's validation errors. Each item inside is a 'key:value' pair, where the "key" is the extracted field name and the "value" is the explanation of why the extracted value didn't pass Canoe's validation logic.
+              example: {}
+            analyst:
+              type: string
+              description: The analyst associated with this fund.
+              example: Allison
+            frequency:
+              type: string
+              description: How frequently this fund's statements come in. For example, if a statement comes in every month then the output will be "monthly."
+              example: monthly
+            custom_fields:
+              type: array
+              description: The list of custom field objects (name, value, ID) of the investment and/or allocation associated with the document.
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: The name of the custom field.
+                  value:
+                    type: string
+                    description: The value of the custom field.
+                  ID:
+                    type: string
+                    description: The ID of the custom field.
+              example:
+              - name: CLIENT_ID
+                value: BOX1
+                ID: '1'
+            document_groups:
+              type: object
+              description: Documents may be associated with other documents via document groups. A document may exist in multiple document groups (based on different criteria).
+              additionalProperties: true
+              example:
+                transaction:
+                  group_id: transaction_group_id
+                  member_document_ids:
+                  - '1'
+                  - '22'
+                  - '35'
+            addepar_owned_id:
+              type: string
+              description: The ID of the addepar owned entity that is associated with the document.
+              example: AddeparOwned1
+            addepar_owner_id:
+              type: string
+              description: The ID of the addepar owner entity that is associated with the document.
+              example: AddeparOwner1
+            black_diamond_symbol:
+              type: string
+              description: The Black Diamond symbol associated with the document.
+              example: BlackDiamondSymbol1
+            black_diamond_account:
+              type: string
+              description: The Black Diamond account associated with the document.
+              example: BlackDiaAcc
+            fund_name:
+              type: string
+              description: The name of the fund.
+              example: Sample Direct Deal 1
+            term_id:
+              type: string
+              description: The ID of the term that is associated with the fund.
+              example: ''
+    GetFunds:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The fund's ID.
+          example: '1'
+        organization_id:
+          type: string
+          description: The ID of the organization that the fund is associated with.
+          example: '12'
+        type:
+          type: string
+          description: The fund's investment type.
+          example: direct_investment
+        status:
+          type: string
+          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
+          example: active
+        name:
+          type: string
+          description: The name of the investment (fund + term).
+          example: Sample Direct Deal 1
+        sponsor:
+          type: string
+          description: The sponsor of the fund.
+          example: Sample Sponsor 1
+        start_date:
+          type: string
+          description: Fund Inception Date. The date on which the fund began its operations.
+          example: '2015-11-10'
+        aliases:
+          type: array
+          description: Aliases of the investment name. These are user-created.
+          items:
+            type: string
+          example:
+          - Sample Direct 1
+          - SDD1
+        legal_name:
+          type: string
+          description: The legal name of the fund.
+          example: Sample Direct Deal 1 LP
+        updated_at:
+          type: string
+          description: A timestamp of when the fund was updated.
+          example: '2018-04-30 20:40:19'
+        created_at:
+          type: string
+          description: A timestamp of when the fund was created.
+          example: '2018-04-30 20:40:19'
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the fund.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              ID:
+                type: string
+                description: The ID of the custom field.
+          example:
+          - name: CLIENT_ID
+            value: BOX1
+            ID: '1'
+        requirements_preference:
+          type: object
+          description: The requirements preference of the fund.
+          properties:
+            account_statements:
+              type: object
+              properties:
+                balance:
+                  type: string
+                  description: Either ending_balance or price_units.
+          example:
+          - account_statements:
+              balance: price_units
+        term_id:
+          type: string
+          description: The ID of the term that is associated with the fund.
+          example: '1'
+        fund_name:
+          type: string
+          description: The name of the fund.
+          example: Sample Direct
+    DeleteFund:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A confirmation that the fund ID was deleted.
+          example: The Fund 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
+    FundDetailedData:
+      type: object
+      description: Detailed fund data including term and allocation information
+      properties:
+        id:
+          type: string
+          description: The fund's ID.
+          example: ba67e8d4-902d-11ed-bafd-0a58a9feac02
+        organization_id:
+          type: string
+          description: The ID of the organization that the fund is associated with.
+          example: fb780fe2-b05f-11ec-a394-5717ed8c873f
+        type:
+          type: string
+          description: The fund's investment type.
+          example: drawdown_fund
+        status:
+          type: string
+          description: Indicates whether or not a fund is active.
+          example: active
+        name:
+          type: string
+          description: The full name of the investment (fund + term).
+          example: Sample Fund - Series A
+        term_id:
+          type: string
+          description: The ID of the term associated with this fund data.
+          example: a5176574-0948-11ee-9701-0a58a9feac02
+        term_name:
+          type: string
+          description: The name of the term.
+          example: Series A
+        sponsor:
+          type: string
+          description: The sponsor of the fund.
+          example: Sample Sponsor
+        start_date:
+          type: string
+          format: date
+          description: Fund Inception Date.
+          example: '2020-01-01'
+        aliases:
+          type: array
+          description: Aliases of the investment name.
+          items:
+            type: string
+          example:
+          - SF-A
+          - Sample Fund A
+        legal_name:
+          type: string
+          description: The legal name of the fund.
+          example: Sample Fund LP
+        custom_fields:
+          type: array
+          description: Custom fields associated with the fund.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+        downstream_ids:
+          type: array
+          description: Downstream system identifiers.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              name:
+                type: string
+              type:
+                type: string
+              value:
+                type: string
+        allocations:
+          type: array
+          description: List of allocations associated with this fund/term.
+          items:
+            type: object
+            properties:
+              allocation_id:
+                type: string
+                description: The ID of the allocation.
+                example: alloc_123
+              status:
+                type: string
+                description: The status of the allocation.
+                example: active
+              custom_allocation_id:
+                type: string
+                description: Custom allocation identifier.
+                example: CUSTOM-001
+              custom_fields:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+                    custom_field_id:
+                      type: string
+              entity:
+                type: object
+                description: Entity information for this allocation.
+                properties:
+                  id:
+                    type: string
+                    description: The entity ID.
+                  name:
+                    type: string
+                    description: The entity name.
+                  parent_id:
+                    type: string
+                    description: The parent account ID.
+                  status:
+                    type: string
+                    description: The entity status.
+                  aliases:
+                    type: array
+                    items:
+                      type: string
+                  custom_fields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                        custom_field_id:
+                          type: string
+    FundDocumentId:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: The total number of document IDs.
+          example: 10
+        ids:
+          type: array
+          description: An array of document IDs.
+          items:
+            type: string
+          example:
+          - 2345abcd-1234-1111-9876-1234567abc89
+          - 2345abcd-1234-1111-9876-1234567abc88
+          - 2345abcd-1234-1111-9876-1234567abc87
+          - 2345abcd-1234-1111-9876-1234567abc86
+          - 2345abcd-1234-1111-9876-1234567abc85
+          - 2345abcd-1234-1111-9876-1234567abc84
+          - 2345abcd-1234-1111-9876-1234567abc83
+          - 2345abcd-1234-1111-9876-1234567abc82
+          - 2345abcd-1234-1111-9876-1234567abc81
+          - 2345abcd-1234-1111-9876-1234567abc80
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Enter your Bearer token in the format: Bearer {token}'
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.canoesoftware.com/oauth/authorize
+          tokenUrl: https://api.canoesoftware.com/oauth/token
+          scopes: {}
+        clientCredentials:
+          tokenUrl: https://api.canoesoftware.com/v1/tokens
+          scopes: {}
+externalDocs:
+  description: Click to download docs in JSON format
+  url: /api/docs.json
+x-tagGroups:
+- name: Getting Started
+  tags:
+  - Introduction
+  - Authentication
+  - Password Grant Tokens
+- name: Core Resources
+  tags:
+  - Documents
+  - Funds
+  - Terms
+  - Organizations
+  - Allocations
+- name: User Management
+  tags:
+  - User

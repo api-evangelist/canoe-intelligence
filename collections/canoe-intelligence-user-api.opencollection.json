@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Canoe API v1 User API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Your API User Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/user"
+          },
+          "docs": "Fetch information about your Canoe API user."
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.canoesoftware.com/v1/user",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new user within your organization. Requires tenant admin or super admin permissions. The newly created user will receive a password reset email to set up their account."
+        },
+        {
+          "info": {
+            "name": "Get Users Within Your Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "This page number. For example, if you specify \"2\" you will see all users on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-12-12.</u> Example: 1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of documents for each page. The maximum number of users limit is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-12-12.</u> Example: 50"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "query",
+                "description": "The IDs of the users in Canoe. Example: user_1,user_2"
+              },
+              {
+                "name": "email_id",
+                "value": "",
+                "type": "query",
+                "description": "The emails of the users in Canoe. Example: user_1@example.com,user_2@example.com"
+              }
+            ]
+          },
+          "docs": "Fetch information about users within your Canoe organization.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.canoesoftware.com/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing user within your organization. Requires tenant admin or super admin permissions. All fields are optional - only include the fields you want to update."
+        },
+        {
+          "info": {
+            "name": "Get User Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/users/roles"
+          },
+          "docs": "Get available user roles within your organization. Requires tenant admin or super admin permissions. Returns a list of roles that can be assigned when creating or updating users."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

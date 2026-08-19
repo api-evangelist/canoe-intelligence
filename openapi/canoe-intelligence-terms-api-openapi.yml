@@ -1,0 +1,431 @@
+openapi: 3.2.0
+info:
+  title: Canoe API v1 Terms API
+  version: 1.0.0
+  description: "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n"
+  contact:
+    name: Canoe Support
+    url: https://canoeintelligence.com
+  termsOfService: https://canoeintelligence.com/api-terms-of-use/
+servers:
+- url: https://api.canoesoftware.com
+  description: Production API
+security:
+- bearerAuth: []
+tags:
+- name: Terms
+  description: ''
+paths:
+  /v1/terms:
+    get:
+      tags:
+      - Terms
+      summary: Get Terms
+      description: Fetch all terms accessible by the current API user.
+      operationId: GetTerms
+      parameters:
+      - name: term_id
+        in: query
+        description: Specifying one or more IDs returns the specified Term(s).
+        required: false
+        schema:
+          type: string
+        examples:
+          term_id single:
+            value: term_id_1
+          term_id multiple:
+            value: term_id_1,term_id_2,term_id_3
+      - name: name
+        in: query
+        description: The name of the Term.  This can either be the formal Term name or any of its associated aliases. To search based on a part of the fund name or alias, append an asterisk * character anywhere within the name parameter.  For example, searching Series* returns all Terms with names starting with Series.
+        required: false
+        schema:
+          type: string
+        examples:
+          exact name:
+            value: Series Term
+          part of name:
+            value: Series*
+      - name: fund_name
+        in: query
+        description: Specifying a Fund name returns the Term(s) associated with the Fund.  This can either be the formal Fund name or any of its associated aliases.  To search based on a part of the Fund name or alias, append an asterisk * character anywhere within the name parameter.  For example, searching *LP returns all Terms associated with Fund names ending with LP.
+        required: false
+        schema:
+          type: string
+        examples:
+          exact name:
+            value: Fund Example
+          part of name:
+            value: Fund*
+      - name: fund_id
+        in: query
+        description: Specifying one or more IDs returns the Term(s) associated with the specified Fund(s).
+        required: false
+        schema:
+          type: string
+        examples:
+          fund_id single:
+            value: fund_id_1
+          fund_id multiple:
+            value: fund_id_1,fund_id_2
+      - name: custom_field
+        in: query
+        description: An indexed string of one or more custom field IDs, which relate to term specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s). When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/funds?custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2&custom_field[867e4563-c2b5-e788-d050-4ce151dec635]=value1
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_field:
+            value: custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2
+      - name: page
+        in: query
+        description: This page of results to retrieve.  For example, if you specify "2" you will receive all Terms on page 2.  The default is 1.
+        required: false
+        schema:
+          type: string
+        examples:
+          page 1:
+            value: '1'
+          page 5 multiple:
+            value: '5'
+      - name: perPage
+        in: query
+        description: The number of Terms for each paginated download. The default is 100.
+        required: false
+        schema:
+          type: string
+        examples:
+          3 per page:
+            value: '3'
+          50 per page:
+            value: '50'
+      - name: fields
+        in: query
+        description: The fields you need in the partial response. The value of the fields parameter must be a comma-separated (U+002C COMMA, ",") list that refers to the name(s) of the fields to be returned.
+        required: false
+        schema:
+          type: string
+        examples:
+          fields:
+            value: name,designation,aliases
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetTerms'
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          \"https://api.canoesoftware.com/v1/terms\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/terms\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/terms',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/terms'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/terms\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+    post:
+      tags:
+      - Terms
+      summary: Create A Single Term
+      description: Create a new term based on the input parameters.
+      operationId: CreateSingleTerm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the Term.
+                  example: Sample Term 1
+                designation:
+                  type: string
+                  description: The Term's designation. The available designations are draw, close, series or share_class
+                  example: draw
+                aliases:
+                  type: string
+                  description: Aliases of the Term name. These are user-created. If there are multiple aliases, separate them by commas.
+                  example: Term Alias 1, Term Alias 2
+                fund_id:
+                  type: string
+                  description: The ID of the Fund to associate the Term. To retrieve these, use the v1/funds endpoint.
+                  example: fund_id_1
+                custom_fields:
+                  type: array
+                  description: The array of objects that contain the id of an existing custom field and a new value
+                  example:
+                  - id: 1
+                    value: 1000
+              required:
+              - name
+              - designation
+              - fund_id
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetTerms'
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X POST \\\n      \"https://api.canoesoftware.com/v1/terms\" \\\n      -H \"Authorization: Bearer {token}\" \\\n      -H \"Accept: application/json\" \\\n      -H \"X-Requested-With: XMLHttpRequest\" \\\n      -H \"Content-Type: application/json\" \\\n      -d '{\"name\":\"Sample Term 1.\",\"designation\":\"draw\",\"aliases\":\"Sample Alias 1, Sample Alias 2\",\"fund_id\":\"fund_id_1\"}'"
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\"https://api.canoesoftware.com/v1/terms\");\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"name\": \"Sample Term 1\",\n          \"designation\": \"draw\",\n          \"aliases\": \"Sample Alias 1, Sample Alias 2\",\n          \"fund_id\": \"fund_id_1\"\n      }\n\n      fetch(url, {\n          method: \"POST\",\n          headers: headers,\n          body: body\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->post('https://api.canoesoftware.com/v1/terms',\n        [\n            'headers' => [\n                'Authorization' => 'Bearer {token}',\n                'Accept' => 'application/json',\n                'X-Requested-With' => 'XMLHttpRequest',\n                'Content-Type' => 'application/json',\n            ],\n            'json' => [\n                'name' => 'Sample Term 1',\n                'designation' => 'draw',\n                'aliases' => 'Sample Alias 1, Sample Alias 2',\n                'fund_id' => 'fund_id_1',\n            ],\n        ]\n        );\n      $body = $response->getBody(); print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/terms'\n      payload = {\n          \"name\": \"Sample Term 1\",\n          \"designation\": \"draw\",\n          \"aliases\": \"Sample Alias 1, Sample Alias 2\",\n          \"fund_id\": \"fund_id_1\"\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('POST', url, headers=headers, json=payload)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"/v1/terms\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          name = \"Sample Term 1\",\n          designation = \"draw\",\n          aliases = \"Sample Alias 1, Sample Alias 2\",\n          fund_id = \"fund_id_1\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+  /v1/terms/{id}:
+    put:
+      tags:
+      - Terms
+      summary: Update A Single Term
+      description: Update the specified term based on the input parameters.
+      operationId: UpdateSingleTerm
+      parameters:
+      - name: id
+        in: path
+        description: The id of the term to edit.
+        required: true
+        schema:
+          type: string
+          example: '1'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the Term.
+                  example: Sample Term 1
+                designation:
+                  type: string
+                  description: The Term's designation. The available designations are draw, close, series or share_class
+                  example: draw
+                aliases:
+                  type: string
+                  description: Aliases of the Term name. These are user-created. If there are multiple aliases, separate them by commas.
+                  example: Term Alias 1, Term Alias 2
+                custom_fields:
+                  type: array
+                  description: The array of objects that contain the id of an existing custom field and a new value
+                  example:
+                  - id: 1
+                    value: 1000
+      responses:
+        '201':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetTerms'
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X PUT \\\n      \"https://api.canoesoftware.com/v1/terms/term_1\" \\\n      -H \"Authorization: Bearer {token}\" \\\n      -H \"Accept: application/json\" \\\n      -H \"X-Requested-With: XMLHttpRequest\" \\\n      -H \"Content-Type: application/json\" \\\n      -d '{\"name\":\"Sample Term 1.\",\"designation\":\"draw\",\"aliases\":\"Sample Alias 1, Sample Alias 2\"}'"
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\"https://api.canoesoftware.com/v1/terms/term_1\");\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"name\": \"Sample Term 1\",\n          \"designation\": \"draw\",\n          \"aliases\": \"Sample Alias 1, Sample Alias 2\",\n      }\n\n      fetch(url, {\n          method: \"PUT\",\n          headers: headers,\n          body: body\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->put('https://api.canoesoftware.com/v1/terms/term_1',\n        [\n            'headers' => [\n                'Authorization' => 'Bearer {token}',\n                'Accept' => 'application/json',\n                'X-Requested-With' => 'XMLHttpRequest',\n                'Content-Type' => 'application/json',\n            ],\n            'json' => [\n                'name' => 'Sample Term 1',\n                'designation' => 'draw',\n                'aliases' => 'Sample Alias 1, Sample Alias 2'\n            ],\n        ]\n        );\n      $body = $response->getBody(); print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/terms/term_1'\n      payload = {\n          \"name\": \"Sample Term 1\",\n          \"designation\": \"draw\",\n          \"aliases\": \"Sample Alias 1, Sample Alias 2\",\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('PUT', url, headers=headers, json=payload)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"/v1/terms/term_1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          name = \"Sample Term 1\",\n          designation = \"draw\",\n          aliases = \"Sample Alias 1, Sample Alias 2\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+    delete:
+      tags:
+      - Terms
+      summary: Delete A Single Term
+      description: Delete a single term based on the term's id.
+      operationId: DeleteSingleTerm
+      parameters:
+      - name: id
+        in: path
+        description: The id of the Term to delete.  Note that the final Term on a Fund cannot be deleted.  Use PUT v1/terms/{id} to update the Term or use DELETE v1/funds/{id} to delete the Fund, which will also delete the Term.  WARNING - This will delete the term as well as it's associated documents and allocations.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeleteTerm'
+        '400':
+          description: Invalid Term provided.
+        '422':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    message: '5a2044f0-4db9-11ed-a40f-0242ac120004 cannot be deleted because it is the last Term on the parent Fund. Use the Delete a single Fund endpoint to delete the Fund ID: fund_id_1'
+          description: Single Term Response, if only one term exists on the fund.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X DELETE \\\n      \"https://api.canoesoftware.com/v1/terms/1\" \\\n      -H \"Authorization: Bearer {token}\" \\\n      -H \"Accept: application/json\" \\\n      -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\"\n          https://api.canoesoftware.com/v1/terms/1\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"DELETE\",\n          headers: headers,\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->delete(\n          'https://api.canoesoftware.com/v1/terms/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/terms/1'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('DELETE', url, headers=headers)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/terms/1\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+components:
+  schemas:
+    DeleteTerm:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A confirmation that the term id was deleted.
+          example: The Term 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
+    GetTerms:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the Term.
+          example: Series 2
+        id:
+          type: string
+          description: The Term's ID.
+          example: a5176574-0948-11ee-9701-0a58a9feac02
+        designation:
+          type: string
+          description: The Term's designation.
+          example: Series
+        aliases:
+          type: array
+          description: Aliases of the Term name. These are user-created.
+          items:
+            type: string
+            example:
+            - SFS2
+            - SF-2
+        created_at:
+          type: string
+          description: A timestamp of when the Term was created.
+          example: '2018-04-30 20:40:19'
+        updated_at:
+          type: string
+          description: A timestamp of when the Term was updated.
+          example: '2018-04-30 20:40:19'
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the term.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+          example:
+          - name: CLIENT_ID
+            value: BOX1
+            custom_field_id: '1'
+        fund_name:
+          type: string
+          description: The name of the Fund to which the Term belongs.
+          example: Sample Fund
+        fund_id:
+          type: string
+          description: The ID of the Fund to which the Term belongs.
+          example: ba67e8d4-902d-11ed-bafd-0a58a9feac02
+        organization_id:
+          type: string
+          description: The ID of the Organization to which the Term’s Fund belongs.
+          example: fb780fe2-b05f-11ec-a394-5717ed8c873f
+        date_format:
+          type: string
+          enum:
+          - DD-MM-YYYY
+          - MM-DD-YYYY
+          description: Date format preference for the term.
+          example: MM-DD-YYYY
+        extraction_status:
+          type: string
+          description: The extraction status of the term.
+          example: Ready For Extract
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Enter your Bearer token in the format: Bearer {token}'
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.canoesoftware.com/oauth/authorize
+          tokenUrl: https://api.canoesoftware.com/oauth/token
+          scopes: {}
+        clientCredentials:
+          tokenUrl: https://api.canoesoftware.com/v1/tokens
+          scopes: {}
+externalDocs:
+  description: Click to download docs in JSON format
+  url: /api/docs.json
+x-tagGroups:
+- name: Getting Started
+  tags:
+  - Introduction
+  - Authentication
+  - Password Grant Tokens
+- name: Core Resources
+  tags:
+  - Documents
+  - Funds
+  - Terms
+  - Organizations
+  - Allocations
+- name: User Management
+  tags:
+  - User

@@ -1,0 +1,2327 @@
+{
+  "item": [
+    {
+      "id": "e4e703bc-9995-4602-b516-1b6f490d44a1",
+      "name": "Funds",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a27fa4a2-beb9-401e-81e5-40a9d8dcc4be",
+          "name": "Get Funds",
+          "request": {
+            "name": "Get Funds",
+            "description": {
+              "content": "Fetch all funds accessible by the current API user.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2022-02-24.\n</span>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "This is the page number. For example, if you specify \"2\" you will see all funds on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2022-02-24.</u>"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<string>",
+                  "description": "The number of funds for each page. The maximum number of funds as well as the default is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2022-02-24.</u>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name of the fund you wish to retrieve records for. This can either be the formal fund name or any of its associated aliases. To search based on a part of the fund name or alias, just append an \"*\" character anywhere within the name parameter."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_field",
+                  "value": "<string>",
+                  "description": "An indexed string of one or more custom field IDs, which relate to fund specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s). When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/funds?custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2&custom_field[867e4563-c2b5-e788-d050-4ce151dec635]=value1"
+                },
+                {
+                  "disabled": false,
+                  "key": "fund_id",
+                  "value": "<string>",
+                  "description": "Returns exact fund for a specific id. Multiple IDs are separated by a comma."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d694a7ac-d6ff-4135-bfdc-23faa6077330",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "3"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Sample Hedge Fund Detail 1"
+                    },
+                    {
+                      "key": "custom_field",
+                      "value": "custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2"
+                    },
+                    {
+                      "key": "fund_id",
+                      "value": "fund_id_1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"1\",\n    \"organization_id\": \"12\",\n    \"type\": \"direct_investment\",\n    \"status\": \"active\",\n    \"name\": \"Sample Direct Deal 1\",\n    \"sponsor\": \"Sample Sponsor 1\",\n    \"start_date\": \"2015-11-10\",\n    \"aliases\": [\n      \"Sample Direct 1\",\n      \"SDD1\"\n    ],\n    \"legal_name\": \"Sample Direct Deal 1 LP\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"ID\": \"1\"\n      }\n    ],\n    \"requirements_preference\": {\n      \"account_statements\": {\n        \"balance\": \"string\"\n      }\n    },\n    \"term_id\": \"1\",\n    \"fund_name\": \"Sample Direct\"\n  },\n  {\n    \"id\": \"1\",\n    \"organization_id\": \"12\",\n    \"type\": \"direct_investment\",\n    \"status\": \"active\",\n    \"name\": \"Sample Direct Deal 1\",\n    \"sponsor\": \"Sample Sponsor 1\",\n    \"start_date\": \"2015-11-10\",\n    \"aliases\": [\n      \"Sample Direct 1\",\n      \"SDD1\"\n    ],\n    \"legal_name\": \"Sample Direct Deal 1 LP\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"ID\": \"1\"\n      }\n    ],\n    \"requirements_preference\": {\n      \"account_statements\": {\n        \"balance\": \"string\"\n      }\n    },\n    \"term_id\": \"1\",\n    \"fund_name\": \"Sample Direct\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "191c5d54-38c0-4135-9e5b-e2b933cc00d0",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "3"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Sample Hedge Fund Detail 1"
+                    },
+                    {
+                      "key": "custom_field",
+                      "value": "custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2"
+                    },
+                    {
+                      "key": "fund_id",
+                      "value": "fund_id_1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "319b1f76-2c87-49ec-9386-a70bccfb6fe7",
+              "name": "Resource Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "3"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Sample Hedge Fund Detail 1"
+                    },
+                    {
+                      "key": "custom_field",
+                      "value": "custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2"
+                    },
+                    {
+                      "key": "fund_id",
+                      "value": "fund_id_1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "84e3a5f6-0590-4ae8-8df3-95c88e369537",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "3"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Sample Hedge Fund Detail 1"
+                    },
+                    {
+                      "key": "custom_field",
+                      "value": "custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2"
+                    },
+                    {
+                      "key": "fund_id",
+                      "value": "fund_id_1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "635587d9-c5b1-4073-93e5-5b845d1aa194",
+          "name": "Create A Single Fund",
+          "request": {
+            "name": "Create A Single Fund",
+            "description": {
+              "content": "Create a new fund based on the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"status\": \"<string>\",\n  \"name\": \"<string>\",\n  \"sponsor\": \"<string>\",\n  \"start_date\": \"<string>\",\n  \"aliases\": \"<string>\",\n  \"legal_name\": \"<string>\",\n  \"custom_fields\": \"<array>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0c53d56d-6916-4f49-babf-b3aadbd45709",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"hedge_fund\",\n  \"status\": \"retired\",\n  \"name\": \"Sample fund 1\",\n  \"sponsor\": \"Sample sponsor 1\",\n  \"start_date\": \"2021-01-01T00:00:00.000Z\",\n  \"aliases\": \"Sample alias 1, Sample alias 2\",\n  \"legal_name\": \"Sample Fund V\",\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"1\",\n    \"organization_id\": \"12\",\n    \"type\": \"direct_investment\",\n    \"status\": \"active\",\n    \"name\": \"Sample Direct Deal 1\",\n    \"sponsor\": \"Sample Sponsor 1\",\n    \"start_date\": \"2015-11-10\",\n    \"aliases\": [\n      \"Sample Direct 1\",\n      \"SDD1\"\n    ],\n    \"legal_name\": \"Sample Direct Deal 1 LP\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"ID\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Direct Deal 1\",\n    \"requirements_preference\": {\n      \"account_statements\": {\n        \"balance\": \"string\"\n      }\n    },\n    \"term_id\": \"123\",\n    \"term_name\": \"Deal 1\"\n  },\n  {\n    \"id\": \"1\",\n    \"organization_id\": \"12\",\n    \"type\": \"direct_investment\",\n    \"status\": \"active\",\n    \"name\": \"Sample Direct Deal 1\",\n    \"sponsor\": \"Sample Sponsor 1\",\n    \"start_date\": \"2015-11-10\",\n    \"aliases\": [\n      \"Sample Direct 1\",\n      \"SDD1\"\n    ],\n    \"legal_name\": \"Sample Direct Deal 1 LP\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"ID\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Direct Deal 1\",\n    \"requirements_preference\": {\n      \"account_statements\": {\n        \"balance\": \"string\"\n      }\n    },\n    \"term_id\": \"123\",\n    \"term_name\": \"Deal 1\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05ee66f5-e501-4fdc-a1ea-e5aa1cebdd40",
+              "name": "Failed to create the fund with a corresponding term.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"hedge_fund\",\n  \"status\": \"retired\",\n  \"name\": \"Sample fund 1\",\n  \"sponsor\": \"Sample sponsor 1\",\n  \"start_date\": \"2021-01-01T00:00:00.000Z\",\n  \"aliases\": \"Sample alias 1, Sample alias 2\",\n  \"legal_name\": \"Sample Fund V\",\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d1d48bcd-53bc-42ab-90fe-f90dba14a3d5",
+              "name": "Failed to create the fund with a corresponding term.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"hedge_fund\",\n  \"status\": \"retired\",\n  \"name\": \"Sample fund 1\",\n  \"sponsor\": \"Sample sponsor 1\",\n  \"start_date\": \"2021-01-01T00:00:00.000Z\",\n  \"aliases\": \"Sample alias 1, Sample alias 2\",\n  \"legal_name\": \"Sample Fund V\",\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68506482-4ad3-4faa-90df-eff6e3ee0398",
+          "name": "Delete Multiple Funds",
+          "request": {
+            "name": "Delete Multiple Funds",
+            "description": {
+              "content": "Bulk delete up to 100 funds at once based on fund ids. WARNING: This will delete all funds associated with the ids passed in, as well as their related documents, allocations, and terms.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62ab7f18-3edf-49db-8e83-d6db9417cae8",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ids\": [\n      \"id_1\",\n      \"id_2\",\n      \"id_3\"\n    ],\n    \"deleted\": 3\n  },\n  {\n    \"ids\": [\n      \"id_1\",\n      \"id_2\",\n      \"id_3\"\n    ],\n    \"deleted\": 3\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d8f0367-56fa-4085-aa07-e3c865aaddd9",
+              "name": "Cannot delete more than 100 records at one time. Request includes 305 items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9480dd9-0936-4696-9573-753f7158c058",
+          "name": "Get Detailed Fund Data",
+          "request": {
+            "name": "Get Detailed Fund Data",
+            "description": {
+              "content": "Fetch detailed fund information including terms, allocations, and related entities. This endpoint provides more comprehensive fund data than the standard /v1/funds endpoint, including allocation data with entity relationships.\n\n<span name=\"doc-alert-info\">\nThis endpoint supports pagination. \nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.\n</span>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "The page number for pagination. By default, this is set to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<integer>",
+                  "description": "The number of results per page. The maximum number of results as well as the default is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by fund name. Supports partial matching with wildcard character (*)."
+                },
+                {
+                  "disabled": false,
+                  "key": "fund_id",
+                  "value": "<string>",
+                  "description": "Filter by specific fund ID(s). Multiple IDs can be separated by commas."
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "Filter allocations by account ID(s). Multiple IDs can be separated by commas."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8c2503db-c971-48ff-a6f5-a41ee63f726f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "25"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Sample Fund"
+                    },
+                    {
+                      "key": "fund_id",
+                      "value": "fund_id_1"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_id_1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"ba67e8d4-902d-11ed-bafd-0a58a9feac02\",\n    \"organization_id\": \"fb780fe2-b05f-11ec-a394-5717ed8c873f\",\n    \"type\": \"drawdown_fund\",\n    \"status\": \"active\",\n    \"name\": \"Sample Fund - Series A\",\n    \"term_id\": \"a5176574-0948-11ee-9701-0a58a9feac02\",\n    \"term_name\": \"Series A\",\n    \"sponsor\": \"Sample Sponsor\",\n    \"start_date\": \"2020-01-01\",\n    \"aliases\": [\n      \"SF-A\",\n      \"Sample Fund A\"\n    ],\n    \"legal_name\": \"Sample Fund LP\",\n    \"custom_fields\": [\n      {\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"custom_field_id\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"custom_field_id\": \"string\"\n      }\n    ],\n    \"downstream_ids\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"allocations\": [\n      {\n        \"allocation_id\": \"alloc_123\",\n        \"status\": \"active\",\n        \"custom_allocation_id\": \"CUSTOM-001\",\n        \"custom_fields\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\",\n            \"custom_field_id\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\",\n            \"custom_field_id\": \"string\"\n          }\n        ],\n        \"entity\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"parent_id\": \"string\",\n          \"status\": \"string\",\n          \"aliases\": [\n            \"string\",\n            \"string\"\n          ],\n          \"custom_fields\": [\n            {\n              \"name\": \"string\",\n              \"value\": \"string\",\n              \"custom_field_id\": \"string\"\n            },\n            {\n              \"name\": \"string\",\n              \"value\": \"string\",\n              \"custom_field_id\": \"string\"\n            }\n          ]\n        }\n      },\n      {\n        \"allocation_id\": \"alloc_123\",\n        \"status\": \"active\",\n        \"custom_allocation_id\": \"CUSTOM-001\",\n        \"custom_fields\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\",\n            \"custom_field_id\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\",\n            \"custom_field_id\": \"string\"\n          }\n        ],\n        \"entity\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"parent_id\": \"string\",\n          \"status\": \"string\",\n          \"aliases\": [\n            \"string\",\n            \"string\"\n          ],\n          \"custom_fields\": [\n            {\n              \"name\": \"string\",\n              \"value\": \"string\",\n              \"custom_field_id\": \"string\"\n            },\n            {\n              \"name\": \"string\",\n              \"value\": \"string\",\n              \"custom_field_id\": \"string\"\n            }\n          ]\n        }\n      }\n    ]\n  },\n  {\n    \"id\": \"ba67e8d4-902d-11ed-bafd-0a58a9feac02\",\n    \"organization_id\": \"fb780fe2-b05f-11ec-a394-5717ed8c873f\",\n    \"type\": \"drawdown_fund\",\n    \"status\": \"active\",\n    \"name\": \"Sample Fund - Series A\",\n    \"term_id\": \"a5176574-0948-11ee-9701-0a58a9feac02\",\n    \"term_name\": \"Series A\",\n    \"sponsor\": \"Sample Sponsor\",\n    \"start_date\": \"2020-01-01\",\n    \"aliases\": [\n      \"SF-A\",\n      \"Sample Fund A\"\n    ],\n    \"legal_name\": \"Sample Fund LP\",\n    \"custom_fields\": [\n      {\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"custom_field_id\": \"string\"\n      },\n      {\n        \"name\": \"string\",\n        \"value\": \"string\",\n        \"custom_field_id\": \"string\"\n      }\n    ],\n    \"downstream_ids\": [\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"id\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"allocations\": [\n      {\n        \"allocation_id\": \"alloc_123\",\n        \"status\": \"active\",\n        \"custom_allocation_id\": \"CUSTOM-001\",\n        \"custom_fields\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\",\n            \"custom_field_id\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\",\n            \"custom_field_id\": \"string\"\n          }\n        ],\n        \"entity\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"parent_id\": \"string\",\n          \"status\": \"string\",\n          \"aliases\": [\n            \"string\",\n            \"string\"\n          ],\n          \"custom_fields\": [\n            {\n              \"name\": \"string\",\n              \"value\": \"string\",\n              \"custom_field_id\": \"string\"\n            },\n            {\n              \"name\": \"string\",\n              \"value\": \"string\",\n              \"custom_field_id\": \"string\"\n            }\n          ]\n        }\n      },\n      {\n        \"allocation_id\": \"alloc_123\",\n        \"status\": \"active\",\n        \"custom_allocation_id\": \"CUSTOM-001\",\n        \"custom_fields\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\",\n            \"custom_field_id\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\",\n            \"custom_field_id\": \"string\"\n          }\n        ],\n        \"entity\": {\n          \"id\": \"string\",\n          \"name\": \"string\",\n          \"parent_id\": \"string\",\n          \"status\": \"string\",\n          \"aliases\": [\n            \"string\",\n            \"string\"\n          ],\n          \"custom_fields\": [\n            {\n              \"name\": \"string\",\n              \"value\": \"string\",\n              \"custom_field_id\": \"string\"\n            },\n            {\n              \"name\": \"string\",\n              \"value\": \"string\",\n              \"custom_field_id\": \"string\"\n            }\n          ]\n        }\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2dbd54d9-a557-4980-9a63-473af507f0ad",
+              "name": "Bad request - Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "25"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Sample Fund"
+                    },
+                    {
+                      "key": "fund_id",
+                      "value": "fund_id_1"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_id_1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0fda6fc3-ebd4-451e-a2b9-66f9dd44e236",
+              "name": "Forbidden - Insufficient permissions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "25"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Sample Fund"
+                    },
+                    {
+                      "key": "fund_id",
+                      "value": "fund_id_1"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_id_1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e45264c5-e31f-499f-9b06-96a39493fd9b",
+              "name": "Resource Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "25"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Sample Fund"
+                    },
+                    {
+                      "key": "fund_id",
+                      "value": "fund_id_1"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_id_1"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a38dbb45-2289-46f7-b6a6-ae50944f881b",
+          "name": "Get A Single Fund",
+          "request": {
+            "name": "Get A Single Fund",
+            "description": {
+              "content": "Fetch a specific fund by the fund's ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the fund."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6423ba02-adfe-4c6d-8081-b70a8ad74f2a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"1\",\n    \"organization_id\": \"12\",\n    \"type\": \"direct_investment\",\n    \"status\": \"active\",\n    \"name\": \"Sample Direct Deal 1\",\n    \"sponsor\": \"Sample Sponsor 1\",\n    \"start_date\": \"2015-11-10\",\n    \"aliases\": [\n      \"Sample Direct 1\",\n      \"SDD1\"\n    ],\n    \"legal_name\": \"Sample Direct Deal 1 LP\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"ID\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Direct Deal 1\",\n    \"requirements_preference\": {\n      \"account_statements\": {\n        \"balance\": \"string\"\n      }\n    },\n    \"term_id\": \"123\",\n    \"term_name\": \"Deal 1\"\n  },\n  {\n    \"id\": \"1\",\n    \"organization_id\": \"12\",\n    \"type\": \"direct_investment\",\n    \"status\": \"active\",\n    \"name\": \"Sample Direct Deal 1\",\n    \"sponsor\": \"Sample Sponsor 1\",\n    \"start_date\": \"2015-11-10\",\n    \"aliases\": [\n      \"Sample Direct 1\",\n      \"SDD1\"\n    ],\n    \"legal_name\": \"Sample Direct Deal 1 LP\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"ID\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Direct Deal 1\",\n    \"requirements_preference\": {\n      \"account_statements\": {\n        \"balance\": \"string\"\n      }\n    },\n    \"term_id\": \"123\",\n    \"term_name\": \"Deal 1\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa73b810-2861-4b7b-9ca8-a018cdbf58bf",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8d54c11d-2cb8-42f1-92d8-54ce61d621b8",
+              "name": "Resource Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e0c611f9-8a1a-47ad-9fca-601bb1f1b532",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5af027d-c3b6-4103-a382-89719c75c742",
+          "name": "Update A Single Fund",
+          "request": {
+            "name": "Update A Single Fund",
+            "description": {
+              "content": "Update an existing fund based on the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the fund"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"status\": \"<string>\",\n  \"name\": \"<string>\",\n  \"sponsor\": \"<string>\",\n  \"start_date\": \"<string>\",\n  \"aliases\": \"<string>\",\n  \"legal_name\": \"<string>\",\n  \"custom_fields\": \"<array>\",\n  \"currency\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14b5b0e7-684c-41e1-a829-065d72e48289",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"drawdown_fund, hedge_fund\",\n  \"status\": \"active, retired\",\n  \"name\": \"Sample fund 1, Sample fund 2\",\n  \"sponsor\": \"Sample sponsor 1, Sample sponsor 2\",\n  \"start_date\": \"2021-01-01, 2010-12-30\",\n  \"aliases\": \"Sample alias 1, Sample alias 2\",\n  \"legal_name\": \"Sample Fund V, Sample Capital LP\",\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"1\",\n    \"organization_id\": \"12\",\n    \"type\": \"direct_investment\",\n    \"status\": \"active\",\n    \"name\": \"Sample Direct Deal 1\",\n    \"sponsor\": \"Sample Sponsor 1\",\n    \"start_date\": \"2015-11-10\",\n    \"aliases\": [\n      \"Sample Direct 1\",\n      \"SDD1\"\n    ],\n    \"legal_name\": \"Sample Direct Deal 1 LP\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"ID\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Direct Deal 1\",\n    \"requirements_preference\": {\n      \"account_statements\": {\n        \"balance\": \"string\"\n      }\n    },\n    \"term_id\": \"123\",\n    \"term_name\": \"Deal 1\"\n  },\n  {\n    \"id\": \"1\",\n    \"organization_id\": \"12\",\n    \"type\": \"direct_investment\",\n    \"status\": \"active\",\n    \"name\": \"Sample Direct Deal 1\",\n    \"sponsor\": \"Sample Sponsor 1\",\n    \"start_date\": \"2015-11-10\",\n    \"aliases\": [\n      \"Sample Direct 1\",\n      \"SDD1\"\n    ],\n    \"legal_name\": \"Sample Direct Deal 1 LP\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"ID\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Direct Deal 1\",\n    \"requirements_preference\": {\n      \"account_statements\": {\n        \"balance\": \"string\"\n      }\n    },\n    \"term_id\": \"123\",\n    \"term_name\": \"Deal 1\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59e20ff0-5f0c-4abc-9a85-5bf66443613b",
+              "name": "Failed to create the fund with a corresponding term.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"drawdown_fund, hedge_fund\",\n  \"status\": \"active, retired\",\n  \"name\": \"Sample fund 1, Sample fund 2\",\n  \"sponsor\": \"Sample sponsor 1, Sample sponsor 2\",\n  \"start_date\": \"2021-01-01, 2010-12-30\",\n  \"aliases\": \"Sample alias 1, Sample alias 2\",\n  \"legal_name\": \"Sample Fund V, Sample Capital LP\",\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "10342db7-afc5-42fd-a614-ba94b2e71da3",
+              "name": "Failed to create the fund with a corresponding term.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"drawdown_fund, hedge_fund\",\n  \"status\": \"active, retired\",\n  \"name\": \"Sample fund 1, Sample fund 2\",\n  \"sponsor\": \"Sample sponsor 1, Sample sponsor 2\",\n  \"start_date\": \"2021-01-01, 2010-12-30\",\n  \"aliases\": \"Sample alias 1, Sample alias 2\",\n  \"legal_name\": \"Sample Fund V, Sample Capital LP\",\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"currency\": \"USD\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af93ef30-2650-4641-b8da-f9c640be0353",
+          "name": "Delete A Single Fund",
+          "request": {
+            "name": "Delete A Single Fund",
+            "description": {
+              "content": "Delete a single fund based on the fund's id. WARNING: This will delete the fund, as well as it's associated documents, allocations, and terms.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the fund to be deleted."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6427a6c8-dc52-4548-a493-e81bd52f0096",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund to be deleted."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"message\": \"The Fund 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.\"\n  },\n  {\n    \"message\": \"The Fund 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a5c2079-8bf1-41f4-9c10-0c6faffe742b",
+              "name": "Cannot delete more than 100 records at one time. Request includes 305 items.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund to be deleted."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4eb1407-0f2f-4965-9204-4608c6d650d5",
+          "name": "Get A Single Fund's Document Data",
+          "request": {
+            "name": "Get A Single Fund's Document Data",
+            "description": {
+              "content": "Fetch the extracted data and metadata of a single fund's documents.\n\nBy default, Canoe's server sends back the full representation of each document object after processing requests. For better performance, you can have the server send only the fields you specify.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination.\nPagination supports the return of large results and is highly recommended for all use cases.\nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results,\nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.\nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.\n</span>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds",
+                ":id",
+                "document-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "This page number. For example, if you specify \"2\" you will see all documents on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-10-07.</u> Example: 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of documents for each page. The maximum number of documents limit is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-10-07.</u> Example: 50"
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "(Required) The fields you need in the partial response. The value of the fields parameter MUST be a comma-separated (U+002C COMMA, \",\") list that refers to the name(s) of the fields to be returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "The category of the document. Our current categories are:<br><br><li>Capital Activity</li><br><li>Email & System Messages</li><br><li>Financial Statements & Performance</li><br><li>Investment & Transactional</li><br><li>Investor Administration & Communication</li><br><li>Legal, Compliance & Regulatory</li><br><li>Other</li><br><li>Tax</li><br><br>Multiple categories can be passed as a comma-delimited list (e.g. <code>Capital Activity,Tax</code>)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the fund."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "901333c4-5f53-4204-8b01-efc2a64630ed",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id",
+                    "document-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "1"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Capital Activity, Email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"1\",\n    \"client_document_id\": \"custom_id_1\",\n    \"name\": \"Sample Hedge Fund Deal 1 - Entity A - Account Statement - 12/31/16\",\n    \"document_status\": \"Complete\",\n    \"category\": \"Capital Activity\",\n    \"document_type\": \"Account Statement\",\n    \"source\": \"Upload Engine\",\n    \"file_type\": \".pdf\",\n    \"original_file_type\": \".docx\",\n    \"original_file_name\": \"Entity A - Sample HF Deal.pdf\",\n    \"document_tags\": [\n      {\n        \"name\": \"tag_1\"\n      },\n      {\n        \"name\": \"tag_2\"\n      }\n    ],\n    \"reporting_frequency\": \"Monthly\",\n    \"uploaded\": {\n      \"date\": \"2018-04-30 20:51:38.000000\",\n      \"timezone_type\": 3,\n      \"timezone\": \"America/New_York\"\n    },\n    \"last_modified\": {\n      \"date\": \"2019-09-16 11:38:47.000000\",\n      \"timezone_type\": 3,\n      \"timezone\": \"America/New_York\"\n    },\n    \"last_modified_by\": {\n      \"user_id\": \"user_canoe\",\n      \"name\": \"canoe software\",\n      \"email\": \"info@canoesoftware.com\"\n    },\n    \"is_locked\": false,\n    \"number_of_pages\": \"1\",\n    \"file_size\": 2000,\n    \"allocations\": {\n      \"allocation_id\": \"allocation_1\",\n      \"data_date\": \"2016-12-31\",\n      \"dataset_type\": \"Account Statement\",\n      \"investment\": \"Sample Hedge Fund Deal 1\",\n      \"fund_sponsor\": \"Sample Sponsor 1\",\n      \"custom_allocation_id\": \"123\",\n      \"investment_id\": \"1\",\n      \"investment_legal_name\": \"Sample Hedge Fund Deal One\",\n      \"investment_extraction_aliases\": [\n        \"Sample Hedge Fund Deal 1 alias 1\",\n        \"Sample Hedge Fund Deal 1 alias 2\"\n      ],\n      \"investment_structure\": \"hedge_fund\",\n      \"entity\": \"Entity A\",\n      \"entity_id\": \"1\",\n      \"entity_extraction_aliases\": [\n        \"Entity A alias 1\",\n        \"Entity A alias 2\"\n      ],\n      \"account\": \"Demo\",\n      \"account_id\": \"3\",\n      \"extracted_data\": {\n        \"entity\": \"Entity A\",\n        \"fundName\": \"Sample Hedge Fund Deal 1\",\n        \"endingDate\": \"12/31/2016\",\n        \"beginningDate\": \"11/30/2016\",\n        \"endingBalance\": \"4,111,305\",\n        \"beginningBalance\": \"4,036,960\",\n        \"otherFeesMTD\": \"395\"\n      },\n      \"validated_data\": {\n        \"entity\": \"Entity A\",\n        \"fundName\": \"Sample Hedge Fund Deal 1\",\n        \"endingDate\": \"2016-12-31\",\n        \"beginningDate\": \"2016-11-30\",\n        \"endingBalance\": 4111305,\n        \"beginningBalance\": 4036960,\n        \"otherFeesMTD\": 395\n      },\n      \"validation_errors\": {},\n      \"analyst\": \"Allison\",\n      \"frequency\": \"monthly\",\n      \"custom_fields\": [\n        {\n          \"name\": \"CLIENT_ID\",\n          \"value\": \"BOX1\",\n          \"ID\": \"1\"\n        }\n      ],\n      \"document_groups\": {\n        \"transaction\": {\n          \"group_id\": \"transaction_group_id\",\n          \"member_document_ids\": [\n            \"1\",\n            \"22\",\n            \"35\"\n          ]\n        }\n      },\n      \"addepar_owned_id\": \"AddeparOwned1\",\n      \"addepar_owner_id\": \"AddeparOwner1\",\n      \"black_diamond_symbol\": \"BlackDiamondSymbol1\",\n      \"black_diamond_account\": \"BlackDiaAcc\",\n      \"fund_name\": \"Sample Direct Deal 1\",\n      \"term_id\": \"\"\n    }\n  },\n  {\n    \"id\": \"1\",\n    \"client_document_id\": \"custom_id_1\",\n    \"name\": \"Sample Hedge Fund Deal 1 - Entity A - Account Statement - 12/31/16\",\n    \"document_status\": \"Complete\",\n    \"category\": \"Capital Activity\",\n    \"document_type\": \"Account Statement\",\n    \"source\": \"Upload Engine\",\n    \"file_type\": \".pdf\",\n    \"original_file_type\": \".docx\",\n    \"original_file_name\": \"Entity A - Sample HF Deal.pdf\",\n    \"document_tags\": [\n      {\n        \"name\": \"tag_1\"\n      },\n      {\n        \"name\": \"tag_2\"\n      }\n    ],\n    \"reporting_frequency\": \"Monthly\",\n    \"uploaded\": {\n      \"date\": \"2018-04-30 20:51:38.000000\",\n      \"timezone_type\": 3,\n      \"timezone\": \"America/New_York\"\n    },\n    \"last_modified\": {\n      \"date\": \"2019-09-16 11:38:47.000000\",\n      \"timezone_type\": 3,\n      \"timezone\": \"America/New_York\"\n    },\n    \"last_modified_by\": {\n      \"user_id\": \"user_canoe\",\n      \"name\": \"canoe software\",\n      \"email\": \"info@canoesoftware.com\"\n    },\n    \"is_locked\": false,\n    \"number_of_pages\": \"1\",\n    \"file_size\": 2000,\n    \"allocations\": {\n      \"allocation_id\": \"allocation_1\",\n      \"data_date\": \"2016-12-31\",\n      \"dataset_type\": \"Account Statement\",\n      \"investment\": \"Sample Hedge Fund Deal 1\",\n      \"fund_sponsor\": \"Sample Sponsor 1\",\n      \"custom_allocation_id\": \"123\",\n      \"investment_id\": \"1\",\n      \"investment_legal_name\": \"Sample Hedge Fund Deal One\",\n      \"investment_extraction_aliases\": [\n        \"Sample Hedge Fund Deal 1 alias 1\",\n        \"Sample Hedge Fund Deal 1 alias 2\"\n      ],\n      \"investment_structure\": \"hedge_fund\",\n      \"entity\": \"Entity A\",\n      \"entity_id\": \"1\",\n      \"entity_extraction_aliases\": [\n        \"Entity A alias 1\",\n        \"Entity A alias 2\"\n      ],\n      \"account\": \"Demo\",\n      \"account_id\": \"3\",\n      \"extracted_data\": {\n        \"entity\": \"Entity A\",\n        \"fundName\": \"Sample Hedge Fund Deal 1\",\n        \"endingDate\": \"12/31/2016\",\n        \"beginningDate\": \"11/30/2016\",\n        \"endingBalance\": \"4,111,305\",\n        \"beginningBalance\": \"4,036,960\",\n        \"otherFeesMTD\": \"395\"\n      },\n      \"validated_data\": {\n        \"entity\": \"Entity A\",\n        \"fundName\": \"Sample Hedge Fund Deal 1\",\n        \"endingDate\": \"2016-12-31\",\n        \"beginningDate\": \"2016-11-30\",\n        \"endingBalance\": 4111305,\n        \"beginningBalance\": 4036960,\n        \"otherFeesMTD\": 395\n      },\n      \"validation_errors\": {},\n      \"analyst\": \"Allison\",\n      \"frequency\": \"monthly\",\n      \"custom_fields\": [\n        {\n          \"name\": \"CLIENT_ID\",\n          \"value\": \"BOX1\",\n          \"ID\": \"1\"\n        }\n      ],\n      \"document_groups\": {\n        \"transaction\": {\n          \"group_id\": \"transaction_group_id\",\n          \"member_document_ids\": [\n            \"1\",\n            \"22\",\n            \"35\"\n          ]\n        }\n      },\n      \"addepar_owned_id\": \"AddeparOwned1\",\n      \"addepar_owner_id\": \"AddeparOwner1\",\n      \"black_diamond_symbol\": \"BlackDiamondSymbol1\",\n      \"black_diamond_account\": \"BlackDiaAcc\",\n      \"fund_name\": \"Sample Direct Deal 1\",\n      \"term_id\": \"\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a76234f-217e-495c-b575-6f23e80cb441",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id",
+                    "document-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "1"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Capital Activity, Email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "07b2d8d2-431c-4d01-8dbd-905653b9dc50",
+              "name": "Resource Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id",
+                    "document-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "1"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Capital Activity, Email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "48db354d-bac8-4de8-9876-49c1ba9a9d34",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id",
+                    "document-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "1"
+                    },
+                    {
+                      "key": "category",
+                      "value": "Capital Activity, Email"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "828ec955-d23c-42cb-9f70-b5bb82e060c6",
+          "name": "Download A Single Fund's Documents",
+          "request": {
+            "name": "Download A Single Fund's Documents",
+            "description": {
+              "content": "Download a specific Fund's documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds",
+                ":id",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>",
+                  "description": "(Required) All documents downloaded will have an uploaded timestamp <strong>greater than or equal to</strong> the given start_time. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target=\"_blank\" href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "This page number corresponds with the pagination in Canoe's Intelligent Document Center. There are up to 100 documents on each page. For example, if you specify \"2\" you will see all of a Fund's documents on page 2. By default, this is set to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<string>",
+                  "description": "The number of documents for each download. The maximum number of documents as well as the default is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "file_name_type",
+                  "value": "<string>",
+                  "description": "The document attribute to use for the file name. Available options are name, original_file_name and id. The default value for this is name."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the fund."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc03940d-5d96-4d67-afc9-1d1f74498e0c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "2019-03-30T04:00:00Z"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "file_name_type",
+                      "value": "original_file_name"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "13d5bb69-2edf-4368-b6bd-4cd1f5cd7885",
+              "name": "No access to the fund documents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "2019-03-30T04:00:00Z"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "file_name_type",
+                      "value": "original_file_name"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c1a16fe6-8123-43e3-8a10-de885fdb0a7f",
+          "name": "Get A Single Fund's Document IDs",
+          "request": {
+            "name": "Get A Single Fund's Document IDs",
+            "description": {
+              "content": "Get a specific fund's documents IDs for downloading the documents one by one.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "funds",
+                ":id",
+                "document-ids"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_time",
+                  "value": "<string>",
+                  "description": "All document IDs returned will have an uploaded timestamp greater than or equal to the given start_time. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the ISO 8601 format for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the fund."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "688f5622-bc1d-4125-b41f-08b2fbda390b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id",
+                    "document-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "2019-03-30T04:00:00Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"total\": 10,\n    \"ids\": [\n      \"2345abcd-1234-1111-9876-1234567abc89\",\n      \"2345abcd-1234-1111-9876-1234567abc88\",\n      \"2345abcd-1234-1111-9876-1234567abc87\",\n      \"2345abcd-1234-1111-9876-1234567abc86\",\n      \"2345abcd-1234-1111-9876-1234567abc85\",\n      \"2345abcd-1234-1111-9876-1234567abc84\",\n      \"2345abcd-1234-1111-9876-1234567abc83\",\n      \"2345abcd-1234-1111-9876-1234567abc82\",\n      \"2345abcd-1234-1111-9876-1234567abc81\",\n      \"2345abcd-1234-1111-9876-1234567abc80\"\n    ]\n  },\n  {\n    \"total\": 10,\n    \"ids\": [\n      \"2345abcd-1234-1111-9876-1234567abc89\",\n      \"2345abcd-1234-1111-9876-1234567abc88\",\n      \"2345abcd-1234-1111-9876-1234567abc87\",\n      \"2345abcd-1234-1111-9876-1234567abc86\",\n      \"2345abcd-1234-1111-9876-1234567abc85\",\n      \"2345abcd-1234-1111-9876-1234567abc84\",\n      \"2345abcd-1234-1111-9876-1234567abc83\",\n      \"2345abcd-1234-1111-9876-1234567abc82\",\n      \"2345abcd-1234-1111-9876-1234567abc81\",\n      \"2345abcd-1234-1111-9876-1234567abc80\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd8f572c-e3c8-410e-97ce-3bb894f5cd1e",
+              "name": "No access to the fund documents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "funds",
+                    ":id",
+                    "document-ids"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_time",
+                      "value": "2019-03-30T04:00:00Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the fund."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.canoesoftware.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "531292d3-3216-44ac-b452-5ce158cfe4c9",
+    "name": "Canoe API v1 Funds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n\n\nContact Support:\n Name: Canoe Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -254,3 +254,9 @@ coverage:
   tools: 45
   rest_operations: 50
   excluded: 4 token/OAuth-client operations excluded — credential issuance is not an agent tool
+deployment:
+  mode: none
+  verified: derived
+  tools: 45
+  checked: '2026-08-12'
+  source: catalog MCP census

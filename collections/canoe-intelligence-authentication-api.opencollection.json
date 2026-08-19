@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Canoe API v1 Authentication API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Managing OAuth Clients",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/oauth/clients"
+          },
+          "docs": "<p>To verify incoming API requests, Canoe's APIs use access tokens.</p>\n<p>Canoe API users may <a href=\"#managing-oauth-clients\">create and manage their OAuth Client</a>, and use the <code>Client ID</code> and <code>Client Secret</code> to request an authorization code and access token.</p>\n<p>Canoe API users can also use the <code class=\"prettyprint\">/v1/tokens</code> <a href=\"#password-grant-tokens\">endpoint</a> to manage the access tokens. To authenticate to the <code class=\"prettyprint\">/v1/"
+        },
+        {
+          "info": {
+            "name": "Requesting Tokens - Authorization Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.canoesoftware.com/oauth/token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/oauth/token\n\n<p>Once a client has been created, you may use the <code>Client ID</code> and <code>Client Secret</code> to request an\nauthorization code and access token from your application. First, your application should make a redirect request to\nCanoe's <code>oauth/authorize</code> route (see examples on the right panel)</p>\n\n<p>When receiving authorization requests, Canoe will ask users to approve or deny the authorization request. If users approve the request, they will be redirected back "
+        },
+        {
+          "info": {
+            "name": "Requesting Tokens - Refresh Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.canoesoftware.com/oauth/token/refresh",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/oauth/token\n\n<p>Users can refresh their access tokens via the refresh token that was provided to them when the access token was issued.</p>\n<p>Users should issue a <code>POST</code> request to Canoe to request an access token. See examples on the right panel and the parameters for the <code>POST</code> request below.</p>"
+        },
+        {
+          "info": {
+            "name": "Requesting Tokens - Client Credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.canoesoftware.com/oauth/token/client-credentials",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "/oauth/token\n\n<p>Once a client has been created, you may use the <code>Client ID</code> and <code>Client Secret</code> to request an\nto request an access token. Access tokens provide access to all other endpoints within the API.</p>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

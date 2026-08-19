@@ -1,0 +1,418 @@
+{
+  "item": [
+    {
+      "id": "964b3cd1-8d74-4276-a8c9-19ec6d47e31e",
+      "name": "Authentication",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52cd1d73-f167-4817-a170-b14c65bd2306",
+          "name": "Managing OAuth Clients",
+          "request": {
+            "name": "Managing OAuth Clients",
+            "description": {
+              "content": "<p>To verify incoming API requests, Canoe's APIs use access tokens.</p>\n<p>Canoe API users may <a href=\"#managing-oauth-clients\">create and manage their OAuth Client</a>, and use the <code>Client ID</code> and <code>Client Secret</code> to request an authorization code and access token.</p>\n<p>Canoe API users can also use the <code class=\"prettyprint\">/v1/tokens</code> <a href=\"#password-grant-tokens\">endpoint</a> to manage the access tokens. To authenticate to the <code class=\"prettyprint\">/v1/tokens</code> endpoint, you will need API user credentials. This is one of the few API endpoints where you will need to use your user credentials; most other endpoints are authenticated through access tokens.</p>\n<aside class=\"notice\">\n    Note: An access token issued from Canoe will expire in 24 hours.\n</aside>\n<p>Once you have an access token, you can authenticate to Canoe's API endpoints. Pass the access token in the request header in the format <code class=\"prettyprint\">Authorization: Bearer {token}</code>, where <code class=\"prettyprint\">{token}</code> is your newly created personal access token.</p>\n<p>For example, if your newly created access token is \"eyJ0eXAiOiJKV1QiLCJhbG\", your header should look like \"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbG\"</p>\n<p>If you are using Postman Collection for testing purpose, you could follow the steps here: <a href=\"https://learning.getpostman.com/docs/postman/sending_api_requests/authorization/#bearer-token\" target=\"_blank\"><u>Authorization - Bearer Token</u></a></p>\n<aside class=\"notice\">\n    Note: Sometimes, you want to give API access only to some specific IP addresses. Please contact us to enable that.\n</aside>\n\n<p>Developers building applications that need to interact with Canoe's API need to first register their application by creating a Client account. Typically, this consists of providing the name of their application and a URL that your application can redirect to after users approve their request for authorization. When a Client is created, it will be issued a <code>Client ID</code> and <code>Client Secret</code>. These values will be used when requesting access tokens from your application. </p>\n\n<p>Canoe API users can create and manage their OAuth Clients through the <a href=https://client.canoesoftware.com/api_configuration target=\"_blank\"><u>API Configuration Dashboard</u></a>.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oauth",
+                "clients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e66eef6-f0a0-4d80-85b9-50dc8bcd766b",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "clients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e54be18-5299-4b2d-92bf-449023e774ba",
+          "name": "Requesting Tokens - Authorization Code",
+          "request": {
+            "name": "Requesting Tokens - Authorization Code",
+            "description": {
+              "content": "/oauth/token\n\n<p>Once a client has been created, you may use the <code>Client ID</code> and <code>Client Secret</code> to request an\nauthorization code and access token from your application. First, your application should make a redirect request to\nCanoe's <code>oauth/authorize</code> route (see examples on the right panel)</p>\n\n<p>When receiving authorization requests, Canoe will ask users to approve or deny the authorization request. If users approve the request, they will be redirected back to the <code>redirect_uri</code> that was specified by the application that requested access (your application). The <code>redirect_uri</code> must match the <code>redirect</code> URL that was specified when the client was created.</p>\n<p>If the user approves the authorization request, they will be redirected back to the consuming application with the authorization code. The consumer should then issue a <code>POST</code> request to Canoe to request an access token. The request should include the authorization code that was issued by Canoe when the user approved the authorization request. See examples on the right panel and the parameters for the <code>POST</code> request below.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oauth",
+                "token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"grant_type\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"redirect_uri\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c31d4e02-fabe-468c-a661-32553f5ad7df",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"grant_type\": \"authorization_code\",\n  \"client_id\": \"client-id\",\n  \"client_secret\": \"your_client_secret\",\n  \"redirect_uri\": \"https://your-application.com/callback\",\n  \"code\": \"code\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 86400,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5YjA4ZmZkZjQ5ZmRiNDYxMzk4MTY0ODNkMGVlNmNjMjA2ZmYxMDU1ODVhMDUwM2ViZmY3Mzg4OTMzN2I4NTI5Mzg1MWY5ZTBjN2YzYzNmIn0.eyJhdWQiOiJhZjFhMjVjNC1hNDE3LTEx\\nZTktOTZmYy0wNmY3NWI2ZjJiNGEiLCJqdGkiOiIz\\nOWIwOGZmZGY0OWZkYjQ2MTM5ODE2NDgzZDBlZTZjYzIwNmZmMTA1NTg1YTA1MDNlYmZmNzM4ODkzMzdiODUyOTM4NTFmOWUwYzdmM2MzZiIsImlhdCI6MTU2Mjg3NjI1MiwibmJmIjoxNTYyODc2MjUyLCJleHAiOjE1NjQx\\nNzIyNTEsInN1YiI6IjE2MzhlZDRhLTY4MTItYTNh\\nYy0wMDA1LTUzYmI5MjJjNGFiYiIsInNjb3BlcyI6W\\n119.t7wflHG7Og9Vf1rqPWo2QzCyyAo3AUc9duZyoM\\nEQ8dix5Omt5OWqHX6TWYddxbC34fvRi1Gby4CqK9Kz-s-0GMr2YnWxBPCzAIGlKMRVKbs615bQTpChG0a5BWzcUMOww1zhL9Gz8aSg2yI47kAHFnVPZFGH4zA2yqcRvmg7QvoYzQcm4hJR6NatMJgKOChagUDthdj-ezWwWq_pyCXZFU2XwLm1vBZTIkgG40uCbqgsEUffDXFibQypBG9BrUkw03o9wh72UoL-QeMHn5K5Q7zJx08pzOUXWm_W4pfO7FIwzaHoOEtFmorSihnw7gzDddwASwMzhYgqF839J7CLa_mq6YV53oMP2eCOKX0jN-dd\\nEg4Gt6yYkVbh54yOsbztc4P1waUJ4JnJsBV2GdWd\\nxnB0bhx6QFhj4HrnkQzx1GScFjRzKPHJGGmN9e-6wCEb7TXncbtnuu-8YxCbG5IUfc25BlBtMeqURE1A6Pa7YciBJoPLlEDUAJ8HwfSHspxDkuPhz1ospacDJgl\\nxHn18Mrkt8lukwIL7dfhM9Wm2b6ZBJrKngFdkFV9ALFImjBwqk2SZVfhLMYvhTG36qGqI7e7uw_SyU2lPiN2MQcVpdaSd0NkCLqGAkRRwuDCaHBfZ35TJguJXHdJuRMDoghUAhYgAwqp7OU1FtgX1gmt5tok\",\n    \"refresh_token\": \"def50200a24fe7672ce8653724d90090ca68fc4729a04b1051b2c885f15e3ce77175eea08a4c94f6e8fc1cd82a50a1b5be47ccfab40f944308a9c694963c3a38bbdf32a825d1d085596d9afceffa2f2dfabe94394b0269926e82bf2b8f2c19d80d51d166425db9b187dce918a2db625353a86e57021689d508c5aad9950a48079f2ce194c34981906282c75ac5718c570f8bcae67d8725d95bc46159dd80c378a7d72a8eda0820c839aa268776bd67a1bbbae102155b3b6c188df55fec6d9abb043ca0ef7463e1416b8373379f93ceab463465844a16ee541da906abf87b0c41b6c1da469733a7\\n9bf1ca175d6d0e7235ec0ff388ed247680047beef09f8bd645c4d34d4fe574d72980f65f8848cbe3e035232367b916d54ded682eca7194225f4c4804fc5c\"\n  },\n  {\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 86400,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5YjA4ZmZkZjQ5ZmRiNDYxMzk4MTY0ODNkMGVlNmNjMjA2ZmYxMDU1ODVhMDUwM2ViZmY3Mzg4OTMzN2I4NTI5Mzg1MWY5ZTBjN2YzYzNmIn0.eyJhdWQiOiJhZjFhMjVjNC1hNDE3LTEx\\nZTktOTZmYy0wNmY3NWI2ZjJiNGEiLCJqdGkiOiIz\\nOWIwOGZmZGY0OWZkYjQ2MTM5ODE2NDgzZDBlZTZjYzIwNmZmMTA1NTg1YTA1MDNlYmZmNzM4ODkzMzdiODUyOTM4NTFmOWUwYzdmM2MzZiIsImlhdCI6MTU2Mjg3NjI1MiwibmJmIjoxNTYyODc2MjUyLCJleHAiOjE1NjQx\\nNzIyNTEsInN1YiI6IjE2MzhlZDRhLTY4MTItYTNh\\nYy0wMDA1LTUzYmI5MjJjNGFiYiIsInNjb3BlcyI6W\\n119.t7wflHG7Og9Vf1rqPWo2QzCyyAo3AUc9duZyoM\\nEQ8dix5Omt5OWqHX6TWYddxbC34fvRi1Gby4CqK9Kz-s-0GMr2YnWxBPCzAIGlKMRVKbs615bQTpChG0a5BWzcUMOww1zhL9Gz8aSg2yI47kAHFnVPZFGH4zA2yqcRvmg7QvoYzQcm4hJR6NatMJgKOChagUDthdj-ezWwWq_pyCXZFU2XwLm1vBZTIkgG40uCbqgsEUffDXFibQypBG9BrUkw03o9wh72UoL-QeMHn5K5Q7zJx08pzOUXWm_W4pfO7FIwzaHoOEtFmorSihnw7gzDddwASwMzhYgqF839J7CLa_mq6YV53oMP2eCOKX0jN-dd\\nEg4Gt6yYkVbh54yOsbztc4P1waUJ4JnJsBV2GdWd\\nxnB0bhx6QFhj4HrnkQzx1GScFjRzKPHJGGmN9e-6wCEb7TXncbtnuu-8YxCbG5IUfc25BlBtMeqURE1A6Pa7YciBJoPLlEDUAJ8HwfSHspxDkuPhz1ospacDJgl\\nxHn18Mrkt8lukwIL7dfhM9Wm2b6ZBJrKngFdkFV9ALFImjBwqk2SZVfhLMYvhTG36qGqI7e7uw_SyU2lPiN2MQcVpdaSd0NkCLqGAkRRwuDCaHBfZ35TJguJXHdJuRMDoghUAhYgAwqp7OU1FtgX1gmt5tok\",\n    \"refresh_token\": \"def50200a24fe7672ce8653724d90090ca68fc4729a04b1051b2c885f15e3ce77175eea08a4c94f6e8fc1cd82a50a1b5be47ccfab40f944308a9c694963c3a38bbdf32a825d1d085596d9afceffa2f2dfabe94394b0269926e82bf2b8f2c19d80d51d166425db9b187dce918a2db625353a86e57021689d508c5aad9950a48079f2ce194c34981906282c75ac5718c570f8bcae67d8725d95bc46159dd80c378a7d72a8eda0820c839aa268776bd67a1bbbae102155b3b6c188df55fec6d9abb043ca0ef7463e1416b8373379f93ceab463465844a16ee541da906abf87b0c41b6c1da469733a7\\n9bf1ca175d6d0e7235ec0ff388ed247680047beef09f8bd645c4d34d4fe574d72980f65f8848cbe3e035232367b916d54ded682eca7194225f4c4804fc5c\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a124ef07-af67-42c9-a0cc-23a81172b286",
+          "name": "Requesting Tokens - Refresh Token",
+          "request": {
+            "name": "Requesting Tokens - Refresh Token",
+            "description": {
+              "content": "/oauth/token\n\n<p>Users can refresh their access tokens via the refresh token that was provided to them when the access token was issued.</p>\n<p>Users should issue a <code>POST</code> request to Canoe to request an access token. See examples on the right panel and the parameters for the <code>POST</code> request below.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oauth",
+                "token",
+                "refresh"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"grant_type\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\",\n  \"refresh_token\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99eac9ea-b211-4b87-97fe-597d834cfb0c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "token",
+                    "refresh"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"grant_type\": \"refresh_token\",\n  \"client_id\": \"your_client_id\",\n  \"client_secret\": \"your_client_secret\",\n  \"refresh_token\": \"def50200a24fe7672ce8653724d90090ca68fc4729a04b1051b2c8\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 86400,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5YjA4ZmZkZjQ5ZmRiNDYxMzk4MTY0ODNkMGVlNmNjMjA2ZmYxMDU1ODVhMDUwM2ViZmY3Mzg4OTMzN2I4NTI5Mzg1MWY5ZTBjN2YzYzNmIn0.eyJhdWQiOiJhZjFhMjVjNC1hNDE3LTEx\\nZTktOTZmYy0wNmY3NWI2ZjJiNGEiLCJqdGkiOiIz\\nOWIwOGZmZGY0OWZkYjQ2MTM5ODE2NDgzZDBlZTZjYzIwNmZmMTA1NTg1YTA1MDNlYmZmNzM4ODkzMzdiODUyOTM4NTFmOWUwYzdmM2MzZiIsImlhdCI6MTU2Mjg3NjI1MiwibmJmIjoxNTYyODc2MjUyLCJleHAiOjE1NjQx\\nNzIyNTEsInN1YiI6IjE2MzhlZDRhLTY4MTItYTNh\\nYy0wMDA1LTUzYmI5MjJjNGFiYiIsInNjb3BlcyI6W\\n119.t7wflHG7Og9Vf1rqPWo2QzCyyAo3AUc9duZyoM\\nEQ8dix5Omt5OWqHX6TWYddxbC34fvRi1Gby4CqK9Kz-s-0GMr2YnWxBPCzAIGlKMRVKbs615bQTpChG0a5BWzcUMOww1zhL9Gz8aSg2yI47kAHFnVPZFGH4zA2yqcRvmg7QvoYzQcm4hJR6NatMJgKOChagUDthdj-ezWwWq_pyCXZFU2XwLm1vBZTIkgG40uCbqgsEUffDXFibQypBG9BrUkw03o9wh72UoL-QeMHn5K5Q7zJx08pzOUXWm_W4pfO7FIwzaHoOEtFmorSihnw7gzDddwASwMzhYgqF839J7CLa_mq6YV53oMP2eCOKX0jN-dd\\nEg4Gt6yYkVbh54yOsbztc4P1waUJ4JnJsBV2GdWd\\nxnB0bhx6QFhj4HrnkQzx1GScFjRzKPHJGGmN9e-6wCEb7TXncbtnuu-8YxCbG5IUfc25BlBtMeqURE1A6Pa7YciBJoPLlEDUAJ8HwfSHspxDkuPhz1ospacDJgl\\nxHn18Mrkt8lukwIL7dfhM9Wm2b6ZBJrKngFdkFV9ALFImjBwqk2SZVfhLMYvhTG36qGqI7e7uw_SyU2lPiN2MQcVpdaSd0NkCLqGAkRRwuDCaHBfZ35TJguJXHdJuRMDoghUAhYgAwqp7OU1FtgX1gmt5tok\",\n    \"refresh_token\": \"def50200a24fe7672ce8653724d90090ca68fc4729a04b1051b2c885f15e3ce77175eea08a4c94f6e8fc1cd82a50a1b5be47ccfab40f944308a9c694963c3a38bbdf32a825d1d085596d9afceffa2f2dfabe94394b0269926e82bf2b8f2c19d80d51d166425db9b187dce918a2db625353a86e57021689d508c5aad9950a48079f2ce194c34981906282c75ac5718c570f8bcae67d8725d95bc46159dd80c378a7d72a8eda0820c839aa268776bd67a1bbbae102155b3b6c188df55fec6d9abb043ca0ef7463e1416b8373379f93ceab463465844a16ee541da906abf87b0c41b6c1da469733a7\\n9bf1ca175d6d0e7235ec0ff388ed247680047beef09f8bd645c4d34d4fe574d72980f65f8848cbe3e035232367b916d54ded682eca7194225f4c4804fc5c\"\n  },\n  {\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 86400,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5YjA4ZmZkZjQ5ZmRiNDYxMzk4MTY0ODNkMGVlNmNjMjA2ZmYxMDU1ODVhMDUwM2ViZmY3Mzg4OTMzN2I4NTI5Mzg1MWY5ZTBjN2YzYzNmIn0.eyJhdWQiOiJhZjFhMjVjNC1hNDE3LTEx\\nZTktOTZmYy0wNmY3NWI2ZjJiNGEiLCJqdGkiOiIz\\nOWIwOGZmZGY0OWZkYjQ2MTM5ODE2NDgzZDBlZTZjYzIwNmZmMTA1NTg1YTA1MDNlYmZmNzM4ODkzMzdiODUyOTM4NTFmOWUwYzdmM2MzZiIsImlhdCI6MTU2Mjg3NjI1MiwibmJmIjoxNTYyODc2MjUyLCJleHAiOjE1NjQx\\nNzIyNTEsInN1YiI6IjE2MzhlZDRhLTY4MTItYTNh\\nYy0wMDA1LTUzYmI5MjJjNGFiYiIsInNjb3BlcyI6W\\n119.t7wflHG7Og9Vf1rqPWo2QzCyyAo3AUc9duZyoM\\nEQ8dix5Omt5OWqHX6TWYddxbC34fvRi1Gby4CqK9Kz-s-0GMr2YnWxBPCzAIGlKMRVKbs615bQTpChG0a5BWzcUMOww1zhL9Gz8aSg2yI47kAHFnVPZFGH4zA2yqcRvmg7QvoYzQcm4hJR6NatMJgKOChagUDthdj-ezWwWq_pyCXZFU2XwLm1vBZTIkgG40uCbqgsEUffDXFibQypBG9BrUkw03o9wh72UoL-QeMHn5K5Q7zJx08pzOUXWm_W4pfO7FIwzaHoOEtFmorSihnw7gzDddwASwMzhYgqF839J7CLa_mq6YV53oMP2eCOKX0jN-dd\\nEg4Gt6yYkVbh54yOsbztc4P1waUJ4JnJsBV2GdWd\\nxnB0bhx6QFhj4HrnkQzx1GScFjRzKPHJGGmN9e-6wCEb7TXncbtnuu-8YxCbG5IUfc25BlBtMeqURE1A6Pa7YciBJoPLlEDUAJ8HwfSHspxDkuPhz1ospacDJgl\\nxHn18Mrkt8lukwIL7dfhM9Wm2b6ZBJrKngFdkFV9ALFImjBwqk2SZVfhLMYvhTG36qGqI7e7uw_SyU2lPiN2MQcVpdaSd0NkCLqGAkRRwuDCaHBfZ35TJguJXHdJuRMDoghUAhYgAwqp7OU1FtgX1gmt5tok\",\n    \"refresh_token\": \"def50200a24fe7672ce8653724d90090ca68fc4729a04b1051b2c885f15e3ce77175eea08a4c94f6e8fc1cd82a50a1b5be47ccfab40f944308a9c694963c3a38bbdf32a825d1d085596d9afceffa2f2dfabe94394b0269926e82bf2b8f2c19d80d51d166425db9b187dce918a2db625353a86e57021689d508c5aad9950a48079f2ce194c34981906282c75ac5718c570f8bcae67d8725d95bc46159dd80c378a7d72a8eda0820c839aa268776bd67a1bbbae102155b3b6c188df55fec6d9abb043ca0ef7463e1416b8373379f93ceab463465844a16ee541da906abf87b0c41b6c1da469733a7\\n9bf1ca175d6d0e7235ec0ff388ed247680047beef09f8bd645c4d34d4fe574d72980f65f8848cbe3e035232367b916d54ded682eca7194225f4c4804fc5c\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dac1618-e1fd-4cbb-b95b-96f5cafda876",
+          "name": "Requesting Tokens - Client Credentials",
+          "request": {
+            "name": "Requesting Tokens - Client Credentials",
+            "description": {
+              "content": "/oauth/token\n\n<p>Once a client has been created, you may use the <code>Client ID</code> and <code>Client Secret</code> to request an\nto request an access token. Access tokens provide access to all other endpoints within the API.</p>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oauth",
+                "token",
+                "client-credentials"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"grant_type\": \"<string>\",\n  \"client_id\": \"<string>\",\n  \"client_secret\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f4745f0-5ad3-4bf1-8ef2-7858161e8efc",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oauth",
+                    "token",
+                    "client-credentials"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"grant_type\": \"client_credentials\",\n  \"client_id\": \"client_credentials\",\n  \"client_secret\": \"your_client_secret\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 86400,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5YjA4ZmZkZjQ5ZmRiNDYxMzk4MTY0ODNkMGVlNmNjMjA2ZmYxMDU1ODVhMDUwM2ViZmY3Mzg4OTMzN2I4NTI5Mzg1MWY5ZTBjN2YzYzNmIn0.eyJhdWQiOiJhZjFhMjVjNC1hNDE3LTExZTktOTZmYy0wNmY3NWI2ZjJiNGEiLCJqdGkiOiIzOWIwOGZmZGY0OWZkYjQ2MTM5ODE2NDgzZDBlZTZjYzIwNmZmMTA1NTg1YTA1MDNlYmZmNzM4ODkzMzdiODUyOTM4NTFmOWUwYzdmM2MzZiIsImlhdCI6MTU2Mjg3NjI1MiwibmJmIjoxNTYyODc2MjUyLCJleHAiOjE1NjQxNzIyNTEsInN1YiI6IjE2MzhlZDRhLTY4MTItYTNhYy0wMDA1LTUzYmI5MjJjNGFiYiIsInNjb3BlcyI6W119.t7wflHG7Og9Vf1rqPWo2QzCyyAo3AUc9duZyoMEQ8dix5Omt5OWqHX6TWYddxbC34fvRi1Gby4CqK9Kz-s-0GMr2YnWxBPCzAIGlKMRVKbs615bQTpChG0a5BWzcUMOww1zhL9Gz8aSg2yI47kAHFnVPZFGH4zA2yqcRvmg7QvoYzQcm4hJR6NatMJgKOChagUDthdj-ezWwWq_pyCXZFU2XwLm1vBZTIkgG40uCbqgsEUffDXFibQypBG9BrUkw03o9wh72UoL-QeMHn5K5Q7zJx08pzOUXWm_W4pfO7FIwzaHoOEtFmorSihnw7gzDddwASwMzhYgqF839J7CLa_mq6YV53oMP2eCOKX0jN-ddEg4Gt6yYkVbh54yOsbztc4P1waUJ4JnJsBV2GdWdxnB0bhx6QFhj4HrnkQzx1GScFjRzKPHJGGmN9e-6wCEb7TXncbtnuu-8YxCbG5IUfc25BlBtMeqURE1A6Pa7YciBJoPLlEDUAJ8HwfSHspxDkuPhz1ospacDJglxHn18Mrkt8lukwIL7dfhM9Wm2b6ZBJrKngFdkFV9ALFImjBwqk2SZVfhLMYvhTG36qGqI7e7uw_SyU2lPiN2MQcVpdaSd0NkCLqGAkRRwuDCaHBfZ35TJguJXHdJuRMDoghUAhYgAwqp7OU1FtgX1gmt5tok\"\n  },\n  {\n    \"token_type\": \"Bearer\",\n    \"expires_in\": 86400,\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjM5YjA4ZmZkZjQ5ZmRiNDYxMzk4MTY0ODNkMGVlNmNjMjA2ZmYxMDU1ODVhMDUwM2ViZmY3Mzg4OTMzN2I4NTI5Mzg1MWY5ZTBjN2YzYzNmIn0.eyJhdWQiOiJhZjFhMjVjNC1hNDE3LTExZTktOTZmYy0wNmY3NWI2ZjJiNGEiLCJqdGkiOiIzOWIwOGZmZGY0OWZkYjQ2MTM5ODE2NDgzZDBlZTZjYzIwNmZmMTA1NTg1YTA1MDNlYmZmNzM4ODkzMzdiODUyOTM4NTFmOWUwYzdmM2MzZiIsImlhdCI6MTU2Mjg3NjI1MiwibmJmIjoxNTYyODc2MjUyLCJleHAiOjE1NjQxNzIyNTEsInN1YiI6IjE2MzhlZDRhLTY4MTItYTNhYy0wMDA1LTUzYmI5MjJjNGFiYiIsInNjb3BlcyI6W119.t7wflHG7Og9Vf1rqPWo2QzCyyAo3AUc9duZyoMEQ8dix5Omt5OWqHX6TWYddxbC34fvRi1Gby4CqK9Kz-s-0GMr2YnWxBPCzAIGlKMRVKbs615bQTpChG0a5BWzcUMOww1zhL9Gz8aSg2yI47kAHFnVPZFGH4zA2yqcRvmg7QvoYzQcm4hJR6NatMJgKOChagUDthdj-ezWwWq_pyCXZFU2XwLm1vBZTIkgG40uCbqgsEUffDXFibQypBG9BrUkw03o9wh72UoL-QeMHn5K5Q7zJx08pzOUXWm_W4pfO7FIwzaHoOEtFmorSihnw7gzDddwASwMzhYgqF839J7CLa_mq6YV53oMP2eCOKX0jN-ddEg4Gt6yYkVbh54yOsbztc4P1waUJ4JnJsBV2GdWdxnB0bhx6QFhj4HrnkQzx1GScFjRzKPHJGGmN9e-6wCEb7TXncbtnuu-8YxCbG5IUfc25BlBtMeqURE1A6Pa7YciBJoPLlEDUAJ8HwfSHspxDkuPhz1ospacDJglxHn18Mrkt8lukwIL7dfhM9Wm2b6ZBJrKngFdkFV9ALFImjBwqk2SZVfhLMYvhTG36qGqI7e7uw_SyU2lPiN2MQcVpdaSd0NkCLqGAkRRwuDCaHBfZ35TJguJXHdJuRMDoghUAhYgAwqp7OU1FtgX1gmt5tok\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.canoesoftware.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "37b95da1-dc1b-45f1-876a-4f2327ff8bdb",
+    "name": "Canoe API v1 Authentication API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n\n\nContact Support:\n Name: Canoe Support",
+      "type": "text/plain"
+    }
+  }
+}

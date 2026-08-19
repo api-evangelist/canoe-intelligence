@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Canoe API v1 Allocations API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Allocations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/allocations",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "This page number. For example, if you specify \"2\" you will see all documents on page 2. By default, this is set to 1."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of allocations displayed on each page. The maximum number of allocations as well as the default is 100."
+              },
+              {
+                "name": "allocation_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns exact allocation record for a specific id. Multiple ids are separated by a comma. Example:- allocation_id1, allocation_id2"
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns exact match on Entity ID that is directly associated to the allocation. Multiple ids are separated by a comma. Example:- entity_3"
+              },
+              {
+                "name": "investment_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns exact allocations related to a specific investment/term. Multiple ids are separated by a comma. Example:- investment_id1, investment_id2"
+              },
+              {
+                "name": "custom_allocation_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns exact allocations related to a specific tenant assigned investment id. Multiple ids are separated by a comma. Example:- customId1, customId2"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Returns allocations related to a specific status. Valid Status values are active, pending, retired, or transitional. Multiple ids are separated by a comma. Example:- active, pending"
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns allocations related to a specific account. Multiple ids are separated by a comma. Example:- account_1, account_2"
+              },
+              {
+                "name": "custom_field",
+                "value": "",
+                "type": "query",
+                "description": "An indexed string of one or more custom field IDs, which relate to allocation specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s). When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/allocations?custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2;custom_field[another-custom-field-id]=another-value1"
+              }
+            ]
+          },
+          "docs": "Fetch all allocations accessible by the current API user."
+        },
+        {
+          "info": {
+            "name": "Create A Single Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.canoesoftware.com/v1/allocations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new allocation based on the input parameters."
+        },
+        {
+          "info": {
+            "name": "Update A Single Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.canoesoftware.com/v1/allocations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the allocation you want to edit."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing allocation based on the input parameters."
+        },
+        {
+          "info": {
+            "name": "Delete A Single Allocation",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.canoesoftware.com/v1/allocations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the allocation to be deleted."
+              }
+            ]
+          },
+          "docs": "Delete a specific allocation by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

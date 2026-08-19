@@ -1,0 +1,871 @@
+{
+  "item": [
+    {
+      "id": "84f1a133-82c6-4553-a874-7e51318ba699",
+      "name": "Allocations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c1337ccd-f3d1-4fde-ad54-21cd9a929855",
+          "name": "Get Allocations",
+          "request": {
+            "name": "Get Allocations",
+            "description": {
+              "content": "Fetch all allocations accessible by the current API user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "allocations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "This page number. For example, if you specify \"2\" you will see all documents on page 2. By default, this is set to 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<integer>",
+                  "description": "The number of allocations displayed on each page. The maximum number of allocations as well as the default is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "allocation_id",
+                  "value": "<string>",
+                  "description": "Returns exact allocation record for a specific id. Multiple ids are separated by a comma. Example:- allocation_id1, allocation_id2"
+                },
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<string>",
+                  "description": "Returns exact match on Entity ID that is directly associated to the allocation. Multiple ids are separated by a comma. Example:- entity_3"
+                },
+                {
+                  "disabled": false,
+                  "key": "investment_id",
+                  "value": "<string>",
+                  "description": "Returns exact allocations related to a specific investment/term. Multiple ids are separated by a comma. Example:- investment_id1, investment_id2"
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_allocation_id",
+                  "value": "<string>",
+                  "description": "Returns exact allocations related to a specific tenant assigned investment id. Multiple ids are separated by a comma. Example:- customId1, customId2"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Returns allocations related to a specific status. Valid Status values are active, pending, retired, or transitional. Multiple ids are separated by a comma. Example:- active, pending"
+                },
+                {
+                  "disabled": false,
+                  "key": "account_id",
+                  "value": "<string>",
+                  "description": "Returns allocations related to a specific account. Multiple ids are separated by a comma. Example:- account_1, account_2"
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_field",
+                  "value": "<string>",
+                  "description": "An indexed string of one or more custom field IDs, which relate to allocation specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s). When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/allocations?custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2;custom_field[another-custom-field-id]=another-value1"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2db394f2-51bc-4a2e-930b-c6fd119af8f1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "allocation_id",
+                      "value": "allocation_id12"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "entity_id1"
+                    },
+                    {
+                      "key": "investment_id",
+                      "value": "investment_id1"
+                    },
+                    {
+                      "key": "custom_allocation_id",
+                      "value": "custom_allocation_id_1"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_1"
+                    },
+                    {
+                      "key": "custom_field",
+                      "value": "custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"2\",\n    \"entity\": \"test_entity_1\",\n    \"entity_id\": \"10\",\n    \"investment\": \"Fund One - Class A\",\n    \"investment_id\": \"11\",\n    \"account\": \"Account One\",\n    \"account_id\": \"12\",\n    \"initial_date\": \"2021-01-01\",\n    \"initial_amount\": \"500000\",\n    \"status\": \"active\",\n    \"custom_allocation_id\": \"13\",\n    \"created_at\": \"2020-12-01 00:00:00\",\n    \"updated_at\": \"2020-12-02 00:00:00\",\n    \"retired_at\": \"2022-01-01\",\n    \"downstream_ids\": [\n      {\n        \"id\": \"investment_metrics_account_short_name\",\n        \"name\": \"Account Short Name\",\n        \"type\": \"Investment Metrics\",\n        \"value\": \"101112\"\n      },\n      {\n        \"id\": \"investment_metrics_account_short_name\",\n        \"name\": \"Account Short Name\",\n        \"type\": \"Investment Metrics\",\n        \"value\": \"101112\"\n      }\n    ],\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"string\",\n        \"custom_field_id\": \"2\"\n      },\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"string\",\n        \"custom_field_id\": \"2\"\n      }\n    ],\n    \"allocation_entity_aliases\": [\n      \"entity_alias_1\",\n      \"entity_alias_1\"\n    ],\n    \"allocation_fund_aliases\": [\n      \"fund_alias_1\",\n      \"fund_alias_1\"\n    ],\n    \"fund_name\": \"Fund One\",\n    \"term_id\": \"term_1\",\n    \"term_name\": \"Class A\",\n    \"extraction_status\": \"Ready For Extract\"\n  },\n  {\n    \"id\": \"2\",\n    \"entity\": \"test_entity_1\",\n    \"entity_id\": \"10\",\n    \"investment\": \"Fund One - Class A\",\n    \"investment_id\": \"11\",\n    \"account\": \"Account One\",\n    \"account_id\": \"12\",\n    \"initial_date\": \"2021-01-01\",\n    \"initial_amount\": \"500000\",\n    \"status\": \"active\",\n    \"custom_allocation_id\": \"13\",\n    \"created_at\": \"2020-12-01 00:00:00\",\n    \"updated_at\": \"2020-12-02 00:00:00\",\n    \"retired_at\": \"2022-01-01\",\n    \"downstream_ids\": [\n      {\n        \"id\": \"investment_metrics_account_short_name\",\n        \"name\": \"Account Short Name\",\n        \"type\": \"Investment Metrics\",\n        \"value\": \"101112\"\n      },\n      {\n        \"id\": \"investment_metrics_account_short_name\",\n        \"name\": \"Account Short Name\",\n        \"type\": \"Investment Metrics\",\n        \"value\": \"101112\"\n      }\n    ],\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"string\",\n        \"custom_field_id\": \"2\"\n      },\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"string\",\n        \"custom_field_id\": \"2\"\n      }\n    ],\n    \"allocation_entity_aliases\": [\n      \"entity_alias_1\",\n      \"entity_alias_1\"\n    ],\n    \"allocation_fund_aliases\": [\n      \"fund_alias_1\",\n      \"fund_alias_1\"\n    ],\n    \"fund_name\": \"Fund One\",\n    \"term_id\": \"term_1\",\n    \"term_name\": \"Class A\",\n    \"extraction_status\": \"Ready For Extract\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "038a9f52-cdb8-4dfe-bc1c-a66466701612",
+              "name": "No access to the document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "allocation_id",
+                      "value": "allocation_id12"
+                    },
+                    {
+                      "key": "entity_id",
+                      "value": "entity_id1"
+                    },
+                    {
+                      "key": "investment_id",
+                      "value": "investment_id1"
+                    },
+                    {
+                      "key": "custom_allocation_id",
+                      "value": "custom_allocation_id_1"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "account_id",
+                      "value": "account_1"
+                    },
+                    {
+                      "key": "custom_field",
+                      "value": "custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ebd1ea47-a8bd-4b20-b208-2970ea4a5f58",
+          "name": "Create A Single Allocation",
+          "request": {
+            "name": "Create A Single Allocation",
+            "description": {
+              "content": "Create a new allocation based on the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "allocations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity_id\": \"<string>\",\n  \"fund_id\": \"<string>\",\n  \"initial_date\": \"<string>\",\n  \"initial_amount\": \"<string>\",\n  \"term_id\": \"<string>\",\n  \"status\": \"<string>\",\n  \"custom_allocation_id\": \"<string>\",\n  \"downstream_ids\": \"<array>\",\n  \"custom_fields\": \"<array>\",\n  \"allocation_entity_aliases\": \"<string>\",\n  \"allocation_fund_aliases\": \"<string>\",\n  \"retired_at\": \"<string>\",\n  \"extraction_status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66460f7c-a0d4-41af-aefa-1d40bf475fa1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_id\": \"entity_1\",\n  \"fund_id\": \"investment_1\",\n  \"initial_date\": \"2021-01-01\",\n  \"initial_amount\": \"10000\",\n  \"term_id\": \"term_1\",\n  \"status\": \"active\",\n  \"custom_allocation_id\": \"700\",\n  \"downstream_ids\": [\n    {\n      \"value\": \"sample_name\"\n    }\n  ],\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"allocation_entity_aliases\": \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n  \"allocation_fund_aliases\": \"Sample allocation fund alias 1,Sample allocation fund alias 2\",\n  \"retired_at\": \"2022-01-01\",\n  \"extraction_status\": \"Ready For Extract\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"1\",\n    \"entity\": \"Sample Entity\",\n    \"entity_id\": \"entity_1\",\n    \"investment\": \"Sample Investment\",\n    \"investment_id\": \"investment_1\",\n    \"account\": \"Sample Account One\",\n    \"account_id\": \"account_1\",\n    \"initial_date\": \"2021-01-01\",\n    \"initial_amount\": \"10000\",\n    \"status\": \"active\",\n    \"custom_allocation_id\": \"700\",\n    \"created_at\": \"2021-01-01 12:00:15\",\n    \"updated_at\": \"2021-01-01 12:00:15\",\n    \"retired_at\": \"2022-01-01\",\n    \"downstream_ids\": [\n      {\n        \"name\": \"Black Diamond\",\n        \"type\": \"Account Name\",\n        \"value\": \"sample_name\"\n      }\n    ],\n    \"custom_fields\": [\n      {\n        \"name\": \"Sample Allocation Custom Field\",\n        \"value\": \"1000\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"allocation_entity_aliases\": [\n      \"entity_alias_1\",\n      \"entity_alias_2\"\n    ],\n    \"allocation_fund_aliases\": [\n      \"fund_alias_1\",\n      \"fund_alias_2\"\n    ],\n    \"fund_name\": \"Sample Investment\",\n    \"term_id\": \"term_1\",\n    \"term_name\": \"Sample Term\",\n    \"extraction_status\": \"Ready For Extract\"\n  },\n  {\n    \"id\": \"1\",\n    \"entity\": \"Sample Entity\",\n    \"entity_id\": \"entity_1\",\n    \"investment\": \"Sample Investment\",\n    \"investment_id\": \"investment_1\",\n    \"account\": \"Sample Account One\",\n    \"account_id\": \"account_1\",\n    \"initial_date\": \"2021-01-01\",\n    \"initial_amount\": \"10000\",\n    \"status\": \"active\",\n    \"custom_allocation_id\": \"700\",\n    \"created_at\": \"2021-01-01 12:00:15\",\n    \"updated_at\": \"2021-01-01 12:00:15\",\n    \"retired_at\": \"2022-01-01\",\n    \"downstream_ids\": [\n      {\n        \"name\": \"Black Diamond\",\n        \"type\": \"Account Name\",\n        \"value\": \"sample_name\"\n      }\n    ],\n    \"custom_fields\": [\n      {\n        \"name\": \"Sample Allocation Custom Field\",\n        \"value\": \"1000\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"allocation_entity_aliases\": [\n      \"entity_alias_1\",\n      \"entity_alias_2\"\n    ],\n    \"allocation_fund_aliases\": [\n      \"fund_alias_1\",\n      \"fund_alias_2\"\n    ],\n    \"fund_name\": \"Sample Investment\",\n    \"term_id\": \"term_1\",\n    \"term_name\": \"Sample Term\",\n    \"extraction_status\": \"Ready For Extract\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bf6f7026-65d6-41cf-a0d2-6a40bfbcd8aa",
+              "name": "Failed to create the allocation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_id\": \"entity_1\",\n  \"fund_id\": \"investment_1\",\n  \"initial_date\": \"2021-01-01\",\n  \"initial_amount\": \"10000\",\n  \"term_id\": \"term_1\",\n  \"status\": \"active\",\n  \"custom_allocation_id\": \"700\",\n  \"downstream_ids\": [\n    {\n      \"value\": \"sample_name\"\n    }\n  ],\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"allocation_entity_aliases\": \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n  \"allocation_fund_aliases\": \"Sample allocation fund alias 1,Sample allocation fund alias 2\",\n  \"retired_at\": \"2022-01-01\",\n  \"extraction_status\": \"Ready For Extract\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "29114780-ccd6-4571-a188-86cf6633e48a",
+              "name": "The date entered should have the format yyyy-mm-dd.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_id\": \"entity_1\",\n  \"fund_id\": \"investment_1\",\n  \"initial_date\": \"2021-01-01\",\n  \"initial_amount\": \"10000\",\n  \"term_id\": \"term_1\",\n  \"status\": \"active\",\n  \"custom_allocation_id\": \"700\",\n  \"downstream_ids\": [\n    {\n      \"value\": \"sample_name\"\n    }\n  ],\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"allocation_entity_aliases\": \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n  \"allocation_fund_aliases\": \"Sample allocation fund alias 1,Sample allocation fund alias 2\",\n  \"retired_at\": \"2022-01-01\",\n  \"extraction_status\": \"Ready For Extract\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec0081a7-9f2e-4130-9b1d-3a20e9a73483",
+          "name": "Update A Single Allocation",
+          "request": {
+            "name": "Update A Single Allocation",
+            "description": {
+              "content": "Update an existing allocation based on the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "allocations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the allocation you want to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"initial_date\": \"<string>\",\n  \"initial_amount\": \"<string>\",\n  \"status\": \"<string>\",\n  \"custom_allocation_id\": \"<string>\",\n  \"downstream_ids\": \"<array>\",\n  \"custom_fields\": \"<array>\",\n  \"allocation_entity_aliases\": \"<string>\",\n  \"allocation_fund_aliases\": \"<string>\",\n  \"retired_at\": \"<string>\",\n  \"extraction_status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b40e42d0-eefa-45b8-b054-80d7acae205f",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the allocation you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initial_date\": \"2021-01-01T00:00:00.000Z\",\n  \"initial_amount\": \"10000\",\n  \"status\": \"active\",\n  \"custom_allocation_id\": \"123\",\n  \"downstream_ids\": [\n    {\n      \"value\": \"sample_name\"\n    }\n  ],\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"allocation_entity_aliases\": \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n  \"allocation_fund_aliases\": \"Sample allocation fund alias 1,Sample allocation fund alias 2\",\n  \"retired_at\": \"2022-01-01\",\n  \"extraction_status\": \"Ready For Extract\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"1\",\n    \"entity\": \"Sample Entity\",\n    \"entity_id\": \"entity_1\",\n    \"investment\": \"Sample Investment\",\n    \"investment_id\": \"investment_1\",\n    \"account\": \"Sample Account One\",\n    \"account_id\": \"account_1\",\n    \"initial_date\": \"2021-01-01\",\n    \"initial_amount\": \"10000\",\n    \"status\": \"active\",\n    \"custom_allocation_id\": \"700\",\n    \"created_at\": \"2021-01-01 12:00:15\",\n    \"updated_at\": \"2021-01-01 12:00:15\",\n    \"retired_at\": \"2022-01-01\",\n    \"downstream_ids\": [\n      {\n        \"name\": \"Black Diamond\",\n        \"type\": \"Account Name\",\n        \"value\": \"sample_name\"\n      }\n    ],\n    \"custom_fields\": [\n      {\n        \"name\": \"Sample Allocation Custom Field\",\n        \"value\": \"1000\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"allocation_entity_aliases\": [\n      \"entity_alias_1\",\n      \"entity_alias_2\"\n    ],\n    \"allocation_fund_aliases\": [\n      \"fund_alias_1\",\n      \"fund_alias_2\"\n    ],\n    \"fund_name\": \"Sample Investment\",\n    \"term_id\": \"term_1\",\n    \"term_name\": \"Sample Term\",\n    \"extraction_status\": \"Ready For Extract\"\n  },\n  {\n    \"id\": \"1\",\n    \"entity\": \"Sample Entity\",\n    \"entity_id\": \"entity_1\",\n    \"investment\": \"Sample Investment\",\n    \"investment_id\": \"investment_1\",\n    \"account\": \"Sample Account One\",\n    \"account_id\": \"account_1\",\n    \"initial_date\": \"2021-01-01\",\n    \"initial_amount\": \"10000\",\n    \"status\": \"active\",\n    \"custom_allocation_id\": \"700\",\n    \"created_at\": \"2021-01-01 12:00:15\",\n    \"updated_at\": \"2021-01-01 12:00:15\",\n    \"retired_at\": \"2022-01-01\",\n    \"downstream_ids\": [\n      {\n        \"name\": \"Black Diamond\",\n        \"type\": \"Account Name\",\n        \"value\": \"sample_name\"\n      }\n    ],\n    \"custom_fields\": [\n      {\n        \"name\": \"Sample Allocation Custom Field\",\n        \"value\": \"1000\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"allocation_entity_aliases\": [\n      \"entity_alias_1\",\n      \"entity_alias_2\"\n    ],\n    \"allocation_fund_aliases\": [\n      \"fund_alias_1\",\n      \"fund_alias_2\"\n    ],\n    \"fund_name\": \"Sample Investment\",\n    \"term_id\": \"term_1\",\n    \"term_name\": \"Sample Term\",\n    \"extraction_status\": \"Ready For Extract\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91da2ff9-f2a9-4336-9cbf-d599f0da9bb8",
+              "name": "Failed to create the allocation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the allocation you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initial_date\": \"2021-01-01T00:00:00.000Z\",\n  \"initial_amount\": \"10000\",\n  \"status\": \"active\",\n  \"custom_allocation_id\": \"123\",\n  \"downstream_ids\": [\n    {\n      \"value\": \"sample_name\"\n    }\n  ],\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"allocation_entity_aliases\": \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n  \"allocation_fund_aliases\": \"Sample allocation fund alias 1,Sample allocation fund alias 2\",\n  \"retired_at\": \"2022-01-01\",\n  \"extraction_status\": \"Ready For Extract\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ceca6ae-7dba-419b-bd02-d247d2287486",
+              "name": "The date entered should have the format yyyy-mm-dd.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the allocation you want to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"initial_date\": \"2021-01-01T00:00:00.000Z\",\n  \"initial_amount\": \"10000\",\n  \"status\": \"active\",\n  \"custom_allocation_id\": \"123\",\n  \"downstream_ids\": [\n    {\n      \"value\": \"sample_name\"\n    }\n  ],\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ],\n  \"allocation_entity_aliases\": \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n  \"allocation_fund_aliases\": \"Sample allocation fund alias 1,Sample allocation fund alias 2\",\n  \"retired_at\": \"2022-01-01\",\n  \"extraction_status\": \"Ready For Extract\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd881f2b-6c62-4eeb-93fa-01d2a94a4759",
+          "name": "Delete A Single Allocation",
+          "request": {
+            "name": "Delete A Single Allocation",
+            "description": {
+              "content": "Delete a specific allocation by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "allocations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the allocation to be deleted."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "52a4165a-4440-47dc-a91c-20b2f4bea695",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the allocation to be deleted."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef55211b-a688-4cd9-98a7-946b8c9b059c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "allocations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the allocation to be deleted."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.canoesoftware.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2283a48e-34cf-4c88-a1bf-f2cce180f639",
+    "name": "Canoe API v1 Allocations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n\n\nContact Support:\n Name: Canoe Support",
+      "type": "text/plain"
+    }
+  }
+}

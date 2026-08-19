@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Canoe API v1 Custom Fields API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Custom Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/custom_fields",
+            "params": [
+              {
+                "name": "ownership_level",
+                "value": "",
+                "type": "query",
+                "description": "Filters the list of custom fields to a specific level. Valid values: Account, Entity, Fund, Allocation, Term. If omitted, returns custom fields for all levels."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return per page. Defaults to 100."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination."
+              }
+            ]
+          },
+          "docs": "Returns a list of custom fields available for the authenticated tenant. Optionally filter by ownership_level."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

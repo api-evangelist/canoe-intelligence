@@ -1,0 +1,707 @@
+openapi: 3.2.0
+info:
+  title: Canoe API v1 Allocations API
+  version: 1.0.0
+  description: "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n"
+  contact:
+    name: Canoe Support
+    url: https://canoeintelligence.com
+  termsOfService: https://canoeintelligence.com/api-terms-of-use/
+servers:
+- url: https://api.canoesoftware.com
+  description: Production API
+security:
+- bearerAuth: []
+tags:
+- name: Allocations
+  description: ''
+paths:
+  /v1/allocations:
+    get:
+      tags:
+      - Allocations
+      summary: Get Allocations
+      description: Fetch all allocations accessible by the current API user.
+      operationId: GetAllocation
+      parameters:
+      - name: page
+        in: query
+        description: This page number. For example, if you specify "2" you will see all documents on page 2. By default, this is set to 1.
+        required: false
+        schema:
+          type: integer
+        examples:
+          page 1:
+            value: 1
+          page 5:
+            value: 5
+      - name: perPage
+        in: query
+        description: The number of allocations displayed on each page. The maximum number of allocations as well as the default is 100.
+        required: false
+        schema:
+          type: integer
+        examples:
+          perPage:
+            value: 50
+      - name: allocation_id
+        in: query
+        description: Returns exact allocation record for a specific id. Multiple ids are separated by a comma. Example:- allocation_id1, allocation_id2
+        required: false
+        schema:
+          type: string
+        examples:
+          allocation_id single:
+            value: allocation_id12
+          allocation_id multiple:
+            value: allocation_id1,allocation_id2
+      - name: entity_id
+        in: query
+        description: Returns exact match on Entity ID that is directly associated to the allocation. Multiple ids are separated by a comma. Example:- entity_3
+        required: false
+        schema:
+          type: string
+        examples:
+          entity_id single:
+            value: entity_id1
+          entity_id multiple:
+            value: entity_id1,entity_id2
+      - name: investment_id
+        in: query
+        description: Returns exact allocations related to a specific investment/term. Multiple ids are separated by a comma. Example:- investment_id1, investment_id2
+        required: false
+        schema:
+          type: string
+        examples:
+          investment_id single:
+            value: investment_id1
+          investment_id multiple:
+            value: investment_id1,investment_id2
+      - name: custom_allocation_id
+        in: query
+        description: Returns exact allocations related to a specific tenant assigned investment id. Multiple ids are separated by a comma. Example:- customId1, customId2
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_allocation_id single:
+            value: custom_allocation_id_1
+          custom_allocation_id multiple:
+            value: custom_allocation_id_1,custom_allocation_id_2
+      - name: status
+        in: query
+        description: Returns allocations related to a specific status. Valid Status values are active, pending, retired, or transitional. Multiple ids are separated by a comma. Example:- active, pending
+        required: false
+        schema:
+          type: string
+        examples:
+          status 1:
+            value: active
+          status 2:
+            value: pending
+          status multiple:
+            value: active,pending
+      - name: account_id
+        in: query
+        description: Returns allocations related to a specific account. Multiple ids are separated by a comma. Example:- account_1, account_2
+        required: false
+        schema:
+          type: string
+        examples:
+          account_id single:
+            value: account_1
+          account_id multiple:
+            value: account_1,account_2
+      - name: custom_field
+        in: query
+        description: An indexed string of one or more custom field IDs, which relate to allocation specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s). When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/allocations?custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2;custom_field[another-custom-field-id]=another-value1
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_field:
+            value: custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Allocations'
+        '403':
+          description: No access to the document.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n      -G \"https://api.canoesoftware.com/v1/allocations?page=1&perPage=50&allocation_id=investment_1&entity_id=entity_3\" \\\n      -H \"Authorization: Bearer {token}\" \\\n      -H \"Accept: application/json\" \\\n      -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/allocations\"\n      );\n\n      let params = {\n          \"page\": \"1\",\n          \"perPage\": \"50\",\n          \"allocation_id\":\"investment_1\",\n          \"entity_id\":\"entity_3\"\n      };\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/allocation',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/allocations'\n      params = {\n        'page': '1',\n        'perPage': '50',\n        'allocation_id':'investment_1',\n        'entity_id':'entity_3'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/allocations\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"perPage\", \"50\");\n      request.AddQueryParameter(\"allocation_id\", \"investment_1\");\n      request.AddQueryParameter(\"entity_id\", \"entity_3\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+    post:
+      tags:
+      - Allocations
+      summary: Create A Single Allocation
+      description: Create a new allocation based on the input parameters.
+      operationId: CreateSingleAllocation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entity_id:
+                  type: string
+                  description: The ID of the Entity in Canoe.
+                  example: entity_1
+                fund_id:
+                  type: string
+                  description: The ID of the Investment/Fund in Canoe.
+                  example: investment_1
+                term_id:
+                  type: string
+                  description: The ID of the term at canoe. If not provided, the default term will be assigned.
+                  example: term_1
+                initial_date:
+                  type: string
+                  description: Allocation inception Date. Its format is yyyy-mm-dd.
+                  example: '2021-01-01'
+                initial_amount:
+                  type: string
+                  description: The initial amount for the allocation. Value must be greater than 0.
+                  example: '10000'
+                status:
+                  type: string
+                  description: Indicates whether an allocation is active. The status can be active, pending, retired, or transitional. If not provided, the default is active.
+                  example: active
+                custom_allocation_id:
+                  type: string
+                  description: The custom allocation ID you'd like to associate the allocation with.
+                  example: '700'
+                downstream_ids:
+                  type: array
+                  example:
+                  - id: black_diamond_account_name
+                    value: sample_name
+                custom_fields:
+                  type: array
+                  example:
+                  - id: 1
+                    value: 1000
+                allocation_entity_aliases:
+                  type: string
+                  description: Aliases of the allocation entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
+                  example: Sample allocation entity alias 1,Sample allocation entity alias 2
+                allocation_fund_aliases:
+                  type: string
+                  description: Aliases of the allocation fund name. These are user-created. If there are multiple aliases, they should be separated by commas.
+                  example: Sample allocation fund alias 1,Sample allocation fund alias 2
+                retired_at:
+                  type: string
+                  description: Allocation retire date. Retired date must be provided if the status is set to retired and should be at least one month after the initial investment date.
+                  example: '2022-01-01'
+                extraction_status:
+                  type: string
+                  description: The status of the allocation extraction. The status can be Ready For Extract and Not Ready For Extract
+                  example: Ready For Extract
+              required:
+              - entity_id
+              - fund_id
+              - initial_date
+              - initial_amount
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SingleAllocation'
+        '403':
+          description: Failed to create the allocation.
+        '422':
+          description: The date entered should have the format yyyy-mm-dd.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X POST \\\n          \"https://api.canoesoftware.com/v1/allocations\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"entity_id\":\"entity_1\",\"fund_id\":\"investment_1\",\"initial_date\":\"2021-01-01\",\"initial_amount\":\"10000\",\"status\":\"active\",\"custom_allocation_id\":\"700\",\"downstream_ids\":[{\"id\":\"black_diamond_account_name\",\"value\":\"sample_name\"}],\"custom_fields\":[{\"id\":\"1\",\"value\":\"1000\"}],\"allocation_entity_aliases\":\"Sample allocation entity alias 1,Sample allocation entity alias 2\",\"allocation_fund_aliases\":\"Sample allocation fund alias 1,Sample allocation fund alias 2\"}'"
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n        \"https://api.canoesoftware.com/v1/allocations\"\n      );\n\n      let headers = {\n        \"Authorization\": \"Bearer {token}\",\n        \"Accept\": \"application/json\",\n        \"X-Requested-With\": \"XMLHttpRequest\",\n        \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n        \"entity_id\": \"entity_1\",\n        \"fund_id\": \"investment_1\",\n        \"initial_date\": \"2021-01-01\",\n        \"initial_amount\": \"10000\",\n        \"status\": \"active\",\n        \"custom_allocation_id\": \"700\",\n        \"downstream_ids\": [\n          {\n            \"id\": \"black_diamond_account_name\",\n            \"value\": \"sample_name\"\n          }\n        ],\n        \"custom_fields\": [\n          {\n            \"id\": \"1\",\n            \"value\": \"1000\"\n          }\n        ],\n        \"allocation_entity_aliases\": \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n        \"allocation_fund_aliases\": \"Sample allocation fund alias 1,Sample allocation fund alias 2\"\n      }\n      fetch(url, {\n        method: \"POST\",\n        headers: headers,\n        body: body\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->post(\n        'https://api.canoesoftware.com/v1/allocations',\n        [\n          'headers' => [\n            'Authorization' => 'Bearer {token}',\n                    'Accept' => 'application/json',\n            'X-Requested-With' => 'XMLHttpRequest',\n            'Content-Type' => 'application/json',\n          ],\n          'json' => [\n            'entity_id' => 'entity_1',\n            'fund_id' => 'investment_1',\n            'initial_date' => '2021-01-01',\n            'initial_amount' => '10000',\n            'status' => 'active',\n            'custom_allocation_id' => '700',\n            'downstream_ids' => [\n              [\n                'id' => 'black_diamond_account_name',\n                'value' => 'sample_name',\n              ],\n            ],\n            'custom_fields' => [\n              [\n                'id' => '1',\n                'value' => '1000',\n              ],\n            ],\n            'allocation_entity_aliases' => 'Sample allocation entity alias 1,Sample allocation entity alias 2',\n            'allocation_fund_aliases' => 'Sample allocation fund alias 1,Sample allocation fund alias 2',\n          ],\n        ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/allocations'\n      params = {\n        'page': '1',\n        'perPage': '50',\n        'allocation_id':'investment_1',\n        'entity_id':'entity_3'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/allocations\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n        entity_id = \"entity_1\",\n        fund_id = \"investment_1\",\n        initial_date = \"2021-01-01\",\n        initial_amount = \"10000\",\n        status = \"active\",\n        custom_allocation_id = 700,\n        downstream_ids = new[]\n        {\n          new { id = black_diamond_account_name, value = sample_name }\n        },\n        custom_fields = new[]\n        {\n          new { id = 1, value = 100 }\n        },\n        allocation_entity_aliases = \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n        allocation_fund_aliases = \"Sample allocation fund alias 1,Sample allocation fund alias 2\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+  /v1/allocations/{id}:
+    put:
+      tags:
+      - Allocations
+      summary: Update A Single Allocation
+      description: Update an existing allocation based on the input parameters.
+      operationId: UpdateSingleAllocation
+      parameters:
+      - name: id
+        in: path
+        description: The id of the allocation you want to edit.
+        required: true
+        schema:
+          type: string
+          example: '1'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                initial_date:
+                  type: string
+                  description: Allocation inception Date. Its format is yyyy-mm-dd.
+                  example: '2021-01-01T00:00:00.000Z'
+                initial_amount:
+                  type: string
+                  description: The initial amount for the allocation. Value must be greater than 0.
+                  example: '10000'
+                status:
+                  type: string
+                  description: Indicates whether an allocation is active. The status can be active, pending, retired, or transitional. If not provided, the default is active.
+                  example: active
+                custom_allocation_id:
+                  type: string
+                  description: The custom allocation ID you'd like to associate the allocation with.
+                  example: '123'
+                downstream_ids:
+                  type: array
+                  example:
+                  - id: black_diamond_account_name
+                    value: sample_name
+                custom_fields:
+                  type: array
+                  example:
+                  - id: 1
+                    value: 1000
+                allocation_entity_aliases:
+                  type: string
+                  description: Aliases of the allocation entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
+                  example: Sample allocation entity alias 1,Sample allocation entity alias 2
+                allocation_fund_aliases:
+                  type: string
+                  description: Aliases of the allocation fund name. These are user-created. If there are multiple aliases, they should be separated by commas.
+                  example: Sample allocation fund alias 1,Sample allocation fund alias 2
+                retired_at:
+                  type: string
+                  description: Allocation retire date. Retired date must be provided if the status is set to retired and should be at least one month after the initial investment date.
+                  example: '2022-01-01'
+                extraction_status:
+                  type: string
+                  description: The status of the allocation extraction. The status can be Ready For Extract and Not Ready For Extract
+                  example: Ready For Extract
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SingleAllocation'
+        '403':
+          description: Failed to create the allocation.
+        '422':
+          description: The date entered should have the format yyyy-mm-dd.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X POST \\\n          \"https://api.canoesoftware.com/v1/allocations\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"entity_id\":\"entity_1\",\"fund_id\":\"investment_1\",\"initial_date\":\"2021-01-01\",\"initial_amount\":\"10000\",\"status\":\"active\",\"custom_allocation_id\":\"700\",\"downstream_ids\":[{\"id\":\"black_diamond_account_name\",\"value\":\"sample_name\"}],\"custom_fields\":[{\"id\":\"1\",\"value\":\"1000\"}],\"allocation_entity_aliases\":\"Sample allocation entity alias 1,Sample allocation entity alias 2\",\"allocation_fund_aliases\":\"Sample allocation fund alias 1,Sample allocation fund alias 2\"}'"
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/allocations\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"entity_id\": \"entity_1\",\n          \"fund_id\": \"investment_1\",\n          \"initial_date\": \"2021-01-01\",\n          \"initial_amount\": \"10000\",\n          \"status\": \"active\",\n          \"custom_allocation_id\": \"700\",\n          \"downstream_ids\": [\n              {\n                  \"id\": \"black_diamond_account_name\",\n                  \"value\": \"sample_name\"\n              }\n          ],\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ],\n          \"allocation_entity_aliases\": \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n          \"allocation_fund_aliases\": \"Sample allocation fund alias 1,Sample allocation fund alias 2\"\n      }\n\n      fetch(url, {\n          method: \"POST\",\n          headers: headers,\n          body: body\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->post(\n          'https://api.canoesoftware.com/v1/allocations',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'entity_id' => 'entity_1',\n                  'fund_id' => 'investment_1',\n                  'initial_date' => '2021-01-01',\n                  'initial_amount' => '10000',\n                  'status' => 'active',\n                  'custom_allocation_id' => '700',\n                  'downstream_ids' => [\n                      [\n                          'id' => 'black_diamond_account_name',\n                          'value' => 'sample_name',\n                      ],\n                  ],\n                  'custom_fields' => [\n                      [\n                          'id' => '1',\n                          'value' => '1000',\n                      ],\n                  ],\n                  'allocation_entity_aliases' => 'Sample allocation entity alias 1,Sample allocation entity alias 2',\n                  'allocation_fund_aliases' => 'Sample allocation fund alias 1,Sample allocation fund alias 2',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/allocations'\n      payload = {\n          \"entity_id\": \"entity_1\",\n          \"fund_id\": \"investment_1\",\n          \"initial_date\": \"2021-01-01\",\n          \"initial_amount\": \"10000\",\n          \"status\": \"active\",\n          \"custom_allocation_id\": \"700\",\n          \"downstream_ids\": [\n              {\n                  \"id\": \"black_diamond_account_name\",\n                  \"value\": \"sample_name\"\n              }\n          ],\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ],\n          \"allocation_entity_aliases\": \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n          \"allocation_fund_aliases\": \"Sample allocation fund alias 1,Sample allocation fund alias 2\"\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('POST', url, headers=headers, json=payload)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/allocations/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          initial_date = \"2021-01-01\",\n          initial_amount = \"10000\",\n          status = \"active\",\n          custom_allocation_id = 700,\n          downstream_ids = new[]\n          {\n              new { id = black_diamond_account_name, value = sample_name }\n          },\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          },\n          allocation_entity_aliases = \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n          allocation_fund_aliases = \"Sample allocation fund alias 1,Sample allocation fund alias 2\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+    delete:
+      tags:
+      - Allocations
+      summary: Delete A Single Allocation
+      description: Delete a specific allocation by its ID.
+      operationId: DeleteSingleAllocation
+      parameters:
+      - name: id
+        in: path
+        description: The id of the allocation to be deleted.
+        required: true
+        schema:
+          type: string
+          example: '1'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    message: The Allocation {id} was deleted.
+        '403':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    message: Failed to delete the Allocation {$id}.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X DELETE \\\n          \"https://api.canoesoftware.com/v1/allocations/1\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/allocations/1\"\n      );\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n      fetch(url, {\n          method: \"DELETE\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->delete(\n          'https://api.canoesoftware.com/v1/allocations/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n      url = 'https://api.canoesoftware.com/v1/allocations/1'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('DELETE', url, headers=headers)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/allocations/1\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+components:
+  schemas:
+    Allocations:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the allocation.
+          example: '2'
+        entity:
+          type: string
+          description: The name of the entity associated with the allocation.
+          example: test_entity_1
+        entity_id:
+          type: string
+          description: The ID of the entity associated with the allocation.
+          example: '10'
+        investment:
+          type: string
+          description: The name of the investment associated with the allocation.
+          example: Fund One - Class A
+        investment_id:
+          type: string
+          description: The ID of the investment associated with the allocation.
+          example: '11'
+        account:
+          type: string
+          description: The name of the account associated with the allocation.
+          example: Account One
+        account_id:
+          type: string
+          description: The ID of the account associated with the allocation.
+          example: '12'
+        initial_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The date of when the allocation first becomes active.
+          example: '2021-01-01'
+        initial_amount:
+          type: string
+          description: The commitment amount of the allocation.
+          example: '500000'
+        status:
+          type: string
+          description: The current status of the allocation. It can be either active or inactive.
+          example: active
+        custom_allocation_id:
+          type: string
+          description: The custom ID of the allocation.
+          example: '13'
+        created_at:
+          type: string
+          format: date-time
+          description: The datetime of when the allocation was created.
+          example: '2020-12-01 00:00:00'
+        updated_at:
+          type: string
+          format: date-time
+          description: The datetime of when the allocation was last updated.
+          example: '2020-12-02 00:00:00'
+        retired_at:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The date of when the allocation retires.
+          example: '2022-01-01'
+        downstream_ids:
+          type: array
+          description: The allocation's downstream information.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the downstream system.
+                example: investment_metrics_account_short_name
+              name:
+                type: string
+                description: The name of the downstream system.
+                example: Account Short Name
+              type:
+                type: string
+                description: The type of ID associated with the downstream system.
+                example: Investment Metrics
+              value:
+                type: string
+                description: The value of the downstream ID.
+                example: '101112'
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the allocation.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+                example: CLIENT_ID
+              value:
+                type: string
+                description: The value of the custom field.
+                example: null
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+                example: '2'
+        allocation_entity_aliases:
+          type: array
+          description: The allocation entity aliases.
+          items:
+            type: string
+            example: entity_alias_1
+        allocation_fund_aliases:
+          type: array
+          description: The allocation fund aliases.
+          items:
+            type: string
+            example: fund_alias_1
+        fund_name:
+          type: string
+          description: The fund associated with the allocation.
+          example: Fund One
+        term_id:
+          type: string
+          description: The term id with the allocation.
+          example: term_1
+        term_name:
+          type: string
+          description: The term associated with the allocation.
+          example: Class A
+        extraction_status:
+          type: string
+          description: The extraction status of the allocation.
+          example: Ready For Extract
+    SingleAllocation:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the allocation.
+          example: '1'
+        entity:
+          type: string
+          description: The name of the entity associated with the allocation.
+          example: Sample Entity
+        entity_id:
+          type: string
+          description: The ID of the entity associated with the allocation.
+          example: entity_1
+        investment:
+          type: string
+          description: The name of the investment associated with the allocation.
+          example: Sample Investment
+        investment_id:
+          type: string
+          description: The ID of the investment associated with the allocation.
+          example: investment_1
+        account:
+          type: string
+          description: The name of the account associated with the allocation.
+          example: Sample Account One
+        account_id:
+          type: string
+          description: The ID of the account associated with the allocation.
+          example: account_1
+        initial_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The date of when the allocation first becomes active.
+          example: '2021-01-01'
+        initial_amount:
+          type: string
+          description: The commitment amount of the allocation.
+          example: '10000'
+        status:
+          type: string
+          description: The current status of the allocation. It can be either active or inactive.
+          example: active
+        custom_allocation_id:
+          type: string
+          description: The custom ID of the allocation.
+          example: '700'
+        created_at:
+          type: string
+          format: date-time
+          description: The datetime of when the allocation was created.
+          example: '2021-01-01 12:00:15'
+        updated_at:
+          type: string
+          format: date-time
+          description: The datetime of when the allocation was last updated.
+          example: '2021-01-01 12:00:15'
+        retired_at:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The date of when the allocation retires.
+          example: '2022-01-01'
+        downstream_ids:
+          type: array
+          description: The allocation's downstream information.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the downstream system.
+              name:
+                type: string
+                description: The name of the downstream system.
+              type:
+                type: string
+                description: The type of ID associated with the downstream system.
+              value:
+                type: string
+                description: The value of the downstream ID.
+          example:
+          - id: black_diamond_account_name
+            name: Black Diamond
+            type: Account Name
+            value: sample_name
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the allocation.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+          example:
+          - name: Sample Allocation Custom Field
+            value: '1000'
+            custom_field_id: '1'
+        allocation_entity_aliases:
+          type: array
+          description: The allocation entity aliases.
+          items:
+            type: string
+          example:
+          - entity_alias_1
+          - entity_alias_2
+        allocation_fund_aliases:
+          type: array
+          description: The allocation fund aliases.
+          items:
+            type: string
+          example:
+          - fund_alias_1
+          - fund_alias_2
+        fund_name:
+          type: string
+          description: The fund associated with the allocation.
+          example: Sample Investment
+        term_id:
+          type: string
+          description: The term id with the allocation.
+          example: term_1
+        term_name:
+          type: string
+          description: The term associated with the allocation.
+          example: Sample Term
+        extraction_status:
+          type: string
+          description: The extraction status of the allocation.
+          example: Ready For Extract
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Enter your Bearer token in the format: Bearer {token}'
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.canoesoftware.com/oauth/authorize
+          tokenUrl: https://api.canoesoftware.com/oauth/token
+          scopes: {}
+        clientCredentials:
+          tokenUrl: https://api.canoesoftware.com/v1/tokens
+          scopes: {}
+externalDocs:
+  description: Click to download docs in JSON format
+  url: /api/docs.json
+x-tagGroups:
+- name: Getting Started
+  tags:
+  - Introduction
+  - Authentication
+  - Password Grant Tokens
+- name: Core Resources
+  tags:
+  - Documents
+  - Funds
+  - Terms
+  - Organizations
+  - Allocations
+- name: User Management
+  tags:
+  - User

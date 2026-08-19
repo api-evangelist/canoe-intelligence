@@ -1,0 +1,308 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Canoe API v1 Funds API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Funds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Funds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/funds",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "This is the page number. For example, if you specify \"2\" you will see all funds on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2022-02-24.</u>"
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of funds for each page. The maximum number of funds as well as the default is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2022-02-24.</u>"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the fund you wish to retrieve records for. This can either be the formal fund name or any of its associated aliases. To search based on a part of the fund name or alias, just append an \"*\" character anywhere within the name parameter."
+              },
+              {
+                "name": "custom_field",
+                "value": "",
+                "type": "query",
+                "description": "An indexed string of one or more custom field IDs, which relate to fund specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s). When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/funds?custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2&custom_field[867e4563-c2b5-e788-d050-4ce151dec635]=value1"
+              },
+              {
+                "name": "fund_id",
+                "value": "",
+                "type": "query",
+                "description": "Returns exact fund for a specific id. Multiple IDs are separated by a comma."
+              }
+            ]
+          },
+          "docs": "Fetch all funds accessible by the current API user.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last<"
+        },
+        {
+          "info": {
+            "name": "Create A Single Fund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.canoesoftware.com/v1/funds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new fund based on the input parameters."
+        },
+        {
+          "info": {
+            "name": "Delete Multiple Funds",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.canoesoftware.com/v1/funds"
+          },
+          "docs": "Bulk delete up to 100 funds at once based on fund ids. WARNING: This will delete all funds associated with the ids passed in, as well as their related documents, allocations, and terms."
+        },
+        {
+          "info": {
+            "name": "Get Detailed Fund Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/funds/details",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number for pagination. By default, this is set to 1."
+              },
+              {
+                "name": "perPage",
+                "value": "",
+                "type": "query",
+                "description": "The number of results per page. The maximum number of results as well as the default is 100."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by fund name. Supports partial matching with wildcard character (*)."
+              },
+              {
+                "name": "fund_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific fund ID(s). Multiple IDs can be separated by commas."
+              },
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter allocations by account ID(s). Multiple IDs can be separated by commas."
+              }
+            ]
+          },
+          "docs": "Fetch detailed fund information including terms, allocations, and related entities. This endpoint provides more comprehensive fund data than the standard /v1/funds endpoint, including allocation data with entity relationships.\n\n<span name=\"doc-alert-info\">\nThis endpoint supports pagination. \nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> pag"
+        },
+        {
+          "info": {
+            "name": "Get A Single Fund",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/funds/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the fund."
+              }
+            ]
+          },
+          "docs": "Fetch a specific fund by the fund's ID."
+        },
+        {
+          "info": {
+            "name": "Update A Single Fund",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.canoesoftware.com/v1/funds/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the fund"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing fund based on the input parameters."
+        },
+        {
+          "info": {
+            "name": "Delete A Single Fund",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.canoesoftware.com/v1/funds/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the fund to be deleted."
+              }
+            ]
+          },
+          "docs": "Delete a single fund based on the fund's id. WARNING: This will delete the fund, as well as it's associated documents, allocations, and terms."
+        },
+        {
+          "info": {
+            "name": "Get A Single Fund's Document Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/funds/:id/document-data",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the fund."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "This page number. For example, if you specify \"2\" you will see all documents on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-10-07.</u> Example: 1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of documents for each page. The maximum number of documents limit is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-10-07.</u> Example: 50"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "The fields you need in the partial response. The value of the fields parameter MUST be a comma-separated (U+002C COMMA, \",\") list that refers to the name(s) of the fields to be returned."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "The category of the document. Our current categories are:<br><br><li>Capital Activity</li><br><li>Email & System Messages</li><br><li>Financial Statements & Performance</li><br><li>Investment & Transactional</li><br><li>Investor Administration & Communication</li><br><li>Legal, Compliance & Regulatory</li><br><li>Other</li><br><li>Tax</li><br><br>Multiple categories can be passed as a comma-delimited list (e.g. <code>Capital Activity,Tax</code>)."
+              }
+            ]
+          },
+          "docs": "Fetch the extracted data and metadata of a single fund's documents.\n\nBy default, Canoe's server sends back the full representation of each document object after processing requests. For better performance, you can have the server send only the fields you specify.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination.\nPagination supports the return of large results and is highly recommended for all use cases.\nUnpaginated calls will be depreciated in future versions of the Canoe A"
+        },
+        {
+          "info": {
+            "name": "Download A Single Fund's Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/funds/:id/documents",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the fund."
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "All documents downloaded will have an uploaded timestamp <strong>greater than or equal to</strong> the given start_time. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target=\"_blank\" href=\"https://www.iso.org/iso-8601-date-and-time-format.html\"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "This page number corresponds with the pagination in Canoe's Intelligent Document Center. There are up to 100 documents on each page. For example, if you specify \"2\" you will see all of a Fund's documents on page 2. By default, this is set to 1."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of documents for each download. The maximum number of documents as well as the default is 100."
+              },
+              {
+                "name": "file_name_type",
+                "value": "",
+                "type": "query",
+                "description": "The document attribute to use for the file name. Available options are name, original_file_name and id. The default value for this is name."
+              }
+            ]
+          },
+          "docs": "Download a specific Fund's documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data."
+        },
+        {
+          "info": {
+            "name": "Get A Single Fund's Document IDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.canoesoftware.com/v1/funds/:id/document-ids",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The id of the fund."
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query",
+                "description": "All document IDs returned will have an uploaded timestamp greater than or equal to the given start_time. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the ISO 8601 format for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00."
+              }
+            ]
+          },
+          "docs": "Get a specific fund's documents IDs for downloading the documents one by one."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

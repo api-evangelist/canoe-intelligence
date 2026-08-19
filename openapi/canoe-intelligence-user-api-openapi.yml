@@ -1,0 +1,484 @@
+openapi: 3.2.0
+info:
+  title: Canoe API v1 User API
+  version: 1.0.0
+  description: "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n"
+  contact:
+    name: Canoe Support
+    url: https://canoeintelligence.com
+  termsOfService: https://canoeintelligence.com/api-terms-of-use/
+servers:
+- url: https://api.canoesoftware.com
+  description: Production API
+security:
+- bearerAuth: []
+tags:
+- name: User
+  description: ''
+paths:
+  /v1/user:
+    get:
+      tags:
+      - User
+      summary: Get Your API User Information
+      description: Fetch information about your Canoe API user.
+      operationId: User
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/user\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/user\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/user',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/user'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/user\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+    post:
+      tags:
+      - User
+      summary: Create User
+      description: Create a new user within your organization. Requires tenant admin or super admin permissions. The newly created user will receive a password reset email to set up their account.
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User email address (must be unique)
+                  example: john.doe@example.com
+                first_name:
+                  type: string
+                  description: User first name (maximum 255 characters)
+                  example: John
+                last_name:
+                  type: string
+                  description: User last name (maximum 255 characters)
+                  example: Doe
+                title:
+                  type: string
+                  description: User title (optional, maximum 255 characters)
+                  example: Senior Analyst
+                status:
+                  type: string
+                  description: User status (optional, defaults to 'active')
+                  enum:
+                  - active
+                  - inactive
+                  example: active
+                access_level:
+                  type: array
+                  description: Array of access levels defining user permissions
+                  items:
+                    type: object
+                    properties:
+                      role_id:
+                        type: string
+                        description: Role ID to assign
+                      role_organization_ids:
+                        type: array
+                        description: Array of organization IDs this role applies to
+                        items:
+                          type: string
+                    required:
+                    - role_id
+                    - role_organization_ids
+                  example:
+                  - role_id: role_123
+                    role_organization_ids:
+                    - org_456
+                    - org_789
+              required:
+              - email
+              - first_name
+              - last_name
+              - access_level
+      responses:
+        '201':
+          description: Success - User created. A password reset email has been sent to the user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    description: The unique identifier for the newly created user
+                  email:
+                    type: string
+                    description: User email address
+                  first_name:
+                    type: string
+                    description: User first name
+                  last_name:
+                    type: string
+                    description: User last name
+                  status:
+                    type: string
+                    description: User status
+              example:
+                user_id: user_987654
+                email: john.doe@example.com
+                first_name: John
+                last_name: Doe
+                status: active
+        '400':
+          description: Bad Request - Invalid input or email already exists
+        '403':
+          description: Forbidden - Insufficient permissions. Requires tenant admin or super admin role.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X POST \\\n          \"https://api.canoesoftware.com/v1/user\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"email\":\"john.doe@example.com\",\"first_name\":\"John\",\"last_name\":\"Doe\",\"title\":\"Senior Analyst\",\"status\":\"active\",\"access_level\":[{\"role_id\":\"role_123\",\"role_organization_ids\":[\"org_456\",\"org_789\"]}]}'"
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/user\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"email\": \"john.doe@example.com\",\n          \"first_name\": \"John\",\n          \"last_name\": \"Doe\",\n          \"title\": \"Senior Analyst\",\n          \"status\": \"active\",\n          \"access_level\": [\n              {\n                  \"role_id\": \"role_123\",\n                  \"role_organization_ids\": [\"org_456\", \"org_789\"]\n              }\n          ]\n      };\n\n      fetch(url, {\n          method: \"POST\",\n          headers: headers,\n          body: JSON.stringify(body)\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->post(\n          'https://api.canoesoftware.com/v1/user',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'email' => 'john.doe@example.com',\n                  'first_name' => 'John',\n                  'last_name' => 'Doe',\n                  'title' => 'Senior Analyst',\n                  'status' => 'active',\n                  'access_level' => [\n                      [\n                          'role_id' => 'role_123',\n                          'role_organization_ids' => ['org_456', 'org_789'],\n                      ],\n                  ],\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/user'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      body = {\n        'email': 'john.doe@example.com',\n        'first_name': 'John',\n        'last_name': 'Doe',\n        'title': 'Senior Analyst',\n        'status': 'active',\n        'access_level': [\n          {\n            'role_id': 'role_123',\n            'role_organization_ids': ['org_456', 'org_789']\n          }\n        ]\n      }\n      response = requests.post(url, headers=headers, json=body)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n      using Newtonsoft.Json;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/user\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n        email = \"john.doe@example.com\",\n        first_name = \"John\",\n        last_name = \"Doe\",\n        title = \"Senior Analyst\",\n        status = \"active\",\n        access_level = new[]\n        {\n          new { role_id = \"role_123\", role_organization_ids = new[] { \"org_456\", \"org_789\" } }\n        }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+  /v1/users:
+    get:
+      tags:
+      - User
+      summary: Get Users Within Your Organization
+      description: "Fetch information about users within your Canoe organization.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2024-12-12.\n</span>"
+      operationId: findByTags
+      parameters:
+      - name: page
+        in: query
+        description: 'This page number. For example, if you specify "2" you will see all users on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-12-12.</u> Example: 1'
+        required: false
+        schema:
+          type: integer
+        examples:
+          page 1:
+            value: 1
+          page 5:
+            value: 5
+      - name: limit
+        in: query
+        description: 'The number of documents for each page. The maximum number of users limit is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-12-12.</u> Example: 50'
+        required: false
+        schema:
+          type: integer
+        examples:
+          limit:
+            value: 50
+      - name: user_id
+        in: query
+        description: 'The IDs of the users in Canoe. Example: user_1,user_2'
+        required: false
+        schema:
+          type: string
+        examples:
+          user 1:
+            value: user_1
+          user 2:
+            value: user_2
+      - name: email_id
+        in: query
+        description: 'The emails of the users in Canoe. Example: user_1@example.com,user_2@example.com'
+        required: false
+        schema:
+          type: string
+        examples:
+          user 1 email address:
+            value: user_1@example.com
+          user 2 email address:
+            value: user_2@example.com
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Users'
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/users?user_id=user_1%2Cuser_2&email=user_1%40example.com%2Cuser_2%40example.com\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/user\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/user',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/user'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/user\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+  /v1/users/{id}:
+    put:
+      tags:
+      - User
+      summary: Update User
+      description: Update an existing user within your organization. Requires tenant admin or super admin permissions. All fields are optional - only include the fields you want to update.
+      operationId: updateUser
+      parameters:
+      - name: id
+        in: path
+        description: The unique identifier of the user
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: User email address (must be unique, maximum 255 characters)
+                  example: updated.email@example.com
+                status:
+                  type: string
+                  description: User status
+                  enum:
+                  - active
+                  - inactive
+                  example: active
+                access_level:
+                  type: array
+                  description: Array of access levels defining user permissions
+                  items:
+                    type: object
+                    properties:
+                      role_id:
+                        type: string
+                        description: Role ID to assign
+                      role_organization_ids:
+                        type: array
+                        description: Array of organization IDs this role applies to
+                        items:
+                          type: string
+                    required:
+                    - role_id
+                    - role_organization_ids
+                  example:
+                  - role_id: role_123
+                    role_organization_ids:
+                    - org_456
+                    - org_789
+      responses:
+        '200':
+          description: Success - User updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    description: The unique identifier for the user
+                  email:
+                    type: string
+                    description: User email address
+                  first_name:
+                    type: string
+                    description: User first name
+                  last_name:
+                    type: string
+                    description: User last name
+                  status:
+                    type: string
+                    description: User status
+              example:
+                user_id: user_123456
+                email: updated.email@example.com
+                first_name: John
+                last_name: Doe
+                status: active
+        '400':
+          description: Bad Request - Invalid input or email already exists
+        '403':
+          description: Forbidden - Insufficient permissions. Requires tenant admin or super admin role.
+        '404':
+          description: Not Found - User not found
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X PUT \\\n          \"https://api.canoesoftware.com/v1/users/user_123456\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"email\":\"updated.email@example.com\",\"status\":\"active\",\"access_level\":[{\"role_id\":\"role_123\",\"role_organization_ids\":[\"org_456\",\"org_789\"]}]}'"
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/users/user_123456\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"email\": \"updated.email@example.com\",\n          \"status\": \"active\",\n          \"access_level\": [\n              {\n                  \"role_id\": \"role_123\",\n                  \"role_organization_ids\": [\"org_456\", \"org_789\"]\n              }\n          ]\n      };\n\n      fetch(url, {\n          method: \"PUT\",\n          headers: headers,\n          body: JSON.stringify(body)\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->put(\n          'https://api.canoesoftware.com/v1/users/user_123456',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'email' => 'updated.email@example.com',\n                  'status' => 'active',\n                  'access_level' => [\n                      [\n                          'role_id' => 'role_123',\n                          'role_organization_ids' => ['org_456', 'org_789'],\n                      ],\n                  ],\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/users/user_123456'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      body = {\n        'email': 'updated.email@example.com',\n        'status': 'active',\n        'access_level': [\n          {\n            'role_id': 'role_123',\n            'role_organization_ids': ['org_456', 'org_789']\n          }\n        ]\n      }\n      response = requests.put(url, headers=headers, json=body)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n      using Newtonsoft.Json;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/users/user_123456\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n        email = \"updated.email@example.com\",\n        status = \"active\",\n        access_level = new[]\n        {\n          new { role_id = \"role_123\", role_organization_ids = new[] { \"org_456\", \"org_789\" } }\n        }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+  /v1/users/roles:
+    get:
+      tags:
+      - User
+      summary: Get User Roles
+      description: Get available user roles within your organization. Requires tenant admin or super admin permissions. Returns a list of roles that can be assigned when creating or updating users.
+      operationId: getUserRoles
+      responses:
+        '200':
+          description: Success - Returns list of available roles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    role_id:
+                      type: string
+                      description: The unique identifier for the role
+                    access_level_name:
+                      type: string
+                      description: The display name of the role/access level
+              example:
+              - role_id: role_123
+                access_level_name: Organization Admin
+              - role_id: role_456
+                access_level_name: Fund Manager
+              - role_id: role_789
+                access_level_name: Viewer
+        '403':
+          description: Forbidden - Insufficient permissions. Requires tenant admin or super admin role.
+      x-codeSamples:
+      - lang: bash
+        label: Bash
+        source: "curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/users/roles\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\""
+      - lang: javascript
+        label: JavaScript
+        source: "const url = new URL(\n          \"https://api.canoesoftware.com/v1/users/roles\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));"
+      - lang: php
+        label: PHP
+        source: "$client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/users/roles',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));"
+      - lang: python
+        label: Python
+        source: "import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/users/roles'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.get(url, headers=headers)\n      response.json()"
+      - lang: csharp
+        label: CSharp
+        source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/users/roles\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Whether a user is active or inactive.
+          example: active
+        email:
+          type: string
+          description: A user's email address.
+          example: your-email@gmail.com
+        phone:
+          type: string
+          description: A user's phone number.
+          example: '1234567890'
+        first_name:
+          type: string
+          description: A user's first name.
+          example: Jane
+        last_name:
+          type: string
+          description: A user's last name.
+          example: Doe
+        created_at:
+          type: string
+          description: A timestamp of when this user was created.
+          example: '2017-03-17 12:05:59'
+    Users:
+      type: object
+      properties:
+        user_id:
+          type: string
+          description: The ID of the user.
+          example: user_1
+        status:
+          type: string
+          description: Whether the user is active or inactive.
+          example: active
+        email:
+          type: string
+          description: The user's email address.
+          example: jane-doe@gmail.com
+        phone:
+          type: string
+          description: The user's phone number.
+          example: (555) 123-4567
+        first_name:
+          type: string
+          description: The user's first name.
+          example: Jane
+        last_name:
+          type: string
+          description: The user's last name.
+          example: Doe
+        created_at:
+          type: string
+          description: The timestamp of when this user was created.
+          example: '2020-11-02 13:20:47'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Enter your Bearer token in the format: Bearer {token}'
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 authentication
+      flows:
+        authorizationCode:
+          authorizationUrl: https://api.canoesoftware.com/oauth/authorize
+          tokenUrl: https://api.canoesoftware.com/oauth/token
+          scopes: {}
+        clientCredentials:
+          tokenUrl: https://api.canoesoftware.com/v1/tokens
+          scopes: {}
+externalDocs:
+  description: Click to download docs in JSON format
+  url: /api/docs.json
+x-tagGroups:
+- name: Getting Started
+  tags:
+  - Introduction
+  - Authentication
+  - Password Grant Tokens
+- name: Core Resources
+  tags:
+  - Documents
+  - Funds
+  - Terms
+  - Organizations
+  - Allocations
+- name: User Management
+  tags:
+  - User

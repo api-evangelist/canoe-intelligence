@@ -1,0 +1,623 @@
+{
+  "item": [
+    {
+      "id": "b307d5a1-b9a3-4ed2-9e74-6c0de47c3372",
+      "name": "Terms",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "56eaf8c2-3aa7-4347-bfa7-3a87495c6e3b",
+          "name": "Get Terms",
+          "request": {
+            "name": "Get Terms",
+            "description": {
+              "content": "Fetch all terms accessible by the current API user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "terms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "term_id",
+                  "value": "<string>",
+                  "description": "Specifying one or more IDs returns the specified Term(s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "The name of the Term.  This can either be the formal Term name or any of its associated aliases. To search based on a part of the fund name or alias, append an asterisk * character anywhere within the name parameter.  For example, searching Series* returns all Terms with names starting with Series."
+                },
+                {
+                  "disabled": false,
+                  "key": "fund_name",
+                  "value": "<string>",
+                  "description": "Specifying a Fund name returns the Term(s) associated with the Fund.  This can either be the formal Fund name or any of its associated aliases.  To search based on a part of the Fund name or alias, append an asterisk * character anywhere within the name parameter.  For example, searching *LP returns all Terms associated with Fund names ending with LP."
+                },
+                {
+                  "disabled": false,
+                  "key": "fund_id",
+                  "value": "<string>",
+                  "description": "Specifying one or more IDs returns the Term(s) associated with the specified Fund(s)."
+                },
+                {
+                  "disabled": false,
+                  "key": "custom_field",
+                  "value": "<string>",
+                  "description": "An indexed string of one or more custom field IDs, which relate to term specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s). When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/funds?custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2&custom_field[867e4563-c2b5-e788-d050-4ce151dec635]=value1"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<string>",
+                  "description": "This page of results to retrieve.  For example, if you specify \"2\" you will receive all Terms on page 2.  The default is 1."
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "<string>",
+                  "description": "The number of Terms for each paginated download. The default is 100."
+                },
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "The fields you need in the partial response. The value of the fields parameter must be a comma-separated (U+002C COMMA, \",\") list that refers to the name(s) of the fields to be returned."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b0616d8-18de-4331-a984-77e2b0104f01",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "term_id",
+                      "value": "term_id_1"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Series Term"
+                    },
+                    {
+                      "key": "fund_name",
+                      "value": "Fund Example"
+                    },
+                    {
+                      "key": "fund_id",
+                      "value": "fund_id_1"
+                    },
+                    {
+                      "key": "custom_field",
+                      "value": "custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "3"
+                    },
+                    {
+                      "key": "fields",
+                      "value": "name,designation,aliases"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Series 2\",\n    \"id\": \"a5176574-0948-11ee-9701-0a58a9feac02\",\n    \"designation\": \"Series\",\n    \"aliases\": [\n      \"string\",\n      \"string\"\n    ],\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Fund\",\n    \"fund_id\": \"ba67e8d4-902d-11ed-bafd-0a58a9feac02\",\n    \"organization_id\": \"fb780fe2-b05f-11ec-a394-5717ed8c873f\",\n    \"date_format\": \"MM-DD-YYYY\",\n    \"extraction_status\": \"Ready For Extract\"\n  },\n  {\n    \"name\": \"Series 2\",\n    \"id\": \"a5176574-0948-11ee-9701-0a58a9feac02\",\n    \"designation\": \"Series\",\n    \"aliases\": [\n      \"string\",\n      \"string\"\n    ],\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Fund\",\n    \"fund_id\": \"ba67e8d4-902d-11ed-bafd-0a58a9feac02\",\n    \"organization_id\": \"fb780fe2-b05f-11ec-a394-5717ed8c873f\",\n    \"date_format\": \"MM-DD-YYYY\",\n    \"extraction_status\": \"Ready For Extract\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "efe0ad82-2c01-4cb2-bef9-08a11ff8c7a4",
+          "name": "Create A Single Term",
+          "request": {
+            "name": "Create A Single Term",
+            "description": {
+              "content": "Create a new term based on the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "terms"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"designation\": \"<string>\",\n  \"fund_id\": \"<string>\",\n  \"aliases\": \"<string>\",\n  \"custom_fields\": \"<array>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "41357d03-5295-4f08-8ced-9aa53e081d27",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "terms"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Sample Term 1\",\n  \"designation\": \"draw\",\n  \"fund_id\": \"fund_id_1\",\n  \"aliases\": \"Term Alias 1, Term Alias 2\",\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Series 2\",\n    \"id\": \"a5176574-0948-11ee-9701-0a58a9feac02\",\n    \"designation\": \"Series\",\n    \"aliases\": [\n      \"string\",\n      \"string\"\n    ],\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Fund\",\n    \"fund_id\": \"ba67e8d4-902d-11ed-bafd-0a58a9feac02\",\n    \"organization_id\": \"fb780fe2-b05f-11ec-a394-5717ed8c873f\",\n    \"date_format\": \"MM-DD-YYYY\",\n    \"extraction_status\": \"Ready For Extract\"\n  },\n  {\n    \"name\": \"Series 2\",\n    \"id\": \"a5176574-0948-11ee-9701-0a58a9feac02\",\n    \"designation\": \"Series\",\n    \"aliases\": [\n      \"string\",\n      \"string\"\n    ],\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Fund\",\n    \"fund_id\": \"ba67e8d4-902d-11ed-bafd-0a58a9feac02\",\n    \"organization_id\": \"fb780fe2-b05f-11ec-a394-5717ed8c873f\",\n    \"date_format\": \"MM-DD-YYYY\",\n    \"extraction_status\": \"Ready For Extract\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "436f9ba8-8332-4c31-b460-c58ddb6179e8",
+          "name": "Update A Single Term",
+          "request": {
+            "name": "Update A Single Term",
+            "description": {
+              "content": "Update the specified term based on the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "terms",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the term to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"designation\": \"<string>\",\n  \"aliases\": \"<string>\",\n  \"custom_fields\": \"<array>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "34805cd6-4318-4622-875e-1619bbac29e1",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "terms",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the term to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Sample Term 1\",\n  \"designation\": \"draw\",\n  \"aliases\": \"Term Alias 1, Term Alias 2\",\n  \"custom_fields\": [\n    {\n      \"id\": 1,\n      \"value\": 1000\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Series 2\",\n    \"id\": \"a5176574-0948-11ee-9701-0a58a9feac02\",\n    \"designation\": \"Series\",\n    \"aliases\": [\n      \"string\",\n      \"string\"\n    ],\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Fund\",\n    \"fund_id\": \"ba67e8d4-902d-11ed-bafd-0a58a9feac02\",\n    \"organization_id\": \"fb780fe2-b05f-11ec-a394-5717ed8c873f\",\n    \"date_format\": \"MM-DD-YYYY\",\n    \"extraction_status\": \"Ready For Extract\"\n  },\n  {\n    \"name\": \"Series 2\",\n    \"id\": \"a5176574-0948-11ee-9701-0a58a9feac02\",\n    \"designation\": \"Series\",\n    \"aliases\": [\n      \"string\",\n      \"string\"\n    ],\n    \"created_at\": \"2018-04-30 20:40:19\",\n    \"updated_at\": \"2018-04-30 20:40:19\",\n    \"custom_fields\": [\n      {\n        \"name\": \"CLIENT_ID\",\n        \"value\": \"BOX1\",\n        \"custom_field_id\": \"1\"\n      }\n    ],\n    \"fund_name\": \"Sample Fund\",\n    \"fund_id\": \"ba67e8d4-902d-11ed-bafd-0a58a9feac02\",\n    \"organization_id\": \"fb780fe2-b05f-11ec-a394-5717ed8c873f\",\n    \"date_format\": \"MM-DD-YYYY\",\n    \"extraction_status\": \"Ready For Extract\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "04399f23-f017-4bac-b398-830fcf7cfa6e",
+          "name": "Delete A Single Term",
+          "request": {
+            "name": "Delete A Single Term",
+            "description": {
+              "content": "Delete a single term based on the term's id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "terms",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The id of the Term to delete.  Note that the final Term on a Fund cannot be deleted.  Use PUT v1/terms/{id} to update the Term or use DELETE v1/funds/{id} to delete the Fund, which will also delete the Term.  WARNING - This will delete the term as well as it's associated documents and allocations."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "751be0fa-a9fb-4966-93d3-3ac303435b32",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "terms",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Term to delete.  Note that the final Term on a Fund cannot be deleted.  Use PUT v1/terms/{id} to update the Term or use DELETE v1/funds/{id} to delete the Fund, which will also delete the Term.  WARNING - This will delete the term as well as it's associated documents and allocations."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"message\": \"The Term 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.\"\n  },\n  {\n    \"message\": \"The Term 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8931040-766f-4ab2-a778-5a92a41eb8d3",
+              "name": "Invalid Term provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "terms",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Term to delete.  Note that the final Term on a Fund cannot be deleted.  Use PUT v1/terms/{id} to update the Term or use DELETE v1/funds/{id} to delete the Fund, which will also delete the Term.  WARNING - This will delete the term as well as it's associated documents and allocations."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "35647071-6634-4efb-88b9-cafee0d1a4e2",
+              "name": "Single Term Response, if only one term exists on the fund.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "terms",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The id of the Term to delete.  Note that the final Term on a Fund cannot be deleted.  Use PUT v1/terms/{id} to update the Term or use DELETE v1/funds/{id} to delete the Fund, which will also delete the Term.  WARNING - This will delete the term as well as it's associated documents and allocations."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.canoesoftware.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "16938f5d-b79e-426a-a99a-24fe3cae42e4",
+    "name": "Canoe API v1 Terms API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n\n\nContact Support:\n Name: Canoe Support",
+      "type": "text/plain"
+    }
+  }
+}

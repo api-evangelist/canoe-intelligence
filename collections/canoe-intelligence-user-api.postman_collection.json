@@ -1,0 +1,853 @@
+{
+  "item": [
+    {
+      "id": "d2d5afe6-7a46-4ee7-8fd9-96feed8c1ab6",
+      "name": "User",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "157187a2-d52c-4b44-8dda-ac0fc443caa6",
+          "name": "Get Your API User Information",
+          "request": {
+            "name": "Get Your API User Information",
+            "description": {
+              "content": "Fetch information about your Canoe API user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aff1f2a7-95b6-4a25-a859-40844e4847ad",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"active\",\n  \"email\": \"your-email@gmail.com\",\n  \"phone\": \"1234567890\",\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"created_at\": \"2017-03-17 12:05:59\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9ff4c72a-f696-4d5b-9f11-a60888adf553",
+          "name": "Create User",
+          "request": {
+            "name": "Create User",
+            "description": {
+              "content": "Create a new user within your organization. Requires tenant admin or super admin permissions. The newly created user will receive a password reset email to set up their account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "user"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"access_level\": [\n    {\n      \"role_id\": \"<string>\",\n      \"role_organization_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"role_id\": \"<string>\",\n      \"role_organization_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"title\": \"<string>\",\n  \"status\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "18c4bf92-1a86-4bd7-9cab-1c6ca4623a64",
+              "name": "Success - User created. A password reset email has been sent to the user.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"access_level\": [\n    {\n      \"role_id\": \"role_123\",\n      \"role_organization_ids\": [\n        \"org_456\",\n        \"org_789\"\n      ]\n    }\n  ],\n  \"title\": \"Senior Analyst\",\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user_id\": \"user_987654\",\n  \"email\": \"john.doe@example.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"status\": \"active\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4157161c-1841-4d44-9234-1108361e7a9c",
+              "name": "Bad Request - Invalid input or email already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"access_level\": [\n    {\n      \"role_id\": \"role_123\",\n      \"role_organization_ids\": [\n        \"org_456\",\n        \"org_789\"\n      ]\n    }\n  ],\n  \"title\": \"Senior Analyst\",\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "edaf7c62-1038-4935-bab8-364acd0fdceb",
+              "name": "Forbidden - Insufficient permissions. Requires tenant admin or super admin role.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "user"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"john.doe@example.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"access_level\": [\n    {\n      \"role_id\": \"role_123\",\n      \"role_organization_ids\": [\n        \"org_456\",\n        \"org_789\"\n      ]\n    }\n  ],\n  \"title\": \"Senior Analyst\",\n  \"status\": \"active\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e371d34-e6ae-46bd-98da-261733e061fe",
+          "name": "Get Users Within Your Organization",
+          "request": {
+            "name": "Get Users Within Your Organization",
+            "description": {
+              "content": "Fetch information about users within your Canoe organization.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2024-12-12.\n</span>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "This page number. For example, if you specify \"2\" you will see all users on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-12-12.</u> Example: 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "The number of documents for each page. The maximum number of users limit is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-12-12.</u> Example: 50"
+                },
+                {
+                  "disabled": false,
+                  "key": "user_id",
+                  "value": "<string>",
+                  "description": "The IDs of the users in Canoe. Example: user_1,user_2"
+                },
+                {
+                  "disabled": false,
+                  "key": "email_id",
+                  "value": "<string>",
+                  "description": "The emails of the users in Canoe. Example: user_1@example.com,user_2@example.com"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "978a0c17-7dd6-4c96-a990-b29915ab0ba0",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "user_id",
+                      "value": "user_1"
+                    },
+                    {
+                      "key": "email_id",
+                      "value": "user_1@example.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"user_id\": \"user_1\",\n    \"status\": \"active\",\n    \"email\": \"jane-doe@gmail.com\",\n    \"phone\": \"(555) 123-4567\",\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"created_at\": \"2020-11-02 13:20:47\"\n  },\n  {\n    \"user_id\": \"user_1\",\n    \"status\": \"active\",\n    \"email\": \"jane-doe@gmail.com\",\n    \"phone\": \"(555) 123-4567\",\n    \"first_name\": \"Jane\",\n    \"last_name\": \"Doe\",\n    \"created_at\": \"2020-11-02 13:20:47\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d50d1740-3643-4e40-ae9c-d9a5c93adb15",
+          "name": "Update User",
+          "request": {
+            "name": "Update User",
+            "description": {
+              "content": "Update an existing user within your organization. Requires tenant admin or super admin permissions. All fields are optional - only include the fields you want to update.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The unique identifier of the user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\",\n  \"status\": \"<string>\",\n  \"access_level\": [\n    {\n      \"role_id\": \"<string>\",\n      \"role_organization_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"role_id\": \"<string>\",\n      \"role_organization_ids\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "edaa610c-a1c9-4191-a6b4-c0fa64614927",
+              "name": "Success - User updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"updated.email@example.com\",\n  \"status\": \"active\",\n  \"access_level\": [\n    {\n      \"role_id\": \"role_123\",\n      \"role_organization_ids\": [\n        \"org_456\",\n        \"org_789\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"user_id\": \"user_123456\",\n  \"email\": \"updated.email@example.com\",\n  \"first_name\": \"John\",\n  \"last_name\": \"Doe\",\n  \"status\": \"active\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22872d98-678d-45f7-baed-3d3160391d57",
+              "name": "Bad Request - Invalid input or email already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"updated.email@example.com\",\n  \"status\": \"active\",\n  \"access_level\": [\n    {\n      \"role_id\": \"role_123\",\n      \"role_organization_ids\": [\n        \"org_456\",\n        \"org_789\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ae508908-ed53-4ae1-9a35-f1ecd5b547a2",
+              "name": "Forbidden - Insufficient permissions. Requires tenant admin or super admin role.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"updated.email@example.com\",\n  \"status\": \"active\",\n  \"access_level\": [\n    {\n      \"role_id\": \"role_123\",\n      \"role_organization_ids\": [\n        \"org_456\",\n        \"org_789\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6c26da9c-f65a-45f5-9bc5-0c1d6aeb7849",
+              "name": "Not Found - User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The unique identifier of the user"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"updated.email@example.com\",\n  \"status\": \"active\",\n  \"access_level\": [\n    {\n      \"role_id\": \"role_123\",\n      \"role_organization_ids\": [\n        \"org_456\",\n        \"org_789\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "735b823a-408d-43f7-9403-07f3ac66f7c3",
+          "name": "Get User Roles",
+          "request": {
+            "name": "Get User Roles",
+            "description": {
+              "content": "Get available user roles within your organization. Requires tenant admin or super admin permissions. Returns a list of roles that can be assigned when creating or updating users.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "users",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d04940bd-b7ec-425e-b595-38ed6e16dbaf",
+              "name": "Success - Returns list of available roles",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"role_id\": \"role_123\",\n    \"access_level_name\": \"Organization Admin\"\n  },\n  {\n    \"role_id\": \"role_456\",\n    \"access_level_name\": \"Fund Manager\"\n  },\n  {\n    \"role_id\": \"role_789\",\n    \"access_level_name\": \"Viewer\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "85fe2910-a15f-4060-8ca2-3a0dd77f37b5",
+              "name": "Forbidden - Insufficient permissions. Requires tenant admin or super admin role.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "users",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.canoesoftware.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7171e309-8c11-440a-addf-7bff5a68f186",
+    "name": "Canoe API v1 User API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n\n\nContact Support:\n Name: Canoe Support",
+      "type": "text/plain"
+    }
+  }
+}
