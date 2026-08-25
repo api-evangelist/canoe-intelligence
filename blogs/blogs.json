@@ -2,10 +2,17 @@
   "repo": "canoe-intelligence",
   "feeds": [
     {
+      "source": "https://canoeintelligence.com/feed/",
+      "feed_url": "https://canoeintelligence.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://canoeintelligence.com/contact-us/",
       "feed_url": "https://canoeintelligence.com/feed/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "discovered"
     },
     {
@@ -16,6 +23,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-08-15T12:22:01Z"
+  "post_count": 10,
+  "fetched": "2026-08-22T20:20:02Z"
 }
