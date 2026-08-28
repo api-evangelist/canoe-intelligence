@@ -8,6 +8,18 @@ description: Canoe Intelligence is an alternative-investment data infrastructure
   and LP records, and delivers structured data downstream. Canoe publishes a public REST API (Canoe API v1) at api.canoesoftware.com
   covering documents, funds, terms, organizations, entities, accounts, allocations, custom fields, and user management,
   documented with a public OpenAPI 3.0 definition and authenticated with OAuth 2.0 bearer/JWT access tokens.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: contact-sales
   onboarding: sales-gate
