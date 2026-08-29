@@ -1,21 +1,1696 @@
 openapi: 3.2.0
 info:
-  title: Canoe API v1 Documents API
-  version: 1.0.0
-  description: "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n"
-  contact:
-    name: Canoe Support
-    url: https://canoeintelligence.com
-  termsOfService: https://canoeintelligence.com/api-terms-of-use/
+  title: Canoe Intelligence Documents API
+  version: '1.0'
+  description: 'Operations tagged Documents across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
-security:
-- bearerAuth: []
 tags:
 - name: Documents
   description: ''
 paths:
+  Get Document Data:
+    get:
+      tags:
+      - Documents
+      summary: null
+      description: "/v1/documents/data\n\nFetch documents' extracted data and metadata.\n\nBy default, Canoe's server sends back the full representation of each document object after processing requests.\nFor faster performance, you can use optional parameters to retrieve a subset of documents.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2022-09-19.\n</span>\n"
+      operationId: GetDocuments
+      parameters:
+      - name: page
+        in: query
+        description: This page number. For example, if you specify "2" you will see all documents on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2022-09-19.</u> Example:- 1
+        required: false
+        schema:
+          type: integer
+        examples:
+          page 1:
+            value: 1
+          page 5:
+            value: 5
+      - name: limit
+        in: query
+        description: The number of documents for each page. The maximum number of documents limit is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2022-09-19.</u> Example:- 50
+        required: false
+        schema:
+          type: integer
+        examples:
+          limit:
+            value: 50
+      - name: fields
+        in: query
+        description: The fields you need in the partial response. The value of the fields parameter MUST be a comma-separated (U+002C COMMA, ",") list that refers to the name(s) of the fields to be returned. If no fields are sent, the full validate_data field of the document is returned
+        required: false
+        schema:
+          type: string
+        examples:
+          fields:
+            value: name,validated_data
+      - name: allocation_id
+        in: query
+        description: The IDs of the allocations in Canoe.
+        required: false
+        schema:
+          type: string
+        examples:
+          allocation_id single:
+            value: allocation_1
+          allocation_id multiple:
+            value: allocation_1,allocation_2
+      - name: document_id
+        in: query
+        description: The IDs of the documents in Canoe.
+        required: false
+        schema:
+          type: string
+        examples:
+          document_id single:
+            value: document_1
+          document_id multiple:
+            value: document_1,document_2
+      - name: client_document_id
+        in: query
+        description: The custom document IDs.
+        required: false
+        schema:
+          type: string
+        examples:
+          client_document_id:
+            value: client_document_id
+      - name: fund_id
+        in: query
+        description: The IDs of funds in Canoe. To retrieve these, use the <code>v1/funds</code> <a href="#operations-Funds-GetFunds"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          fund_id single:
+            value: fund_1
+          fund_id multiple:
+            value: fund_1,fund_2
+      - name: account_id
+        in: query
+        description: The IDs of accounts in Canoe. To retrieve these, use the <code>v1/organizations?type=account</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          account_id single:
+            value: account_1
+          account_id multiple:
+            value: account_1,account_2
+      - name: investment_entity_id
+        in: query
+        description: The IDs of investment entities in Canoe. To retrieve these, use the <code>v1/organizations?type=entity</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          investment_entity_id single:
+            value: entity_1
+          investment_entity_id multiple:
+            value: entity_1,entity_2
+      - name: not_fund_id
+        in: query
+        description: Exclude documents with the specified Fund IDs. To retrieve Fund IDs, use the <code>v1/organizations?type=fund</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          not_fund_id single:
+            value: fund_1
+          not_fund_id multiple:
+            value: fund_1,fund_2
+      - name: not_investment_entity_id
+        in: query
+        description: Exclude documents with the specified investment entity IDs. To retrieve these, use the <code>v1/organizations?type=entity</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          not_investment_entity_id single:
+            value: entity_1
+          not_investment_entity_id multiple:
+            value: entity_1,entity_2
+      - name: not_account_id
+        in: query
+        description: Exclude documents with the specified Account IDs. To retrieve Account IDs, use the <code>v1/accounts</code> <a href="#operations-Accounts-GetAccounts"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          not_account_id single:
+            value: account_1
+          not_account_id multiple:
+            value: account_1,account_2
+      - name: document_type
+        in: query
+        description: The document types. To retrieve these, use the <code>v1/documents/types</code> <a href="#operations-Documents-GetDocumentsType"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          document_type single:
+            value: Account Statement
+          document_type multiple:
+            value: Account Statement,Capital Call Notice
+      - name: fund_sponsor
+        in: query
+        description: The Fund Sponsors. The entered Fund Sponsors must be an exact match, although all query parameters are case-insensitive.
+        required: false
+        schema:
+          type: string
+        examples:
+          fund_sponsor multiple:
+            value: fund_sponsor_1,fund_sponsor_2
+          fund_sponsor single:
+            value: fund_sponsor_1
+      - name: data_date_start
+        in: query
+        description: All documents returned will have data date <strong>greater than or equal to</strong> the given data_date_start. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+        examples:
+          data_date_start:
+            value: '2019-03-30'
+      - name: data_date_end
+        in: query
+        description: All documents returned will have data date <strong>less than or equal to</strong> the given data_date_end. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+        examples:
+          data_date_end:
+            value: '2019-03-30'
+      - name: document_status
+        in: query
+        description: This is the validation status determined by Canoe. For example, Complete means that Canoe has successfully categorized, recognized, extracted, and validated data from the document.<br><br>Our current statuses are:<br><br><li>Complete</li><br><li>Potential Discrepancy</li><br><li>Duplicate</li><br><li>Password Protected</li><br><li>Configuration Required</li><br><li>Unsupported Formats</li><br><li>Anomaly Detected</li><br><li>Awaiting Confirmation</li><br><li>Storage Only</li><br><br>A misspelled status will return an empty array.
+        required: false
+        schema:
+          type: string
+        examples:
+          document_status:
+            value: Complete,Storage Only
+      - name: document_source
+        in: query
+        description: The method of document ingestion. These sources are:<br><br><li>Upload Engine</li><br><li>Email</li><br><li>Intralinks</li><br><li>API</li>
+        required: false
+        schema:
+          type: string
+        examples:
+          document_source:
+            value: Email,Upload Engine
+      - name: document_tag_id
+        in: query
+        description: The IDs of tags in Canoe. To retrieve these, use the <code>v1/documents/tags</code> <a href="#get-document-tags"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          document_tag_id:
+            value: tag_1,tag_2
+      - name: file_upload_time_start
+        in: query
+        description: All documents downloaded will have an uploaded timestamp <strong>greater than or equal to</strong> the given file_upload_time_start. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          file_upload_time_start:
+            value: '2019-03-30T04:00:00Z'
+      - name: file_upload_time_end
+        in: query
+        description: All documents downloaded will have an uploaded timestamp <strong>less than or equal to</strong> the given file_upload_time_end. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          file_upload_time_end:
+            value: '2019-03-31T04:00:00Z'
+      - name: account_group
+        in: query
+        description: The Account Group the documents belong to.
+        required: false
+        schema:
+          type: string
+        examples:
+          account_group:
+            value: 'Geography: North America,Geography: Europe'
+      - name: last_modified_time_start
+        in: query
+        description: All documents returned will have a last updated timestamp <strong>greater than or equal to</strong> the given last_modified_time_start. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents updated on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          last_modified_time_start:
+            value: '2019-03-30T04:00:00Z'
+      - name: last_modified_time_end
+        in: query
+        description: All documents returned will have a last updated timestamp <strong>less than or equal to</strong> the given last_modified_time_end. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents updated on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          last_modified_time_end:
+            value: '2019-07-31T04:00:00Z'
+      - name: is_locked
+        in: query
+        description: The is_locked status of the document in Canoe. Accepted values are either true or false. The default is false.
+        required: false
+        schema:
+          type: string
+        examples:
+          is_locked:
+            value: false
+      - name: ready_for_extract
+        in: query
+        description: The extraction status of the document in Canoe. Accepted values are either true or false. The default is false.
+        required: false
+        schema:
+          type: string
+        examples:
+          ready_for_extract:
+            value: false
+      - name: sum_values
+        in: query
+        description: Whether to return the sums of multi-data point fields in validated_data. Accepted values are either true or false. If it is set to false, multi-data points are returned as a list of values. The default is false.
+        required: false
+        schema:
+          type: string
+        examples:
+          sum_values:
+            value: false
+      - name: approval_status
+        in: query
+        description: The approval status of the documents in Canoe. If searching for multiple statuses, they should be separated by commas. Valid statuses are:<br><br><li>Approved</li><br><li>Flagged</li><br><li>Ignored</li><br><li>Pending</li>
+        required: false
+        schema:
+          type: string
+        examples:
+          approval_status:
+            value: Approved
+      - name: approved_by
+        in: query
+        description: The User ID of the approver of the documents in Canoe.
+        required: false
+        schema:
+          type: string
+        examples:
+          approved_by:
+            value: user_1,user_2
+      - name: approval_date_start
+        in: query
+        description: All documents returned will have an approval date <strong>greater than or equal to</strong> the given approval_date_start. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+        examples:
+          approval_date_start:
+            value: '2019-03-30'
+      - name: approval_date_end
+        in: query
+        description: All documents returned will have an approval date <strong>less than or equal to</strong> the given approval_date_end. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+        examples:
+          approval_date_end:
+            value: '2019-03-31'
+      - name: assignee
+        in: query
+        description: The User ID of the assignee for the document in Canoe. If searching for multiple assignees, they should be separated by commas. Example:- user_1,user_2
+        required: false
+        schema:
+          type: string
+        examples:
+          approved_by:
+            value: user_1,user_2
+      - name: uploaded_by
+        in: query
+        description: The full name of the user who uploaded the document. If searching for multiple users, they should be separated by commas. Use 'Canoe Connect System User' to filter for documents uploaded via Canoe Connect. Example:- John Smith,John Doe
+        required: false
+        schema:
+          type: string
+        examples:
+          uploaded_by:
+            value: John Smith,John Doe
+      - name: not_document_tag_id
+        in: query
+        description: The IDs of tags in Canoe. To retrieve these, use the <code>v1/documents/tags</code> <a href="#get-document-tags">endpoint</a>. This will search for documents that have NOT been tagged with a specified tag.
+        required: false
+        schema:
+          type: string
+        examples:
+          approved_by:
+            value: tag_1,tag_2
+      - name: category
+        in: query
+        description: The category of the document. Our current categories are:<br><br><li>Capital Activity</li><br><li>Email & System Messages</li><br><li>Financial Statements & Performance</li><br><li>Investment & Transactional</li><br><li>Investor Administration & Communication</li><br><li>Legal, Compliance & Regulatory</li><br><li>Other</li><br><li>Tax</li><br><br>Multiple categories can be passed as a comma-delimited list (e.g. <code>Capital Activity,Tax</code>).
+        required: false
+        schema:
+          type: string
+        examples:
+          category:
+            value: Capital Activity, Email
+      - name: downstream_ids
+        in: query
+        description: Filter documents by downstream system identifiers. Accepts an array of key-value pairs where the key represents the downstream system name and the value represents the identifier in that system. Multiple pairs can be provided to filter by multiple downstream systems.<u>This parameter is only valid if the X-API-VERSION header is set to 2022-09-19 and pagination is provided.</u>
+        required: false
+        schema:
+          type: string
+        examples:
+          downstream_ids:
+            value: downstream_ids[downstream_identifier_name]=value1,value2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/documents/data?fields=name%2Cvalidated_data&document_id=document_1%2Cdocument_2&client_document_id=custom_id_16%2Ccustom_id_17&fund_id=fund_1%2Cfund_2&account_id=account_1%2Caccount_2&investment_entity_id=entity_1%2Centity_2&document_type=Account+Statement%2CCapital+Call+Notice&fund_sponsor=fund_sponsor_1%2Cfund_sponsor_2&data_date_start=2019-03-30&data_date_end=2019-07-31&document_status=Complete%2CStorage+Only&document_source=Email%2CUpload+Engine&document_tag_id=tag_1%2Ctag_2&file_upload_time_start=2019-03-30T04%3A00%3A00Z&file_upload_time_end=2019-07-31T04%3A00%3A00Z&account_group=Geography%3A+North+America%2CGeography%3A+Europe&last_modified_time_start=2019-03-30T04%3A00%3A00Z&last_modified_time_end=2019-07-31T04%3A00%3A00Z&is_locked=false&ready_for_extract=false&sum_values=false&approval_status=Approved%2CIgnored%2CFlagged&approved_by=user_1%2Cuser_2&approval_date_start=2019-03-30&approval_date_end=2019-07-31&category=Capital%20Activity&downstream_ids=%5B%7B%22key%22%3A%22system1%22%2C%22value%22%3A%22id123%22%7D%5D\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/data\"\n      );\n\n      let params = {\n          \"page\": \"1\",\n          \"limit\": \"100\",\n          \"fields\": \"name,validated_data\",\n          \"document_id\": \"document_1,document_2\",\n          \"client_document_id\": \"custom_id_16,custom_id_17\",\n          \"fund_id\": \"fund_1,fund_2\",\n          \"account_id\": \"account_1,account_2\",\n          \"investment_entity_id\": \"entity_1,entity_2\",\n          \"document_type\": \"Account Statement,Capital Call Notice\",\n          \"fund_sponsor\": \"fund_sponsor_1,fund_sponsor_2\",\n          \"data_date_start\": \"2019-03-30\",\n          \"data_date_end\": \"2019-07-31\",\n          \"document_status\": \"Complete,Storage Only\",\n          \"document_source\": \"Email,Upload Engine\",\n          \"document_tag_id\": \"tag_1,tag_2\",\n          \"file_upload_time_start\": \"2019-03-30T04:00:00Z\",\n          \"file_upload_time_end\": \"2019-07-31T04:00:00Z\",\n          \"account_group\": \"Geography: North America,Geography: Europe\",\n          \"last_modified_time_start\": \"2019-03-30T04:00:00Z\",\n          \"last_modified_time_end\": \"2019-07-31T04:00:00Z\",\n          \"is_locked\": \"false\",\n          \"ready_for_extract\": \"false\",\n          \"sum_values\": \"false\",\n          \"approval_status\": \"Approved\",\n          \"approved_by\": \"user_1,user_2\",\n          \"approval_date_start\": \"2019-03-30\",\n          \"approval_date_end\": \"2019-07-31\",\n          \"assignee\": \"user_1,user_2\",\n          \"uploaded_by\": \"John Smith,John Doe\",\n          \"not_document_tag_id\": \"tag_1,tag_2\",\n          \"category\": \"Capital Activity\"\n      };\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/documents/data',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'page'=> '1',\n                  'limit'=> '100',\n                  'fields' => 'name,validated_data',\n                  'document_id' => 'document_1,document_2',\n                  'client_document_id' => 'custom_id_16,custom_id_17',\n                  'fund_id' => 'fund_1,fund_2',\n                  'account_id' => 'account_1,account_2',\n                  'investment_entity_id' => 'entity_1,entity_2',\n                  'document_type' => 'Account Statement,Capital Call Notice',\n                  'fund_sponsor' => 'fund_sponsor_1,fund_sponsor_2',\n                  'data_date_start' => '2019-03-30',\n                  'data_date_end' => '2019-07-31',\n                  'document_status' => 'Complete,Storage Only',\n                  'document_source' => 'Email,Upload Engine',\n                  'document_tag_id' => 'tag_1,tag_2',\n                  'file_upload_time_start' => '2019-03-30T04:00:00Z',\n                  'file_upload_time_end' => '2019-07-31T04:00:00Z',\n                  'account_group' => 'Geography: North America,Geography: Europe',\n                  'last_modified_time_start' => '2019-03-30T04:00:00Z',\n                  'last_modified_time_end' => '2019-07-31T04:00:00Z',\n                  'is_locked' => 'false',\n                  'ready_for_extract' => 'false',\n                  'sum_values' => 'false',\n                  'approval_status' => 'Approved,Pending',\n                  'approved_by' => 'user_1,user_2',\n                  'approval_date_start' => '2019-03-30',\n                  'approval_date_end' => '2019-07-31',\n                  'assignee' => 'user_1,user_2',\n                  'uploaded_by' => 'John Smith,John Doe',\n                  'not_document_tag_id' => 'tag_1,tag_2',\n                  'category'=> 'Capital Activity'\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/data'\n      params = {\n        'page': '1',\n        'limit': '100',\n        'fields': 'name,validated_data',\n        'document_id': 'document_1,document_2',\n        'client_document_id': 'custom_id_16,custom_id_17',\n        'fund_id': 'fund_1,fund_2',\n        'account_id': 'account_1,account_2',\n        'investment_entity_id': 'entity_1,entity_2',\n        'document_type': 'Account Statement,Capital Call Notice',\n        'fund_sponsor': 'fund_sponsor_1,fund_sponsor_2',\n        'data_date_start': '2019-03-30',\n        'data_date_end': '2019-07-31',\n        'document_status': 'Complete,Storage Only',\n        'document_source': 'Email,Upload Engine',\n        'document_tag_id': 'tag_1,tag_2',\n        'file_upload_time_start': '2019-03-30T04:00:00Z',\n        'file_upload_time_end': '2019-07-31T04:00:00Z',\n        'account_group': 'Geography: North America,Geography: Europe',\n        'last_modified_time_start': '2019-03-30T04:00:00Z',\n        'last_modified_time_end': '2019-07-31T04:00:00Z',\n        'is_locked': 'false',\n        'ready_for_extract': 'false',\n        'sum_values': 'false',\n        'approval_status': 'Approved',\n        'approved_by': 'user_1,user_2',\n        'approval_date_start': '2019-03-30',\n        'approval_date_end': '2019-07-31'\n        'assignee': 'user_1,user_2',\n        'uploaded_by': 'John Smith,John Doe',\n        'not_document_tag_id': 'tag_1,tag_2',\n        'category': 'Capital Activity'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/data\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"100\");\n      request.AddQueryParameter(\"fields\", \"name,validated_data\");\n      request.AddQueryParameter(\"document_id\", \"document_1,document_2\");\n      request.AddQueryParameter(\"client_document_id\", \"custom_id_16,custom_id_17\");\n      request.AddQueryParameter(\"fund_id\", \"fund_1,fund_2\");\n      request.AddQueryParameter(\"account_id\", \"account_1,account_2\");\n      request.AddQueryParameter(\"investment_entity_id\", \"entity_1,entity_2\");\n      request.AddQueryParameter(\"document_type\", \"Account Statement,Capital Call Notice\");\n      request.AddQueryParameter(\"fund_sponsor\", \"fund_sponsor_1,fund_sponsor_2\");\n      request.AddQueryParameter(\"data_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"data_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"document_status\", \"Complete,Storage Only\");\n      request.AddQueryParameter(\"document_source\", \"Email,Upload Engine\");\n      request.AddQueryParameter(\"document_tag_id\", \"tag_1,tag_2\");\n      request.AddQueryParameter(\"file_upload_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"file_upload_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"account_group\", \"Geography: North America,Geography: Europe\");\n      request.AddQueryParameter(\"last_modified_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"last_modified_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"is_locked\", \"false\");\n      request.AddQueryParameter(\"ready_for_extract\", \"false\");\n      request.AddQueryParameter(\"sum_values\", \"false\");\n      request.AddQueryParameter(\"approval_status\", \"Approved\");\n      request.AddQueryParameter(\"approved_by\", \"user_1,user_2\");\n      request.AddQueryParameter(\"approval_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"approval_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"assignee\", \"user_1,user_2\");\n      request.AddQueryParameter(\"uploaded_by\", \"John Smith,John Doe\");\n      request.AddQueryParameter(\"not_document_tag_id\", \"tag_1,tag_2\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Document'
+        '403':
+          description: No access to the document.
+  Get Document Types:
+    get:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents/types
+
+
+        Fetch all available document types.
+
+
+        Document types are dynamically managed and organized by category. The response includes document type information including ID, key, level (''client_document'' or ''general_document''), category, and display name.
+
+        '
+      operationId: GetDocumentsType
+      parameters: null
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/documents/types\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/types\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/documents/types',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/types'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/types\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                  - id: id_of_the_account_statement_document_type
+                    key: account_statement
+                    level: client_document
+                    category: Capital Activity
+                    document_type: Account Statement
+                  - id: id_of_the_capital_call_notice_document_type
+                    key: call_notice
+                    level: client_document
+                    category: Capital Activity
+                    document_type: Capital Call Notice
+  Get Document Tags:
+    get:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents/tags
+
+
+        Fetch all available document tags.
+
+        '
+      operationId: GetDocumentTags
+      parameters:
+      - name: page
+        in: query
+        description: This page number. For example, if you specify "2" you will see all tags data on page 2. By default, this is set to 1.
+        required: false
+        schema:
+          type: integer
+        examples:
+          page 1:
+            value: 1
+          page 5:
+            value: 5
+      - name: limit
+        in: query
+        description: The number of tags displayed on each page. The maximum number of tags as well as the default is 100.
+        required: false
+        schema:
+          type: integer
+        examples:
+          limit:
+            value: 100
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/documents/tags?page=1&limit=100\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/tags\"\n      );\n\n      let params = {\n          \"page\": \"1\",\n          \"limit\": \"100\",\n      }\n\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n        'https://api.canoesoftware.com/v1/documents/tags',\n        [\n          'headers' => [\n            'Authorization' => 'Bearer {token}',\n            'Accept' => 'application/json',\n            'X-Requested-With' => 'XMLHttpRequest',\n          ],\n          'query' => [\n            'page' => '1',\n            'limit' => '100'\n          ],\n        ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/tags'\n      params = {\n        'page': '1',\n        'limit': '100',\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/tags\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"100\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    data:
+                    - id: '1'
+                      name: tag_1
+                    - id: '2'
+                      name: tag_2
+                    pageInfo:
+                      first: https://api.canoesoftware.com/v1/documents/tags?page=1
+                      last: https://api.canoesoftware.com/v1/documents/tags?page=1
+                      prev: null
+                      next: null
+                      current_page: 1
+                      from: 1
+                      last_page: 1
+                      path: https://api.canoesoftware.com/v1/documents/tags
+                      per_page: 100
+                      to: 2
+                      total: 2
+  Get Document Allocation Tags:
+    get:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents/allocation-tags
+
+
+        Fetch all available document allocation tags.
+
+        '
+      operationId: GetDocumentAllocationTags
+      parameters:
+      - name: page
+        in: query
+        description: This page number. For example, if you specify "2" you will see all tags data on page 2. By default, this is set to 1.
+        required: false
+        schema:
+          type: integer
+        examples:
+          page 1:
+            value: 1
+          page 5:
+            value: 5
+      - name: limit
+        in: query
+        description: The number of tags displayed on each page. The maximum number of tags as well as the default is 100.
+        required: false
+        schema:
+          type: integer
+        examples:
+          limit:
+            value: 100
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/documents/allocation-tags?page=1&limit=100\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/allocation-tags\"\n      );\n\n      let params = {\n          \"page\": \"1\",\n          \"limit\": \"100\",\n      }\n\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n        'https://api.canoesoftware.com/v1/documents/allocation-tags',\n        [\n          'headers' => [\n            'Authorization' => 'Bearer {token}',\n            'Accept' => 'application/json',\n            'X-Requested-With' => 'XMLHttpRequest',\n          ],\n          'query' => [\n            'page' => '1',\n            'limit' => '100'\n          ],\n        ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/allocation-tags'\n      params = {\n        'page': '1',\n        'limit': '100',\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/allocation-tags\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"100\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    data:
+                    - id: '1'
+                      name: tag_1
+                    - id: '2'
+                      name: tag_2
+                    pageInfo:
+                      first: https://api.canoesoftware.com/v1/documents/allocation-tags?page=1
+                      last: https://api.canoesoftware.com/v1/documents/allocation-tags?page=1
+                      prev: null
+                      next: null
+                      current_page: 1
+                      from: 1
+                      last_page: 1
+                      path: https://api.canoesoftware.com/v1/documents/allocation-tags
+                      per_page: 100
+                      to: 2
+                      total: 2
+  Delete Multiple Documents:
+    post:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents/delete-documents
+
+
+        Delete up to 100 documents by filtering with the current parameters. At least one parameter is required in the request.
+
+        '
+      operationId: DeleteMultipleDocuments
+      parameters:
+      - name: document_id
+        in: body
+        description: The IDs of the documents in Canoe.
+        required: false
+        schema:
+          type: string
+          example:
+            document_id: document_1,document_2
+      - name: client_document_id
+        in: body
+        description: The custom document IDs.
+        required: false
+        schema:
+          type: string
+          example:
+            client_document_id: custom_id_16,custom_id_17
+      - name: fund_id
+        in: body
+        description: The IDs of funds in Canoe. To retrieve these, use the <code>v1/funds</code> <a href="#operations-Funds-GetFunds"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            fund_id: fund_1,fund_2
+      - name: account_id
+        in: body
+        description: The IDs of accounts in Canoe. To retrieve these, use the <code>v1/organizations?type=account</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            account_id: account_1,account_2
+      - name: investment_entity_id
+        in: body
+        description: The IDs of investment entities in Canoe. To retrieve these, use the <code>v1/organizations?type=entity</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            investment_entity_id: entity_1,entity_2
+      - name: document_type
+        in: body
+        description: The document types. To retrieve these, use the <code>v1/documents/types</code> <a href="#operations-Documents-GetDocumentsType"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            document_type: Account Statement,Capital Call Notice
+      - name: fund_sponsor
+        in: body
+        description: The Fund Sponsors. The entered Fund Sponsors must be an exact match, although all query parameters are case-insensitive.
+        required: false
+        schema:
+          type: string
+          example:
+            fund_sponsor: fund_sponsor_1,fund_sponsor_2
+      - name: data_date_start
+        in: body
+        description: All documents returned will have data date <strong>greater than or equal to</strong> the given data_date_start. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+          example:
+            data_date_start: '2019-03-30'
+      - name: data_date_end
+        in: body
+        description: All documents returned will have data date <strong>less than or equal to</strong> the given data_date_end. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+          example:
+            data_date_end: '2019-03-30'
+      - name: document_status
+        in: body
+        description: This is the validation status determined by Canoe. For example, Complete means that Canoe has successfully categorized, recognized, extracted, and validated data from the document.<br><br>Our current statuses are:<br><br><li>Complete</li><br><li>Potential Discrepancy</li><br><li>Duplicate</li><br><li>Password Protected</li><br><li>Configuration Required</li><br><li>Unsupported Formats</li><br><li>Anomaly Detected</li><br><li>Awaiting Confirmation</li><br><li>Storage Only</li><br><br>A misspelled status will return an empty array.
+        required: false
+        schema:
+          type: string
+          example:
+            document_status: Complete,Storage Only
+      - name: document_source
+        in: body
+        description: The method of document ingestion. These sources are:<br><br><li>Upload Engine</li><br><li>Email</li><br><li>Intralinks</li><br><li>API</li>
+        required: false
+        schema:
+          type: string
+          example:
+            document_source: Email,Upload Engine
+      - name: document_tag_id
+        in: body
+        description: The IDs of tags in Canoe. To retrieve these, use the <code>v1/documents/tags</code> <a href="#get-document-tags"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            document_tag_id: tag_1,tag_2
+      - name: file_upload_time_start
+        in: body
+        description: All documents downloaded will have an uploaded timestamp <strong>greater than or equal to</strong> the given file_upload_time_start. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+          example:
+            file_upload_time_start: '2019-03-30T04:00:00Z'
+      - name: file_upload_time_end
+        in: body
+        description: All documents downloaded will have an uploaded timestamp <strong>less than or equal to</strong> the given file_upload_time_end. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+          example:
+            file_upload_time_end: '2019-03-31T04:00:00Z'
+      - name: is_locked
+        in: body
+        description: The is_locked status of the document in Canoe. Accepted values are either true or false. The default is false.
+        required: false
+        schema:
+          type: boolean
+          example:
+            is_locked: false
+      - name: ready_for_extract
+        in: body
+        description: The extraction status of the document in Canoe. Accepted values are either true or false. The default is false.
+        required: false
+        schema:
+          type: string
+          example:
+            ready_for_extract: false
+      - name: approval_status
+        in: body
+        description: The approval status of the documents in Canoe. If searching for multiple statuses, they should be separated by commas. Valid statuses are:<br><br><li>Approved</li><br><li>Flagged</li><br><li>Ignored</li><br><li>Pending</li>
+        required: false
+        schema:
+          type: string
+          example:
+            approval_status: Approved
+      - name: approved_by
+        in: body
+        description: The User ID of the approver of the documents in Canoe.
+        required: false
+        schema:
+          type: string
+          example:
+            approved_by: user_1,user_2
+      - name: approval_date_start
+        in: body
+        description: All documents returned will have an approval date <strong>greater than or equal to</strong> the given approval_date_start. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+          example:
+            approval_date_start: '2019-03-30'
+      - name: approval_date_end
+        in: body
+        description: All documents returned will have an approval date <strong>less than or equal to</strong> the given approval_date_end. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+          example:
+            approval_date_end: '2019-03-31'
+      - name: account_group
+        in: body
+        description: The Account Group the documents belong to.
+        required: false
+        schema:
+          type: string
+          example:
+            approved_by: 'Geography: North America,Geography: Europe'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X POST \\\n          \"https://api.canoesoftware.com/v1/documents/delete-documents\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"document_id\":\"document_1,document_2\",\"client_document_id\":\"custom_id_16,custom_id_17\",\"fund_id\":\"fund_1,fund_2\",\"account_id\":\"account_1,account_2\",\"investment_entity_id\":\"entity_1,entity_2\",\"document_type\":\"Account Statement,Capital Call Notice\",\"fund_sponsor\":\"fund_sponsor_1,fund_sponsor_2\",\"data_date_start\":\"2019-03-30\",\"data_date_end\":\"2019-07-31\",\"document_status\":\"Complete,Storage Only\",\"document_source\":\"Email,Upload Engine\",\"document_tag_id\":\"tag_1,tag_2\",\"file_upload_time_start\":\"2019-03-30T04:00:00Z\",\"file_upload_time_end\":\"2019-07-31T04:00:00Z\",\"is_locked\":false,\"ready_for_extract\":true,\"approval_status\":\"Approved\",\"approved_by\":\"user_1,user_2\",\"approval_date_start\":\"2019-03-30\",\"approval_date_end\":\"2019-07-31\",\"account_group\":\"Geography: North America,Geography: Europe\"}'\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/delete-documents\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n      let body = {\n          \"document_id\": \"document_1,document_2\",\n          \"client_document_id\": \"custom_id_16,custom_id_17\",\n          \"fund_id\": \"fund_1,fund_2\",\n          \"account_id\": \"account_1,account_2\",\n          \"investment_entity_id\": \"entity_1,entity_2\",\n          \"document_type\": \"Account Statement,Capital Call Notice\",\n          \"fund_sponsor\": \"fund_sponsor_1,fund_sponsor_2\",\n          \"data_date_start\": \"2019-03-30\",\n          \"data_date_end\": \"2019-07-31\",\n          \"document_status\": \"Complete,Storage Only\",\n          \"document_source\": \"Email,Upload Engine\",\n          \"document_tag_id\": \"tag_1,tag_2\",\n          \"file_upload_time_start\": \"2019-03-30T04:00:00Z\",\n          \"file_upload_time_end\": \"2019-07-31T04:00:00Z\",\n          \"is_locked\": false,\n          \"ready_for_extract\": true,\n          \"approval_status\": \"Approved\",\n          \"approved_by\": \"user_1,user_2\",\n          \"approval_date_start\": \"2019-03-30\",\n          \"approval_date_end\": \"2019-07-31\",\n          \"account_group\": \"Geography: North America,Geography: Europe\"\n      }\n\n      fetch(url, {\n          method: \"POST\",\n          headers: headers,\n          body: body\n      })\n      .then(response => response.json())\n      .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->post(\n          'https://api.canoesoftware.com/v1/documents/delete-documents',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'document_id' => 'document_1,document_2',\n                  'client_document_id' => 'custom_id_16,custom_id_17',\n                  'fund_id' => 'fund_1,fund_2',\n                  'account_id' => 'account_1,account_2',\n                  'investment_entity_id' => 'entity_1,entity_2',\n                  'document_type' => 'Account Statement,Capital Call Notice',\n                  'fund_sponsor' => 'fund_sponsor_1,fund_sponsor_2',\n                  'data_date_start' => '2019-03-30',\n                  'data_date_end' => '2019-07-31',\n                  'document_status' => 'Complete,Storage Only',\n                  'document_source' => 'Email,Upload Engine',\n                  'document_tag_id' => 'tag_1,tag_2',\n                  'file_upload_time_start' => '2019-03-30T04:00:00Z',\n                  'file_upload_time_end' => '2019-07-31T04:00:00Z',\n                  'is_locked' => false,\n                  'ready_for_extract' => true,\n                  'approval_status' => 'Approved,Ignored,Flagged,Pending',\n                  'approved_by' => 'user_1,user_2',\n                  'approval_date_start' => '2019-03-30',\n                  'approval_date_end' => '2019-07-31',\n                  'account_group' => 'Geography: North America,Geography: Europe',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/delete-documents'\n      payload = {\n          \"document_id\": \"document_1,document_2\",\n          \"client_document_id\": \"custom_id_16,custom_id_17\",\n          \"fund_id\": \"fund_1,fund_2\",\n          \"account_id\": \"account_1,account_2\",\n          \"investment_entity_id\": \"entity_1,entity_2\",\n          \"document_type\": \"Account Statement,Capital Call Notice\",\n          \"fund_sponsor\": \"fund_sponsor_1,fund_sponsor_2\",\n          \"data_date_start\": \"2019-03-30\",\n          \"data_date_end\": \"2019-07-31\",\n          \"document_status\": \"Complete,Storage Only\",\n          \"document_source\": \"Email,Upload Engine\",\n          \"document_tag_id\": \"tag_1,tag_2\",\n          \"file_upload_time_start\": \"2019-03-30T04:00:00Z\",\n          \"file_upload_time_end\": \"2019-07-31T04:00:00Z\",\n          \"is_locked\": false,\n          \"ready_for_extract\": true,\n          \"approval_status\": \"Approved\",\n          \"approved_by\": \"user_1,user_2\",\n          \"approval_date_start\": \"2019-03-30\",\n          \"approval_date_end\": \"2019-07-31\",\n          \"account_group\": \"Geography: North America,Geography: Europe\"\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('POST', url, headers=headers, json=payload)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/delete-documents\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          document_id = \"document_1,document_2\",\n          client_document_id = \"custom_id_16,custom_id_17\",\n          fund_id = \"fund_1,fund_2\",\n          account_id = \"account_1,account_2\",\n          document_type = \"Account Statement,Capital Call Notice\",\n          fund_sponsor = \"fund_sponsor_1,fund_sponsor_2\",\n          data_date_start = \"2019-03-30\",\n          data_date_end = \"2019-07-31\",\n          document_status = \"Complete,Storage Only\",\n          document_source = \"Email,Upload Engine\",\n          document_tag_id = \"tag_1,tag_2\",\n          file_upload_time_start = \"2019-03-30T04:00:00Z\",\n          file_upload_time_end = \"2019-07-31T04:00:00Z\",\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    deleted: 1
+                    ids:
+                    - deleted_document_id
+  Get A Single Document:
+    get:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents/{id}
+
+
+        Download a specific document by the document''s ID. A successful call to this endpoint will only contain the binary file, not the JSON data.
+
+        '
+      operationId: GetASingleDocument
+      parameters:
+      - name: id
+        in: path
+        description: The id document.
+        required: true
+        schema:
+          type: string
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/documents/1\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/1\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/documents/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/1'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/1\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+        '403':
+          description: No access to the document.
+  Delete A Single Document:
+    delete:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents/{id}
+
+
+        Delete a specific document by using the document''s Canoe ID.
+
+        '
+      operationId: DeleteDocument
+      parameters:
+      - name: id
+        in: path
+        description: The id of the document to be deleted.
+        required: true
+        schema:
+          type: string
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X DELETE \\\n          \"https://api.canoesoftware.com/v1/documents/1\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/1\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"DELETE\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->delete(\n          'https://api.canoesoftware.com/v1/documents/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/1'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('DELETE', url, headers=headers)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/1\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: The Document was deleted.
+        '403':
+          description: No access to the document.
+  Bulk Set Document Metadata:
+    post:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents/metadata
+
+
+        Update metadata fields for up to 100 documents in a single request.
+
+        Processing continues even if individual documents fail. Returns a summary
+
+        of successful and failed updates.
+
+        '
+      operationId: BulkSetDocumentMetadata
+      parameters:
+      - name: document_ids
+        in: body
+        description: Array of document IDs to update. Maximum 100 per request.
+        required: true
+        schema:
+          type: array
+          example:
+            document_ids:
+            - document_1
+            - document_2
+      - name: approval_status
+        in: body
+        description: Set the approval status for all specified documents. Valid values are Approved, Flagged, Ignored, Pending.
+        required: false
+        schema:
+          type: string
+          example:
+            approval_status: Approved
+      - name: comment
+        in: body
+        description: Set the internal comment for all specified documents.
+        required: false
+        schema:
+          type: string
+          example:
+            comment: Reviewed and approved.
+      - name: tags
+        in: body
+        description: Set or append document tags. Provide names array and optional overwrite flag. If overwrite is true, existing tags are replaced.
+        required: false
+        schema:
+          type: object
+          example:
+            tags:
+              names:
+              - TagA
+              - TagB
+              overwrite: true
+      - name: client_document_id
+        in: body
+        description: Set the client document ID for all specified documents.
+        required: false
+        schema:
+          type: string
+          example:
+            client_document_id: CLIENT-REF-001
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X POST \\\n          \"https://api.canoesoftware.com/v1/documents/metadata\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"document_ids\":[\"document_1\",\"document_2\"],\"approval_status\":\"Approved\",\"comment\":\"Reviewed.\",\"tags\":{\"names\":[\"TagA\"],\"overwrite\":false}}'\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/metadata\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"document_ids\": [\"document_1\", \"document_2\"],\n          \"approval_status\": \"Approved\",\n          \"comment\": \"Reviewed.\",\n          \"tags\": {\n              \"names\": [\"TagA\"],\n              \"overwrite\": false\n          }\n      }\n\n      fetch(url, {\n          method: \"POST\",\n          headers: headers,\n          body: JSON.stringify(body)\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->post(\n          'https://api.canoesoftware.com/v1/documents/metadata',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'document_ids' => ['document_1', 'document_2'],\n                  'approval_status' => 'Approved',\n                  'comment' => 'Reviewed.',\n                  'tags' => [\n                      'names' => ['TagA'],\n                      'overwrite' => false,\n                  ],\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/metadata'\n      payload = {\n          \"document_ids\": [\"document_1\", \"document_2\"],\n          \"approval_status\": \"Approved\",\n          \"comment\": \"Reviewed.\",\n          \"tags\": {\n              \"names\": [\"TagA\"],\n              \"overwrite\": false\n          }\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('POST', url, headers=headers, json=payload)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/metadata\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          document_ids = new [] { \"document_1\", \"document_2\" },\n          approval_status = \"Approved\",\n          comment = \"Reviewed.\",\n          tags = new { names = new [] { \"TagA\" }, overwrite = false }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Returns summary with total, successful, failed counts and per-document results.
+        '422':
+          description: Validation error — invalid request body (returned before processing starts).
+  Set Document Metadata:
+    put:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents/{id}/metadata
+
+
+        Set document metadata.
+
+        '
+      operationId: SetDocumentMetadata
+      parameters:
+      - name: id
+        in: path
+        description: The id of the document to be updated.
+        required: true
+        schema:
+          type: string
+          example: 1
+      - name: approval_status
+        in: body
+        description: The new approval status to be changed on the document.
+        required: false
+        schema:
+          type: string
+          example:
+            approval_status: Approved
+      - name: comment
+        in: body
+        description: The comment on the document.
+        required: false
+        schema:
+          type: string
+          example:
+            comment: Sample Comment.
+      - name: tags
+        in: body
+        description: Tags to be applied to the document. Set `overwrite` to true to remove pre-existing tags.
+        required: false
+        schema:
+          type: string
+          example:
+            tags:
+              names: []
+              overwrite: false
+      - name: tags.names
+        in: body
+        description: The array of tag names to apply to the document.
+        required: false
+        schema:
+          type: string
+          example:
+            tags:
+              names: []
+              overwrite: false
+      - name: tags.overwrite
+        in: body
+        description: A boolean indicating whether pre-existing tags should be detached.
+        required: false
+        schema:
+          type: boolean
+          example:
+            tags:
+              names: []
+              overwrite: false
+      - name: client_document_id
+        in: body
+        description: The custom document ID.
+        required: false
+        schema:
+          type: string
+          example:
+            client_document_id: custom_document_id.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X PUT \\\n          \"https://api.canoesoftware.com/v1/documents/3/metadata\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"approval_status\":\"Approved\",\"comment\":\"Sample Comment.\",\"tags\":{\"names\":[],\"overwrite\":false}}'\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/3/metadata\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"approval_status\": \"Approved\",\n          \"comment\": \"Sample Comment.\",\n          \"tags\": {\n              \"names\": [],\n              \"overwrite\": false\n          }\n      }\n\n      fetch(url, {\n          method: \"PUT\",\n          headers: headers,\n          body: body\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->put(\n          'https://api.canoesoftware.com/v1/documents/3/metadata',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'approval_status' => 'Approved,Ignored,Flagged,Pending',\n                  'comment' => 'Sample Comment.',\n                  'tags' => [\n                      'names' => [],\n                      'overwrite' => false,\n                  ],\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/3/metadata'\n      payload = {\n          \"approval_status\": \"Approved\",\n          \"comment\": \"Sample Comment.\",\n          \"tags\": {\n              \"names\": [],\n              \"overwrite\": false\n          }\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('PUT', url, headers=headers, json=payload)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/3/metadata\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {   \n          approval_status = \"Approved\",\n          comment = \"Sample Comment\",\n          tags = new { names = new [] { \"tag name 1\", \"tag name 2\" }, overwrite = false }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentMetaData'
+        '401':
+          description: This feature is not enabled for your account.
+        '403':
+          description: Approval status cannot be set on this document.
+        '422':
+          description: Invalid approval status specified.
+  Download Documents:
+    get:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents
+
+
+        Download documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.
+
+
+        To retrieve additional information, you can inspect the response header data. There, you can find the total number of documents filtered by current query parameters.
+
+        '
+      operationId: DownloadDocuments
+      parameters:
+      - name: page
+        in: query
+        description: This page number. For example, if you specify "2" you will see all documents on page 2. By default, this is set to 1. Example:- 1
+        required: false
+        schema:
+          type: integer
+        examples:
+          page 1:
+            value: 1
+          page 5:
+            value: 5
+      - name: limit
+        in: query
+        description: The number of documents for each page. The maximum number of documents limit is 100. Example:- 50
+        required: false
+        schema:
+          type: integer
+        examples:
+          limit:
+            value: 50
+      - name: fields
+        in: query
+        description: The fields you need in the partial response. The value of the fields parameter MUST be a comma-separated (U+002C COMMA, ",") list that refers to the name(s) of the fields to be returned.
+        required: false
+        schema:
+          type: string
+        examples:
+          fields:
+            value: name,validated_data
+      - name: document_id
+        in: query
+        description: The IDs of the documents in Canoe.
+        required: false
+        schema:
+          type: string
+        examples:
+          document_id:
+            value: document_1,document_2
+      - name: client_document_id
+        in: query
+        description: The custom document IDs.
+        required: false
+        schema:
+          type: string
+        examples:
+          client_document_id:
+            value: client_document_id
+      - name: fund_id
+        in: query
+        description: The IDs of funds in Canoe. To retrieve these, use the <code>v1/funds</code> <a href="#operations-Funds-GetFunds"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          fund_id:
+            value: fund_1,fund_2
+      - name: account_id
+        in: query
+        description: The IDs of accounts in Canoe. To retrieve these, use the <code>v1/organizations?type=account</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          account_id:
+            value: account_1,account_2
+      - name: investment_entity_id
+        in: query
+        description: The IDs of investment entities in Canoe. To retrieve these, use the <code>v1/organizations?type=entity</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          investment_entity_id:
+            value: entity_1,entity_2
+      - name: document_type
+        in: query
+        description: The document types. To retrieve these, use the <code>v1/documents/types</code> <a href="#operations-Documents-GetDocumentsType"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          document_type:
+            value: Account Statement,Capital Call Notice
+      - name: fund_sponsor
+        in: query
+        description: The Fund Sponsors. The entered Fund Sponsors must be an exact match, although all query parameters are case-insensitive.
+        required: false
+        schema:
+          type: string
+        examples:
+          fund_sponsor_multiple:
+            value: fund_sponsor_1,fund_sponsor_2
+          fund_sponsor_single:
+            value: fund_sponsor_1
+      - name: data_date_start
+        in: query
+        description: All documents returned will have data date <strong>greater than or equal to</strong> the given data_date_start. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+        examples:
+          data_date_start:
+            value: '2019-03-30'
+      - name: data_date_end
+        in: query
+        description: All documents returned will have data date <strong>less than or equal to</strong> the given data_date_end. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+        examples:
+          data_date_end:
+            value: '2019-03-30'
+      - name: document_status
+        in: query
+        description: This is the validation status determined by Canoe. For example, Complete means that Canoe has successfully categorized, recognized, extracted, and validated data from the document.<br><br>Our current statuses are:<br><br><li>Complete</li><br><li>Potential Discrepancy</li><br><li>Duplicate</li><br><li>Password Protected</li><br><li>Configuration Required</li><br><li>Unsupported Formats</li><br><li>Anomaly Detected</li><br><li>Awaiting Confirmation</li><br><li>Storage Only</li><br><br>A misspelled status will return an empty array.
+        required: false
+        schema:
+          type: string
+        examples:
+          document_status:
+            value: Complete,Storage Only
+      - name: document_source
+        in: query
+        description: The method of document ingestion. These sources are:<br><br><li>Upload Engine</li><br><li>Email</li><br><li>Intralinks</li><br><li>API</li>
+        required: false
+        schema:
+          type: string
+        examples:
+          document_source:
+            value: Email,Upload Engine
+      - name: skip_downloaded
+        in: query
+        description: Setting to true excludes documents from the response that have previously been downloaded through the API for the document allocations that match the call's other request parameters. The default value is false.
+        required: false
+        schema:
+          type: string
+        examples:
+          skip_downloaded:
+            value: false
+      - name: document_tag_id
+        in: query
+        description: The IDs of tags in Canoe. To retrieve these, use the <code>v1/documents/tags</code> <a href="#get-document-tags"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+        examples:
+          document_tag_id:
+            value: tag_1,tag_2
+      - name: file_upload_time_start
+        in: query
+        description: All documents downloaded will have an uploaded timestamp <strong>greater than or equal to</strong> the given file_upload_time_start. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          file_upload_time_start:
+            value: '2019-03-30T04:00:00Z'
+      - name: file_upload_time_end
+        in: query
+        description: All documents downloaded will have an uploaded timestamp <strong>less than or equal to</strong> the given file_upload_time_end. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          file_upload_time_end:
+            value: '2019-03-31T04:00:00Z'
+      - name: account_group
+        in: query
+        description: The Account Group the documents belong to.
+        required: false
+        schema:
+          type: string
+        examples:
+          account_group:
+            value: 'Geography: North America,Geography: Europe'
+      - name: last_modified_time_start
+        in: query
+        description: All documents returned will have a last updated timestamp <strong>greater than or equal to</strong> the given last_modified_time_start. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents updated on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          last_modified_time_start:
+            value: '2019-03-30T04:00:00Z'
+      - name: last_modified_time_end
+        in: query
+        description: All documents returned will have a last updated timestamp <strong>less than or equal to</strong> the given last_modified_time_end. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the <a target="_blank" href="https://www.iso.org/iso-8601-date-and-time-format.html"><u>ISO 8601 format</u></a> for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents updated on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          last_modified_time_end:
+            value: '2019-07-31T04:00:00Z'
+      - name: is_locked
+        in: query
+        description: The is_locked status of the document in Canoe. Accepted values are either true or false. The default is false.
+        required: false
+        schema:
+          type: string
+        examples:
+          is_locked:
+            value: false
+      - name: file_name_type
+        in: query
+        description: The document name format to return for each document.  The available options are name, original_file_name and id.  The default value for this is name, which is your tenant's custom "Document Name Format" specified in the Intelligent Document Center.  original_file_name returns the name of the file as it appeared when loaded into Canoe.  id returns the documentâ€™s Canoe Document Identifier.
+        required: false
+        schema:
+          type: string
+        examples:
+          file_name_type:
+            value: original_file_name
+      - name: ready_for_extract
+        in: query
+        description: The extraction status of the document in Canoe. Accepted values are either true or false. The default is false.
+        required: false
+        schema:
+          type: string
+        examples:
+          ready_for_extract:
+            value: false
+      - name: approval_status
+        in: query
+        description: The approval status of the documents in Canoe. If searching for multiple statuses, they should be separated by commas. Valid statuses are:<br><br><li>Approved</li><br><li>Flagged</li><br><li>Ignored</li><br><li>Pending</li>
+        required: false
+        schema:
+          type: string
+        examples:
+          approval_status:
+            value: Approved
+      - name: approved_by
+        in: query
+        description: The User ID of the approver of the documents in Canoe.
+        required: false
+        schema:
+          type: string
+        examples:
+          approved_by:
+            value: user_1,user_2
+      - name: approval_date_start
+        in: query
+        description: All documents returned will have an approval date <strong>greater than or equal to</strong> the given approval_date_start. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+        examples:
+          approval_date_start:
+            value: '2019-03-30'
+      - name: approval_date_end
+        in: query
+        description: All documents returned will have an approval date <strong>less than or equal to</strong> the given approval_date_end. This will be in EST (Eastern Standard Time).
+        required: false
+        schema:
+          type: string
+        examples:
+          approval_date_end:
+            value: '2019-03-31'
+      - name: assignee
+        in: query
+        description: The User ID of the assignee for the document in Canoe. If searching for multiple assignees, they should be separated by commas. Example:- user_1,user_2
+        required: false
+        schema:
+          type: string
+        examples:
+          approved_by:
+            value: user_1,user_2
+      - name: uploaded_by
+        in: query
+        description: The full name of the user who uploaded the document. If searching for multiple users, they should be separated by commas. Use 'Canoe Connect System User' to filter for documents uploaded via Canoe Connect. Example:- John Smith,John Doe
+        required: false
+        schema:
+          type: string
+        examples:
+          uploaded_by:
+            value: John Smith,John Doe
+      - name: not_document_tag_id
+        in: query
+        description: The IDs of tags in Canoe. To retrieve these, use the <code>v1/documents/tags</code> <a href="#get-document-tags">endpoint</a>. This will search for documents that have NOT been tagged with a specified tag.
+        required: false
+        schema:
+          type: string
+        examples:
+          approved_by:
+            value: tag_1,tag_2
+      - name: category
+        in: query
+        description: The category of the document. Our current categories are:<br><br><li>Capital Activity</li><br><li>Email & System Messages</li><br><li>Financial Statements & Performance</li><br><li>Investment & Transactional</li><br><li>Investor Administration & Communication</li><br><li>Legal, Compliance & Regulatory</li><br><li>Other</li><br><li>Tax</li><br><br>Multiple categories can be passed as a comma-delimited list (e.g. <code>Capital Activity,Tax</code>).
+        required: false
+        schema:
+          type: string
+        examples:
+          category:
+            value: Capital Activity, Email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/documents?page=1&limit=50&document_id=document_1%2Cdocument_2&client_document_id=custom_id_16%2Ccustom_id_17&fund_id=fund_1%2Cfund_2&account_id=account_1%2Caccount_2&investment_entity_id=entity_1%2Centity_2&document_type=Account+Statement%2CCapital+Call+Notice&fund_sponsor=fund_sponsor_1%2Cfund_sponsor_2&data_date_start=2019-03-30&data_date_end=2019-07-31&document_status=Complete%2CStorage+Only&document_source=Email%2CUpload+Engine&document_tag_id=tag_1%2Ctag_2&file_upload_time_start=2019-03-30T04%3A00%3A00Z&file_upload_time_end=2019-07-31T04%3A00%3A00Z&last_modified_time_start=2019-03-30T04%3A00%3A00Z&last_modified_time_end=2019-07-31T04%3A00%3A00Z&is_locked=false&ready_for_extract=true&approval_status=Approved&approved_by=user_1%2Cuser_2&approval_date_start=2019-03-30&approval_date_end=2019-07-31&account_group=Geography%3A+North+America%2CGeography%3A+Europe&skip_downloaded=false&file_name_type=original_file_name&category=Capital%20Activity\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents\"\n      );\n\n      let params = {\n          \"page\": \"1\",\n          \"limit\": \"50\",\n          \"document_id\": \"document_1,document_2\",\n          \"client_document_id\": \"custom_id_16,custom_id_17\",\n          \"fund_id\": \"fund_1,fund_2\",\n          \"account_id\": \"account_1,account_2\",\n          \"investment_entity_id\": \"entity_1,entity_2\",\n          \"document_type\": \"Account Statement,Capital Call Notice\",\n          \"fund_sponsor\": \"fund_sponsor_1,fund_sponsor_2\",\n          \"data_date_start\": \"2019-03-30\",\n          \"data_date_end\": \"2019-07-31\",\n          \"document_status\": \"Complete,Storage Only\",\n          \"document_source\": \"Email,Upload Engine\",\n          \"document_tag_id\": \"tag_1,tag_2\",\n          \"file_upload_time_start\": \"2019-03-30T04:00:00Z\",\n          \"file_upload_time_end\": \"2019-07-31T04:00:00Z\",\n          \"last_modified_time_start\": \"2019-03-30T04:00:00Z\",\n          \"last_modified_time_end\": \"2019-07-31T04:00:00Z\",\n          \"is_locked\": \"false\",\n          \"ready_for_extract\": \"true\",\n          \"approval_status\": \"Approved\",\n          \"approved_by\": \"user_1,user_2\",\n          \"approval_date_start\": \"2019-03-30\",\n          \"approval_date_end\": \"2019-07-31\",\n          \"account_group\": \"Geography: North America,Geography: Europe\",\n          \"skip_downloaded\": \"false\",\n          \"file_name_type\": \"original_file_name\",\n          \"category\": \"Capital Activity\"\n      };\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/documents',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'page' => '1',\n                  'limit' => '50',\n                  'document_id' => 'document_1,document_2',\n                  'client_document_id' => 'custom_id_16,custom_id_17',\n                  'fund_id' => 'fund_1,fund_2',\n                  'account_id' => 'account_1,account_2',\n                  'investment_entity_id' => 'entity_1,entity_2',\n                  'document_type' => 'Account Statement,Capital Call Notice',\n                  'fund_sponsor' => 'fund_sponsor_1,fund_sponsor_2',\n                  'data_date_start' => '2019-03-30',\n                  'data_date_end' => '2019-07-31',\n                  'document_status' => 'Complete,Storage Only',\n                  'document_source' => 'Email,Upload Engine',\n                  'document_tag_id' => 'tag_1,tag_2',\n                  'file_upload_time_start' => '2019-03-30T04:00:00Z',\n                  'file_upload_time_end' => '2019-07-31T04:00:00Z',\n                  'last_modified_time_start' => '2019-03-30T04:00:00Z',\n                  'last_modified_time_end' => '2019-07-31T04:00:00Z',\n                  'is_locked' => 'false',\n                  'ready_for_extract' => 'true',\n                  'approval_status' => 'Approved',\n                  'approved_by' => 'user_1,user_2',\n                  'approval_date_start' => '2019-03-30',\n                  'approval_date_end' => '2019-07-31',\n                  'account_group' => 'Geography: North America,Geography: Europe',\n                  'skip_downloaded' => 'false',\n                  'file_name_type' => 'original_file_name',\n                  'category'=> 'Capital Activity'\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents'\n      params = {\n        'page': '1',\n        'limit': '50',\n        'document_id': 'document_1,document_2',\n        'client_document_id': 'custom_id_16,custom_id_17',\n        'fund_id': 'fund_1,fund_2',\n        'account_id': 'account_1,account_2',\n        'investment_entity_id': 'entity_1,entity_2',\n        'document_type': 'Account Statement,Capital Call Notice',\n        'fund_sponsor': 'fund_sponsor_1,fund_sponsor_2',\n        'data_date_start': '2019-03-30',\n        'data_date_end': '2019-07-31',\n        'document_status': 'Complete,Storage Only',\n        'document_source': 'Email,Upload Engine',\n        'document_tag_id': 'tag_1,tag_2',\n        'file_upload_time_start': '2019-03-30T04:00:00Z',\n        'file_upload_time_end': '2019-07-31T04:00:00Z',\n        'last_modified_time_start': '2019-03-30T04:00:00Z',\n        'last_modified_time_end': '2019-07-31T04:00:00Z',\n        'is_locked': 'false',\n        'ready_for_extract': 'true',\n        'approval_status': 'Approved',\n        'approved_by': 'user_1,user_2',\n        'approval_date_start': '2019-03-30',\n        'approval_date_end': '2019-07-31',\n        'account_group': 'Geography: North America,Geography: Europe',\n        'skip_downloaded': 'false',\n        'file_name_type': 'original_file_name',\n        'category'=> 'Capital Activity'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"50\");\n      request.AddQueryParameter(\"document_id\", \"document_1,document_2\");\n      request.AddQueryParameter(\"client_document_id\", \"custom_id_16,custom_id_17\");\n      request.AddQueryParameter(\"fund_id\", \"fund_1,fund_2\");\n      request.AddQueryParameter(\"account_id\", \"account_1,account_2\");\n      request.AddQueryParameter(\"investment_entity_id\", \"entity_1,entity_2\");\n      request.AddQueryParameter(\"document_type\", \"Account Statement,Capital Call Notice\");\n      request.AddQueryParameter(\"fund_sponsor\", \"fund_sponsor_1,fund_sponsor_2\");\n      request.AddQueryParameter(\"data_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"data_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"document_status\", \"Complete,Storage Only\");\n      request.AddQueryParameter(\"document_source\", \"Email,Upload Engine\");\n      request.AddQueryParameter(\"document_tag_id\", \"tag_1,tag_2\");\n      request.AddQueryParameter(\"file_upload_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"file_upload_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"last_modified_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"last_modified_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"is_locked\", \"false\");\n      request.AddQueryParameter(\"ready_for_extract\", \"true\");\n      request.AddQueryParameter(\"approval_status\", \"Approved\");\n      request.AddQueryParameter(\"approved_by\", \"user_1,user_2\");\n      request.AddQueryParameter(\"approval_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"approval_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"account_group\", \"Geography: North America,Geography: Europe\");\n      request.AddQueryParameter(\"skip_downloaded\", \"false\");\n      request.AddQueryParameter(\"file_name_type\", \"original_file_name\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+  Upload A Single Document:
+    post:
+      tags:
+      - Documents
+      summary: null
+      description: '/v1/documents
+
+
+        Upload a Single Document
+
+        '
+      operationId: UploadDocuments
+      parameters:
+      - name: file
+        in: body
+        description: The file you would like to upload to Canoe. This supports only one file per request. If you send multiple files through a single request, only first file will be taken. If you are including a non-PDF document, please make sure your tenant is enabled for these extensions before attempting upload.
+        required: true
+        schema:
+          type: file
+          example:
+            file: ab
+      - name: storage_only
+        in: body
+        description: Whether you want the uploaded file to be extracted. If it's set to true, it will not be extracted nor validated by Canoe. The default value for this is false.
+        required: false
+        schema:
+          type: boolean
+          example:
+            storage_only: true
+      - name: term_id
+        in: body
+        description: The term's ID you would like to associate the document with. This is <strong>required</strong> if storage_only is set to true. To retrieve term IDs, use the <code>v1/funds</code> <a href="#operations-Funds-GetFunds"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            term_id: term_1
+      - name: organization_id
+        in: body
+        description: This is the entity or account ID you would like to associate the document with. It's <strong>required</strong> if storage_only is set to true and the document type you specified is one of the client document types. It's not required if storage_only is set to true and the document type you specified is one of the general document types. To retrieve these, use the <code>v1/organizations</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            organization_id: document_1,document_2
+      - name: document_type_id
+        in: body
+        description: The document type you would like to associate the document with. It's <strong>required</strong> if storage_only is set to true. To retrieve these IDs, use the <code>v1/documents/types</code> <a href="#operations-Documents-GetDocumentsType"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            document_type_id: document_1,document_2
+      - name: client_document_id
+        in: body
+        description: The custom document ID you'd like to associate the document with. This must be a unique ID within your account; multiple documents cannot share the same ID.
+        required: false
+        schema:
+          type: string
+          example:
+            document_type_id: 123,124
+      - name: allocation_id
+        in: body
+        description: The ID of an existing investment (allocation) in Canoe to pre-seed categorization attributes. When provided, the document will be automatically associated with the investment's fund, entity, and term. This allows categorization to be seeded at upload time without a separate API call. To retrieve investment IDs, use the <code>v1/funds</code> <a href="#operations-Funds-GetFunds"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            allocation_id: allocation_1
+      - name: data_date
+        in: body
+        description: The data date to associate with the document, in <code>YYYY-MM-DD</code> format. Used to pre-seed the data date attribute during upload.
+        required: false
+        schema:
+          type: string
+          example:
+            data_date: '2024-03-31'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X POST \\\n          \"https://api.canoesoftware.com/v1/documents\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"file\":\"ab\",\"storage_only\":true,\"term_id\":\"term_1\",\"organization_id\":\"organization_1\",\"document_type_id\":\"term_sheet_id\",\"client_document_id\":\"123\",\"allocation_id\":\"allocation_1\",\"data_date\":\"2024-03-31\"}'\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"file\": \"ab\",\n          \"storage_only\": true,\n          \"term_id\": \"term_1\",\n          \"organization_id\": \"organization_1\",\n          \"document_type_id\": \"term_sheet_id\",\n          \"client_document_id\": \"123\",\n          \"allocation_id\": \"allocation_1\",\n          \"data_date\": \"2024-03-31\"\n      }\n\n      fetch(url, {\n          method: \"POST\",\n          headers: headers,\n          body: body\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->post(\n          'https://api.canoesoftware.com/v1/documents',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'file' => 'ab',\n                  'storage_only' => true,\n                  'term_id' => 'term_1',\n                  'organization_id' => 'organization_1',\n                  'document_type_id' => 'term_sheet_id',\n                  'client_document_id' => '123',\n                  'allocation_id' => 'allocation_1',\n                  'data_date' => '2024-03-31',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents'\n      payload = {\n          \"file\": \"ab\",\n          \"storage_only\": true,\n          \"term_id\": \"term_1\",\n          \"organization_id\": \"organization_1\",\n          \"document_type_id\": \"term_sheet_id\",\n          \"client_document_id\": \"123\",\n          \"allocation_id\": \"allocation_1\",\n          \"data_date\": \"2024-03-31\"\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('POST', url, headers=headers, json=payload)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"multipart/form-data\");\n      request.AddFile(\"file\",\"path_to_file\");\n      var body = new\n      {\n          storage_only = \"1\",\n          term_id = \"term_id\",\n          organization_id = \"organization_1\",\n          term_sheet_id = \"term_sheet_id\"\n          client_document_id = \"123\",\n          allocation_id = \"allocation_1\",\n          data_date = \"2024-03-31\",\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UploadSingleDocument'
+        '422':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    errors:
+                      file:
+                      - 'The file must be a file of type: pdf.'
+                      document_type_id:
+                      - The document_type_id field is required for storage only upload.
+                      term_id:
+                      - The term_id field is required for storage only upload.
+  Edit Document Attributes:
+    put:
+      tags:
+      - Documents
+      summary: null
+      description: "/v1/documents/edit-attributes\n\nUpdate categorization attributes for up to 100 documents in a single request. At least one of the following fields must be provided: <code>allocation_id</code>, <code>entity_id</code>, <code>term_id</code>, <code>data_date</code>, or <code>document_type_id</code>.\n\nThe allocation can be specified in two ways:\n<ul>\n  <li>By <code>allocation_id</code> — directly identifies an existing investment. This derives the associated fund, entity, and term automatically.</li>\n  <li>By <code>term_id</code> + <code>entity_id</code> — must correspond to an existing investment record.</li>\n</ul>\n"
+      operationId: EditDocumentAttributes
+      parameters:
+      - name: document_ids
+        in: body
+        description: An array of Canoe document IDs to update. At least 1 and at most 100 document IDs may be provided per request.
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          example:
+            document_ids:
+            - document_1
+            - document_2
+      - name: allocation_id
+        in: body
+        description: The ID of an existing investment (allocation) in Canoe. When provided, the document will be associated with the investment's fund, entity, and term. Takes precedence over <code>term_id</code> + <code>entity_id</code> when both are supplied. To retrieve investment IDs, use the <code>v1/funds</code> <a href="#operations-Funds-GetFunds"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            allocation_id: allocation_1
+      - name: entity_id
+        in: body
+        description: The entity (investment entity) ID to associate the documents with. To retrieve these, use the <code>v1/organizations?type=entity</code> <a href="#operations-Organizations-Organizations"><u>endpoint</u></a>. If provided alongside <code>term_id</code> (without <code>allocation_id</code>), the combination must correspond to a valid investment.
+        required: false
+        schema:
+          type: string
+          example:
+            entity_id: entity_1
+      - name: term_id
+        in: body
+        description: The term ID to associate the documents with. To retrieve term IDs, use the <code>v1/funds</code> <a href="#operations-Funds-GetFunds"><u>endpoint</u></a>. If provided alongside <code>entity_id</code> (without <code>allocation_id</code>), the combination must correspond to a valid investment.
+        required: false
+        schema:
+          type: string
+          example:
+            term_id: term_1
+      - name: data_date
+        in: body
+        description: The data date to set on the document allocations, in <code>YYYY-MM-DD</code> format.
+        required: false
+        schema:
+          type: string
+          example:
+            data_date: '2024-03-31'
+      - name: document_type_id
+        in: body
+        description: The document type ID to assign to the documents. To retrieve valid document type IDs, use the <code>v1/documents/types</code> <a href="#operations-Documents-GetDocumentsType"><u>endpoint</u></a>.
+        required: false
+        schema:
+          type: string
+          example:
+            document_type_id: term_sheet_id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X PUT \\\n          \"https://api.canoesoftware.com/v1/documents/edit-attributes\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"document_ids\":[\"document_1\",\"document_2\"],\"allocation_id\":\"allocation_1\",\"data_date\":\"2024-03-31\",\"document_type_id\":\"term_sheet_id\"}'\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/documents/edit-attributes\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"document_ids\": [\"document_1\", \"document_2\"],\n          \"allocation_id\": \"allocation_1\",\n          \"data_date\": \"2024-03-31\",\n          \"document_type_id\": \"term_sheet_id\"\n      }\n\n      fetch(url, {\n          method: \"PUT\",\n          headers: headers,\n          body: JSON.stringify(body)\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->put(\n          'https://api.canoesoftware.com/v1/documents/edit-attributes',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'document_ids' => ['document_1', 'document_2'],\n                  'allocation_id' => 'allocation_1',\n                  'data_date' => '2024-03-31',\n                  'document_type_id' => 'term_sheet_id',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/documents/edit-attributes'\n      payload = {\n          \"document_ids\": [\"document_1\", \"document_2\"],\n          \"allocation_id\": \"allocation_1\",\n          \"data_date\": \"2024-03-31\",\n          \"document_type_id\": \"term_sheet_id\"\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('PUT', url, headers=headers, json=payload)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/edit-attributes\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          document_ids = new[] { \"document_1\", \"document_2\" },\n          allocation_id = \"allocation_1\",\n          data_date = \"2024-03-31\",\n          document_type_id = \"term_sheet_id\",\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  updated:
+                    type: array
+                    description: IDs of documents that were successfully updated.
+                    items:
+                      type: string
+                  failed:
+                    type: array
+                    description: Documents that could not be updated, with a reason for each failure.
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: The document ID that failed to update.
+                        reason:
+                          type: string
+                          description: The reason the update failed.
+              example:
+                updated:
+                - document_1
+                - document_2
+                failed:
+                - id: document_3
+                  reason: Document not found.
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                example: At least one allocation field is required.
   /v1/documents/data:
     get:
       tags:
@@ -347,7 +2022,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Document'
+                  $ref: '#/components/schemas/Document_2'
         '403':
           description: No access to the document.
       x-codeSamples:
@@ -366,6 +2041,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/data\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"100\");\n      request.AddQueryParameter(\"fields\", \"name,validated_data\");\n      request.AddQueryParameter(\"document_id\", \"document_1,document_2\");\n      request.AddQueryParameter(\"client_document_id\", \"custom_id_16,custom_id_17\");\n      request.AddQueryParameter(\"fund_id\", \"fund_1,fund_2\");\n      request.AddQueryParameter(\"account_id\", \"account_1,account_2\");\n      request.AddQueryParameter(\"investment_entity_id\", \"entity_1,entity_2\");\n      request.AddQueryParameter(\"document_type\", \"Account Statement,Capital Call Notice\");\n      request.AddQueryParameter(\"fund_sponsor\", \"fund_sponsor_1,fund_sponsor_2\");\n      request.AddQueryParameter(\"data_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"data_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"document_status\", \"Complete,Storage Only\");\n      request.AddQueryParameter(\"document_source\", \"Email,Upload Engine\");\n      request.AddQueryParameter(\"document_tag_id\", \"tag_1,tag_2\");\n      request.AddQueryParameter(\"file_upload_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"file_upload_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"account_group\", \"Geography: North America,Geography: Europe\");\n      request.AddQueryParameter(\"last_modified_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"last_modified_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"is_locked\", \"false\");\n      request.AddQueryParameter(\"ready_for_extract\", \"false\");\n      request.AddQueryParameter(\"sum_values\", \"false\");\n      request.AddQueryParameter(\"approval_status\", \"Approved\");\n      request.AddQueryParameter(\"approved_by\", \"user_1,user_2\");\n      request.AddQueryParameter(\"approval_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"approval_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"assignee\", \"user_1,user_2\");\n      request.AddQueryParameter(\"not_document_tag_id\", \"tag_1,tag_2\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/documents/types:
     get:
       tags:
@@ -411,6 +2091,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/types\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/documents/tags:
     get:
       tags:
@@ -481,6 +2166,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/tags\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"100\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/documents/allocation-tags:
     get:
       tags:
@@ -551,6 +2241,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/allocation-tags\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"100\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/documents/delete-documents:
     post:
       tags:
@@ -677,6 +2372,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/delete-documents\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          document_id = \"document_1,document_2\",\n          client_document_id = \"custom_id_16,custom_id_17\",\n          fund_id = \"fund_1,fund_2\",\n          account_id = \"account_1,account_2\",\n          document_type = \"Account Statement,Capital Call Notice\",\n          fund_sponsor = \"fund_sponsor_1,fund_sponsor_2\",\n          data_date_start = \"2019-03-30\",\n          data_date_end = \"2019-07-31\",\n          document_status = \"Complete,Storage Only\",\n          document_source = \"Email,Upload Engine\",\n          document_tag_id = \"tag_1,tag_2\",\n          file_upload_time_start = \"2019-03-30T04:00:00Z\",\n          file_upload_time_end = \"2019-07-31T04:00:00Z\",\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/documents/{id}:
     get:
       tags:
@@ -713,6 +2413,8 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/1\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }"
+      security:
+      - bearerAuth: []
     delete:
       tags:
       - Documents
@@ -748,6 +2450,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/1\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/documents/metadata:
     post:
       tags:
@@ -807,6 +2514,11 @@ paths:
           description: Returns summary with total, successful, failed counts and per-document results.
         '422':
           description: Validation error — invalid request body (returned before processing starts).
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/documents/{id}/metadata:
     put:
       tags:
@@ -890,6 +2602,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/3/metadata\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {   \n          approval_status = \"Approved\",\n          comment = \"Sample Comment\",\n          tags = new { names = new [] { \"tag name 1\", \"tag name 2\" }, overwrite = false }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/documents:
     get:
       tags:
@@ -1203,6 +2920,8 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"50\");\n      request.AddQueryParameter(\"document_id\", \"document_1,document_2\");\n      request.AddQueryParameter(\"client_document_id\", \"custom_id_16,custom_id_17\");\n      request.AddQueryParameter(\"fund_id\", \"fund_1,fund_2\");\n      request.AddQueryParameter(\"account_id\", \"account_1,account_2\");\n      request.AddQueryParameter(\"investment_entity_id\", \"entity_1,entity_2\");\n      request.AddQueryParameter(\"document_type\", \"Account Statement,Capital Call Notice\");\n      request.AddQueryParameter(\"fund_sponsor\", \"fund_sponsor_1,fund_sponsor_2\");\n      request.AddQueryParameter(\"data_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"data_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"document_status\", \"Complete,Storage Only\");\n      request.AddQueryParameter(\"document_source\", \"Email,Upload Engine\");\n      request.AddQueryParameter(\"document_tag_id\", \"tag_1,tag_2\");\n      request.AddQueryParameter(\"file_upload_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"file_upload_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"last_modified_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"last_modified_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"is_locked\", \"false\");\n      request.AddQueryParameter(\"ready_for_extract\", \"true\");\n      request.AddQueryParameter(\"approval_status\", \"Approved\");\n      request.AddQueryParameter(\"approved_by\", \"user_1,user_2\");\n      request.AddQueryParameter(\"approval_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"approval_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"account_group\", \"Geography: North America,Geography: Europe\");\n      request.AddQueryParameter(\"skip_downloaded\", \"false\");\n      request.AddQueryParameter(\"file_name_type\", \"original_file_name\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }"
+      security:
+      - bearerAuth: []
     post:
       tags:
       - Documents
@@ -1282,6 +3001,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"multipart/form-data\");\n      request.AddFile(\"file\",\"path_to_file\");\n      var body = new\n      {   \n          storage_only = \"1\",\n          term_id = \"term_id\",\n          organization_id = \"organization_1\",\n          term_sheet_id = \"term_sheet_id\"\n          client_document_id = \"123\",\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/documents/{allocationId}/allocation-tags:
     patch:
       tags:
@@ -1385,8 +3109,436 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n      using Newtonsoft.Json;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/allocation_12345/allocation-tags\", Method.Patch);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n        tags = new\n        {\n          names = new[] { \"Q1 2024\", \"Reviewed\", \"Priority\" },\n          overwrite = false\n        }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
 components:
   schemas:
+    UploadSingleDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The document's ID at Canoe.
+          example: canoe_document_id
+        name:
+          type: string
+          description: The name of the uploaded document.
+          example: uploaded_document_name
+        client_document_id:
+          type: string
+          description: The custom document ID user specified for the uploaded document.
+          example: '123'
+    Document:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ID of the document
+          example: '16'
+        client_document_id:
+          type: string
+          description: Custom ID of the client document
+          example: custom_id_16
+        name:
+          type: string
+          description: Name of the document
+          example: Sample Hedge Fund Deal 1 - Entity A - Account Statement - 07/31/19
+        document_status:
+          type: string
+          description: Status of the document (e.g., Complete)
+          example: Complete
+        category:
+          type: string
+          description: Category of the document (e.g., Capital Activity)
+          example: Capital Activity
+        document_type:
+          type: string
+          description: Type of the document (e.g., Account Statement)
+          example: Account Statement
+        source:
+          type: string
+          description: Source of the document (e.g., Upload Engine)
+          example: Upload Engine
+        file_type:
+          type: string
+          description: Type of the file (e.g., ".pdf")
+          example: .pdf
+        original_file_type:
+          type: string
+          description: Original type of the file before any conversion (e.g., ".docx")
+          example: .docx
+        original_file_name:
+          type: string
+          description: Original file name of the document
+          example: Entity One - Sample HF Deal.pdf
+        document_tags:
+          type: array
+          description: Tags associated with the document
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Tag ID
+                example: 1
+              name:
+                type: string
+                description: Tag name
+                example: tag_1
+        reporting_frequency:
+          type: string
+          description: Reporting frequency of the document (e.g., Monthly)
+          example: Monthly
+        uploaded:
+          type: string
+          format: date-time
+          description: The datetime when the document was uploaded.
+          example: '2019-04-30T20:51:38Z'
+        last_modified:
+          type: string
+          format: date-time
+          description: The datetime when the document was last modified.
+          example: '2019-09-16T11:38:47Z'
+        last_modified_by:
+          type: object
+          description: Information about the user who last modified the document
+          properties:
+            user_id:
+              type: string
+              description: User ID of the modifier
+              example: user_canoe
+            name:
+              type: string
+              description: Name of the user who modified the document
+              example: canoe software
+            email:
+              type: string
+              description: Email address of the user who modified the document
+              example: info@canoesoftware.com
+        document_approval:
+          description: Approval status of the document. Can be a string 'Pending' when no approval exists, or an object with approval details when approved.
+          oneOf:
+          - type: string
+            enum:
+            - Pending
+            description: When no approval exists
+          - type: object
+            description: When document is approved
+            properties:
+              approval_status:
+                type: string
+                description: Approval status of the document
+                example: Approved
+              approved_by:
+                type: object
+                description: Information about the user who approved the document
+                properties:
+                  user_id:
+                    type: string
+                    description: User ID of the approver
+                    example: user_1
+                  first_name:
+                    type: string
+                    description: First name of the user who approved the document
+                    example: Allison
+                  last_name:
+                    type: string
+                    description: Last name of the user who approved the document
+                    example: Smith
+                  email:
+                    type: string
+                    description: Email address of the user who approved the document
+                    example: allison@example.com
+              approval_date:
+                type: string
+                format: date-time
+                description: The datetime when the document was approved.
+                example: '2019-09-16T11:38:47Z'
+        is_locked:
+          type: boolean
+          description: Indicates whether the document is locked or not
+          example: false
+        ready_for_extract:
+          type: boolean
+          description: Extraction readiness status of the document
+          example: true
+        number_of_pages:
+          type: string
+          description: Number of pages in the document
+          example: '1'
+        file_size:
+          type: integer
+          description: Size of the file in bytes
+          example: 2000
+        comment:
+          type: string
+          description: Current comment associated with the document
+          example: current comment
+        comment_history:
+          type: array
+          description: History of comments for the document
+          items:
+            type: object
+            properties:
+              document_id:
+                type: string
+                description: ID of the commented document
+                example: '1'
+              comment:
+                type: string
+                description: Comment text
+                example: comment
+              user_id:
+                type: string
+                description: User ID of the commenter
+                example: user_1
+              created_at:
+                type: string
+                description: Comment creation date in format 'YYYY-MM-DD HH:MM:SS'
+                example: '2019-09-16 11:38:47.000000'
+        assignee:
+          type: string
+          description: User ID of the assignee
+          example: user_1
+        uploaded_by:
+          type:
+          - string
+          - 'null'
+          description: Full name of the user who uploaded the document, or 'Canoe Connect System User' for documents uploaded via Canoe Connect
+          example: John Smith
+        allocations:
+          type: array
+          description: List of allocations related to the document
+          items:
+            type: object
+            properties:
+              allocation_id:
+                type: string
+                description: The ID of the allocation record
+                example: allocation_1
+              data_date:
+                type: string
+                description: Date of the data in format 'YYYY-MM-DD'
+                example: '2019-07-31'
+              dataset_type:
+                type: string
+                description: Type of the dataset (e.g., Account Statement)
+                example: Account Statement
+              investment:
+                type: string
+                description: Name of the investment
+                example: Sample Hedge Fund Deal 1
+              fund_sponsor:
+                type: string
+                description: Name of the fund sponsor
+                example: Sample Sponsor 1
+              custom_allocation_id:
+                type: string
+                description: Custom ID of the allocation
+                example: '123'
+              investment_id:
+                type: string
+                description: ID of the investment
+                example: '1'
+              investment_legal_name:
+                type: string
+                description: Legal name of the investment
+                example: Sample Hedge Fund Deal One
+              investment_extraction_aliases:
+                type:
+                - array
+                - 'null'
+                description: Aliases related to the investment extraction
+                items:
+                  type: string
+                  example:
+                  - Sample Hedge Fund Deal 1 alias 1
+                  - Sample Hedge Fund Deal 1 alias 2
+              investment_structure:
+                type: string
+                description: Type of the investment structure (e.g., hedge_fund)
+                example: hedge_fund
+              entity:
+                type: string
+                description: Name of the entity
+                example: Entity One
+              entity_id:
+                type: string
+                description: ID of the entity
+                example: '4'
+              entity_extraction_aliases:
+                type:
+                - array
+                - 'null'
+                description: Aliases related to the entity extraction
+                items:
+                  type: string
+                  example:
+                  - Entity One alias 1
+                  - Entity One alias 2
+              account:
+                type: string
+                description: Name of the account
+                example: Account One
+              account_id:
+                type: string
+                description: ID of the account
+                example: '1'
+              extracted_data:
+                type: object
+                description: Extracted data related to the allocation
+                properties:
+                  entity:
+                    type: string
+                    description: Name of the entity
+                    example: Entity One
+                  fundName:
+                    type: string
+                    description: Name of the fund
+                    example: Sample Hedge Fund Deal 1
+                  endingDate:
+                    type: string
+                    description: Ending date in format 'MM/DD/YYYY'
+                    example: 07/31/2019
+                  beginningDate:
+                    type: string
+                    description: Beginning date in format 'MM/DD/YYYY'
+                    example: 07/01/2019
+                  endingBalance:
+                    type: string
+                    description: Ending balance as a string
+                    example: 4,111,305
+                  beginningBalance:
+                    type: string
+                    description: Beginning balance as a string
+                    example: 4,036,960
+                  otherFeesMTD:
+                    type: string
+                    description: Other fees for the month as a string
+                    example: '508'
+              validated_data:
+                type: object
+                description: Validated data related to the allocation
+                properties:
+                  entity:
+                    type: string
+                    description: Name of the entity
+                    example: Entity One
+                  fundName:
+                    type: string
+                    description: Name of the fund
+                    example: Sample Hedge Fund Deal 1
+                  endingDate:
+                    type: string
+                    description: Ending date in format 'YYYY-MM-DD'
+                    example: '2019-07-31'
+                  beginningDate:
+                    type: string
+                    description: Beginning date in format 'YYYY-MM-DD'
+                    example: '2019-07-01'
+                  endingBalance:
+                    type: integer
+                    description: Ending balance as an integer
+                    example: 4111305
+                  beginningBalance:
+                    type: integer
+                    description: Beginning balance as an integer
+                    example: 4036960
+                  otherFeesMTD:
+                    type: integer
+                    description: Other fees for the month as an integer
+                    example: 508
+              validation_errors:
+                type: array
+                description: Validation errors related to the allocation
+                items:
+                  type: string
+                example: []
+              analyst:
+                type: string
+                description: Name of the analyst
+                example: Allison
+              frequency:
+                type: string
+                description: Frequency of the allocation (e.g., monthly)
+                example: monthly
+              custom_fields:
+                type: array
+                description: Custom fields associated with the allocation
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the custom field
+                      example: CLIENT_ID
+                    value:
+                      type: string
+                      description: Value of the custom field
+                      example: BOX1
+                    custom_field_id:
+                      type: string
+                      description: ID of the custom field
+                      example: '1'
+              document_groups:
+                type: object
+                description: Document groups associated with the allocation
+                properties:
+                  transaction:
+                    type: object
+                    properties:
+                      group_id:
+                        type: string
+                        description: ID of the transaction group
+                        example: transaction_group_id
+                      member_document_ids:
+                        type: array
+                        description: IDs of the member documents in the group
+                        items:
+                          type: string
+                          example:
+                          - '16'
+                          - '22'
+                          - '35'
+              addepar_owned_id:
+                type: string
+                description: Addepar owned ID
+                example: AddeparOwned1
+              addepar_owner_id:
+                type: string
+                description: Addepar owner ID
+                example: AddeparOwner1
+              black_diamond_symbol:
+                type: string
+                description: Black Diamond symbol
+                example: BlackDiamondSymbol1
+              black_diamond_account:
+                type: string
+                description: Black Diamond account
+                example: BlackDiaAcc
+              fund_name:
+                type: string
+                description: The fund associated with the allocation.
+                example: Sample Hedge Fund Deal 1
+              term_id:
+                type: string
+                description: The term id with the allocation.
+                example: term_1
+              term_name:
+                type: string
+                description: The term associated with the allocation.
+                example: Sample Term 1
+              allocation_status:
+                type: string
+                description: The current status of the allocation. It can be either active, inactive or retired.
+                example: active
+              retired_date:
+                type: string
+                description: The date of when the allocation retires.
+                example: '2017-12-31'
     DocumentMetaData:
       type: object
       properties:
@@ -1424,22 +3576,415 @@ components:
           type: string
           description: The client document id.
           example: custom_document_id.
-    UploadSingleDocument:
+    Document_2:
       type: object
       properties:
         id:
           type: string
-          description: The document's ID at Canoe.
-          example: canoe_document_id
-        name:
-          type: string
-          description: The name of the uploaded document.
-          example: uploaded_document_name
+          description: Unique ID of the document
+          example: '16'
         client_document_id:
           type: string
-          description: The custom document ID user specified for the uploaded document.
-          example: '123'
-    Document:
+          description: Custom ID of the client document
+          example: custom_id_16
+        name:
+          type: string
+          description: Name of the document
+          example: Sample Hedge Fund Deal 1 - Entity A - Account Statement - 07/31/19
+        document_status:
+          type: string
+          description: Status of the document (e.g., Complete)
+          example: Complete
+        category:
+          type: string
+          description: Category of the document (e.g., Capital Activity)
+          example: Capital Activity
+        document_type:
+          type: string
+          description: Type of the document (e.g., Account Statement)
+          example: Account Statement
+        source:
+          type: string
+          description: Source of the document (e.g., Upload Engine)
+          example: Upload Engine
+        file_type:
+          type: string
+          description: Type of the file (e.g., ".pdf")
+          example: .pdf
+        original_file_type:
+          type: string
+          description: Original type of the file before any conversion (e.g., ".docx")
+          example: .docx
+        original_file_name:
+          type: string
+          description: Original file name of the document
+          example: Entity One - Sample HF Deal.pdf
+        document_tags:
+          type: array
+          description: Tags associated with the document
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                description: Tag ID
+                example: 1
+              name:
+                type: string
+                description: Tag name
+                example: tag_1
+        reporting_frequency:
+          type: string
+          description: Reporting frequency of the document (e.g., Monthly)
+          example: Monthly
+        uploaded:
+          type: string
+          format: date-time
+          description: The date and time when the document was uploaded
+          example: '2019-04-30 20:51:38'
+        uploaded_by:
+          type:
+          - string
+          - 'null'
+          description: Name of the user who uploaded the document
+          example: John Doe
+        last_modified:
+          type: string
+          format: date-time
+          description: The date and time when the document was last modified
+          example: '2019-09-16 11:38:47'
+        last_modified_by:
+          type: object
+          description: Information about the user who last modified the document
+          properties:
+            user_id:
+              type: string
+              description: User ID of the modifier
+              example: user_canoe
+            name:
+              type: string
+              description: Name of the user who modified the document
+              example: canoe software
+            email:
+              type: string
+              description: Email address of the user who modified the document
+              example: info@canoesoftware.com
+        document_approval:
+          description: Details about the approval of the document. Returns string 'Pending' when no approval exists, or an object when approved.
+          oneOf:
+          - type: string
+            enum:
+            - Pending
+            description: Returned when no approval exists
+          - type: object
+            description: Returned when document is approved
+            properties:
+              approval_status:
+                type: string
+                description: Approval status of the document (e.g., Approved)
+                example: Approved
+              approved_by:
+                type: object
+                description: Information about the user who approved the document
+                properties:
+                  user_id:
+                    type: string
+                    description: User ID of the approver
+                    example: user_1
+                  first_name:
+                    type: string
+                    description: First name of the user who approved the document
+                    example: Allison
+                  last_name:
+                    type: string
+                    description: Last name of the user who approved the document
+                    example: Smith
+                  email:
+                    type: string
+                    description: Email address of the user who approved the document
+                    example: allison@example.com
+              approval_date:
+                type: string
+                format: date-time
+                description: Approval date and time
+                example: '2019-09-16 11:38:47'
+        is_locked:
+          type: boolean
+          description: Indicates whether the document is locked or not
+          example: false
+        number_of_pages:
+          type: string
+          description: Number of pages in the document
+          example: '1'
+        file_size:
+          type: integer
+          description: Size of the file in bytes
+          example: 2000
+        comment:
+          type: string
+          description: Current comment associated with the document
+          example: current comment
+        comment_history:
+          type: array
+          description: History of comments for the document
+          items:
+            type: object
+            properties:
+              document_id:
+                type: string
+                description: ID of the commented document
+                example: '1'
+              comment:
+                type: string
+                description: Comment text
+                example: comment
+              user_id:
+                type: string
+                description: User ID of the commenter
+                example: user_1
+              created_at:
+                type: string
+                description: Comment creation date in format 'YYYY-MM-DD HH:MM:SS'
+                example: '2019-09-16 11:38:47.000000'
+        assignee:
+          type: string
+          description: User ID of the assignee
+          example: user_1
+        ready_for_extract:
+          type: boolean
+          description: Extraction readiness status of the document
+          example: true
+        allocations:
+          type: array
+          description: List of allocations related to the document
+          items:
+            type: object
+            properties:
+              allocation_id:
+                type: string
+                description: The ID of the allocation record
+                example: allocation_1
+              data_date:
+                type: string
+                description: Date of the data in format 'YYYY-MM-DD'
+                example: '2019-07-31'
+              dataset_type:
+                type: string
+                description: Type of the dataset (e.g., Account Statement)
+                example: Account Statement
+              investment:
+                type: string
+                description: Name of the investment
+                example: Sample Hedge Fund Deal 1
+              fund_sponsor:
+                type: string
+                description: Name of the fund sponsor
+                example: Sample Sponsor 1
+              custom_allocation_id:
+                type: string
+                description: Custom ID of the allocation
+                example: '123'
+              investment_id:
+                type: string
+                description: ID of the investment
+                example: '1'
+              investment_legal_name:
+                type: string
+                description: Legal name of the investment
+                example: Sample Hedge Fund Deal One
+              investment_extraction_aliases:
+                type:
+                - array
+                - 'null'
+                description: Aliases related to the investment extraction
+                items:
+                  type: string
+                  example:
+                  - Sample Hedge Fund Deal 1 alias 1
+                  - Sample Hedge Fund Deal 1 alias 2
+              investment_structure:
+                type: string
+                description: Type of the investment structure (e.g., hedge_fund)
+                example: hedge_fund
+              entity:
+                type: string
+                description: Name of the entity
+                example: Entity One
+              entity_id:
+                type: string
+                description: ID of the entity
+                example: '4'
+              entity_extraction_aliases:
+                type:
+                - array
+                - 'null'
+                description: Aliases related to the entity extraction
+                items:
+                  type: string
+                  example:
+                  - Entity One alias 1
+                  - Entity One alias 2
+              account:
+                type: string
+                description: Name of the account
+                example: Account One
+              account_id:
+                type: string
+                description: ID of the account
+                example: '1'
+              extracted_data:
+                type: object
+                description: Extracted data related to the allocation
+                properties:
+                  entity:
+                    type: string
+                    description: Name of the entity
+                    example: Entity One
+                  fundName:
+                    type: string
+                    description: Name of the fund
+                    example: Sample Hedge Fund Deal 1
+                  endingDate:
+                    type: string
+                    description: Ending date in format 'MM/DD/YYYY'
+                    example: 07/31/2019
+                  beginningDate:
+                    type: string
+                    description: Beginning date in format 'MM/DD/YYYY'
+                    example: 07/01/2019
+                  endingBalance:
+                    type: string
+                    description: Ending balance as a string
+                    example: 4,111,305
+                  beginningBalance:
+                    type: string
+                    description: Beginning balance as a string
+                    example: 4,036,960
+                  otherFeesMTD:
+                    type: string
+                    description: Other fees for the month as a string
+                    example: '508'
+              validated_data:
+                type: object
+                description: Validated data related to the allocation
+                properties:
+                  entity:
+                    type: string
+                    description: Name of the entity
+                    example: Entity One
+                  fundName:
+                    type: string
+                    description: Name of the fund
+                    example: Sample Hedge Fund Deal 1
+                  endingDate:
+                    type: string
+                    description: Ending date in format 'YYYY-MM-DD'
+                    example: '2019-07-31'
+                  beginningDate:
+                    type: string
+                    description: Beginning date in format 'YYYY-MM-DD'
+                    example: '2019-07-01'
+                  endingBalance:
+                    type: integer
+                    description: Ending balance as an integer
+                    example: 4111305
+                  beginningBalance:
+                    type: integer
+                    description: Beginning balance as an integer
+                    example: 4036960
+                  otherFeesMTD:
+                    type: integer
+                    description: Other fees for the month as an integer
+                    example: 508
+              validation_errors:
+                type: array
+                description: Validation errors related to the allocation
+                items:
+                  type: string
+                example: []
+              analyst:
+                type: string
+                description: Name of the analyst
+                example: Allison
+              frequency:
+                type: string
+                description: Frequency of the allocation (e.g., monthly)
+                example: monthly
+              custom_fields:
+                type: array
+                description: Custom fields associated with the allocation
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      description: Name of the custom field
+                      example: CLIENT_ID
+                    value:
+                      type: string
+                      description: Value of the custom field
+                      example: BOX1
+                    custom_field_id:
+                      type: string
+                      description: ID of the custom field
+                      example: '1'
+              document_groups:
+                type: object
+                description: Document groups associated with the allocation
+                properties:
+                  transaction:
+                    type: object
+                    properties:
+                      group_id:
+                        type: string
+                        description: ID of the transaction group
+                        example: transaction_group_id
+                      member_document_ids:
+                        type: array
+                        description: IDs of the member documents in the group
+                        items:
+                          type: string
+                          example:
+                          - '16'
+                          - '22'
+                          - '35'
+              addepar_owned_id:
+                type: string
+                description: Addepar owned ID
+                example: AddeparOwned1
+              addepar_owner_id:
+                type: string
+                description: Addepar owner ID
+                example: AddeparOwner1
+              black_diamond_symbol:
+                type: string
+                description: Black Diamond symbol
+                example: BlackDiamondSymbol1
+              black_diamond_account:
+                type: string
+                description: Black Diamond account
+                example: BlackDiaAcc
+              fund_name:
+                type: string
+                description: The fund associated with the allocation.
+                example: Sample Hedge Fund Deal 1
+              term_id:
+                type: string
+                description: The term id with the allocation.
+                example: term_1
+              term_name:
+                type: string
+                description: The term associated with the allocation.
+                example: Sample Term 1
+              allocation_status:
+                type: string
+                description: The current status of the allocation. It can be either active, inactive or retired.
+                example: active
+              retired_date:
+                type: string
+                description: The date of when the allocation retires.
+                example: '2017-12-31'
+    Document_3:
       type: object
       properties:
         id:
@@ -1867,6 +4412,10 @@ components:
 externalDocs:
   description: Click to download docs in JSON format
   url: /api/docs.json
+x-refined-from:
+- canoe-intelligence-api-docs-v1-original.yaml
+- canoe-intelligence-api-openapi-original.json
+- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:
@@ -1880,6 +4429,7 @@ x-tagGroups:
   - Terms
   - Organizations
   - Allocations
+  - Custom Fields
 - name: User Management
   tags:
   - User

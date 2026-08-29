@@ -1,21 +1,927 @@
 openapi: 3.2.0
 info:
-  title: Canoe API v1 Organizations API
-  version: 1.0.0
-  description: "Canoe's API provides methods for retrieving extracted data from documents and their metadata as well as data from downloaded PDFs. This documentation includes detailed explanations of API endpoints and examples. You may not have access to all of the listed endpoints depending on the services you've purchased from Canoe as well as your user permissions.\n<p>By using Canoe’s API Documentation, you agree to the most recent version of <a href=\"https://canoeintelligence.com/api-terms-of-use/\" target=\"_blank\"><u>Canoe’s Developer Portal Terms of Use.</u></a></p>\n<p>In addition to the <code class=\"prettyprint\">curl</code>, <code class=\"prettyprint\">javascript</code>, <code class=\"prettyprint\">python</code>, <code class=\"prettyprint\">php</code> and <code class=\"prettyprint\">CSharp</code> examples next to each endpoint, we've also included a <a href=\"https://www.getpostman.com\" target=\"_blank\"><u>Postman</u></a> collection. The collection contains API calls for each available endpoint.  Postman is a tool that helps generate and test API calls by providing a clean interface to build and save HTTP requests, and to check and test API responses. </p>\n\n<p>\n    Note: Download Postman from their official website. Find out more about how to import Postman collections <a href=\"https://learning.getpostman.com/docs/postman/collections/data_formats/#importing-postman-data\" target=\"_blank\"><u>here</u></a>.\n</p>\n<p>\n    Your information security team may require whitelisting Canoe’s IP addresses before you can call the API.  Whitelist the IP addresses found in <a href=\"https://client.canoesoftware.com/knowledge-base#/api/canoe-api-overview\" target=\"_blank\"><u>this knowledge base page</u></a> to allow all API addresses of Canoe. <b>(Note: You must be logged into your Canoe account to access the knowledge base page)</b>\n</p>\n<p>\n    Your information technology team may require you to open ports to call the API. The API uses port numbers 443 and 9443.\n</p>\n<p>\n    Additionally, your information security team may request that Canoe limit the IP address(es) from which you can make API calls as an extra layer of data protection. If so, please reach out to our support team.\n</p>\n\n<br>\n<strong><u>Request:</u></strong>\n\nThe base URL for all Canoe API requests is <code class=\"prettyprint\">https://api.canoesoftware.com</code>\n\nThe API is built on RESTful principles with resource-oriented URL endpoints. HTTP status codes are used to indicate any API errors and all responses are returned in JSON format. All requests must be made over an HTTPS connection to ensure a secure transmission of data. Following a RESTful structure, requests should hit API endpoints using the appropriate HTTP method, which will depend on the desired action:\n\n<table><thead>\n    <tr>\n        <th>Method</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>GET</td>\n        <td>Use the <strong>GET</strong> method to retrieve information about your users, their organizations, and available associated data. This will always be a read-only request, so queried objects will never be modified by a GET request. When using filter parameters that include special characters, you should always encode those values to fit URI specifications.</td>\n    </tr>\n    <tr>\n        <td>POST</td>\n        <td>Use a <strong>POST</strong> method to create a new object, such as a new user or organization. Request parameters should be given in JSON format. The response body will typically return the newly created resource.</td>\n    </tr>\n    <tr>\n        <td>PUT</td>\n        <td>Use a <strong>PUT</strong> method to update an object, such as updating user credentials. As with a POST request, parameters should be given in JSON format. If successful, the response body will typically return the modified object.</td>\n    </tr>\n    <tr>\n        <td>DELETE</td>\n        <td>Use a <strong>DELETE</strong> method to delete an object, such as deleting one of your funds. Successful DELETE requests will typically return an empty response body.</td>\n    </tr>\n    </tbody></table>\n\n\n<strong><u>Response:</u></strong>\n\n<p>All non-empty response bodies, including errors, will be formatted as a JSON object. If you are fetching multiple entries, such as <code class=\"prettyprint\">/v1/funds</code> example, the data will be returned as a list. If you are fetching a single entry, such as <code class=\"prettyprint\">GET /v1/funds/1</code>, the data will be returned as a single object.</p>\n<p>Canoe's APIs use standard HTTP status codes to indicate the status of a request.</p>\n<p>Below is a brief overview of the most common status codes:</p>\n<table><thead>\n    <tr>\n        <th>Code</th>\n        <th>Text</th>\n        <th>Definition</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>200</td>\n        <td>OK</td>\n        <td>Success!</td>\n    </tr>\n    <tr>\n        <td>400</td>\n        <td>Bad Request</td>\n        <td>The request was invalid or cannot be otherwise served. This could be due to an invalid or malformed parameter, etc.</td>\n    </tr>\n    <tr>\n        <td>401</td>\n        <td>Unauthorized</td>\n        <td>The API authentication credentials or access token are missing or incorrect.</td>\n    </tr>\n    <tr>\n        <td>403</td>\n        <td>Forbidden</td>\n        <td>The credentials or access token are authenticated, but you do not have access to the requested resource.</td>\n    </tr>\n    <tr>\n        <td>404</td>\n        <td>Not Found</td>\n        <td>The requested resource is invalid or the resource requested, such as a Fund, does not exist. The 404 status code might indicates that the REST API can't map the client's URI to a resource but may be available in the future.</td>\n    </tr>\n    <tr>\n        <td>405</td>\n        <td>Method Not Allowed</td>\n        <td>The request tried to use an HTTP method that the resource does not allow. For instance, a read-only resource could support only GET, but not PUT or DELETE or POST.</td>\n    </tr>\n    <tr>\n        <td>500</td>\n        <td>Internal Server Error</td>\n        <td>There are internal or API-related errors on Canoe's side. Additional requests will not resolve the issue.</td>\n    </tr>\n    <tr>\n        <td>503</td>\n        <td>Service Unavailable</td>\n        <td>The Canoe servers are up, but overloaded with requests. Try again later.</td>\n    </tr>\n    </tbody></table>\n"
-  contact:
-    name: Canoe Support
-    url: https://canoeintelligence.com
-  termsOfService: https://canoeintelligence.com/api-terms-of-use/
+  title: Canoe Intelligence Organizations API
+  version: '1.0'
+  description: 'Operations tagged Organizations across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
-security:
-- bearerAuth: []
 tags:
 - name: Organizations
   description: ''
 paths:
+  Get Organizations:
+    get:
+      tags:
+      - Organizations
+      summary: null
+      description: "/v1/organizations\n\nGet your organizations user info\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2023-08-07.\n</span>\n"
+      operationId: Organizations
+      parameters:
+      - name: page
+        in: query
+        description: This page number. For example, if you specify "2" you will see all organizations on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2023-08-07.</u>
+        required: false
+        schema:
+          type: string
+          examples:
+            page 1:
+              value: 1
+            page 5 multiple:
+              value: 5
+      - name: limit
+        in: query
+        description: The number of Organizations for each paginated download. The default is 100.
+        required: false
+        schema:
+          type: string
+        examples:
+          3 per page:
+            value: 3
+          50 per page:
+            value: 50
+      - name: organization_id
+        in: query
+        description: This is the entity or account ID you would like to search for. When filtering on multiple values, separate them by commas.
+        required: false
+        schema:
+          type: string
+          example:
+            organization_id: organization_1,organization_2
+      - name: entity_custom_field
+        in: query
+        description: An indexed string of one or more custom field IDs, which relate to entity specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s).  When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/organizations?entity_custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2&entity_custom_field[867e4563-c2b5-e788-d050-4ce151dec635]=value1
+        required: false
+        schema:
+          type: string
+        examples:
+          entity_custom_field:
+            value: entity_custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2
+      - name: account_custom_field
+        in: query
+        description: An indexed string of one or more custom field IDs, which relate to account specific custom fields, and one or more custom field values for each. Specify the custom field ID and then the custom field value(s).  When filtering on multiple values, separate them by commas.  Filter on additional custom fields by separating with an ampersand. Example:- /v1/organizations?account_custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2&account_custom_field[867e4563-c2b5-e788-d050-4ce151dec635]=value1
+        required: false
+        schema:
+          type: string
+        examples:
+          account_custom_field:
+            value: account_custom_field[bfa7ec21-9a73-4640-03b2-0e32aa1ae8a6]=value1,value2
+      - name: type
+        in: query
+        description: The type of organizations to return. Available types are 'account' and 'entity'. Defaults to both types.
+        required: false
+        schema:
+          type: string
+        examples:
+          account:
+            value: account
+          entity:
+            value: entity
+      - name: name
+        in: query
+        description: The names of the accounts or entities you wish to retrieve records for. When filtering for entities this can either be the formal entity name or any of its associated aliases. To search based on a part of an account name or part of an entity name or alias, just append an "*" character anywhere within the name parameter.
+        schema: null
+        type: string
+        examples:
+          single name:
+            value: Sample Organization 1
+          partial name:
+            value: Sample Org*
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/organizations?type=account\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/organizations\"\n      );\n\n      let params = {\n          \"type\": \"account\",\n      };\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/organizations',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'type' => 'account',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/organizations'\n      params = {\n        'type': 'account'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"type\", \"account\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetOrganization'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+  Get A Single Organization:
+    get:
+      tags:
+      - Organizations
+      summary: null
+      description: '/v1/organizations/{id}
+
+
+        Fetch organization by the organization''s ID
+
+        '
+      operationId: FindById
+      parameters:
+      - name: id
+        in: path
+        description: The id of the organization.
+        required: true
+        schema:
+          type: string
+          example: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/organizations/1\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/organizations/1\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/organizations/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/organizations/1'\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetOrganization'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+  Get A Single Organization's Document Data:
+    get:
+      tags:
+      - Organizations
+      summary: null
+      description: '/v1/organizations/{id}/document-data
+
+
+        Fetch the extracted data and metadata of a single organization''s documents.
+
+
+        <span name="doc-alert-info">
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+        <br><br>
+
+        When using pagination, the response will contain headers defining the <code>total</code> number of results,
+
+        as well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.
+
+        </span>
+
+        '
+      operationId: FindBySingleOrganizationId
+      parameters:
+      - name: id
+        in: path
+        description: The id of the organization.
+        required: true
+        schema:
+          type: string
+          example: 1
+      - name: page
+        in: query
+        description: This page number. For example, if you specify "2" you will see all documents on page 2. By default, this is set to 1. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-10-07.</u> Example:- 1
+        required: false
+        schema:
+          type: integer
+        examples:
+          page 1:
+            value: 1
+          page 5:
+            value: 5
+      - name: limit
+        in: query
+        description: The number of documents for each page. The maximum number of documents limit is 100. <u>This parameter is only valid if the X-API-VERSION header is set to 2024-10-07.</u> Example:- 50
+        required: false
+        schema:
+          type: integer
+        examples:
+          limit:
+            value: 50
+      - name: fields
+        in: query
+        description: The fields you need in the partial response. The value of the fields parameter MUST be a comma-separated (U+002C COMMA, ",") list that refers to the name(s) of the fields to be returned.
+        required: false
+        schema:
+          type: string
+        examples:
+          fields:
+            value: name,validated_data
+      - name: category
+        in: query
+        description: The category of the document. Our current categories are:<br><br><li>Capital Activity</li><br><li>Email & System Messages</li><br><li>Financial Statements & Performance</li><br><li>Investment & Transactional</li><br><li>Investor Administration & Communication</li><br><li>Legal, Compliance & Regulatory</li><br><li>Other</li><br><li>Tax</li><br><br>Multiple categories can be passed as a comma-delimited list (e.g. <code>Capital Activity,Tax</code>).
+        required: false
+        schema:
+          type: string
+        examples:
+          category:
+            value: Capital Activity, Email
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/organizations/1/document-data?fields=name%2Cvalidated_data&category=Capital%20Activity\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/organizations/1/document-data\"\n      );\n\n      let params = {\n          \"fields\": \"name,validated_data\",\n          \"category\": \"Capital Activity\"\n      };\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/organizations/1/document-data',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'fields' => 'name,validated_data',\n                  'category'=> 'Capital Activity'\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/organizations/1/document-data'\n      params = {\n        'fields': 'name,validated_data',\n        'category': 'Capital Activity'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1/document-data\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"fields\", \"name,validated_data\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetSingleOrganizationData'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+  Download A Single Organization's Documents:
+    get:
+      tags:
+      - Organizations
+      summary: null
+      description: '/v1/organizations/{id}/documents
+
+
+        Download a specific Organization''s documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.
+
+        '
+      operationId: DownloadOrganizationDocuments
+      parameters:
+      - name: id
+        in: path
+        description: The id of the organization.
+        required: true
+        schema:
+          type: string
+          example: 1
+      - name: start_time
+        in: query
+        description: All documents downloaded will have an uploaded timestamp greater than or equal to the given start_time. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the ISO 8601 format for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          start_time:
+            value: '2019-03-30T04:00:00Z'
+      - name: page
+        in: query
+        description: This page number corresponds with the pagination in Canoe's Intelligent Document Center. There are up to 100 documents on each page. For example, if you specify "2" you will see all of an Organization's documents on page 2. By default, this is set to 1.
+        required: false
+        schema:
+          type: string
+        examples:
+          page:
+            value: '1'
+      - name: limit
+        in: query
+        description: The number of documents for each download. The maximum number of documents as well as the default is 100.
+        required: false
+        schema:
+          type: string
+        examples:
+          limit:
+            value: '50'
+      - name: file_name_type
+        in: query
+        description: The document attribute to use for the file name. Available options are name, original_file_name and id. The default value for this is name.
+        required: false
+        schema:
+          type: string
+        examples:
+          file_name_type:
+            value: original_file_name
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/organizations/1/documents?start_time=2019-03-30T04%3A00%3A00Z&page=1&limit=50&file_name_type=original_file_name\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/organizations/1/documents\"\n      );\n\n      let params = {\n          \"start_time\": \"2019-03-30T04:00:00Z\",\n          \"page\": \"1\",\n          \"limit\": \"50\",\n          \"file_name_type\": \"original_file_name\"\n      };\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/organizations/1/documents',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'start_time' => '2019-03-30T04:00:00Z',\n                  'page' => '1',\n                  'limit' => '50',\n                  'file_name_type' => 'original_file_name'\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/organizations/1/documents'\n      params = {\n        'start_time': '2019-03-30T04:00:00Z',\n        'page': '1',\n        'limit': '50',\n        'file_name_type': 'original_file_name'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1/documents\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"50\");\n      request.AddQueryParameter(\"file_name_type\", \"original_file_name\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+  Get A Single Organization's Document IDs:
+    get:
+      tags:
+      - Organizations
+      summary: null
+      description: '/v1/organizations/{id}/document-ids
+
+
+        Get a specific organization''s document IDs for downloading the documents one by one.
+
+        '
+      operationId: DownloadBySingleOrganizationId
+      parameters:
+      - name: id
+        in: path
+        description: The id of the organization.
+        required: true
+        schema:
+          type: string
+          example: 1
+      - name: start_time
+        in: query
+        description: All document IDs returned will have an uploaded timestamp greater than or equal to the given start_time. Unless otherwise specified, the timestamp will be in EST (Eastern Standard Time). We suggest using the ISO 8601 format for the parameter. For example, '2019-09-18T00:00:00-07:00' represents the time in Pacific Daylight Time; this will be automatically converted to EST. In this case, the user will receive the documents uploaded on or after 2019-09-19 at 03:00:00.
+        required: false
+        schema:
+          type: string
+        examples:
+          start_time:
+            value: '2019-03-30T04:00:00Z'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X GET \\\n          -G \"https://api.canoesoftware.com/v1/organizations/1/document-ids?start_time=2019-03-30T04%3A00%3A00Z\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\"\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/organizations/1/document-ids\"\n      );\n\n      let params = {\n          \"start_time\": \"2019-03-30T04:00:00Z\",\n      };\n      Object.keys(params)\n          .forEach(key => url.searchParams.append(key, params[key]));\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      fetch(url, {\n          method: \"GET\",\n          headers: headers,\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->get(\n          'https://api.canoesoftware.com/v1/organizations/1/document-ids',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n              ],\n              'query' => [\n                  'start_time' => '2019-03-30T04:00:00Z',\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/organizations/1/document-ids'\n      params = {\n        'start_time': '2019-03-30T04:00:00Z'\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest'\n      }\n      response = requests.request('GET', url, headers=headers, params=params)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1/document-ids\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetSingleOrganizationId'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+  Create A Single Entity:
+    post:
+      tags:
+      - Organizations
+      summary: null
+      description: '/v1/organizations/entities
+
+
+        Create a new entity based on the input parameters.
+
+        '
+      operationId: CreateASingleEntity
+      parameters:
+      - name: parent_account
+        in: body
+        description: The ID of the entity's parent account.
+        required: true
+        schema:
+          type: string
+        examples:
+          parent_account:
+            value: account_1
+      - name: name
+        in: body
+        description: The name of the entity.
+        required: true
+        schema:
+          type: string
+        examples:
+          name:
+            value: Sample entity 1
+      - name: aliases
+        in: body
+        description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
+        required: true
+        schema:
+          type: string
+        examples:
+          aliases:
+            value: Sample alias 1
+      - name: downstream_ids
+        in: body
+        description: null
+        required: false
+        schema:
+          type: string
+      - name: downstream_ids.ids
+        in: body
+        description: ID of the entity downstream system identifier. Possible options are addepar_owner_id, addepar_cash_owner_id, tamarac_account_number.
+        required: false
+        schema:
+          type: string
+        examples:
+          aliases.ids:
+            value: addepar_owner_id
+      - name: downstream_ids.value
+        in: body
+        description: The value for the specified downstream system identifier.
+        required: false
+        schema:
+          type: string
+          aliases.value:
+            value: sample_name
+      - name: custom_fields
+        in: body
+        description: null
+        required: false
+        schema:
+          type: string
+      - name: custom_fields.id
+        in: body
+        description: ID of the entity custom field. This can be retrieved by using the Get Organizations endpoint.
+        required: true
+        schema:
+          type: string
+        examples:
+          custom_fields.id:
+            value: '1'
+      - name: custom_fields.value
+        in: body
+        description: The value of the custom Field.
+        required: true
+        schema:
+          type: string
+        examples:
+          custom_fields.value:
+            value: '1000'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X POST \\\n          \"https://api.canoesoftware.com/v1/organizations/entities\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"parent_account\":\"account_1\",\"name\":\"Sample entity 1\",\"aliases\":\"Sample alias 1\",\"downstream_ids\":[{\"id\":\"addepar_owner_id\",\"value\":\"sample_name\"}],\"custom_fields\":[{\"id\":\"1\",\"value\":\"1000\"}]}'\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/organizations/entities\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"parent_account\": \"account_1\",\n          \"name\": \"Sample entity 1\",\n          \"aliases\": \"Sample alias 1\",\n          \"downstream_ids\": [\n              {\n                  \"id\": \"addepar_owner_id\",\n                  \"value\": \"sample_name\"\n              }\n          ],\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n\n      fetch(url, {\n          method: \"POST\",\n          headers: headers,\n          body: body\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->post(\n          'https://api.canoesoftware.com/v1/organizations/entities',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'parent_account' => 'account_1',\n                  'name' => 'Sample entity 1',\n                  'aliases' => 'Sample alias 1',\n                  'downstream_ids' => [\n                      [\n                          'id' => 'addepar_owner_id',\n                          'value' => 'sample_name',\n                      ],\n                  ],\n                  'custom_fields' => [\n                      [\n                          'id' => '1',\n                          'value' => '1000',\n                      ],\n                  ],\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/organizations/entities'\n      payload = {\n          \"parent_account\": \"account_1\",\n          \"name\": \"Sample entity 1\",\n          \"aliases\": \"Sample alias 1\",\n          \"downstream_ids\": [\n              {\n                  \"id\": \"addepar_owner_id\",\n                  \"value\": \"sample_name\"\n              }\n          ],\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('POST', url, headers=headers, json=payload)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/entities\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader)\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          aliases = \"Sample alias 1\",\n          downstream_ids = new[]\n          {\n              new { id = addepar_owner_id, value = sample_name }\n          },\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SingleEntity'
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+  Update A Single Entity:
+    put:
+      tags:
+      - Organizations
+      summary: null
+      description: '/v1/organizations/entities/{id}
+
+
+        Update an existing entity based on the input parameters.
+
+        '
+      operationId: UpdateASingleEntity
+      parameters:
+      - name: id
+        in: path
+        description: The id of the entity.
+        required: true
+        schema:
+          type: string
+          example: 1
+      - name: parent_account
+        in: body
+        description: The ID of the entity's parent account.
+        required: true
+        schema:
+          type: string
+        examples:
+          parent_account:
+            value: account_1
+      - name: name
+        in: body
+        description: The name of the entity.
+        required: true
+        schema:
+          type: string
+        examples:
+          name:
+            value: Sample entity 1
+      - name: aliases
+        in: body
+        description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
+        required: true
+        schema:
+          type: string
+        examples:
+          aliases:
+            value: Sample alias 1
+      - name: downstream_ids
+        in: body
+        description: null
+        required: false
+        schema:
+          type: string
+      - name: downstream_ids.ids
+        in: body
+        description: ID of the entity downstream system identifier. Possible options are addepar_owner_id, addepar_cash_owner_id, tamarac_account_number.
+        required: false
+        schema:
+          type: string
+        examples:
+          aliases.ids:
+            value: addepar_owner_id
+      - name: downstream_ids.value
+        in: body
+        description: The value for the specified downstream system identifier.
+        required: false
+        schema:
+          type: string
+          aliases.value:
+            value: sample_name
+      - name: custom_fields
+        in: body
+        description: null
+        required: false
+        schema:
+          type: string
+      - name: custom_fields.id
+        in: body
+        description: ID of the entity custom field. This can be retrieved by using the Get Organizations endpoint.
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_fields.id:
+            value: '1'
+      - name: custom_fields.value
+        in: body
+        description: The value of the custom Field.
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_fields.value:
+            value: '1000'
+      - name: status
+        in: body
+        description: The status of the entity. Values can be "active" or "inactive".
+        required: false
+        schema:
+          type: string
+        examples:
+          status:
+            value: active
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X PUT \\\n          \"https://api.canoesoftware.com/v1/organizations/entities/1\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"parent_account\":\"account_1\",\"name\":\"Sample entity 1\",\"aliases\":\"Sample alias 1\",\"downstream_ids\":[{\"id\":\"addepar_owner_id\",\"value\":\"sample_name\"}],\"custom_fields\":[{\"id\":\"1\",\"value\":\"1000\"}]}'\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/organizations/entities/1\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"parent_account\": \"account_1\",\n          \"name\": \"Sample entity 1\",\n          \"aliases\": \"Sample alias 1\",\n          \"downstream_ids\": [\n              {\n                  \"id\": \"addepar_owner_id\",\n                  \"value\": \"sample_name\"\n              }\n          ],\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n\n      fetch(url, {\n          method: \"PUT\",\n          headers: headers,\n          body: body\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->put(\n          'https://api.canoesoftware.com/v1/organizations/entities/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'parent_account' => 'account_1',\n                  'name' => 'Sample entity 1',\n                  'aliases' => 'Sample alias 1',\n                  'downstream_ids' => [\n                      [\n                          'id' => 'addepar_owner_id',\n                          'value' => 'sample_name',\n                      ],\n                  ],\n                  'custom_fields' => [\n                      [\n                          'id' => '1',\n                          'value' => '1000',\n                      ],\n                  ],\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/organizations/entities/1'\n      payload = {\n          \"parent_account\": \"account_1\",\n          \"name\": \"Sample entity 1\",\n          \"aliases\": \"Sample alias 1\",\n          \"downstream_ids\": [\n              {\n                  \"id\": \"addepar_owner_id\",\n                  \"value\": \"sample_name\"\n              }\n          ],\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('PUT', url, headers=headers, json=payload)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/entities/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          aliases = \"Sample alias 1\",\n          downstream_ids = new[]\n          {\n              new { id = addepar_owner_id, value = sample_name }\n          },\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    id: '1'
+                    parent_id: '00'
+                    name: Demo
+                    aliases: []
+                    created_at: '2017-06-18 23:42:52'
+                    updated_at: '2019-04-09 10:18:05'
+                    downstream_ids:
+                    - id: addepar_owner_id
+                      name: Addepar
+                      type: Owner ID
+                      value: sample_name
+                    custom_fields:
+                    - name: CLIENT_ID
+                      value: BOX1
+                      custom_field_id: '1'
+                    status: active
+        '400':
+          description: Bad request
+        '404':
+          description: Resource Not Found
+        '422':
+          description: Unprocessable Entity
+  Create A Single Account:
+    post:
+      tags:
+      - Organizations
+      summary: null
+      description: '/v1/organizations/accounts
+
+
+        Create a new account based on the input parameters.
+
+        '
+      operationId: CreateASingleAccount
+      parameters:
+      - name: parent_account
+        in: body
+        description: The ID of the accounts's parent account.
+        required: false
+        schema:
+          type: string
+        examples:
+          parent_account:
+            value: account_1
+      - name: name
+        in: body
+        description: The name of the account.
+        required: false
+        schema:
+          type: string
+        examples:
+          name:
+            value: Sample Account 1
+      - name: custom_fields
+        in: body
+        description: null
+        required: false
+        schema:
+          type: string
+      - name: custom_fields.id
+        in: body
+        description: ID of the account custom field. This can be retrieved by using the Get Organizations endpoint.
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_fields.id:
+            value: '1'
+      - name: custom_fields.value
+        in: body
+        description: The value of the custom Field.
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_fields.value:
+            value: '1000'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X POST \\\n          \"https://api.canoesoftware.com/v1/organizations/accounts\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"parent_account\":\"account_1\",\"name\":\"Sample account 1\",\"custom_fields\":[{\"id\":\"1\",\"value\":\"1000\"}]}'\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/organizations/accounts\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"parent_account\": \"account_1\",\n          \"name\": \"Sample account 1\",\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n\n      fetch(url, {\n          method: \"POST\",\n          headers: headers,\n          body: body\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->post(\n          'https://api.canoesoftware.com/v1/organizations/accounts',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'parent_account' => 'account_1',\n                  'name' => 'Sample account 1',\n                  'custom_fields' => [\n                      [\n                          'id' => '1',\n                          'value' => '1000',\n                      ],\n                  ],\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/organizations/accounts'\n      payload = {\n          \"parent_account\": \"account_1\",\n          \"name\": \"Sample account 1\",\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('POST', url, headers=headers, json=payload)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/accounts\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    id: '1'
+                    parent_id: '00'
+                    name: Demo
+                    aliases: []
+                    created_at: '2017-06-18 23:42:52'
+                    updated_at: '2019-04-09 10:18:05'
+                    custom_fields:
+                    - name: CLIENT_ID
+                      value: BOX1
+                      custom_field_id: '1'
+        '403':
+          description: Failed to create the account.
+  Update A Single Account:
+    put:
+      tags:
+      - Organizations
+      summary: null
+      description: '/v1/organizations/accounts/{id}
+
+
+        Update an existing account based on the input parameters.
+
+        '
+      operationId: UpdateASingleAccount
+      parameters:
+      - name: id
+        in: path
+        description: The id of the account.
+        required: true
+        schema:
+          type: string
+          example: 1
+      - name: parent_account
+        in: body
+        description: The ID of the entity's parent account.
+        required: false
+        schema:
+          type: string
+        examples:
+          parent_account:
+            value: account_1
+      - name: name
+        in: body
+        description: The name of the entity.
+        required: false
+        schema:
+          type: string
+        examples:
+          name:
+            value: Sample entity 1
+      - name: custom_fields
+        in: body
+        description: null
+        required: false
+        schema:
+          type: string
+      - name: custom_fields.id
+        in: body
+        description: ID of the entity custom field. This can be retrieved by using the Get Organizations endpoint.
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_fields.id:
+            value: '1'
+      - name: custom_fields.value
+        in: body
+        description: The value of the custom Field.
+        required: false
+        schema:
+          type: string
+        examples:
+          custom_fields.value:
+            value: '1000'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+            examples:
+              bash:
+                description: "-\n      curl -X PUT \\\n          \"https://api.canoesoftware.com/v1/organizations/accounts/1\" \\\n          -H \"Authorization: Bearer {token}\" \\\n          -H \"Accept: application/json\" \\\n          -H \"X-Requested-With: XMLHttpRequest\" \\\n          -H \"Content-Type: application/json\" \\\n          -d '{\"parent_account\":\"account_1\",\"name\":\"Sample account 1\",\"custom_fields\":[{\"id\":\"1\",\"value\":\"1000\"}]}'\n"
+                summary: Bash
+              Javascript:
+                description: "-\n      const url = new URL(\n          \"https://api.canoesoftware.com/v1/organizations/accounts/1\"\n      );\n\n      let headers = {\n          \"Authorization\": \"Bearer {token}\",\n          \"Accept\": \"application/json\",\n          \"X-Requested-With\": \"XMLHttpRequest\",\n          \"Content-Type\": \"application/json\",\n      };\n\n      let body = {\n          \"parent_account\": \"account_1\",\n          \"name\": \"Sample account 1\",\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n\n      fetch(url, {\n          method: \"PUT\",\n          headers: headers,\n          body: body\n      })\n          .then(response => response.json())\n          .then(json => console.log(json));\n"
+                summary: JavaScript
+              PHP:
+                description: "-\n      $client = new \\GuzzleHttp\\Client();\n      $response = $client->put(\n          'https://api.canoesoftware.com/v1/organizations/accounts/1',\n          [\n              'headers' => [\n                  'Authorization' => 'Bearer {token}',\n                  'Accept' => 'application/json',\n                  'X-Requested-With' => 'XMLHttpRequest',\n                  'Content-Type' => 'application/json',\n              ],\n              'json' => [\n                  'parent_account' => 'account_1',\n                  'name' => 'Sample account 1',\n                  'custom_fields' => [\n                      [\n                          'id' => '1',\n                          'value' => '1000',\n                      ],\n                  ],\n              ],\n          ]\n      );\n      $body = $response->getBody();\n      print_r(json_decode((string) $body));\n"
+                summary: PHP
+              Python:
+                description: "-\n      import requests\n      import json\n\n      url = 'https://api.canoesoftware.com/v1/organizations/accounts/1'\n      payload = {\n          \"parent_account\": \"account_1\",\n          \"name\": \"Sample account 1\",\n          \"custom_fields\": [\n              {\n                  \"id\": \"1\",\n                  \"value\": \"1000\"\n              }\n          ]\n      }\n      headers = {\n        'Authorization': 'Bearer {token}',\n        'Accept': 'application/json',\n        'X-Requested-With': 'XMLHttpRequest',\n        'Content-Type': 'application/json'\n      }\n      response = requests.request('PUT', url, headers=headers, json=payload)\n      response.json()\n"
+                summary: Python
+              CSharp:
+                description: "-\n      using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/accounts/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);\n"
+                summary: CSharp
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    id: '1'
+                    parent_id: '00'
+                    name: Demo
+                    aliases: []
+                    created_at: '2017-06-18 23:42:52'
+                    updated_at: '2019-04-09 10:18:05'
+                    custom_fields:
+                    - name: CLIENT_ID
+                      value: BOX1
+                      custom_field_id: '1'
+        '403':
+          description: Failed to update the account.
   /v1/organizations:
     get:
       tags:
@@ -114,6 +1020,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"type\", \"account\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/organizations/{id}:
     get:
       tags:
@@ -160,6 +1071,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/organizations/{id}/document-data:
     get:
       tags:
@@ -240,7 +1156,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GetSingleOrganizationData'
+                  $ref: '#/components/schemas/GetSingleOrganizationData_2'
         '400':
           description: Bad request
         '404':
@@ -263,6 +1179,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1/document-data\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"fields\", \"name,validated_data\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/organizations/{id}/documents:
     get:
       tags:
@@ -339,6 +1260,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1/documents\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"50\");\n      request.AddQueryParameter(\"file_name_type\", \"original_file_name\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/organizations/{id}/document-ids:
     get:
       tags:
@@ -394,6 +1320,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1/document-ids\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/organizations/entities:
     post:
       tags:
@@ -447,7 +1378,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SingleEntity'
+                  $ref: '#/components/schemas/SingleEntity_2'
         '400':
           description: Bad request
         '404':
@@ -470,6 +1401,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/entities\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader)\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          aliases = \"Sample alias 1\",\n          downstream_ids = new[]\n          {\n              new { id = addepar_owner_id, value = sample_name }\n          },\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/organizations/entities/{id}:
     put:
       tags:
@@ -567,6 +1503,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/entities/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          aliases = \"Sample alias 1\",\n          downstream_ids = new[]\n          {\n              new { id = addepar_owner_id, value = sample_name }\n          },\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/organizations/accounts:
     post:
       tags:
@@ -632,6 +1573,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/accounts\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
   /v1/organizations/accounts/{id}:
     put:
       tags:
@@ -705,6 +1651,11 @@ paths:
       - lang: csharp
         label: CSharp
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/accounts/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
+      security:
+      - bearerAuth: []
+    servers:
+    - url: https://api.canoesoftware.com
+      description: Production API
 components:
   schemas:
     GetOrganization:
@@ -790,6 +1741,319 @@ components:
             name: downstream_system
             type: downstream
             value: '123'
+    GetSingleOrganizationData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the document in Canoe.
+          example: '3'
+        client_document_id:
+          type: string
+          description: The custom document ID.
+          example: custom_id_3
+        name:
+          type: string
+          description: The name of the document. This contains the Investment Name (and its corresponding Entity Name), the Document Type, as well as the Data Date.
+          example: Sample Direct Deal 1 - Entity A - K-1
+        document_status:
+          type: string
+          description: This is the validation status determined by Canoe.
+          example: Storage Only
+        category:
+          type: string
+          description: The category of the document.
+          example: Tax
+        document_type:
+          type: string
+          description: The document type. For example, Capital Call Notice and Account Statement are examples of two document types.
+          example: K-1
+        source:
+          type: string
+          description: How the document entered Canoe.
+          example: Upload Engine
+        file_type:
+          type: string
+          description: A document's file type, such as .PDF or .DOC. Canoe only supports extraction and validation of PDFs.
+          example: .pdf
+        original_file_type:
+          type: string
+          description: Original type of the file before any conversion (e.g., ".docx")
+          example: .docx
+        original_file_name:
+          type: string
+          description: The document's original file name including the file type extension.
+          example: TEST 1.pdf
+        document_tags:
+          type: array
+          description: The list of tag objects (name, ID) assigned to the document.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: tag_1
+        reporting_frequency:
+          type: string
+          description: The reporting frequency (monthly, quarterly, or yearly) of the document, as determined based on the extracted fields.
+          example: null
+        uploaded:
+          type: string
+          format: date-time
+          description: The datetime when the document was uploaded.
+          example: '2018-08-30T20:51:38Z'
+        last_modified:
+          type: string
+          format: date-time
+          description: The datetime when the document was last modified.
+          example: '2019-09-16T11:38:47Z'
+        last_modified_by:
+          type: object
+          properties:
+            user_id:
+              type: string
+              example: user_2
+            name:
+              type: string
+              example: Mike Smith
+            email:
+              type: string
+              example: mike@example.com
+        document_approval:
+          description: Approval status of the document. Can be a string 'Pending' when no approval exists, or an object with approval details when approved.
+          oneOf:
+          - type: string
+            enum:
+            - Pending
+            description: When no approval exists
+          - type: object
+            description: When document is approved
+            properties:
+              approval_status:
+                type: string
+                description: Approval status of the document
+                example: Approved
+              approved_by:
+                type: object
+                description: Information about the user who approved the document
+                properties:
+                  user_id:
+                    type: string
+                    description: User ID of the approver
+                    example: user_2
+                  first_name:
+                    type: string
+                    description: First name of the user who approved the document
+                    example: Mike
+                  last_name:
+                    type: string
+                    description: Last name of the user who approved the document
+                    example: Smith
+                  email:
+                    type: string
+                    description: Email address of the user who approved the document
+                    example: mike@example.com
+              approval_date:
+                type: string
+                format: date-time
+                description: The datetime when the document was approved.
+                example: '2019-09-16T11:38:47Z'
+        is_locked:
+          type: boolean
+          description: The is_locked status of the document in Canoe.
+          example: false
+        ready_for_extract:
+          type: boolean
+          description: The extraction status of the document in Canoe.
+          example: false
+        number_of_pages:
+          type: string
+          description: The number of pages of the document.
+          example: '1'
+        file_size:
+          type: integer
+          description: The file size of the document.
+          example: 2000
+        allocations:
+          type: array
+          items:
+            type: object
+            properties:
+              allocation_id:
+                type: string
+                description: The ID of the allocation record
+                example: allocation_1
+              data_date:
+                type: string
+                description: The effective date of the document.
+                example: '2017-12-31'
+              dataset_type:
+                type: string
+                description: The dataset type. For example, Capital Call Notice and Account Statement are examples of two dataset types.
+                example: K-1
+              investment:
+                type: string
+                description: The name of the investment that's associated with the document.
+                example: Sample Direct Deal 1
+              fund_sponsor:
+                type: string
+                description: The name of the fund sponsor that's associated with the document.
+                example: Sample Sponsor 1
+              custom_allocation_id:
+                type: string
+                description: The custom ID of the investment entity allocation that's associated with the document. This is user-created.
+                example: '124'
+              investment_id:
+                type: string
+                description: The ID of the investment that's associated with the document.
+                example: '2'
+              investment_legal_name:
+                type: string
+                description: The legal name of the investment that's associated with the document.
+                example: Sample Direct Deal One
+              investment_extraction_aliases:
+                type: array
+                description: The aliases of the investment that are associated with the document. These are user-created.
+                items:
+                  type: string
+                  example:
+                  - Sample Direct Deal 1  alias 1
+                  - Sample Direct Deal 1  alias 2
+              investment_structure:
+                type: string
+                description: The asset type of the fund that's associated with the document.
+                example: direct_investment
+              entity:
+                type: string
+                description: The name of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
+                example: Entity A
+              entity_id:
+                type: string
+                description: The ID of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
+                example: '1'
+              entity_extraction_aliases:
+                type: array
+                description: The aliases of the entity that are associated with the document. These are user-created.
+                items:
+                  type: string
+                  example:
+                  - Entity A alias 1
+                  - Entity A alias 2
+              account:
+                type: string
+                description: The name of the account that's associated with the document.
+                example: Demo
+              account_id:
+                type: string
+                description: The ID of the account that's associated with the document.
+                example: '3'
+              extracted_data:
+                type: array
+                description: An object of the raw extracted data from the document.
+                example: []
+              validated_data:
+                type: array
+                description: An object of the formatted and validated data of the document.
+                example: []
+              validation_errors:
+                type: array
+                description: An object of the document's validation errors. Each item inside is a "key:value" pair, where the "key" is the extracted field name and the "value" is the explanation of why the extracted value didn't pass Canoe's validation logic.
+                example: []
+              analyst:
+                type: string
+                description: The analyst associated with this fund.
+                example: Mike
+              frequency:
+                type: string
+                description: How frequently this fund's statements come in. For example, if a statement comes in every month then the output will be "monthly."
+                example: annually
+              custom_fields:
+                type: array
+                description: The list of custom field objects (name, value, ID) of the investment and/or allocation associated with the document.
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: CLIENT_ID
+                    value:
+                      type: string
+                      example: BOX1
+                    custom_field_id:
+                      type: string
+                      example: '1'
+              document_groups:
+                type: object
+                description: Documents may be associated with other documents via document groups. A document may exist in multiple document groups (based on different criteria).
+                properties:
+                  transaction:
+                    type: object
+                    properties:
+                      group_id:
+                        type: string
+                        example: transaction_group_id
+                      member_document_ids:
+                        type: array
+                        items:
+                          type: string
+                          example:
+                          - '3'
+                          - '22'
+                          - '35'
+              addepar_owned_id:
+                type: string
+                example: AddeparOwned1
+              addepar_owner_id:
+                type: string
+                example: AddeparOwner1
+              black_diamond_symbol:
+                type: string
+                example: BlackDiamondSymbol1
+              black_diamond_account:
+                type: string
+                example: BlackDiaAcc
+              fund_name:
+                type: string
+                description: The name of the fund.
+                example: Sample Direct Deal 1
+              term_id:
+                type: string
+                description: The ID of the term that is associated with the fund.
+                example: ''
+              allocation_status:
+                type: string
+                description: The current status of the allocation. It can be either active, inactive or retired.
+                example: active
+              retired_date:
+                type: string
+                description: The date of when the allocation retires.
+                example: '2017-12-31'
+    GetSingleOrganizationId:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: The total number of document IDs.
+          example: 10
+        ids:
+          type: array
+          description: An array of document IDs.
+          items:
+            type: string
+            example:
+            - 2345abcd-1234-1111-9876-1234567abc89
+            - 2345abcd-1234-1111-9876-1234567abc88
+            - 2345abcd-1234-1111-9876-1234567abc87
+            - 2345abcd-1234-1111-9876-1234567abc86
+            - 2345abcd-1234-1111-9876-1234567abc85
+            - 2345abcd-1234-1111-9876-1234567abc84
+            - 2345abcd-1234-1111-9876-1234567abc83
+            - 2345abcd-1234-1111-9876-1234567abc82
+            - 2345abcd-1234-1111-9876-1234567abc81
+            - 2345abcd-1234-1111-9876-1234567abc80
     SingleEntity:
       type: object
       properties:
@@ -805,26 +2069,26 @@ components:
           type: string
           description: The name of the entity.
           example: Demo
+        status:
+          type: string
+          description: The status of the entity.
+          example: active
         aliases:
           type: array
           description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
           items:
             type: string
           example: []
-        status:
-          type: string
-          description: The status of the entity.
-          example: active
         created_at:
           type: string
           format: date-time
           description: The datetime of when the entity was created.
-          example: '2017-06-18 23:42:52'
+          example: '2017-06-18T23:42:52Z'
         updated_at:
           type: string
           format: date-time
           description: The datetime of when the entity was last updated.
-          example: '2019-04-09 10:18:05'
+          example: '2019-04-09T10:18:05Z'
         downstream_ids:
           type: array
           description: The entity's downstream information.
@@ -865,7 +2129,7 @@ components:
                 type: string
                 description: The ID of the custom field.
                 example: '1'
-    GetSingleOrganizationData:
+    GetSingleOrganizationData_2:
       type: object
       properties:
         id:
@@ -1154,29 +2418,445 @@ components:
                 type: string
                 description: The date of when the allocation retires.
                 example: '2017-12-31'
-    GetSingleOrganizationId:
+    SingleEntity_2:
       type: object
       properties:
-        total:
-          type: integer
-          description: The total number of document IDs.
-          example: 10
-        ids:
+        id:
+          type: string
+          description: The ID of the entity.
+          example: '1'
+        parent_id:
+          type: string
+          description: The ID of the entity's parent account.
+          example: '00'
+        name:
+          type: string
+          description: The name of the entity.
+          example: Demo
+        aliases:
           type: array
-          description: An array of document IDs.
+          description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
           items:
             type: string
-            example:
-            - 2345abcd-1234-1111-9876-1234567abc89
-            - 2345abcd-1234-1111-9876-1234567abc88
-            - 2345abcd-1234-1111-9876-1234567abc87
-            - 2345abcd-1234-1111-9876-1234567abc86
-            - 2345abcd-1234-1111-9876-1234567abc85
-            - 2345abcd-1234-1111-9876-1234567abc84
-            - 2345abcd-1234-1111-9876-1234567abc83
-            - 2345abcd-1234-1111-9876-1234567abc82
-            - 2345abcd-1234-1111-9876-1234567abc81
-            - 2345abcd-1234-1111-9876-1234567abc80
+          example: []
+        status:
+          type: string
+          description: The status of the entity.
+          example: active
+        created_at:
+          type: string
+          format: date-time
+          description: The datetime of when the entity was created.
+          example: '2017-06-18 23:42:52'
+        updated_at:
+          type: string
+          format: date-time
+          description: The datetime of when the entity was last updated.
+          example: '2019-04-09 10:18:05'
+        downstream_ids:
+          type: array
+          description: The entity's downstream information.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the downstream system.
+                example: addepar_owner_id
+              name:
+                type: string
+                description: The name of the downstream system.
+                example: Addepar
+              type:
+                type: string
+                description: The type of ID associated with the downstream system.
+                example: Owner ID
+              value:
+                type: string
+                description: The value of the downstream ID.
+                example: sample_name
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the entity.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+                example: CLIENT_ID
+              value:
+                type: string
+                description: The value of the custom field.
+                example: BOX1
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+                example: '1'
+    GetSingleOrganizationData_3:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the document in Canoe.
+          example: '3'
+        client_document_id:
+          type: string
+          description: The custom document ID.
+          example: custom_id_3
+        name:
+          type: string
+          description: The name of the document. This contains the Investment Name (and its corresponding Entity Name), the Document Type, as well as the Data Date.
+          example: Sample Direct Deal 1 - Entity A - K-1
+        document_status:
+          type: string
+          description: This is the validation status determined by Canoe.
+          example: Storage Only
+        category:
+          type: string
+          description: The category of the document.
+          example: Tax
+        document_type:
+          type: string
+          description: The document type. For example, Capital Call Notice and Account Statement are examples of two document types.
+          example: K-1
+        source:
+          type: string
+          description: How the document entered Canoe.
+          example: Upload Engine
+        file_type:
+          type: string
+          description: A document's file type, such as .PDF or .DOC. Canoe only supports extraction and validation of PDFs.
+          example: .pdf
+        original_file_type:
+          type: string
+          description: Original type of the file before any conversion (e.g., ".docx")
+          example: .docx
+        original_file_name:
+          type: string
+          description: The document's original file name including the file type extension.
+          example: TEST 1.pdf
+        document_tags:
+          type: array
+          description: The list of tag objects (name, ID) assigned to the document.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                example: 1
+              name:
+                type: string
+                example: tag_1
+        reporting_frequency:
+          type: string
+          description: The reporting frequency (monthly, quarterly, or yearly) of the document, as determined based on the extracted fields.
+          example: null
+        uploaded:
+          type: string
+          format: date-time
+          description: The date and time when the document was uploaded
+          example: '2018-08-30 20:51:38'
+        uploaded_by:
+          type:
+          - string
+          - 'null'
+          description: Name of the user who uploaded the document
+          example: John Doe
+        last_modified:
+          type: string
+          format: date-time
+          description: The date and time when the document was last modified
+          example: '2019-09-16 11:38:47'
+        last_modified_by:
+          type: object
+          properties:
+            user_id:
+              type: string
+              example: user_2
+            name:
+              type: string
+              example: Mike Smith
+            email:
+              type: string
+              example: mike@example.com
+        document_approval:
+          description: Details about the approval of the document. Returns string 'Pending' when no approval exists, or an object when approved.
+          oneOf:
+          - type: string
+            enum:
+            - Pending
+            description: Returned when no approval exists
+          - type: object
+            description: Returned when document is approved
+            properties:
+              approval_status:
+                type: string
+                example: Approved
+              approved_by:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    example: user_2
+                  first_name:
+                    type: string
+                    example: Mike
+                  last_name:
+                    type: string
+                    example: Smith
+                  email:
+                    type: string
+                    example: mike@example.com
+              approval_date:
+                type: string
+                format: date-time
+                example: '2019-09-16 11:38:47'
+        is_locked:
+          type: boolean
+          description: The is_locked status of the document in Canoe.
+          example: false
+        ready_for_extract:
+          type: boolean
+          description: The extraction status of the document in Canoe.
+          example: false
+        number_of_pages:
+          type: string
+          description: The number of pages of the document.
+          example: '1'
+        file_size:
+          type: integer
+          description: The file size of the document.
+          example: 2000
+        allocations:
+          type: array
+          items:
+            type: object
+            properties:
+              allocation_id:
+                type: string
+                description: The ID of the allocation record
+                example: allocation_1
+              data_date:
+                type: string
+                description: The effective date of the document.
+                example: '2017-12-31'
+              dataset_type:
+                type: string
+                description: The dataset type. For example, Capital Call Notice and Account Statement are examples of two dataset types.
+                example: K-1
+              investment:
+                type: string
+                description: The name of the investment that's associated with the document.
+                example: Sample Direct Deal 1
+              fund_sponsor:
+                type: string
+                description: The name of the fund sponsor that's associated with the document.
+                example: Sample Sponsor 1
+              custom_allocation_id:
+                type: string
+                description: The custom ID of the investment entity allocation that's associated with the document. This is user-created.
+                example: '124'
+              investment_id:
+                type: string
+                description: The ID of the investment that's associated with the document.
+                example: '2'
+              investment_legal_name:
+                type: string
+                description: The legal name of the investment that's associated with the document.
+                example: Sample Direct Deal One
+              investment_extraction_aliases:
+                type: array
+                description: The aliases of the investment that are associated with the document. These are user-created.
+                items:
+                  type: string
+                  example:
+                  - Sample Direct Deal 1  alias 1
+                  - Sample Direct Deal 1  alias 2
+              investment_structure:
+                type: string
+                description: The asset type of the fund that's associated with the document.
+                example: direct_investment
+              entity:
+                type: string
+                description: The name of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
+                example: Entity A
+              entity_id:
+                type: string
+                description: The ID of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
+                example: '1'
+              entity_extraction_aliases:
+                type: array
+                description: The aliases of the entity that are associated with the document. These are user-created.
+                items:
+                  type: string
+                  example:
+                  - Entity A alias 1
+                  - Entity A alias 2
+              account:
+                type: string
+                description: The name of the account that's associated with the document.
+                example: Demo
+              account_id:
+                type: string
+                description: The ID of the account that's associated with the document.
+                example: '3'
+              extracted_data:
+                type: array
+                description: An object of the raw extracted data from the document.
+                example: []
+              validated_data:
+                type: array
+                description: An object of the formatted and validated data of the document.
+                example: []
+              validation_errors:
+                type: array
+                description: An object of the document's validation errors. Each item inside is a "key:value" pair, where the "key" is the extracted field name and the "value" is the explanation of why the extracted value didn't pass Canoe's validation logic.
+                example: []
+              analyst:
+                type: string
+                description: The analyst associated with this fund.
+                example: Mike
+              frequency:
+                type: string
+                description: How frequently this fund's statements come in. For example, if a statement comes in every month then the output will be "monthly."
+                example: annually
+              custom_fields:
+                type: array
+                description: The list of custom field objects (name, value, ID) of the investment and/or allocation associated with the document.
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                      example: CLIENT_ID
+                    value:
+                      type: string
+                      example: BOX1
+                    custom_field_id:
+                      type: string
+                      example: '1'
+              document_groups:
+                type: object
+                description: Documents may be associated with other documents via document groups. A document may exist in multiple document groups (based on different criteria).
+                properties:
+                  transaction:
+                    type: object
+                    properties:
+                      group_id:
+                        type: string
+                        example: transaction_group_id
+                      member_document_ids:
+                        type: array
+                        items:
+                          type: string
+                          example:
+                          - '3'
+                          - '22'
+                          - '35'
+              addepar_owned_id:
+                type: string
+                example: AddeparOwned1
+              addepar_owner_id:
+                type: string
+                example: AddeparOwner1
+              black_diamond_symbol:
+                type: string
+                example: BlackDiamondSymbol1
+              black_diamond_account:
+                type: string
+                example: BlackDiaAcc
+              fund_name:
+                type: string
+                description: The name of the fund.
+                example: Sample Direct Deal 1
+              term_id:
+                type: string
+                description: The ID of the term that is associated with the fund.
+                example: ''
+              allocation_status:
+                type: string
+                description: The current status of the allocation. It can be either active, inactive or retired.
+                example: active
+              retired_date:
+                type: string
+                description: The date of when the allocation retires.
+                example: '2017-12-31'
+    SingleEntity_3:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the entity.
+          example: '1'
+        parent_id:
+          type: string
+          description: The ID of the entity's parent account.
+          example: '00'
+        name:
+          type: string
+          description: The name of the entity.
+          example: Demo
+        aliases:
+          type: array
+          description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
+          items:
+            type: string
+          example: []
+        status:
+          type: string
+          description: The status of the entity.
+          example: active
+        created_at:
+          type: string
+          format: date-time
+          description: The datetime of when the entity was created.
+          example: '2017-06-18 23:42:52'
+        updated_at:
+          type: string
+          format: date-time
+          description: The datetime of when the entity was last updated.
+          example: '2019-04-09 10:18:05'
+        downstream_ids:
+          type: array
+          description: The entity's downstream information.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the downstream system.
+                example: addepar_owner_id
+              name:
+                type: string
+                description: The name of the downstream system.
+                example: Addepar
+              type:
+                type: string
+                description: The type of ID associated with the downstream system.
+                example: Owner ID
+              value:
+                type: string
+                description: The value of the downstream ID.
+                example: sample_name
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the entity.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+                example: CLIENT_ID
+              value:
+                type: string
+                description: The value of the custom field.
+                example: BOX1
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+                example: '1'
   securitySchemes:
     bearerAuth:
       type: http
@@ -1197,6 +2877,10 @@ components:
 externalDocs:
   description: Click to download docs in JSON format
   url: /api/docs.json
+x-refined-from:
+- canoe-intelligence-api-docs-v1-original.yaml
+- canoe-intelligence-api-openapi-original.json
+- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:
@@ -1210,6 +2894,7 @@ x-tagGroups:
   - Terms
   - Organizations
   - Allocations
+  - Custom Fields
 - name: User Management
   tags:
   - User

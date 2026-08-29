@@ -344,6 +344,16 @@ apis:
     url: examples/canoe-intelligence-examples.yml
   - type: AgenticAccess
     url: agentic-access/canoe-intelligence-agentic-access.yml
+- aid: canoe-intelligence:canoe-intelligence-introduction-api
+  name: Canoe Intelligence Introduction API
+  description: The Introduction API from Canoe Intelligence — 2 operation(s) for introduction.
+  humanURL: https://api.canoesoftware.com/docs
+  baseURL: https://api.canoesoftware.com
+  tags:
+  - Introduction
+  properties:
+  - type: OpenAPI
+    url: openapi/canoe-intelligence-introduction-api-openapi.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
