@@ -1,19 +1,81 @@
-generated: '2026-08-09'
+generated: '2026-09-16'
 method: generated
-source: openapi/canoe-intelligence-api-openapi.yml
+source: openapi/canoe-intelligence-allocations-api-openapi.yml, openapi/canoe-intelligence-authentication-api-openapi.yml,
+  openapi/canoe-intelligence-custom-fields-api-openapi.yml, openapi/canoe-intelligence-documents-api-openapi.yml,
+  openapi/canoe-intelligence-funds-api-openapi.yml, openapi/canoe-intelligence-introduction-api-openapi.yml,
+  openapi/canoe-intelligence-organizations-api-openapi.yml, openapi/canoe-intelligence-password-grant-tokens-api-openapi.yml,
+  openapi/canoe-intelligence-terms-api-openapi.yml, openapi/canoe-intelligence-user-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 50
+  operations: 102
   by_action_class:
-    connected: 24
-    acting: 26
+    connected: 50
+    acting: 52
   by_consequence:
-    read: 24
-    write: 26
+    read: 50
+    write: 52
   human_in_the_loop_required: 0
 operations:
+- path: Get Allocations
+  method: get
+  operationId: GetAllocation
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Create A Single Allocation
+  method: post
+  operationId: CreateSingleAllocation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Update A Single Allocation
+  method: put
+  operationId: UpdateSingleAllocation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Delete A Single Allocation
+  method: delete
+  operationId: DeleteSingleAllocation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v1/allocations
   method: get
   operationId: GetAllocation
@@ -59,6 +121,308 @@ operations:
 - path: /v1/allocations/{id}
   method: delete
   operationId: DeleteSingleAllocation
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Authentication Error Responses
+  method: get
+  operationId: AuthenticationErrorResponses
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Managing OAuth Clients
+  method: get
+  operationId: ManageAuthClient
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Requesting Tokens - Authorization Code
+  method: post
+  operationId: RequestingTokensAuthCodes
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Requesting Tokens - Refresh Token
+  method: post
+  operationId: RequestingTokensRefreshToken
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Requesting Tokens - Client Credentials
+  method: post
+  operationId: RequestingTokensClientCredentials
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /oauth/clients
+  method: get
+  operationId: ManageAuthClient
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /oauth/token
+  method: post
+  operationId: RequestingTokensAuthCodes
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /oauth/token/refresh
+  method: post
+  operationId: RequestingTokensRefreshToken
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /oauth/token/client-credentials
+  method: post
+  operationId: RequestingTokensClientCredentials
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Get Custom Fields
+  method: get
+  operationId: GetCustomFields
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/custom_fields
+  method: get
+  operationId: GetCustomFields
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get Document Data
+  method: get
+  operationId: GetDocuments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get Document Types
+  method: get
+  operationId: GetDocumentsType
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get Document Tags
+  method: get
+  operationId: GetDocumentTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get Document Allocation Tags
+  method: get
+  operationId: GetDocumentAllocationTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Delete Multiple Documents
+  method: post
+  operationId: DeleteMultipleDocuments
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Get A Single Document
+  method: get
+  operationId: GetASingleDocument
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Delete A Single Document
+  method: delete
+  operationId: DeleteDocument
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Bulk Set Document Metadata
+  method: post
+  operationId: BulkSetDocumentMetadata
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Set Document Metadata
+  method: put
+  operationId: SetDocumentMetadata
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Download Documents
+  method: get
+  operationId: DownloadDocuments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Upload A Single Document
+  method: post
+  operationId: UploadDocuments
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Edit Document Attributes
+  method: put
+  operationId: EditDocumentAttributes
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -212,6 +576,136 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v1/documents/{allocationId}/allocation-tags
+  method: patch
+  operationId: updateAllocationTags
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Get Funds
+  method: get
+  operationId: GetFunds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get A Single Fund
+  method: get
+  operationId: GetSingleFunds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Create A Single Fund
+  method: post
+  operationId: CreateSingleFund
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Update A Single Fund
+  method: put
+  operationId: UpdateSingleFund
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Get A Single Fund's Document Data
+  method: get
+  operationId: GetSingleFundsDocumentdata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Download A Single Fund's Documents
+  method: get
+  operationId: DownloadSingleFundsDocumentdata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get A Single Fund's Document IDs
+  method: get
+  operationId: GetSingleFundsDocumentId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Delete Multiple Funds
+  method: delete
+  operationId: DeleteMultipleFunds
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Delete A Single Fund
+  method: delete
+  operationId: DeleteSingleFund
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v1/funds
   method: get
   operationId: GetFunds
@@ -336,6 +830,140 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: Request
+  method: get
+  operationId: IntroductionRequest
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Response
+  method: get
+  operationId: IntroductionResponse
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get Organizations
+  method: get
+  operationId: Organizations
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get A Single Organization
+  method: get
+  operationId: FindById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get A Single Organization's Document Data
+  method: get
+  operationId: FindBySingleOrganizationId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Download A Single Organization's Documents
+  method: get
+  operationId: DownloadOrganizationDocuments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get A Single Organization's Document IDs
+  method: get
+  operationId: DownloadBySingleOrganizationId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Create A Single Entity
+  method: post
+  operationId: CreateASingleEntity
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Update A Single Entity
+  method: put
+  operationId: UpdateASingleEntity
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Create A Single Account
+  method: post
+  operationId: CreateASingleAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Update A Single Account
+  method: put
+  operationId: UpdateASingleAccount
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v1/organizations
   method: get
   operationId: Organizations
@@ -450,29 +1078,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/custom_fields
-  method: get
-  operationId: GetCustomFields
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/user
-  method: get
-  operationId: User
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/user
+- path: Get an access token
   method: post
-  operationId: createUser
+  operationId: Tokens
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -486,16 +1094,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/users
-  method: get
-  operationId: findByTags
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /v1/tokens
   method: post
   operationId: Tokens
@@ -512,9 +1110,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /oauth/clients
+- path: Get Terms
   method: get
-  operationId: ManageAuthClient
+  operationId: GetTerms
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -522,9 +1120,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /oauth/token
+- path: Create A Single Term
   method: post
-  operationId: RequestingTokensAuthCodes
+  operationId: CreateSingleTerm
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -538,9 +1136,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /oauth/token/refresh
-  method: post
-  operationId: RequestingTokensRefreshToken
+- path: Update A Single Term
+  method: put
+  operationId: UpdateSingleTerm
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -554,9 +1152,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /oauth/token/client-credentials
-  method: post
-  operationId: RequestingTokensClientCredentials
+- path: Delete A Single Term
+  method: delete
+  operationId: DeleteSingleTerm
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -628,9 +1226,29 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /v1/documents/{allocationId}/allocation-tags
-  method: patch
-  operationId: updateAllocationTags
+- path: Get Your API User Information
+  method: get
+  operationId: User
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Get Users Within Your Organization
+  method: get
+  operationId: findByTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: Create A User Within Your Organization
+  method: post
+  operationId: CreateASingleUser
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -644,6 +1262,68 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: Update A User Within Your Organization
+  method: put
+  operationId: UpdateASingleUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: Get User Access Levels
+  method: get
+  operationId: findByRole
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/user
+  method: get
+  operationId: User
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/user
+  method: post
+  operationId: createUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/users
+  method: get
+  operationId: findByTags
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v1/users/{id}
   method: put
   operationId: updateUser
