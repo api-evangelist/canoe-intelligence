@@ -197,6 +197,8 @@ apis:
   humanURL: https://api.canoesoftware.com/docs
   baseURL: https://api.canoesoftware.com
   tags:
+  - Fund
+  tags_raw:
   - Funds
   properties:
   - type: OpenAPI
