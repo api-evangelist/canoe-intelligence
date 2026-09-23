@@ -1,0 +1,29 @@
+# Front Door AI Index — canoe-intelligence — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: canoe-intelligence
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: canoeintelligence.com
+  final_host: canoeintelligence.com
+  ownership: own
+  owner: canoe-intelligence
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 13
+  host_score: 13
+  density: 3.26
+  words: 3988
+  tiers:
+    agentic: 0
+    core: 13
+    model: 0
+  ambiguous: 14
+  top_terms:
+    intelligence: 13
+    AI: 11
+    artificial intelligence: 1
+    automation: 1
+    gen ai: 1

@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Canoe Intelligence Authentication API
   version: '1.0'
-  description: 'Operations tagged Authentication across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Authentication across 2 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
@@ -14,36 +14,157 @@ paths:
     get:
       tags:
       - Authentication
-      summary: null
-      description: "<h3>Authentication Error Responses</h3>\n\n<p>When authentication fails, Canoe's API returns detailed error responses to help you diagnose and resolve issues. All authentication errors follow a consistent format with the following fields:</p>\n\n<table><thead>\n    <tr>\n        <th>Field</th>\n        <th>Type</th>\n        <th>Description</th>\n    </tr>\n    </thead><tbody>\n    <tr>\n        <td>error_code</td>\n        <td>String</td>\n        <td>A machine-readable error code that identifies the specific type of error (e.g., <code>INVALID_CREDENTIALS</code>, <code>MALFORMED_JWT</code>, <code>RATE_LIMIT_EXCEEDED</code>)</td>\n    </tr>\n    <tr>\n        <td>error_description</td>\n        <td>String</td>\n        <td>A human-readable description of what went wrong</td>\n    </tr>\n    <tr>\n        <td>hint</td>\n        <td>String</td>\n        <td>Actionable guidance on how to resolve the error</td>\n    </tr>\n    </tbody></table>\n\n<h4>Common Authentication Errors</h4>\n\n<p><strong>Invalid Credentials (400)</strong></p>\n<pre><code>{\n    \"error_code\": \"INVALID_CREDENTIALS\",\n    \"error_description\": \"The user credentials were incorrect\",\n    \"hint\": \"Please verify your client_id and client_secret are correct\"\n}</code></pre>\n\n<p><strong>Malformed JWT Token (401)</strong></p>\n<pre><code>{\n    \"error_code\": \"MALFORMED_JWT\",\n    \"error_description\": \"Token structure is invalid\",\n    \"hint\": \"JWT tokens must have format: header.payload.signature\"\n}</code></pre>\n\n<p><strong>Rate Limit Exceeded (429)</strong></p>\n<pre><code>{\n    \"error_code\": \"RATE_LIMIT_EXCEEDED\",\n    \"error_description\": \"Too many failed authentication attempts\",\n    \"retry_after\": 60,\n    \"hint\": \"Please check your credentials and wait 60 seconds before trying again\"\n}</code></pre>\n\n<aside class=\"warning\">\n    <strong>Rate Limiting:</strong> To protect against brute-force attacks, Canoe implements rate limiting on authentication endpoints. If you receive a 429 error, wait for the time specified in the <code>retry_after</code> field before attempting to authenticate again.\n</aside>\n\n<aside class=\"notice\">\n    <strong>Best Practices:</strong>\n    <ul>\n        <li>Store your client credentials securely and never commit them to version control</li>\n        <li>Implement exponential backoff when retrying failed authentication requests</li>\n        <li>Monitor the <code>error_code</code> field in your error handling to respond appropriately to different error types</li>\n    </ul>\n</aside>\n"
+      summary: Authentication error responses
+      description: 'Authentication Error Responses
+
+
+        When authentication fails, Canoe''s API returns detailed error responses to help you diagnose and resolve issues. All authentication errors follow a consistent format with the following fields:
+
+
+        Field
+
+        Type
+
+        Description
+
+
+        error_code
+
+        String
+
+        A machine-readable error code that identifies the specific type of error (e.g., INVALID_CREDENTIALS, MALFORMED_JWT, RATE_LIMIT_EXCEEDED)
+
+
+        error_description
+
+        String
+
+        A human-readable description of what went wrong
+
+
+        hint
+
+        String
+
+        Actionable guidance on how to resolve the error
+
+
+        Common Authentication Errors
+
+
+        Invalid Credentials (400)
+
+
+        {
+
+        "error_code": "INVALID_CREDENTIALS",
+
+        "error_description": "The user credentials were incorrect",
+
+        "hint": "Please verify your client_id and client_secret are correct"
+
+        }
+
+
+        Malformed JWT Token (401)
+
+
+        {
+
+        "error_code": "MALFORMED_JWT",
+
+        "error_description": "Token structure is invalid",
+
+        "hint": "JWT tokens must have format: header.payload.signature"
+
+        }
+
+
+        Rate Limit Exceeded (429)
+
+
+        {
+
+        "error_code": "RATE_LIMIT_EXCEEDED",
+
+        "error_description": "Too many failed authentication attempts",
+
+        "retry_after": 60,
+
+        "hint": "Please check your credentials and wait 60 seconds before trying again"
+
+        }
+
+
+        Rate Limiting: To protect against brute-force attacks, Canoe implements rate limiting on authentication endpoints. If you receive a 429 error, wait for the time specified in the retry_after field before attempting to authenticate again.
+
+
+        Best Practices:
+
+
+        Store your client credentials securely and never commit them to version control
+
+
+        Implement exponential backoff when retrying failed authentication requests
+
+
+        Monitor the error_code field in your error handling to respond appropriately to different error types'
       operationId: AuthenticationErrorResponses
+      x-summary-source: derived
   Managing OAuth Clients:
     get:
       tags:
       - Authentication
-      summary: null
-      description: "<p>To verify incoming API requests, Canoe's APIs use access tokens.</p>\n<p>Canoe API users may <a href=\"#managing-oauth-clients\">create and manage their OAuth Client</a>, and use the <code>Client ID</code> and <code>Client Secret</code> to request an authorization code and access token.</p>\n<p>Canoe API users can also use the <code class=\"prettyprint\">/v1/tokens</code> <a href=\"#password-grant-tokens\">endpoint</a> to manage the access tokens. To authenticate to the <code class=\"prettyprint\">/v1/tokens</code> endpoint, you will need API user credentials. This is one of the few API endpoints where you will need to use your user credentials; most other endpoints are authenticated through access tokens.</p>\n<aside class=\"notice\">\n    Note: An access token issued from Canoe will expire in 24 hours.\n</aside>\n<p>Once you have an access token, you can authenticate to Canoe's API endpoints. Pass the access token in the request header in the format <code class=\"prettyprint\">Authorization: Bearer {token}</code>, where <code class=\"prettyprint\">{token}</code> is your newly created personal access token.</p>\n<p>For example, if your newly created access token is \"eyJ0eXAiOiJKV1QiLCJhbG\", your header should look like \"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbG\"</p>\n<p>If you are using Postman Collection for testing purpose, you could follow the steps here: <a href=\"https://learning.getpostman.com/docs/postman/sending_api_requests/authorization/#bearer-token\" target=\"_blank\"><u>Authorization - Bearer Token</u></a></p>\n<aside class=\"notice\">\n    Note: Sometimes, you want to give API access only to some specific IP addresses. Please contact us to enable that.\n</aside>\n\n<p>Developers building applications that need to interact with Canoe's API need to first register their application by creating a Client account. Typically, this consists of providing the name of their application and a URL that your application can redirect to after users approve their request for authorization. When a Client is created, it will be issued a <code>Client ID</code> and <code>Client Secret</code>. These values will be used when requesting access tokens from your application. </p>\n\n<p>Canoe API users can create and manage their OAuth Clients through the <a href=https://client.canoesoftware.com/api_configuration target=\"_blank\"><u>API Configuration Dashboard</u></a>.</p>\n"
+      summary: Manage auth client
+      description: 'To verify incoming API requests, Canoe''s APIs use access tokens.
+
+
+        Canoe API users may create and manage their OAuth Client, and use the Client ID and Client Secret to request an authorization code and access token.
+
+
+        Canoe API users can also use the /v1/tokens endpoint to manage the access tokens. To authenticate to the /v1/tokens endpoint, you will need API user credentials. This is one of the few API endpoints where you will need to use your user credentials; most other endpoints are authenticated through access tokens.
+
+
+        Note: An access token issued from Canoe will expire in 24 hours.
+
+
+        Once you have an access token, you can authenticate to Canoe''s API endpoints. Pass the access token in the request header in the format Authorization: Bearer {token}, where {token} is your newly created personal access token.
+
+
+        For example, if your newly created access token is "eyJ0eXAiOiJKV1QiLCJhbG", your header should look like "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbG"
+
+
+        If you are using Postman Collection for testing purpose, you could follow the steps here: Authorization - Bearer Token
+
+
+        Note: Sometimes, you want to give API access only to some specific IP addresses. Please contact us to enable that.
+
+
+        Developers building applications that need to interact with Canoe''s API need to first register their application by creating a Client account. Typically, this consists of providing the name of their application and a URL that your application can redirect to after users approve their request for authorization. When a Client is created, it will be issued a Client ID and Client Secret. These values will be used when requesting access tokens from your application.
+
+
+        Canoe API users can create and manage their OAuth Clients through the API Configuration Dashboard.'
       operationId: ManageAuthClient
+      x-summary-source: derived
   Requesting Tokens - Authorization Code:
     post:
       tags:
       - Authentication
-      summary: null
+      summary: Requesting tokens auth codes
       description: '/oauth/token
 
 
-        <p>Once a client has been created, you may use the <code>Client ID</code> and <code>Client Secret</code> to request an
+        Once a client has been created, you may use the Client ID and Client Secret to request an
 
         authorization code and access token from your application. First, your application should make a redirect request to
 
-        Canoe''s <code>oauth/authorize</code> route (see examples on the right panel)</p>
+        Canoe''s oauth/authorize route (see examples on the right panel)
 
 
-        <p>When receiving authorization requests, Canoe will ask users to approve or deny the authorization request. If users approve the request, they will be redirected back to the <code>redirect_uri</code> that was specified by the application that requested access (your application). The <code>redirect_uri</code> must match the <code>redirect</code> URL that was specified when the client was created.</p>
+        When receiving authorization requests, Canoe will ask users to approve or deny the authorization request. If users approve the request, they will be redirected back to the redirect_uri that was specified by the application that requested access (your application). The redirect_uri must match the redirect URL that was specified when the client was created.
 
-        <p>If the user approves the authorization request, they will be redirected back to the consuming application with the authorization code. The consumer should then issue a <code>POST</code> request to Canoe to request an access token. The request should include the authorization code that was issued by Canoe when the user approved the authorization request. See examples on the right panel and the parameters for the <code>POST</code> request below.</p>
 
-        '
+        If the user approves the authorization request, they will be redirected back to the consuming application with the authorization code. The consumer should then issue a POST request to Canoe to request an access token. The request should include the authorization code that was issued by Canoe when the user approved the authorization request. See examples on the right panel and the parameters for the POST request below.'
       operationId: RequestingTokensAuthCodes
       parameters:
       - name: grant_type
@@ -116,19 +237,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AuthorizationCode'
+      x-summary-source: derived
   Requesting Tokens - Refresh Token:
     post:
       tags:
       - Authentication
-      summary: null
+      summary: Requesting tokens refresh token
       description: '/oauth/token
 
 
-        <p>Users can refresh their access tokens via the refresh token that was provided to them when the access token was issued.</p>
+        Users can refresh their access tokens via the refresh token that was provided to them when the access token was issued.
 
-        <p>Users should issue a <code>POST</code> request to Canoe to request an access token. See examples on the right panel and the parameters for the <code>POST</code> request below.</p>
 
-        '
+        Users should issue a POST request to Canoe to request an access token. See examples on the right panel and the parameters for the POST request below.'
       operationId: RequestingTokensRefreshToken
       parameters:
       - name: grant_type
@@ -193,19 +314,18 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AuthorizationCode'
+      x-summary-source: derived
   Requesting Tokens - Client Credentials:
     post:
       tags:
       - Authentication
-      summary: null
+      summary: Requesting tokens client credentials
       description: '/oauth/token
 
 
-        <p>Once a client has been created, you may use the <code>Client ID</code> and <code>Client Secret</code> to request an
+        Once a client has been created, you may use the Client ID and Client Secret to request an
 
-        to request an access token. Access tokens provide access to all other endpoints within the API.</p>
-
-        '
+        to request an access token. Access tokens provide access to all other endpoints within the API.'
       operationId: RequestingTokensClientCredentials
       parameters:
       - name: grant_type
@@ -262,12 +382,40 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ClientCredentials'
+      x-summary-source: derived
   /oauth/clients:
     get:
       tags:
       - Authentication
       summary: Managing OAuth Clients
-      description: "<p>To verify incoming API requests, Canoe's APIs use access tokens.</p>\n<p>Canoe API users may <a href=\"#managing-oauth-clients\">create and manage their OAuth Client</a>, and use the <code>Client ID</code> and <code>Client Secret</code> to request an authorization code and access token.</p>\n<p>Canoe API users can also use the <code class=\"prettyprint\">/v1/tokens</code> <a href=\"#password-grant-tokens\">endpoint</a> to manage the access tokens. To authenticate to the <code class=\"prettyprint\">/v1/tokens</code> endpoint, you will need API user credentials. This is one of the few API endpoints where you will need to use your user credentials; most other endpoints are authenticated through access tokens.</p>\n<aside class=\"notice\">\n    Note: An access token issued from Canoe will expire in 24 hours.\n</aside>\n<p>Once you have an access token, you can authenticate to Canoe's API endpoints. Pass the access token in the request header in the format <code class=\"prettyprint\">Authorization: Bearer {token}</code>, where <code class=\"prettyprint\">{token}</code> is your newly created personal access token.</p>\n<p>For example, if your newly created access token is \"eyJ0eXAiOiJKV1QiLCJhbG\", your header should look like \"Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbG\"</p>\n<p>If you are using Postman Collection for testing purpose, you could follow the steps here: <a href=\"https://learning.getpostman.com/docs/postman/sending_api_requests/authorization/#bearer-token\" target=\"_blank\"><u>Authorization - Bearer Token</u></a></p>\n<aside class=\"notice\">\n    Note: Sometimes, you want to give API access only to some specific IP addresses. Please contact us to enable that.\n</aside>\n\n<p>Developers building applications that need to interact with Canoe's API need to first register their application by creating a Client account. Typically, this consists of providing the name of their application and a URL that your application can redirect to after users approve their request for authorization. When a Client is created, it will be issued a <code>Client ID</code> and <code>Client Secret</code>. These values will be used when requesting access tokens from your application. </p>\n\n<p>Canoe API users can create and manage their OAuth Clients through the <a href=https://client.canoesoftware.com/api_configuration target=\"_blank\"><u>API Configuration Dashboard</u></a>.</p>"
+      description: 'To verify incoming API requests, Canoe''s APIs use access tokens.
+
+
+        Canoe API users may create and manage their OAuth Client, and use the Client ID and Client Secret to request an authorization code and access token.
+
+
+        Canoe API users can also use the /v1/tokens endpoint to manage the access tokens. To authenticate to the /v1/tokens endpoint, you will need API user credentials. This is one of the few API endpoints where you will need to use your user credentials; most other endpoints are authenticated through access tokens.
+
+
+        Note: An access token issued from Canoe will expire in 24 hours.
+
+
+        Once you have an access token, you can authenticate to Canoe''s API endpoints. Pass the access token in the request header in the format Authorization: Bearer {token}, where {token} is your newly created personal access token.
+
+
+        For example, if your newly created access token is "eyJ0eXAiOiJKV1QiLCJhbG", your header should look like "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbG"
+
+
+        If you are using Postman Collection for testing purpose, you could follow the steps here: Authorization - Bearer Token
+
+
+        Note: Sometimes, you want to give API access only to some specific IP addresses. Please contact us to enable that.
+
+
+        Developers building applications that need to interact with Canoe''s API need to first register their application by creating a Client account. Typically, this consists of providing the name of their application and a URL that your application can redirect to after users approve their request for authorization. When a Client is created, it will be issued a Client ID and Client Secret. These values will be used when requesting access tokens from your application.
+
+
+        Canoe API users can create and manage their OAuth Clients through the API Configuration Dashboard.'
       operationId: ManageAuthClient
       responses:
         '200':
@@ -285,16 +433,17 @@ paths:
       description: '/oauth/token
 
 
-        <p>Once a client has been created, you may use the <code>Client ID</code> and <code>Client Secret</code> to request an
+        Once a client has been created, you may use the Client ID and Client Secret to request an
 
         authorization code and access token from your application. First, your application should make a redirect request to
 
-        Canoe''s <code>oauth/authorize</code> route (see examples on the right panel)</p>
+        Canoe''s oauth/authorize route (see examples on the right panel)
 
 
-        <p>When receiving authorization requests, Canoe will ask users to approve or deny the authorization request. If users approve the request, they will be redirected back to the <code>redirect_uri</code> that was specified by the application that requested access (your application). The <code>redirect_uri</code> must match the <code>redirect</code> URL that was specified when the client was created.</p>
+        When receiving authorization requests, Canoe will ask users to approve or deny the authorization request. If users approve the request, they will be redirected back to the redirect_uri that was specified by the application that requested access (your application). The redirect_uri must match the redirect URL that was specified when the client was created.
 
-        <p>If the user approves the authorization request, they will be redirected back to the consuming application with the authorization code. The consumer should then issue a <code>POST</code> request to Canoe to request an access token. The request should include the authorization code that was issued by Canoe when the user approved the authorization request. See examples on the right panel and the parameters for the <code>POST</code> request below.</p>'
+
+        If the user approves the authorization request, they will be redirected back to the consuming application with the authorization code. The consumer should then issue a POST request to Canoe to request an access token. The request should include the authorization code that was issued by Canoe when the user approved the authorization request. See examples on the right panel and the parameters for the POST request below.'
       operationId: RequestingTokensAuthCodes
       requestBody:
         required: true
@@ -366,9 +515,10 @@ paths:
       description: '/oauth/token
 
 
-        <p>Users can refresh their access tokens via the refresh token that was provided to them when the access token was issued.</p>
+        Users can refresh their access tokens via the refresh token that was provided to them when the access token was issued.
 
-        <p>Users should issue a <code>POST</code> request to Canoe to request an access token. See examples on the right panel and the parameters for the <code>POST</code> request below.</p>'
+
+        Users should issue a POST request to Canoe to request an access token. See examples on the right panel and the parameters for the POST request below.'
       operationId: RequestingTokensRefreshToken
       requestBody:
         required: true
@@ -435,9 +585,9 @@ paths:
       description: '/oauth/token
 
 
-        <p>Once a client has been created, you may use the <code>Client ID</code> and <code>Client Secret</code> to request an
+        Once a client has been created, you may use the Client ID and Client Secret to request an
 
-        to request an access token. Access tokens provide access to all other endpoints within the API.</p>'
+        to request an access token. Access tokens provide access to all other endpoints within the API.'
       operationId: RequestingTokensClientCredentials
       requestBody:
         required: true
@@ -570,7 +720,6 @@ externalDocs:
 x-refined-from:
 - canoe-intelligence-api-docs-v1-original.yaml
 - canoe-intelligence-api-openapi-original.json
-- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:

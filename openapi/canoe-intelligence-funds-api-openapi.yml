@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Canoe Intelligence Funds API
   version: '1.0'
-  description: 'Operations tagged Funds across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Funds across 2 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
@@ -14,8 +14,25 @@ paths:
     get:
       tags:
       - Funds
-      summary: null
-      description: "/v1/funds\n\nFetch all funds accessible by the current API user.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2022-02-24.\n</span>\n"
+      summary: Get funds
+      description: '/v1/funds
+
+
+        Fetch all funds accessible by the current API user.
+
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+
+        When using pagination, the response will contain headers defining the total number of results,
+
+        as well as the first, next, prev, and last page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2022-02-24.'
       operationId: GetFunds
       parameters:
       - name: page
@@ -105,17 +122,16 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Get A Single Fund:
     get:
       tags:
       - Funds
-      summary: null
+      summary: Get single funds
       description: '/v1/funds/{id}
 
 
-        Fetch a specific fund by the fund''s ID.
-
-        '
+        Fetch a specific fund by the fund''s ID.'
       operationId: GetSingleFunds
       parameters:
       - name: id
@@ -161,17 +177,16 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Create A Single Fund:
     post:
       tags:
       - Funds
-      summary: null
+      summary: Create single fund
       description: '/v1/funds
 
 
-        Create a new fund based on the input parameters.
-
-        '
+        Create a new fund based on the input parameters.'
       operationId: CreateSingleFund
       parameters:
       - name: type
@@ -300,17 +315,16 @@ paths:
           description: Failed to create the fund with a corresponding term.
         '422':
           description: Failed to create the fund with a corresponding term.
+      x-summary-source: derived
   Update A Single Fund:
     put:
       tags:
       - Funds
-      summary: null
+      summary: Update single fund
       description: '/v1/funds/{id}
 
 
-        Update an existing fund based on the input parameters.
-
-        '
+        Update an existing fund based on the input parameters.'
       operationId: UpdateSingleFund
       parameters:
       - name: id
@@ -446,11 +460,12 @@ paths:
           description: Failed to create the fund with a corresponding term.
         '422':
           description: Failed to create the fund with a corresponding term.
+      x-summary-source: derived
   Get A Single Fund's Document Data:
     get:
       tags:
       - Funds
-      summary: null
+      summary: Get single funds documentdata
       description: '/v1/funds/{id}/document-data
 
 
@@ -460,25 +475,18 @@ paths:
         By default, Canoe''s server sends back the full representation of each document object after processing requests. For better performance, you can have the server send only the fields you specify.
 
 
-        <span name="doc-alert-info">
-
         This endpoint offers optional pagination.
 
         Pagination supports the return of large results and is highly recommended for all use cases.
 
         Unpaginated calls will be depreciated in future versions of the Canoe API.
 
-        <br><br>
 
-        When using pagination, the response will contain headers defining the <code>total</code> number of results,
+        When using pagination, the response will contain headers defining the total number of results,
 
-        as well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.
+        as well as the first, next, prev, and last page responses for your result set.
 
-        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.
-
-        </span>
-
-        '
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.'
       operationId: GetSingleFundsDocumentdata
       parameters:
       - name: id
@@ -562,17 +570,16 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Download A Single Fund's Documents:
     get:
       tags:
       - Funds
-      summary: null
+      summary: Download single funds documentdata
       description: '/v1/funds/{id}/documents
 
 
-        Download a specific Fund''s documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.
-
-        '
+        Download a specific Fund''s documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.'
       operationId: DownloadSingleFundsDocumentdata
       parameters:
       - name: id
@@ -644,17 +651,16 @@ paths:
           description: Success
         '403':
           description: No access to the fund documents.
+      x-summary-source: derived
   Get A Single Fund's Document IDs:
     get:
       tags:
       - Funds
-      summary: null
+      summary: Get single funds document id
       description: '/v1/funds/{id}/document-ids
 
 
-        Get a specific fund''s documents IDs for downloading the documents one by one.
-
-        '
+        Get a specific fund''s documents IDs for downloading the documents one by one.'
       operationId: GetSingleFundsDocumentId
       parameters:
       - name: id
@@ -705,17 +711,16 @@ paths:
                   $ref: '#/components/schemas/FundDocumentId'
         '403':
           description: No access to the fund documents.
+      x-summary-source: derived
   Delete Multiple Funds:
     delete:
       tags:
       - Funds
-      summary: null
+      summary: Delete multiple funds
       description: '/v1/funds
 
 
-        Bulk delete up to 100 funds at once based on fund ids. WARNING: This will delete all funds associated with the ids passed in, as well as their related documents, allocations, and terms.
-
-        '
+        Bulk delete up to 100 funds at once based on fund ids. WARNING: This will delete all funds associated with the ids passed in, as well as their related documents, allocations, and terms.'
       operationId: DeleteMultipleFunds
       parameters:
       - name: fund_id
@@ -758,17 +763,16 @@ paths:
                   $ref: '#/components/schemas/DeleteFunds'
         '400':
           description: Cannot delete more than 100 records at one time. Request includes 305 items.
+      x-summary-source: derived
   Delete A Single Fund:
     delete:
       tags:
       - Funds
-      summary: null
+      summary: Delete single fund
       description: '/v1/funds/{id}
 
 
-        Delete a single fund based on the fund''s id. WARNING: This will delete the fund, as well as it''s associated documents, allocations, and terms.
-
-        '
+        Delete a single fund based on the fund''s id. WARNING: This will delete the fund, as well as it''s associated documents, allocations, and terms.'
       operationId: DeleteSingleFund
       parameters:
       - name: id
@@ -810,12 +814,27 @@ paths:
                   $ref: '#/components/schemas/DeleteFund'
         '400':
           description: Cannot delete more than 100 records at one time. Request includes 305 items.
+      x-summary-source: derived
   /v1/funds:
     get:
       tags:
       - Funds
       summary: Get Funds
-      description: "Fetch all funds accessible by the current API user.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2022-02-24.\n</span>"
+      description: 'Fetch all funds accessible by the current API user.
+
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+
+        When using pagination, the response will contain headers defining the total number of results,
+
+        as well as the first, next, prev, and last page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2022-02-24.'
       operationId: GetFunds
       parameters:
       - name: page
@@ -1027,7 +1046,14 @@ paths:
       tags:
       - Funds
       summary: Get Detailed Fund Data
-      description: "Fetch detailed fund information including terms, allocations, and related entities. This endpoint provides more comprehensive fund data than the standard /v1/funds endpoint, including allocation data with entity relationships.\n\n<span name=\"doc-alert-info\">\nThis endpoint supports pagination. \nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.\n</span>"
+      description: 'Fetch detailed fund information including terms, allocations, and related entities. This endpoint provides more comprehensive fund data than the standard /v1/funds endpoint, including allocation data with entity relationships.
+
+
+        This endpoint supports pagination.
+
+        When using pagination, the response will contain headers defining the total number of results,
+
+        as well as the first, next, prev, and last page responses for your result set.'
       operationId: GetFundsDetailedData
       parameters:
       - name: page
@@ -1312,23 +1338,18 @@ paths:
         By default, Canoe''s server sends back the full representation of each document object after processing requests. For better performance, you can have the server send only the fields you specify.
 
 
-        <span name="doc-alert-info">
-
         This endpoint offers optional pagination.
 
         Pagination supports the return of large results and is highly recommended for all use cases.
 
         Unpaginated calls will be depreciated in future versions of the Canoe API.
 
-        <br><br>
 
-        When using pagination, the response will contain headers defining the <code>total</code> number of results,
+        When using pagination, the response will contain headers defining the total number of results,
 
-        as well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.
+        as well as the first, next, prev, and last page responses for your result set.
 
-        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.
-
-        </span>'
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.'
       operationId: GetSingleFundsDocumentdata
       parameters:
       - name: id
@@ -1547,6 +1568,22 @@ paths:
       description: Production API
 components:
   schemas:
+    DeleteFunds:
+      type: object
+      properties:
+        ids:
+          type: array
+          description: An array of fund IDs that were deleted.
+          items:
+            type: string
+          example:
+          - id_1
+          - id_2
+          - id_3
+        deleted:
+          type: integer
+          description: The total number of funds deleted.
+          example: 3
     GetFunds:
       type: object
       properties:
@@ -1638,6 +1675,108 @@ components:
           type: string
           description: The name of the fund.
           example: Sample Direct
+    DeleteFund:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A confirmation that the fund ID was deleted.
+          example: The Fund 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
+    SingleFund:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The fund's ID.
+          example: '1'
+        organization_id:
+          type: string
+          description: The ID of the organization that the fund is associated with.
+          example: '12'
+        type:
+          type: string
+          description: The fund's investment type.
+          example: direct_investment
+        status:
+          type: string
+          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
+          example: active
+        name:
+          type: string
+          description: The name of the fund.
+          example: Sample Direct Deal 1
+        sponsor:
+          type: string
+          description: The sponsor of the fund.
+          example: Sample Sponsor 1
+        start_date:
+          type: string
+          description: Fund Inception Date. The date on which the fund began its operations.
+          example: '2015-11-10'
+        aliases:
+          type: array
+          description: Aliases of the investment name. These are user-created.
+          items:
+            type: string
+          example:
+          - Sample Direct 1
+          - SDD1
+        legal_name:
+          type: string
+          description: The legal name of the fund.
+          example: Sample Direct Deal 1 LP
+        updated_at:
+          type: string
+          description: A timestamp of when the fund was updated.
+          example: '2018-04-30 20:40:19'
+        created_at:
+          type: string
+          description: A timestamp of when the fund was created.
+          example: '2018-04-30 20:40:19'
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the fund.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+          example:
+          - name: CLIENT_ID
+            value: BOX1
+            custom_field_id: '1'
+        fund_name:
+          type: string
+          description: The name of the fund.
+          example: Sample Direct Deal 1
+        requirements_preference:
+          type: object
+          description: The requirements preference of the fund.
+          properties:
+            account_statements:
+              type: object
+              properties:
+                balance:
+                  type: string
+                  description: Either ending_balance or price_units.
+          example:
+          - account_statements:
+              balance: price_units
+        term_id:
+          type: string
+          description: The ID of the term that is associated with the fund.
+          example: '123'
+        term_name:
+          type: string
+          description: The name of the term
+          example: Deal 1
     FundDocumentData:
       type: object
       properties:
@@ -1906,13 +2045,6 @@ components:
               type: string
               description: The ID of the term that is associated with the fund.
               example: ''
-    DeleteFund:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A confirmation that the fund ID was deleted.
-          example: The Fund 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
     FundDocumentId:
       type: object
       properties:
@@ -1936,259 +2068,6 @@ components:
           - 2345abcd-1234-1111-9876-1234567abc82
           - 2345abcd-1234-1111-9876-1234567abc81
           - 2345abcd-1234-1111-9876-1234567abc80
-    DeleteFunds:
-      type: object
-      properties:
-        ids:
-          type: array
-          description: An array of fund IDs that were deleted.
-          items:
-            type: string
-          example:
-          - id_1
-          - id_2
-          - id_3
-        deleted:
-          type: integer
-          description: The total number of funds deleted.
-          example: 3
-    SingleFund:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The fund's ID.
-          example: '1'
-        organization_id:
-          type: string
-          description: The ID of the organization that the fund is associated with.
-          example: '12'
-        type:
-          type: string
-          description: The fund's investment type.
-          example: direct_investment
-        status:
-          type: string
-          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
-          example: active
-        name:
-          type: string
-          description: The name of the fund.
-          example: Sample Direct Deal 1
-        sponsor:
-          type: string
-          description: The sponsor of the fund.
-          example: Sample Sponsor 1
-        start_date:
-          type: string
-          description: Fund Inception Date. The date on which the fund began its operations.
-          example: '2015-11-10'
-        aliases:
-          type: array
-          description: Aliases of the investment name. These are user-created.
-          items:
-            type: string
-          example:
-          - Sample Direct 1
-          - SDD1
-        legal_name:
-          type: string
-          description: The legal name of the fund.
-          example: Sample Direct Deal 1 LP
-        updated_at:
-          type: string
-          description: A timestamp of when the fund was updated.
-          example: '2018-04-30 20:40:19'
-        created_at:
-          type: string
-          description: A timestamp of when the fund was created.
-          example: '2018-04-30 20:40:19'
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the fund.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-              value:
-                type: string
-                description: The value of the custom field.
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-          example:
-          - name: CLIENT_ID
-            value: BOX1
-            custom_field_id: '1'
-        fund_name:
-          type: string
-          description: The name of the fund.
-          example: Sample Direct Deal 1
-        requirements_preference:
-          type: object
-          description: The requirements preference of the fund.
-          properties:
-            account_statements:
-              type: object
-              properties:
-                balance:
-                  type: string
-                  description: Either ending_balance or price_units.
-          example:
-          - account_statements:
-              balance: price_units
-        term_id:
-          type: string
-          description: The ID of the term that is associated with the fund.
-          example: '123'
-        term_name:
-          type: string
-          description: The name of the term
-          example: Deal 1
-    FundDetailedData:
-      type: object
-      description: Detailed fund data including term and allocation information
-      properties:
-        id:
-          type: string
-          description: The fund's ID.
-          example: ba67e8d4-902d-11ed-bafd-0a58a9feac02
-        organization_id:
-          type: string
-          description: The ID of the organization that the fund is associated with.
-          example: fb780fe2-b05f-11ec-a394-5717ed8c873f
-        type:
-          type: string
-          description: The fund's investment type.
-          example: drawdown_fund
-        status:
-          type: string
-          description: Indicates whether or not a fund is active.
-          example: active
-        name:
-          type: string
-          description: The full name of the investment (fund + term).
-          example: Sample Fund - Series A
-        term_id:
-          type: string
-          description: The ID of the term associated with this fund data.
-          example: a5176574-0948-11ee-9701-0a58a9feac02
-        term_name:
-          type: string
-          description: The name of the term.
-          example: Series A
-        sponsor:
-          type: string
-          description: The sponsor of the fund.
-          example: Sample Sponsor
-        start_date:
-          type: string
-          format: date
-          description: Fund Inception Date.
-          example: '2020-01-01'
-        aliases:
-          type: array
-          description: Aliases of the investment name.
-          items:
-            type: string
-          example:
-          - SF-A
-          - Sample Fund A
-        legal_name:
-          type: string
-          description: The legal name of the fund.
-          example: Sample Fund LP
-        custom_fields:
-          type: array
-          description: Custom fields associated with the fund.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-              value:
-                type: string
-                description: The value of the custom field.
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-        downstream_ids:
-          type: array
-          description: Downstream system identifiers.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-              name:
-                type: string
-              type:
-                type: string
-              value:
-                type: string
-        allocations:
-          type: array
-          description: List of allocations associated with this fund/term.
-          items:
-            type: object
-            properties:
-              allocation_id:
-                type: string
-                description: The ID of the allocation.
-                example: alloc_123
-              status:
-                type: string
-                description: The status of the allocation.
-                example: active
-              custom_allocation_id:
-                type: string
-                description: Custom allocation identifier.
-                example: CUSTOM-001
-              custom_fields:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    value:
-                      type: string
-                    custom_field_id:
-                      type: string
-              entity:
-                type: object
-                description: Entity information for this allocation.
-                properties:
-                  id:
-                    type: string
-                    description: The entity ID.
-                  name:
-                    type: string
-                    description: The entity name.
-                  parent_id:
-                    type: string
-                    description: The parent account ID.
-                  status:
-                    type: string
-                    description: The entity status.
-                  aliases:
-                    type: array
-                    items:
-                      type: string
-                  custom_fields:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        value:
-                          type: string
-                        custom_field_id:
-                          type: string
     GetFunds_2:
       type: object
       properties:
@@ -2280,6 +2159,101 @@ components:
           type: string
           description: The name of the fund.
           example: Sample Direct
+    SingleFund_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The fund's ID.
+          example: '1'
+        organization_id:
+          type: string
+          description: The ID of the organization that the fund is associated with.
+          example: '12'
+        type:
+          type: string
+          description: The fund's investment type.
+          example: direct_investment
+        status:
+          type: string
+          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
+          example: active
+        name:
+          type: string
+          description: The name of the fund.
+          example: Sample Direct Deal 1
+        sponsor:
+          type: string
+          description: The sponsor of the fund.
+          example: Sample Sponsor 1
+        start_date:
+          type: string
+          description: Fund Inception Date. The date on which the fund began its operations.
+          example: '2015-11-10'
+        aliases:
+          type: array
+          description: Aliases of the investment name. These are user-created.
+          items:
+            type: string
+          example:
+          - Sample Direct 1
+          - SDD1
+        legal_name:
+          type: string
+          description: The legal name of the fund.
+          example: Sample Direct Deal 1 LP
+        updated_at:
+          type: string
+          description: A timestamp of when the fund was updated.
+          example: '2018-04-30 20:40:19'
+        created_at:
+          type: string
+          description: A timestamp of when the fund was created.
+          example: '2018-04-30 20:40:19'
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the fund.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              ID:
+                type: string
+                description: The ID of the custom field.
+          example:
+          - name: CLIENT_ID
+            value: BOX1
+            ID: '1'
+        fund_name:
+          type: string
+          description: The name of the fund.
+          example: Sample Direct Deal 1
+        requirements_preference:
+          type: object
+          description: The requirements preference of the fund.
+          properties:
+            account_statements:
+              type: object
+              properties:
+                balance:
+                  type: string
+                  description: Either ending_balance or price_units.
+          example:
+          - account_statements:
+              balance: price_units
+        term_id:
+          type: string
+          description: The ID of the term that is associated with the fund.
+          example: '123'
+        term_name:
+          type: string
+          description: The name of the term
+          example: Deal 1
     FundDocumentData_2:
       type: object
       properties:
@@ -2578,155 +2552,62 @@ components:
               type: string
               description: The ID of the term that is associated with the fund.
               example: ''
-    SingleFund_2:
+    FundDetailedData:
       type: object
+      description: Detailed fund data including term and allocation information
       properties:
         id:
           type: string
           description: The fund's ID.
-          example: '1'
+          example: ba67e8d4-902d-11ed-bafd-0a58a9feac02
         organization_id:
           type: string
           description: The ID of the organization that the fund is associated with.
-          example: '12'
+          example: fb780fe2-b05f-11ec-a394-5717ed8c873f
         type:
           type: string
           description: The fund's investment type.
-          example: direct_investment
+          example: drawdown_fund
         status:
           type: string
-          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
+          description: Indicates whether or not a fund is active.
           example: active
         name:
           type: string
-          description: The name of the fund.
-          example: Sample Direct Deal 1
-        sponsor:
-          type: string
-          description: The sponsor of the fund.
-          example: Sample Sponsor 1
-        start_date:
-          type: string
-          description: Fund Inception Date. The date on which the fund began its operations.
-          example: '2015-11-10'
-        aliases:
-          type: array
-          description: Aliases of the investment name. These are user-created.
-          items:
-            type: string
-          example:
-          - Sample Direct 1
-          - SDD1
-        legal_name:
-          type: string
-          description: The legal name of the fund.
-          example: Sample Direct Deal 1 LP
-        updated_at:
-          type: string
-          description: A timestamp of when the fund was updated.
-          example: '2018-04-30 20:40:19'
-        created_at:
-          type: string
-          description: A timestamp of when the fund was created.
-          example: '2018-04-30 20:40:19'
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the fund.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-              value:
-                type: string
-                description: The value of the custom field.
-              ID:
-                type: string
-                description: The ID of the custom field.
-          example:
-          - name: CLIENT_ID
-            value: BOX1
-            ID: '1'
-        fund_name:
-          type: string
-          description: The name of the fund.
-          example: Sample Direct Deal 1
-        requirements_preference:
-          type: object
-          description: The requirements preference of the fund.
-          properties:
-            account_statements:
-              type: object
-              properties:
-                balance:
-                  type: string
-                  description: Either ending_balance or price_units.
-          example:
-          - account_statements:
-              balance: price_units
+          description: The full name of the investment (fund + term).
+          example: Sample Fund - Series A
         term_id:
           type: string
-          description: The ID of the term that is associated with the fund.
-          example: '123'
+          description: The ID of the term associated with this fund data.
+          example: a5176574-0948-11ee-9701-0a58a9feac02
         term_name:
           type: string
-          description: The name of the term
-          example: Deal 1
-    GetFunds_3:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The fund's ID.
-          example: '1'
-        organization_id:
-          type: string
-          description: The ID of the organization that the fund is associated with.
-          example: '12'
-        type:
-          type: string
-          description: The fund's investment type.
-          example: direct_investment
-        status:
-          type: string
-          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
-          example: active
-        name:
-          type: string
-          description: The name of the investment (fund + term).
-          example: Sample Direct Deal 1
+          description: The name of the term.
+          example: Series A
         sponsor:
           type: string
           description: The sponsor of the fund.
-          example: Sample Sponsor 1
+          example: Sample Sponsor
         start_date:
           type: string
-          description: Fund Inception Date. The date on which the fund began its operations.
-          example: '2015-11-10'
+          format: date
+          description: Fund Inception Date.
+          example: '2020-01-01'
         aliases:
           type: array
-          description: Aliases of the investment name. These are user-created.
+          description: Aliases of the investment name.
           items:
             type: string
           example:
-          - Sample Direct 1
-          - SDD1
+          - SF-A
+          - Sample Fund A
         legal_name:
           type: string
           description: The legal name of the fund.
-          example: Sample Direct Deal 1 LP
-        updated_at:
-          type: string
-          description: A timestamp of when the fund was updated.
-          example: '2018-04-30 20:40:19'
-        created_at:
-          type: string
-          description: A timestamp of when the fund was created.
-          example: '2018-04-30 20:40:19'
+          example: Sample Fund LP
         custom_fields:
           type: array
-          description: The list of custom fields associated with the fund.
+          description: Custom fields associated with the fund.
           items:
             type: object
             properties:
@@ -2736,427 +2617,83 @@ components:
               value:
                 type: string
                 description: The value of the custom field.
-              ID:
+              custom_field_id:
                 type: string
                 description: The ID of the custom field.
-          example:
-          - name: CLIENT_ID
-            value: BOX1
-            ID: '1'
-        requirements_preference:
-          type: object
-          description: The requirements preference of the fund.
-          properties:
-            account_statements:
-              type: object
-              properties:
-                balance:
-                  type: string
-                  description: Either ending_balance or price_units.
-          example:
-          - account_statements:
-              balance: price_units
-        term_id:
-          type: string
-          description: The ID of the term that is associated with the fund.
-          example: '1'
-        fund_name:
-          type: string
-          description: The name of the fund.
-          example: Sample Direct
-    FundDocumentData_3:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the document in Canoe.
-          example: '1'
-        client_document_id:
-          type: string
-          description: The custom document ID.
-          example: custom_id_1
-        name:
-          type: string
-          description: The name of the document. This contains the Investment Name (and its corresponding Entity Name), the Document Type, as well as the Data Date.
-          example: Sample Hedge Fund Deal 1 - Entity A - Account Statement - 12/31/16
-        document_status:
-          type: string
-          description: This is the validation status determined by Canoe.
-          example: Complete
-        category:
-          type: string
-          description: The category of the document.
-          example: Capital Activity
-        document_type:
-          type: string
-          description: The document type. For example, Capital Call Notice and Account Statement are examples of two document types.
-          example: Account Statement
-        source:
-          type: string
-          description: How the document entered Canoe.
-          example: Upload Engine
-        file_type:
-          type: string
-          description: A document's file type, such as .PDF or .DOC. Canoe only supports extraction and validation of PDFs.
-          example: .pdf
-        original_file_type:
-          type: string
-          description: Original type of the file before any conversion (e.g., ".docx")
-          example: .docx
-        original_file_name:
-          type: string
-          description: The document's original file name including the file type extension.
-          example: Entity A - Sample HF Deal.pdf
-        document_tags:
+        downstream_ids:
           type: array
-          description: The list of tag objects (name, ID) assigned to the document.
+          description: Downstream system identifiers.
           items:
             type: object
             properties:
               id:
                 type: string
-                description: The id of the tag.
-                example: '1'
               name:
                 type: string
-                description: The name of the tag.
-                example: tag_1
-          example:
-          - id: '1'
-            name: tag_1
-          - id: '2'
-            name: tag_2
-        reporting_frequency:
-          type: string
-          description: The reporting frequency (monthly, quarterly, or yearly) of the document, as determined based on the extracted fields.
-          example: Monthly
-        uploaded:
-          type: object
-          description: The datetime of when the document was uploaded into Canoe.
-          properties:
-            date:
-              type: string
-              description: The date of the upload.
-              example: '2018-04-30 20:51:38.000000'
-            timezone_type:
-              type: integer
-              description: The timezone type.
-              example: 3
-            timezone:
-              type: string
-              description: The timezone of the upload.
-              example: America/New_York
-          example:
-            date: '2018-04-30 20:51:38.000000'
-            timezone_type: 3
-            timezone: America/New_York
-        last_modified:
-          type: object
-          description: The datetime of when the document was last updated.
-          properties:
-            date:
-              type: string
-              description: The date of the last modification.
-              example: '2019-09-16 11:38:47.000000'
-            timezone_type:
-              type: integer
-              description: The timezone type.
-              example: 3
-            timezone:
-              type: string
-              description: The timezone of the last modification.
-              example: America/New_York
-          example:
-            date: '2019-09-16 11:38:47.000000'
-            timezone_type: 3
-            timezone: America/New_York
-        last_modified_by:
-          type: object
-          description: The user who last updated the document.
-          properties:
-            user_id:
-              type: string
-              description: The user ID of the user.
-              example: user_canoe
-            name:
-              type: string
-              description: The name of the user.
-              example: canoe software
-            email:
-              type: string
-              description: The email address of the user.
-              example: info@canoesoftware.com
-          example:
-            user_id: user_canoe
-            name: canoe software
-            email: info@canoesoftware.com
-        is_locked:
-          type: boolean
-          description: The is_locked status of the document in Canoe.
-          example: false
-        number_of_pages:
-          type: string
-          description: The number of pages of the document.
-          example: '1'
-        file_size:
-          type: integer
-          description: The file size of the document.
-          example: 2000
+              type:
+                type: string
+              value:
+                type: string
         allocations:
-          type: object
-          description: The investment allocation data of the document.
-          properties:
-            allocation_id:
-              type: string
-              description: The ID of the allocation record
-              example: allocation_1
-            data_date:
-              type: string
-              description: The effective date of the document.
-              example: '2016-12-31'
-            dataset_type:
-              type: string
-              description: The dataset type. For example, Capital Call Notice and Account Statement are examples of two dataset types.
-              example: Account Statement
-            investment:
-              type: string
-              description: The name of the investment that's associated with the document.
-              example: Sample Hedge Fund Deal 1
-            fund_sponsor:
-              type: string
-              description: The name of the fund sponsor that's associated with the document.
-              example: Sample Sponsor 1
-            custom_allocation_id:
-              type: string
-              description: The custom ID of the investment entity allocation that's associated with the document. This is user-created.
-              example: '123'
-            investment_id:
-              type: string
-              description: The ID of the investment that's associated with the document.
-              example: '1'
-            investment_legal_name:
-              type: string
-              description: The legal name of the investment that's associated with the document.
-              example: Sample Hedge Fund Deal One
-            investment_extraction_aliases:
-              type: array
-              description: The aliases of the investment that are associated with the document. These are user-created.
-              items:
-                type: string
-              example:
-              - Sample Hedge Fund Deal 1 alias 1
-              - Sample Hedge Fund Deal 1 alias 2
-            investment_structure:
-              type: string
-              description: The asset type of the fund that's associated with the document.
-              example: hedge_fund
-            entity:
-              type: string
-              description: The name of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
-              example: Entity A
-            entity_id:
-              type: string
-              description: The ID of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
-              example: '1'
-            entity_extraction_aliases:
-              type: array
-              description: The aliases of the entity that are associated with the document. These are user-created.
-              items:
-                type: string
-              example:
-              - Entity A alias 1
-              - Entity A alias 2
-            account:
-              type: string
-              description: The name of the account that's associated with the document.
-              example: Demo
-            account_id:
-              type: string
-              description: The ID of the account that's associated with the document.
-              example: '3'
-            extracted_data:
-              type: object
-              description: An object of the raw extracted data from the document.
-              example:
-                entity: Entity A
-                fundName: Sample Hedge Fund Deal 1
-                endingDate: 12/31/2016
-                beginningDate: 11/30/2016
-                endingBalance: 4,111,305
-                beginningBalance: 4,036,960
-                otherFeesMTD: '395'
-            validated_data:
-              type: object
-              description: An object of the formatted and validated data of the document. If the sign handling setting of the tenant is "standard", some data fields will be formatted and normalized. If the setting is "as reported", all data fields will only be formatted.
-              example:
-                entity: Entity A
-                fundName: Sample Hedge Fund Deal 1
-                endingDate: '2016-12-31'
-                beginningDate: '2016-11-30'
-                endingBalance: 4111305
-                beginningBalance: 4036960
-                otherFeesMTD: 395
-            validation_errors:
-              type: object
-              description: An object of the document's validation errors. Each item inside is a 'key:value' pair, where the "key" is the extracted field name and the "value" is the explanation of why the extracted value didn't pass Canoe's validation logic.
-              example: {}
-            analyst:
-              type: string
-              description: The analyst associated with this fund.
-              example: Allison
-            frequency:
-              type: string
-              description: How frequently this fund's statements come in. For example, if a statement comes in every month then the output will be "monthly."
-              example: monthly
-            custom_fields:
-              type: array
-              description: The list of custom field objects (name, value, ID) of the investment and/or allocation associated with the document.
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                    description: The name of the custom field.
-                  value:
-                    type: string
-                    description: The value of the custom field.
-                  ID:
-                    type: string
-                    description: The ID of the custom field.
-              example:
-              - name: CLIENT_ID
-                value: BOX1
-                ID: '1'
-            document_groups:
-              type: object
-              description: Documents may be associated with other documents via document groups. A document may exist in multiple document groups (based on different criteria).
-              additionalProperties: true
-              example:
-                transaction:
-                  group_id: transaction_group_id
-                  member_document_ids:
-                  - '1'
-                  - '22'
-                  - '35'
-            addepar_owned_id:
-              type: string
-              description: The ID of the addepar owned entity that is associated with the document.
-              example: AddeparOwned1
-            addepar_owner_id:
-              type: string
-              description: The ID of the addepar owner entity that is associated with the document.
-              example: AddeparOwner1
-            black_diamond_symbol:
-              type: string
-              description: The Black Diamond symbol associated with the document.
-              example: BlackDiamondSymbol1
-            black_diamond_account:
-              type: string
-              description: The Black Diamond account associated with the document.
-              example: BlackDiaAcc
-            fund_name:
-              type: string
-              description: The name of the fund.
-              example: Sample Direct Deal 1
-            term_id:
-              type: string
-              description: The ID of the term that is associated with the fund.
-              example: ''
-    SingleFund_3:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The fund's ID.
-          example: '1'
-        organization_id:
-          type: string
-          description: The ID of the organization that the fund is associated with.
-          example: '12'
-        type:
-          type: string
-          description: The fund's investment type.
-          example: direct_investment
-        status:
-          type: string
-          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
-          example: active
-        name:
-          type: string
-          description: The name of the fund.
-          example: Sample Direct Deal 1
-        sponsor:
-          type: string
-          description: The sponsor of the fund.
-          example: Sample Sponsor 1
-        start_date:
-          type: string
-          description: Fund Inception Date. The date on which the fund began its operations.
-          example: '2015-11-10'
-        aliases:
           type: array
-          description: Aliases of the investment name. These are user-created.
-          items:
-            type: string
-          example:
-          - Sample Direct 1
-          - SDD1
-        legal_name:
-          type: string
-          description: The legal name of the fund.
-          example: Sample Direct Deal 1 LP
-        updated_at:
-          type: string
-          description: A timestamp of when the fund was updated.
-          example: '2018-04-30 20:40:19'
-        created_at:
-          type: string
-          description: A timestamp of when the fund was created.
-          example: '2018-04-30 20:40:19'
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the fund.
+          description: List of allocations associated with this fund/term.
           items:
             type: object
             properties:
-              name:
+              allocation_id:
                 type: string
-                description: The name of the custom field.
-              value:
+                description: The ID of the allocation.
+                example: alloc_123
+              status:
                 type: string
-                description: The value of the custom field.
-              ID:
+                description: The status of the allocation.
+                example: active
+              custom_allocation_id:
                 type: string
-                description: The ID of the custom field.
-          example:
-          - name: CLIENT_ID
-            value: BOX1
-            ID: '1'
-        fund_name:
-          type: string
-          description: The name of the fund.
-          example: Sample Direct Deal 1
-        requirements_preference:
-          type: object
-          description: The requirements preference of the fund.
-          properties:
-            account_statements:
-              type: object
-              properties:
-                balance:
-                  type: string
-                  description: Either ending_balance or price_units.
-          example:
-          - account_statements:
-              balance: price_units
-        term_id:
-          type: string
-          description: The ID of the term that is associated with the fund.
-          example: '123'
-        term_name:
-          type: string
-          description: The name of the term
-          example: Deal 1
+                description: Custom allocation identifier.
+                example: CUSTOM-001
+              custom_fields:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+                    custom_field_id:
+                      type: string
+              entity:
+                type: object
+                description: Entity information for this allocation.
+                properties:
+                  id:
+                    type: string
+                    description: The entity ID.
+                  name:
+                    type: string
+                    description: The entity name.
+                  parent_id:
+                    type: string
+                    description: The parent account ID.
+                  status:
+                    type: string
+                    description: The entity status.
+                  aliases:
+                    type: array
+                    items:
+                      type: string
+                  custom_fields:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                        custom_field_id:
+                          type: string
   securitySchemes:
     bearerAuth:
       type: http
@@ -3180,7 +2717,6 @@ externalDocs:
 x-refined-from:
 - canoe-intelligence-api-docs-v1-original.yaml
 - canoe-intelligence-api-openapi-original.json
-- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:

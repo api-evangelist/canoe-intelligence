@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Canoe Intelligence Custom Fields API
   version: '1.0'
-  description: 'Operations tagged Custom Fields across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Custom Fields across 2 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
@@ -13,15 +13,13 @@ paths:
     get:
       tags:
       - Custom Fields
-      summary: null
+      summary: Get custom fields
       description: '/v1/custom_fields
 
 
         Returns a list of custom fields available for the authenticated tenant.
 
-        Optionally filter by ownership_level.
-
-        '
+        Optionally filter by ownership_level.'
       operationId: GetCustomFields
       parameters:
       - name: ownership_level
@@ -79,6 +77,7 @@ paths:
           description: Successful response with list of custom fields.
         '400':
           description: Invalid ownership_level provided.
+      x-summary-source: derived
   /v1/custom_fields:
     get:
       tags:
@@ -150,7 +149,6 @@ externalDocs:
 x-refined-from:
 - canoe-intelligence-api-docs-v1-original.yaml
 - canoe-intelligence-api-openapi-original.json
-- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:

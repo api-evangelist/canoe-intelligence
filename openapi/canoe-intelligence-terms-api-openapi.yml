@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Canoe Intelligence Terms API
   version: '1.0'
-  description: 'Operations tagged Terms across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Terms across 2 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
@@ -14,13 +14,11 @@ paths:
     get:
       tags:
       - Terms
-      summary: null
+      summary: Get terms
       description: '/v1/terms
 
 
-        Fetch all terms accessible by the current API user.
-
-        '
+        Fetch all terms accessible by the current API user.'
       operationId: GetTerms
       parameters:
       - name: term_id
@@ -137,17 +135,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GetTerms'
+      x-summary-source: derived
   Create A Single Term:
     post:
       tags:
       - Terms
-      summary: null
+      summary: Create single term
       description: '/v1/terms
 
 
-        Create a new term based on the input parameters.
-
-        '
+        Create a new term based on the input parameters.'
       operationId: CreateSingleTerm
       parameters:
       - name: name
@@ -248,17 +245,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GetTerms'
+      x-summary-source: derived
   Update A Single Term:
     put:
       tags:
       - Terms
-      summary: null
+      summary: Update single term
       description: '/v1/terms/{id}
 
 
-        Update the specified term based on the input parameters.
-
-        '
+        Update the specified term based on the input parameters.'
       operationId: UpdateSingleTerm
       parameters:
       - name: id
@@ -366,17 +362,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GetTerms'
+      x-summary-source: derived
   Delete A Single Term:
     delete:
       tags:
       - Terms
-      summary: null
+      summary: Delete single term
       description: '/v1/terms/{id}
 
 
-        Delete a single term based on the term''s id.
-
-        '
+        Delete a single term based on the term''s id.'
       operationId: DeleteSingleTerm
       parameters:
       - name: id
@@ -424,6 +419,7 @@ paths:
                 items:
                   example:
                     message: '5a2044f0-4db9-11ed-a40f-0242ac120004 cannot be deleted because it is the last Term on the parent Fund. Use the Delete a single Fund endpoint to delete the Fund ID: fund_id_1'
+      x-summary-source: derived
   /v1/terms:
     get:
       tags:
@@ -885,79 +881,6 @@ components:
           type: string
           description: The extraction status of the term.
           example: Ready For Extract
-    GetTerms_3:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the Term.
-          example: Series 2
-        id:
-          type: string
-          description: The Term's ID.
-          example: a5176574-0948-11ee-9701-0a58a9feac02
-        designation:
-          type: string
-          description: The Term's designation.
-          example: Series
-        aliases:
-          type: array
-          description: Aliases of the Term name. These are user-created.
-          items:
-            type: string
-            example:
-            - SFS2
-            - SF-2
-        created_at:
-          type: string
-          description: A timestamp of when the Term was created.
-          example: '2018-04-30 20:40:19'
-        updated_at:
-          type: string
-          description: A timestamp of when the Term was updated.
-          example: '2018-04-30 20:40:19'
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the term.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-              value:
-                type: string
-                description: The value of the custom field.
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-          example:
-          - name: CLIENT_ID
-            value: BOX1
-            custom_field_id: '1'
-        fund_name:
-          type: string
-          description: The name of the Fund to which the Term belongs.
-          example: Sample Fund
-        fund_id:
-          type: string
-          description: The ID of the Fund to which the Term belongs.
-          example: ba67e8d4-902d-11ed-bafd-0a58a9feac02
-        organization_id:
-          type: string
-          description: The ID of the Organization to which the Term’s Fund belongs.
-          example: fb780fe2-b05f-11ec-a394-5717ed8c873f
-        date_format:
-          type: string
-          enum:
-          - DD-MM-YYYY
-          - MM-DD-YYYY
-          description: Date format preference for the term.
-          example: MM-DD-YYYY
-        extraction_status:
-          type: string
-          description: The extraction status of the term.
-          example: Ready For Extract
   securitySchemes:
     bearerAuth:
       type: http
@@ -981,7 +904,6 @@ externalDocs:
 x-refined-from:
 - canoe-intelligence-api-docs-v1-original.yaml
 - canoe-intelligence-api-openapi-original.json
-- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:

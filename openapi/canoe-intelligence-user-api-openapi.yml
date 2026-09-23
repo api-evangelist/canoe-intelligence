@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Canoe Intelligence User API
   version: '1.0'
-  description: 'Operations tagged User across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged User across 2 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
@@ -14,13 +14,11 @@ paths:
     get:
       tags:
       - User
-      summary: null
+      summary: User
       description: '/v1/user
 
 
-        Fetch information about your Canoe API user.
-
-        '
+        Fetch information about your Canoe API user.'
       operationId: User
       requestBody:
         content:
@@ -50,12 +48,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
+      x-summary-source: derived
   Get Users Within Your Organization:
     get:
       tags:
       - User
-      summary: null
-      description: "/v1/users\n\nFetch information about users within your Canoe organization.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2024-12-12.\n</span>\n"
+      summary: Find by tags
+      description: '/v1/users
+
+
+        Fetch information about users within your Canoe organization.
+
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+
+        When using pagination, the response will contain headers defining the total number of results,
+
+        as well as the first, next, prev, and last page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-12-12.'
       operationId: findByTags
       parameters:
       - name: page
@@ -161,16 +177,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Users'
+      x-summary-source: derived
   Create A User Within Your Organization:
     post:
       tags:
       - User
-      summary: null
+      summary: Create ASingle user
       description: '/v1/user
 
-        Create a user within your Canoe organization.
-
-        '
+        Create a user within your Canoe organization.'
       operationId: CreateASingleUser
       parameters:
       - name: first_name
@@ -245,16 +260,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UserWithId'
+      x-summary-source: derived
   Update A User Within Your Organization:
     put:
       tags:
       - User
-      summary: null
+      summary: Update ASingle user
       description: '/v1/users/{id}
 
-        Update a user within your Canoe organization.
-
-        '
+        Update a user within your Canoe organization.'
       operationId: UpdateASingleUser
       parameters:
       - name: id
@@ -322,17 +336,16 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Users'
+      x-summary-source: derived
   Get User Access Levels:
     get:
       tags:
       - User
-      summary: null
+      summary: Find by role
       description: '/v1/users/roles
 
 
-        Fetch information about access roles within your Canoe organization.
-
-        '
+        Fetch information about access roles within your Canoe organization.'
       operationId: findByRole
       parameters: null
       requestBody:
@@ -365,6 +378,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Roles'
+      x-summary-source: derived
   /v1/user:
     get:
       tags:
@@ -519,7 +533,21 @@ paths:
       tags:
       - User
       summary: Get Users Within Your Organization
-      description: "Fetch information about users within your Canoe organization.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2024-12-12.\n</span>"
+      description: 'Fetch information about users within your Canoe organization.
+
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+
+        When using pagination, the response will contain headers defining the total number of results,
+
+        as well as the first, next, prev, and last page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-12-12.'
       operationId: findByTags
       parameters:
       - name: page
@@ -989,64 +1017,6 @@ components:
           type: string
           description: A timestamp of when this user was created.
           example: '2017-03-17 12:05:59'
-    Users_3:
-      type: object
-      properties:
-        user_id:
-          type: string
-          description: The ID of the user.
-          example: user_1
-        status:
-          type: string
-          description: Whether the user is active or inactive.
-          example: active
-        email:
-          type: string
-          description: The user's email address.
-          example: jane-doe@gmail.com
-        phone:
-          type: string
-          description: The user's phone number.
-          example: (555) 123-4567
-        first_name:
-          type: string
-          description: The user's first name.
-          example: Jane
-        last_name:
-          type: string
-          description: The user's last name.
-          example: Doe
-        created_at:
-          type: string
-          description: The timestamp of when this user was created.
-          example: '2020-11-02 13:20:47'
-    User_3:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Whether a user is active or inactive.
-          example: active
-        email:
-          type: string
-          description: A user's email address.
-          example: your-email@gmail.com
-        phone:
-          type: string
-          description: A user's phone number.
-          example: '1234567890'
-        first_name:
-          type: string
-          description: A user's first name.
-          example: Jane
-        last_name:
-          type: string
-          description: A user's last name.
-          example: Doe
-        created_at:
-          type: string
-          description: A timestamp of when this user was created.
-          example: '2017-03-17 12:05:59'
   securitySchemes:
     bearerAuth:
       type: http
@@ -1070,7 +1040,6 @@ externalDocs:
 x-refined-from:
 - canoe-intelligence-api-docs-v1-original.yaml
 - canoe-intelligence-api-openapi-original.json
-- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:

@@ -2,8 +2,7 @@
   "provider": "canoe-intelligence",
   "sources": [
     "_original/canoe-intelligence-api-docs-v1-original.yaml",
-    "_original/canoe-intelligence-api-openapi-original.json",
-    "_original/canoe-intelligence-api-openapi.yml"
+    "_original/canoe-intelligence-api-openapi-original.json"
   ],
   "outputs": [
     "canoe-intelligence-allocations-api-openapi.yml",
@@ -24,29 +23,31 @@
     "canoe-intelligence-api-docs-v1-original.yaml: info.version missing"
   ],
   "notes": [
-    "sourced from openapi/_original/ (3 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "1 archived document(s) dropped as subsets of other archived documents",
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "canoe-intelligence-api-docs-v1-original.yaml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
     "canoe-intelligence-api-docs-v1-original.yaml: declared missing tag: Custom Fields",
     "canoe-intelligence-api-openapi-original.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
     "canoe-intelligence-api-openapi-original.json: declared missing tag: Custom Fields",
-    "canoe-intelligence-api-openapi.yml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
-    "canoe-intelligence-api-openapi.yml: declared missing tag: Custom Fields",
-    "tag 'Allocations' spans 3 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml): per-path servers applied",
-    "tag 'Authentication' spans 3 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml): per-path servers applied",
-    "tag 'Custom Fields' spans 3 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml): per-path servers applied",
-    "tag 'Documents' spans 3 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml): per-path servers applied",
-    "tag 'Funds' spans 3 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml): per-path servers applied",
-    "tag 'Organizations' spans 3 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml): per-path servers applied",
-    "tag 'Password Grant Tokens' spans 3 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml): per-path servers applied",
-    "tag 'Terms' spans 3 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml): per-path servers applied",
-    "tag 'User' spans 3 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml): per-path servers applied"
+    "tag 'Allocations' spans 2 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json): per-path servers applied",
+    "tag 'Authentication' spans 2 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json): per-path servers applied",
+    "tag 'Custom Fields' spans 2 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json): per-path servers applied",
+    "tag 'Documents' spans 2 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json): per-path servers applied",
+    "tag 'Funds' spans 2 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json): per-path servers applied",
+    "tag 'Organizations' spans 2 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json): per-path servers applied",
+    "tag 'Password Grant Tokens' spans 2 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json): per-path servers applied",
+    "tag 'Terms' spans 2 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json): per-path servers applied",
+    "tag 'User' spans 2 source specs (canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
+    "_original/canoe-intelligence-api-openapi.yml: archived document superseded by a larger archived document",
     "canoe-intelligence-allocations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "canoe-intelligence-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "canoe-intelligence-custom-fields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "canoe-intelligence-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "canoe-intelligence-funds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "canoe-intelligence-introduction-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "canoe-intelligence-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "canoe-intelligence-password-grant-tokens-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "canoe-intelligence-terms-api-openapi.yml: previously refined output, superseded by openapi/_original/",

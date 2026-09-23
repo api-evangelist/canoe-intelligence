@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Canoe Intelligence Documents API
   version: '1.0'
-  description: 'Operations tagged Documents across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Documents across 2 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
@@ -14,8 +14,30 @@ paths:
     get:
       tags:
       - Documents
-      summary: null
-      description: "/v1/documents/data\n\nFetch documents' extracted data and metadata.\n\nBy default, Canoe's server sends back the full representation of each document object after processing requests.\nFor faster performance, you can use optional parameters to retrieve a subset of documents.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2022-09-19.\n</span>\n"
+      summary: Get documents
+      description: '/v1/documents/data
+
+
+        Fetch documents'' extracted data and metadata.
+
+
+        By default, Canoe''s server sends back the full representation of each document object after processing requests.
+
+        For faster performance, you can use optional parameters to retrieve a subset of documents.
+
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+
+        When using pagination, the response will contain headers defining the total number of results,
+
+        as well as the first, next, prev, and last page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2022-09-19.'
       operationId: GetDocuments
       parameters:
       - name: page
@@ -396,20 +418,19 @@ paths:
                   $ref: '#/components/schemas/Document'
         '403':
           description: No access to the document.
+      x-summary-source: derived
   Get Document Types:
     get:
       tags:
       - Documents
-      summary: null
+      summary: Get documents type
       description: '/v1/documents/types
 
 
         Fetch all available document types.
 
 
-        Document types are dynamically managed and organized by category. The response includes document type information including ID, key, level (''client_document'' or ''general_document''), category, and display name.
-
-        '
+        Document types are dynamically managed and organized by category. The response includes document type information including ID, key, level (''client_document'' or ''general_document''), category, and display name.'
       operationId: GetDocumentsType
       parameters: null
       requestBody:
@@ -452,17 +473,16 @@ paths:
                     level: client_document
                     category: Capital Activity
                     document_type: Capital Call Notice
+      x-summary-source: derived
   Get Document Tags:
     get:
       tags:
       - Documents
-      summary: null
+      summary: Get document tags
       description: '/v1/documents/tags
 
 
-        Fetch all available document tags.
-
-        '
+        Fetch all available document tags.'
       operationId: GetDocumentTags
       parameters:
       - name: page
@@ -532,17 +552,16 @@ paths:
                       per_page: 100
                       to: 2
                       total: 2
+      x-summary-source: derived
   Get Document Allocation Tags:
     get:
       tags:
       - Documents
-      summary: null
+      summary: Get document allocation tags
       description: '/v1/documents/allocation-tags
 
 
-        Fetch all available document allocation tags.
-
-        '
+        Fetch all available document allocation tags.'
       operationId: GetDocumentAllocationTags
       parameters:
       - name: page
@@ -612,17 +631,16 @@ paths:
                       per_page: 100
                       to: 2
                       total: 2
+      x-summary-source: derived
   Delete Multiple Documents:
     post:
       tags:
       - Documents
-      summary: null
+      summary: Delete multiple documents
       description: '/v1/documents/delete-documents
 
 
-        Delete up to 100 documents by filtering with the current parameters. At least one parameter is required in the request.
-
-        '
+        Delete up to 100 documents by filtering with the current parameters. At least one parameter is required in the request.'
       operationId: DeleteMultipleDocuments
       parameters:
       - name: document_id
@@ -826,17 +844,16 @@ paths:
                     deleted: 1
                     ids:
                     - deleted_document_id
+      x-summary-source: derived
   Get A Single Document:
     get:
       tags:
       - Documents
-      summary: null
+      summary: Get ASingle document
       description: '/v1/documents/{id}
 
 
-        Download a specific document by the document''s ID. A successful call to this endpoint will only contain the binary file, not the JSON data.
-
-        '
+        Download a specific document by the document''s ID. A successful call to this endpoint will only contain the binary file, not the JSON data.'
       operationId: GetASingleDocument
       parameters:
       - name: id
@@ -872,17 +889,16 @@ paths:
           description: Success
         '403':
           description: No access to the document.
+      x-summary-source: derived
   Delete A Single Document:
     delete:
       tags:
       - Documents
-      summary: null
+      summary: Delete document
       description: '/v1/documents/{id}
 
 
-        Delete a specific document by using the document''s Canoe ID.
-
-        '
+        Delete a specific document by using the document''s Canoe ID.'
       operationId: DeleteDocument
       parameters:
       - name: id
@@ -918,11 +934,12 @@ paths:
           description: The Document was deleted.
         '403':
           description: No access to the document.
+      x-summary-source: derived
   Bulk Set Document Metadata:
     post:
       tags:
       - Documents
-      summary: null
+      summary: Bulk set document metadata
       description: '/v1/documents/metadata
 
 
@@ -930,9 +947,7 @@ paths:
 
         Processing continues even if individual documents fail. Returns a summary
 
-        of successful and failed updates.
-
-        '
+        of successful and failed updates.'
       operationId: BulkSetDocumentMetadata
       parameters:
       - name: document_ids
@@ -1007,17 +1022,16 @@ paths:
           description: Returns summary with total, successful, failed counts and per-document results.
         '422':
           description: Validation error — invalid request body (returned before processing starts).
+      x-summary-source: derived
   Set Document Metadata:
     put:
       tags:
       - Documents
-      summary: null
+      summary: Set document metadata
       description: '/v1/documents/{id}/metadata
 
 
-        Set document metadata.
-
-        '
+        Set document metadata.'
       operationId: SetDocumentMetadata
       parameters:
       - name: id
@@ -1117,20 +1131,19 @@ paths:
           description: Approval status cannot be set on this document.
         '422':
           description: Invalid approval status specified.
+      x-summary-source: derived
   Download Documents:
     get:
       tags:
       - Documents
-      summary: null
+      summary: Download documents
       description: '/v1/documents
 
 
         Download documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.
 
 
-        To retrieve additional information, you can inspect the response header data. There, you can find the total number of documents filtered by current query parameters.
-
-        '
+        To retrieve additional information, you can inspect the response header data. There, you can find the total number of documents filtered by current query parameters.'
       operationId: DownloadDocuments
       parameters:
       - name: page
@@ -1449,17 +1462,16 @@ paths:
       responses:
         '200':
           description: Success
+      x-summary-source: derived
   Upload A Single Document:
     post:
       tags:
       - Documents
-      summary: null
+      summary: Upload documents
       description: '/v1/documents
 
 
-        Upload a Single Document
-
-        '
+        Upload a Single Document'
       operationId: UploadDocuments
       parameters:
       - name: file
@@ -1571,12 +1583,25 @@ paths:
                       - The document_type_id field is required for storage only upload.
                       term_id:
                       - The term_id field is required for storage only upload.
+      x-summary-source: derived
   Edit Document Attributes:
     put:
       tags:
       - Documents
-      summary: null
-      description: "/v1/documents/edit-attributes\n\nUpdate categorization attributes for up to 100 documents in a single request. At least one of the following fields must be provided: <code>allocation_id</code>, <code>entity_id</code>, <code>term_id</code>, <code>data_date</code>, or <code>document_type_id</code>.\n\nThe allocation can be specified in two ways:\n<ul>\n  <li>By <code>allocation_id</code> — directly identifies an existing investment. This derives the associated fund, entity, and term automatically.</li>\n  <li>By <code>term_id</code> + <code>entity_id</code> — must correspond to an existing investment record.</li>\n</ul>\n"
+      summary: Edit document attributes
+      description: '/v1/documents/edit-attributes
+
+
+        Update categorization attributes for up to 100 documents in a single request. At least one of the following fields must be provided: allocation_id, entity_id, term_id, data_date, or document_type_id.
+
+
+        The allocation can be specified in two ways:
+
+
+        By allocation_id — directly identifies an existing investment. This derives the associated fund, entity, and term automatically.
+
+
+        By term_id + entity_id — must correspond to an existing investment record.'
       operationId: EditDocumentAttributes
       parameters:
       - name: document_ids
@@ -1691,12 +1716,32 @@ paths:
               schema:
                 type: object
                 example: At least one allocation field is required.
+      x-summary-source: derived
   /v1/documents/data:
     get:
       tags:
       - Documents
       summary: Get Document Data
-      description: "Fetch documents' extracted data and metadata.\n\nBy default, Canoe's server sends back the full representation of each document object after processing requests.\nFor faster performance, you can use optional parameters to retrieve a subset of documents.\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2022-09-19.\n</span>"
+      description: 'Fetch documents'' extracted data and metadata.
+
+
+        By default, Canoe''s server sends back the full representation of each document object after processing requests.
+
+        For faster performance, you can use optional parameters to retrieve a subset of documents.
+
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+
+        When using pagination, the response will contain headers defining the total number of results,
+
+        as well as the first, next, prev, and last page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2022-09-19.'
       operationId: GetDocuments
       parameters:
       - name: page
@@ -3116,6 +3161,43 @@ paths:
       description: Production API
 components:
   schemas:
+    DocumentMetaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the document that was updated.
+          example: '3'
+        document_status:
+          type: string
+          description: The updated document status.
+          example: Complete
+        approval_status:
+          type: string
+          description: The updated approval status of the document.
+          example: Approved
+        comment:
+          type: string
+          description: The updated comment on the document.
+          example: Sample Comment.
+        tags:
+          type: array
+          description: The array of tags associated with the document.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The id of the tag.
+                example: '1'
+              name:
+                type: string
+                description: The name of the tag.
+                example: tag_1
+        client_document_id:
+          type: string
+          description: The client document id.
+          example: custom_document_id.
     UploadSingleDocument:
       type: object
       properties:
@@ -3539,452 +3621,7 @@ components:
                 type: string
                 description: The date of when the allocation retires.
                 example: '2017-12-31'
-    DocumentMetaData:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the document that was updated.
-          example: '3'
-        document_status:
-          type: string
-          description: The updated document status.
-          example: Complete
-        approval_status:
-          type: string
-          description: The updated approval status of the document.
-          example: Approved
-        comment:
-          type: string
-          description: The updated comment on the document.
-          example: Sample Comment.
-        tags:
-          type: array
-          description: The array of tags associated with the document.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The id of the tag.
-                example: '1'
-              name:
-                type: string
-                description: The name of the tag.
-                example: tag_1
-        client_document_id:
-          type: string
-          description: The client document id.
-          example: custom_document_id.
     Document_2:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique ID of the document
-          example: '16'
-        client_document_id:
-          type: string
-          description: Custom ID of the client document
-          example: custom_id_16
-        name:
-          type: string
-          description: Name of the document
-          example: Sample Hedge Fund Deal 1 - Entity A - Account Statement - 07/31/19
-        document_status:
-          type: string
-          description: Status of the document (e.g., Complete)
-          example: Complete
-        category:
-          type: string
-          description: Category of the document (e.g., Capital Activity)
-          example: Capital Activity
-        document_type:
-          type: string
-          description: Type of the document (e.g., Account Statement)
-          example: Account Statement
-        source:
-          type: string
-          description: Source of the document (e.g., Upload Engine)
-          example: Upload Engine
-        file_type:
-          type: string
-          description: Type of the file (e.g., ".pdf")
-          example: .pdf
-        original_file_type:
-          type: string
-          description: Original type of the file before any conversion (e.g., ".docx")
-          example: .docx
-        original_file_name:
-          type: string
-          description: Original file name of the document
-          example: Entity One - Sample HF Deal.pdf
-        document_tags:
-          type: array
-          description: Tags associated with the document
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-                description: Tag ID
-                example: 1
-              name:
-                type: string
-                description: Tag name
-                example: tag_1
-        reporting_frequency:
-          type: string
-          description: Reporting frequency of the document (e.g., Monthly)
-          example: Monthly
-        uploaded:
-          type: string
-          format: date-time
-          description: The date and time when the document was uploaded
-          example: '2019-04-30 20:51:38'
-        uploaded_by:
-          type:
-          - string
-          - 'null'
-          description: Name of the user who uploaded the document
-          example: John Doe
-        last_modified:
-          type: string
-          format: date-time
-          description: The date and time when the document was last modified
-          example: '2019-09-16 11:38:47'
-        last_modified_by:
-          type: object
-          description: Information about the user who last modified the document
-          properties:
-            user_id:
-              type: string
-              description: User ID of the modifier
-              example: user_canoe
-            name:
-              type: string
-              description: Name of the user who modified the document
-              example: canoe software
-            email:
-              type: string
-              description: Email address of the user who modified the document
-              example: info@canoesoftware.com
-        document_approval:
-          description: Details about the approval of the document. Returns string 'Pending' when no approval exists, or an object when approved.
-          oneOf:
-          - type: string
-            enum:
-            - Pending
-            description: Returned when no approval exists
-          - type: object
-            description: Returned when document is approved
-            properties:
-              approval_status:
-                type: string
-                description: Approval status of the document (e.g., Approved)
-                example: Approved
-              approved_by:
-                type: object
-                description: Information about the user who approved the document
-                properties:
-                  user_id:
-                    type: string
-                    description: User ID of the approver
-                    example: user_1
-                  first_name:
-                    type: string
-                    description: First name of the user who approved the document
-                    example: Allison
-                  last_name:
-                    type: string
-                    description: Last name of the user who approved the document
-                    example: Smith
-                  email:
-                    type: string
-                    description: Email address of the user who approved the document
-                    example: allison@example.com
-              approval_date:
-                type: string
-                format: date-time
-                description: Approval date and time
-                example: '2019-09-16 11:38:47'
-        is_locked:
-          type: boolean
-          description: Indicates whether the document is locked or not
-          example: false
-        number_of_pages:
-          type: string
-          description: Number of pages in the document
-          example: '1'
-        file_size:
-          type: integer
-          description: Size of the file in bytes
-          example: 2000
-        comment:
-          type: string
-          description: Current comment associated with the document
-          example: current comment
-        comment_history:
-          type: array
-          description: History of comments for the document
-          items:
-            type: object
-            properties:
-              document_id:
-                type: string
-                description: ID of the commented document
-                example: '1'
-              comment:
-                type: string
-                description: Comment text
-                example: comment
-              user_id:
-                type: string
-                description: User ID of the commenter
-                example: user_1
-              created_at:
-                type: string
-                description: Comment creation date in format 'YYYY-MM-DD HH:MM:SS'
-                example: '2019-09-16 11:38:47.000000'
-        assignee:
-          type: string
-          description: User ID of the assignee
-          example: user_1
-        ready_for_extract:
-          type: boolean
-          description: Extraction readiness status of the document
-          example: true
-        allocations:
-          type: array
-          description: List of allocations related to the document
-          items:
-            type: object
-            properties:
-              allocation_id:
-                type: string
-                description: The ID of the allocation record
-                example: allocation_1
-              data_date:
-                type: string
-                description: Date of the data in format 'YYYY-MM-DD'
-                example: '2019-07-31'
-              dataset_type:
-                type: string
-                description: Type of the dataset (e.g., Account Statement)
-                example: Account Statement
-              investment:
-                type: string
-                description: Name of the investment
-                example: Sample Hedge Fund Deal 1
-              fund_sponsor:
-                type: string
-                description: Name of the fund sponsor
-                example: Sample Sponsor 1
-              custom_allocation_id:
-                type: string
-                description: Custom ID of the allocation
-                example: '123'
-              investment_id:
-                type: string
-                description: ID of the investment
-                example: '1'
-              investment_legal_name:
-                type: string
-                description: Legal name of the investment
-                example: Sample Hedge Fund Deal One
-              investment_extraction_aliases:
-                type:
-                - array
-                - 'null'
-                description: Aliases related to the investment extraction
-                items:
-                  type: string
-                  example:
-                  - Sample Hedge Fund Deal 1 alias 1
-                  - Sample Hedge Fund Deal 1 alias 2
-              investment_structure:
-                type: string
-                description: Type of the investment structure (e.g., hedge_fund)
-                example: hedge_fund
-              entity:
-                type: string
-                description: Name of the entity
-                example: Entity One
-              entity_id:
-                type: string
-                description: ID of the entity
-                example: '4'
-              entity_extraction_aliases:
-                type:
-                - array
-                - 'null'
-                description: Aliases related to the entity extraction
-                items:
-                  type: string
-                  example:
-                  - Entity One alias 1
-                  - Entity One alias 2
-              account:
-                type: string
-                description: Name of the account
-                example: Account One
-              account_id:
-                type: string
-                description: ID of the account
-                example: '1'
-              extracted_data:
-                type: object
-                description: Extracted data related to the allocation
-                properties:
-                  entity:
-                    type: string
-                    description: Name of the entity
-                    example: Entity One
-                  fundName:
-                    type: string
-                    description: Name of the fund
-                    example: Sample Hedge Fund Deal 1
-                  endingDate:
-                    type: string
-                    description: Ending date in format 'MM/DD/YYYY'
-                    example: 07/31/2019
-                  beginningDate:
-                    type: string
-                    description: Beginning date in format 'MM/DD/YYYY'
-                    example: 07/01/2019
-                  endingBalance:
-                    type: string
-                    description: Ending balance as a string
-                    example: 4,111,305
-                  beginningBalance:
-                    type: string
-                    description: Beginning balance as a string
-                    example: 4,036,960
-                  otherFeesMTD:
-                    type: string
-                    description: Other fees for the month as a string
-                    example: '508'
-              validated_data:
-                type: object
-                description: Validated data related to the allocation
-                properties:
-                  entity:
-                    type: string
-                    description: Name of the entity
-                    example: Entity One
-                  fundName:
-                    type: string
-                    description: Name of the fund
-                    example: Sample Hedge Fund Deal 1
-                  endingDate:
-                    type: string
-                    description: Ending date in format 'YYYY-MM-DD'
-                    example: '2019-07-31'
-                  beginningDate:
-                    type: string
-                    description: Beginning date in format 'YYYY-MM-DD'
-                    example: '2019-07-01'
-                  endingBalance:
-                    type: integer
-                    description: Ending balance as an integer
-                    example: 4111305
-                  beginningBalance:
-                    type: integer
-                    description: Beginning balance as an integer
-                    example: 4036960
-                  otherFeesMTD:
-                    type: integer
-                    description: Other fees for the month as an integer
-                    example: 508
-              validation_errors:
-                type: array
-                description: Validation errors related to the allocation
-                items:
-                  type: string
-                example: []
-              analyst:
-                type: string
-                description: Name of the analyst
-                example: Allison
-              frequency:
-                type: string
-                description: Frequency of the allocation (e.g., monthly)
-                example: monthly
-              custom_fields:
-                type: array
-                description: Custom fields associated with the allocation
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                      description: Name of the custom field
-                      example: CLIENT_ID
-                    value:
-                      type: string
-                      description: Value of the custom field
-                      example: BOX1
-                    custom_field_id:
-                      type: string
-                      description: ID of the custom field
-                      example: '1'
-              document_groups:
-                type: object
-                description: Document groups associated with the allocation
-                properties:
-                  transaction:
-                    type: object
-                    properties:
-                      group_id:
-                        type: string
-                        description: ID of the transaction group
-                        example: transaction_group_id
-                      member_document_ids:
-                        type: array
-                        description: IDs of the member documents in the group
-                        items:
-                          type: string
-                          example:
-                          - '16'
-                          - '22'
-                          - '35'
-              addepar_owned_id:
-                type: string
-                description: Addepar owned ID
-                example: AddeparOwned1
-              addepar_owner_id:
-                type: string
-                description: Addepar owner ID
-                example: AddeparOwner1
-              black_diamond_symbol:
-                type: string
-                description: Black Diamond symbol
-                example: BlackDiamondSymbol1
-              black_diamond_account:
-                type: string
-                description: Black Diamond account
-                example: BlackDiaAcc
-              fund_name:
-                type: string
-                description: The fund associated with the allocation.
-                example: Sample Hedge Fund Deal 1
-              term_id:
-                type: string
-                description: The term id with the allocation.
-                example: term_1
-              term_name:
-                type: string
-                description: The term associated with the allocation.
-                example: Sample Term 1
-              allocation_status:
-                type: string
-                description: The current status of the allocation. It can be either active, inactive or retired.
-                example: active
-              retired_date:
-                type: string
-                description: The date of when the allocation retires.
-                example: '2017-12-31'
-    Document_3:
       type: object
       properties:
         id:
@@ -4415,7 +4052,6 @@ externalDocs:
 x-refined-from:
 - canoe-intelligence-api-docs-v1-original.yaml
 - canoe-intelligence-api-openapi-original.json
-- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:

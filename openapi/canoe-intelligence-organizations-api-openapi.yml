@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Canoe Intelligence Organizations API
   version: '1.0'
-  description: 'Operations tagged Organizations across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Organizations across 2 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
@@ -14,8 +14,25 @@ paths:
     get:
       tags:
       - Organizations
-      summary: null
-      description: "/v1/organizations\n\nGet your organizations user info\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2023-08-07.\n</span>\n"
+      summary: Organizations
+      description: '/v1/organizations
+
+
+        Get your organizations user info
+
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+
+        When using pagination, the response will contain headers defining the total number of results,
+
+        as well as the first, next, prev, and last page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2023-08-07.'
       operationId: Organizations
       parameters:
       - name: page
@@ -123,17 +140,16 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Get A Single Organization:
     get:
       tags:
       - Organizations
-      summary: null
+      summary: Find by id
       description: '/v1/organizations/{id}
 
 
-        Fetch organization by the organization''s ID
-
-        '
+        Fetch organization by the organization''s ID'
       operationId: FindById
       parameters:
       - name: id
@@ -179,18 +195,17 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Get A Single Organization's Document Data:
     get:
       tags:
       - Organizations
-      summary: null
+      summary: Find by single organization id
       description: '/v1/organizations/{id}/document-data
 
 
         Fetch the extracted data and metadata of a single organization''s documents.
 
-
-        <span name="doc-alert-info">
 
         This endpoint offers optional pagination.
 
@@ -198,17 +213,12 @@ paths:
 
         Unpaginated calls will be depreciated in future versions of the Canoe API.
 
-        <br><br>
 
-        When using pagination, the response will contain headers defining the <code>total</code> number of results,
+        When using pagination, the response will contain headers defining the total number of results,
 
-        as well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.
+        as well as the first, next, prev, and last page responses for your result set.
 
-        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.
-
-        </span>
-
-        '
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.'
       operationId: FindBySingleOrganizationId
       parameters:
       - name: id
@@ -292,17 +302,16 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Download A Single Organization's Documents:
     get:
       tags:
       - Organizations
-      summary: null
+      summary: Download organization documents
       description: '/v1/organizations/{id}/documents
 
 
-        Download a specific Organization''s documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.
-
-        '
+        Download a specific Organization''s documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.'
       operationId: DownloadOrganizationDocuments
       parameters:
       - name: id
@@ -378,17 +387,16 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Get A Single Organization's Document IDs:
     get:
       tags:
       - Organizations
-      summary: null
+      summary: Download by single organization id
       description: '/v1/organizations/{id}/document-ids
 
 
-        Get a specific organization''s document IDs for downloading the documents one by one.
-
-        '
+        Get a specific organization''s document IDs for downloading the documents one by one.'
       operationId: DownloadBySingleOrganizationId
       parameters:
       - name: id
@@ -443,17 +451,16 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Create A Single Entity:
     post:
       tags:
       - Organizations
-      summary: null
+      summary: Create ASingle entity
       description: '/v1/organizations/entities
 
 
-        Create a new entity based on the input parameters.
-
-        '
+        Create a new entity based on the input parameters.'
       operationId: CreateASingleEntity
       parameters:
       - name: parent_account
@@ -566,17 +573,16 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Update A Single Entity:
     put:
       tags:
       - Organizations
-      summary: null
+      summary: Update ASingle entity
       description: '/v1/organizations/entities/{id}
 
 
-        Update an existing entity based on the input parameters.
-
-        '
+        Update an existing entity based on the input parameters.'
       operationId: UpdateASingleEntity
       parameters:
       - name: id
@@ -721,17 +727,16 @@ paths:
           description: Resource Not Found
         '422':
           description: Unprocessable Entity
+      x-summary-source: derived
   Create A Single Account:
     post:
       tags:
       - Organizations
-      summary: null
+      summary: Create ASingle account
       description: '/v1/organizations/accounts
 
 
-        Create a new account based on the input parameters.
-
-        '
+        Create a new account based on the input parameters.'
       operationId: CreateASingleAccount
       parameters:
       - name: parent_account
@@ -818,17 +823,16 @@ paths:
                       custom_field_id: '1'
         '403':
           description: Failed to create the account.
+      x-summary-source: derived
   Update A Single Account:
     put:
       tags:
       - Organizations
-      summary: null
+      summary: Update ASingle account
       description: '/v1/organizations/accounts/{id}
 
 
-        Update an existing account based on the input parameters.
-
-        '
+        Update an existing account based on the input parameters.'
       operationId: UpdateASingleAccount
       parameters:
       - name: id
@@ -922,12 +926,27 @@ paths:
                       custom_field_id: '1'
         '403':
           description: Failed to update the account.
+      x-summary-source: derived
   /v1/organizations:
     get:
       tags:
       - Organizations
       summary: Get Organizations
-      description: "Get your organizations user info\n\n<span name=\"doc-alert-info\">\nThis endpoint offers optional pagination. \nPagination supports the return of large results and is highly recommended for all use cases. \nUnpaginated calls will be depreciated in future versions of the Canoe API.\n<br><br>\nWhen using pagination, the response will contain headers defining the <code>total</code> number of results, \nas well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set. \nTo enable pagination pass a header parameter of X-API-VERSION with a value of 2023-08-07.\n</span>"
+      description: 'Get your organizations user info
+
+
+        This endpoint offers optional pagination.
+
+        Pagination supports the return of large results and is highly recommended for all use cases.
+
+        Unpaginated calls will be depreciated in future versions of the Canoe API.
+
+
+        When using pagination, the response will contain headers defining the total number of results,
+
+        as well as the first, next, prev, and last page responses for your result set.
+
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2023-08-07.'
       operationId: Organizations
       parameters:
       - name: page
@@ -1084,23 +1103,18 @@ paths:
       description: 'Fetch the extracted data and metadata of a single organization''s documents.
 
 
-        <span name="doc-alert-info">
-
         This endpoint offers optional pagination.
 
         Pagination supports the return of large results and is highly recommended for all use cases.
 
         Unpaginated calls will be depreciated in future versions of the Canoe API.
 
-        <br><br>
 
-        When using pagination, the response will contain headers defining the <code>total</code> number of results,
+        When using pagination, the response will contain headers defining the total number of results,
 
-        as well as the <code>first</code>, <code>next</code>, <code>prev</code>, and <code>last</code> page responses for your result set.
+        as well as the first, next, prev, and last page responses for your result set.
 
-        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.
-
-        </span>'
+        To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.'
       operationId: FindBySingleOrganizationId
       parameters:
       - name: id
@@ -1658,6 +1672,104 @@ paths:
       description: Production API
 components:
   schemas:
+    SingleEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the entity.
+          example: '1'
+        parent_id:
+          type: string
+          description: The ID of the entity's parent account.
+          example: '00'
+        name:
+          type: string
+          description: The name of the entity.
+          example: Demo
+        status:
+          type: string
+          description: The status of the entity.
+          example: active
+        aliases:
+          type: array
+          description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
+          items:
+            type: string
+          example: []
+        created_at:
+          type: string
+          format: date-time
+          description: The datetime of when the entity was created.
+          example: '2017-06-18T23:42:52Z'
+        updated_at:
+          type: string
+          format: date-time
+          description: The datetime of when the entity was last updated.
+          example: '2019-04-09T10:18:05Z'
+        downstream_ids:
+          type: array
+          description: The entity's downstream information.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the downstream system.
+                example: addepar_owner_id
+              name:
+                type: string
+                description: The name of the downstream system.
+                example: Addepar
+              type:
+                type: string
+                description: The type of ID associated with the downstream system.
+                example: Owner ID
+              value:
+                type: string
+                description: The value of the downstream ID.
+                example: sample_name
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the entity.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+                example: CLIENT_ID
+              value:
+                type: string
+                description: The value of the custom field.
+                example: BOX1
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+                example: '1'
+    GetSingleOrganizationId:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: The total number of document IDs.
+          example: 10
+        ids:
+          type: array
+          description: An array of document IDs.
+          items:
+            type: string
+            example:
+            - 2345abcd-1234-1111-9876-1234567abc89
+            - 2345abcd-1234-1111-9876-1234567abc88
+            - 2345abcd-1234-1111-9876-1234567abc87
+            - 2345abcd-1234-1111-9876-1234567abc86
+            - 2345abcd-1234-1111-9876-1234567abc85
+            - 2345abcd-1234-1111-9876-1234567abc84
+            - 2345abcd-1234-1111-9876-1234567abc83
+            - 2345abcd-1234-1111-9876-1234567abc82
+            - 2345abcd-1234-1111-9876-1234567abc81
+            - 2345abcd-1234-1111-9876-1234567abc80
     GetOrganization:
       type: object
       properties:
@@ -2031,30 +2143,7 @@ components:
                 type: string
                 description: The date of when the allocation retires.
                 example: '2017-12-31'
-    GetSingleOrganizationId:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: The total number of document IDs.
-          example: 10
-        ids:
-          type: array
-          description: An array of document IDs.
-          items:
-            type: string
-            example:
-            - 2345abcd-1234-1111-9876-1234567abc89
-            - 2345abcd-1234-1111-9876-1234567abc88
-            - 2345abcd-1234-1111-9876-1234567abc87
-            - 2345abcd-1234-1111-9876-1234567abc86
-            - 2345abcd-1234-1111-9876-1234567abc85
-            - 2345abcd-1234-1111-9876-1234567abc84
-            - 2345abcd-1234-1111-9876-1234567abc83
-            - 2345abcd-1234-1111-9876-1234567abc82
-            - 2345abcd-1234-1111-9876-1234567abc81
-            - 2345abcd-1234-1111-9876-1234567abc80
-    SingleEntity:
+    SingleEntity_2:
       type: object
       properties:
         id:
@@ -2069,26 +2158,26 @@ components:
           type: string
           description: The name of the entity.
           example: Demo
-        status:
-          type: string
-          description: The status of the entity.
-          example: active
         aliases:
           type: array
           description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
           items:
             type: string
           example: []
+        status:
+          type: string
+          description: The status of the entity.
+          example: active
         created_at:
           type: string
           format: date-time
           description: The datetime of when the entity was created.
-          example: '2017-06-18T23:42:52Z'
+          example: '2017-06-18 23:42:52'
         updated_at:
           type: string
           format: date-time
           description: The datetime of when the entity was last updated.
-          example: '2019-04-09T10:18:05Z'
+          example: '2019-04-09 10:18:05'
         downstream_ids:
           type: array
           description: The entity's downstream information.
@@ -2418,445 +2507,6 @@ components:
                 type: string
                 description: The date of when the allocation retires.
                 example: '2017-12-31'
-    SingleEntity_2:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the entity.
-          example: '1'
-        parent_id:
-          type: string
-          description: The ID of the entity's parent account.
-          example: '00'
-        name:
-          type: string
-          description: The name of the entity.
-          example: Demo
-        aliases:
-          type: array
-          description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
-          items:
-            type: string
-          example: []
-        status:
-          type: string
-          description: The status of the entity.
-          example: active
-        created_at:
-          type: string
-          format: date-time
-          description: The datetime of when the entity was created.
-          example: '2017-06-18 23:42:52'
-        updated_at:
-          type: string
-          format: date-time
-          description: The datetime of when the entity was last updated.
-          example: '2019-04-09 10:18:05'
-        downstream_ids:
-          type: array
-          description: The entity's downstream information.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the downstream system.
-                example: addepar_owner_id
-              name:
-                type: string
-                description: The name of the downstream system.
-                example: Addepar
-              type:
-                type: string
-                description: The type of ID associated with the downstream system.
-                example: Owner ID
-              value:
-                type: string
-                description: The value of the downstream ID.
-                example: sample_name
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the entity.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-                example: CLIENT_ID
-              value:
-                type: string
-                description: The value of the custom field.
-                example: BOX1
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-                example: '1'
-    GetSingleOrganizationData_3:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the document in Canoe.
-          example: '3'
-        client_document_id:
-          type: string
-          description: The custom document ID.
-          example: custom_id_3
-        name:
-          type: string
-          description: The name of the document. This contains the Investment Name (and its corresponding Entity Name), the Document Type, as well as the Data Date.
-          example: Sample Direct Deal 1 - Entity A - K-1
-        document_status:
-          type: string
-          description: This is the validation status determined by Canoe.
-          example: Storage Only
-        category:
-          type: string
-          description: The category of the document.
-          example: Tax
-        document_type:
-          type: string
-          description: The document type. For example, Capital Call Notice and Account Statement are examples of two document types.
-          example: K-1
-        source:
-          type: string
-          description: How the document entered Canoe.
-          example: Upload Engine
-        file_type:
-          type: string
-          description: A document's file type, such as .PDF or .DOC. Canoe only supports extraction and validation of PDFs.
-          example: .pdf
-        original_file_type:
-          type: string
-          description: Original type of the file before any conversion (e.g., ".docx")
-          example: .docx
-        original_file_name:
-          type: string
-          description: The document's original file name including the file type extension.
-          example: TEST 1.pdf
-        document_tags:
-          type: array
-          description: The list of tag objects (name, ID) assigned to the document.
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-                example: 1
-              name:
-                type: string
-                example: tag_1
-        reporting_frequency:
-          type: string
-          description: The reporting frequency (monthly, quarterly, or yearly) of the document, as determined based on the extracted fields.
-          example: null
-        uploaded:
-          type: string
-          format: date-time
-          description: The date and time when the document was uploaded
-          example: '2018-08-30 20:51:38'
-        uploaded_by:
-          type:
-          - string
-          - 'null'
-          description: Name of the user who uploaded the document
-          example: John Doe
-        last_modified:
-          type: string
-          format: date-time
-          description: The date and time when the document was last modified
-          example: '2019-09-16 11:38:47'
-        last_modified_by:
-          type: object
-          properties:
-            user_id:
-              type: string
-              example: user_2
-            name:
-              type: string
-              example: Mike Smith
-            email:
-              type: string
-              example: mike@example.com
-        document_approval:
-          description: Details about the approval of the document. Returns string 'Pending' when no approval exists, or an object when approved.
-          oneOf:
-          - type: string
-            enum:
-            - Pending
-            description: Returned when no approval exists
-          - type: object
-            description: Returned when document is approved
-            properties:
-              approval_status:
-                type: string
-                example: Approved
-              approved_by:
-                type: object
-                properties:
-                  user_id:
-                    type: string
-                    example: user_2
-                  first_name:
-                    type: string
-                    example: Mike
-                  last_name:
-                    type: string
-                    example: Smith
-                  email:
-                    type: string
-                    example: mike@example.com
-              approval_date:
-                type: string
-                format: date-time
-                example: '2019-09-16 11:38:47'
-        is_locked:
-          type: boolean
-          description: The is_locked status of the document in Canoe.
-          example: false
-        ready_for_extract:
-          type: boolean
-          description: The extraction status of the document in Canoe.
-          example: false
-        number_of_pages:
-          type: string
-          description: The number of pages of the document.
-          example: '1'
-        file_size:
-          type: integer
-          description: The file size of the document.
-          example: 2000
-        allocations:
-          type: array
-          items:
-            type: object
-            properties:
-              allocation_id:
-                type: string
-                description: The ID of the allocation record
-                example: allocation_1
-              data_date:
-                type: string
-                description: The effective date of the document.
-                example: '2017-12-31'
-              dataset_type:
-                type: string
-                description: The dataset type. For example, Capital Call Notice and Account Statement are examples of two dataset types.
-                example: K-1
-              investment:
-                type: string
-                description: The name of the investment that's associated with the document.
-                example: Sample Direct Deal 1
-              fund_sponsor:
-                type: string
-                description: The name of the fund sponsor that's associated with the document.
-                example: Sample Sponsor 1
-              custom_allocation_id:
-                type: string
-                description: The custom ID of the investment entity allocation that's associated with the document. This is user-created.
-                example: '124'
-              investment_id:
-                type: string
-                description: The ID of the investment that's associated with the document.
-                example: '2'
-              investment_legal_name:
-                type: string
-                description: The legal name of the investment that's associated with the document.
-                example: Sample Direct Deal One
-              investment_extraction_aliases:
-                type: array
-                description: The aliases of the investment that are associated with the document. These are user-created.
-                items:
-                  type: string
-                  example:
-                  - Sample Direct Deal 1  alias 1
-                  - Sample Direct Deal 1  alias 2
-              investment_structure:
-                type: string
-                description: The asset type of the fund that's associated with the document.
-                example: direct_investment
-              entity:
-                type: string
-                description: The name of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
-                example: Entity A
-              entity_id:
-                type: string
-                description: The ID of the entity that's associated with the document. If the document is a general investment document that is not associated with a specific entity, this field will be Null.
-                example: '1'
-              entity_extraction_aliases:
-                type: array
-                description: The aliases of the entity that are associated with the document. These are user-created.
-                items:
-                  type: string
-                  example:
-                  - Entity A alias 1
-                  - Entity A alias 2
-              account:
-                type: string
-                description: The name of the account that's associated with the document.
-                example: Demo
-              account_id:
-                type: string
-                description: The ID of the account that's associated with the document.
-                example: '3'
-              extracted_data:
-                type: array
-                description: An object of the raw extracted data from the document.
-                example: []
-              validated_data:
-                type: array
-                description: An object of the formatted and validated data of the document.
-                example: []
-              validation_errors:
-                type: array
-                description: An object of the document's validation errors. Each item inside is a "key:value" pair, where the "key" is the extracted field name and the "value" is the explanation of why the extracted value didn't pass Canoe's validation logic.
-                example: []
-              analyst:
-                type: string
-                description: The analyst associated with this fund.
-                example: Mike
-              frequency:
-                type: string
-                description: How frequently this fund's statements come in. For example, if a statement comes in every month then the output will be "monthly."
-                example: annually
-              custom_fields:
-                type: array
-                description: The list of custom field objects (name, value, ID) of the investment and/or allocation associated with the document.
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                      example: CLIENT_ID
-                    value:
-                      type: string
-                      example: BOX1
-                    custom_field_id:
-                      type: string
-                      example: '1'
-              document_groups:
-                type: object
-                description: Documents may be associated with other documents via document groups. A document may exist in multiple document groups (based on different criteria).
-                properties:
-                  transaction:
-                    type: object
-                    properties:
-                      group_id:
-                        type: string
-                        example: transaction_group_id
-                      member_document_ids:
-                        type: array
-                        items:
-                          type: string
-                          example:
-                          - '3'
-                          - '22'
-                          - '35'
-              addepar_owned_id:
-                type: string
-                example: AddeparOwned1
-              addepar_owner_id:
-                type: string
-                example: AddeparOwner1
-              black_diamond_symbol:
-                type: string
-                example: BlackDiamondSymbol1
-              black_diamond_account:
-                type: string
-                example: BlackDiaAcc
-              fund_name:
-                type: string
-                description: The name of the fund.
-                example: Sample Direct Deal 1
-              term_id:
-                type: string
-                description: The ID of the term that is associated with the fund.
-                example: ''
-              allocation_status:
-                type: string
-                description: The current status of the allocation. It can be either active, inactive or retired.
-                example: active
-              retired_date:
-                type: string
-                description: The date of when the allocation retires.
-                example: '2017-12-31'
-    SingleEntity_3:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the entity.
-          example: '1'
-        parent_id:
-          type: string
-          description: The ID of the entity's parent account.
-          example: '00'
-        name:
-          type: string
-          description: The name of the entity.
-          example: Demo
-        aliases:
-          type: array
-          description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
-          items:
-            type: string
-          example: []
-        status:
-          type: string
-          description: The status of the entity.
-          example: active
-        created_at:
-          type: string
-          format: date-time
-          description: The datetime of when the entity was created.
-          example: '2017-06-18 23:42:52'
-        updated_at:
-          type: string
-          format: date-time
-          description: The datetime of when the entity was last updated.
-          example: '2019-04-09 10:18:05'
-        downstream_ids:
-          type: array
-          description: The entity's downstream information.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the downstream system.
-                example: addepar_owner_id
-              name:
-                type: string
-                description: The name of the downstream system.
-                example: Addepar
-              type:
-                type: string
-                description: The type of ID associated with the downstream system.
-                example: Owner ID
-              value:
-                type: string
-                description: The value of the downstream ID.
-                example: sample_name
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the entity.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-                example: CLIENT_ID
-              value:
-                type: string
-                description: The value of the custom field.
-                example: BOX1
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-                example: '1'
   securitySchemes:
     bearerAuth:
       type: http
@@ -2880,7 +2530,6 @@ externalDocs:
 x-refined-from:
 - canoe-intelligence-api-docs-v1-original.yaml
 - canoe-intelligence-api-openapi-original.json
-- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:

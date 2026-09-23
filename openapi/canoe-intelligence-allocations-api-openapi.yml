@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Canoe Intelligence Allocations API
   version: '1.0'
-  description: 'Operations tagged Allocations across 3 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json, canoe-intelligence-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Allocations across 2 of this provider''s published API definitions: canoe-intelligence-api-docs-v1-original.yaml, canoe-intelligence-api-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.canoesoftware.com
   description: Production API
@@ -14,13 +14,11 @@ paths:
     get:
       tags:
       - Allocations
-      summary: null
+      summary: Get allocation
       description: '/v1/allocations
 
 
-        Fetch all allocations accessible by the current API user.
-
-        '
+        Fetch all allocations accessible by the current API user.'
       operationId: GetAllocation
       parameters:
       - name: page
@@ -152,17 +150,16 @@ paths:
                   $ref: '#/components/schemas/Allocations'
         '403':
           description: No access to the document.
+      x-summary-source: derived
   Create A Single Allocation:
     post:
       tags:
       - Allocations
-      summary: null
+      summary: Create single allocation
       description: '/v1/allocations
 
 
-        Create a new allocation based on the input parameters.
-
-        '
+        Create a new allocation based on the input parameters.'
       operationId: CreateSingleAllocation
       parameters:
       - name: entity_id
@@ -343,17 +340,16 @@ paths:
           description: Failed to create the allocation.
         '422':
           description: The date entered should have the format yyyy-mm-dd.
+      x-summary-source: derived
   Update A Single Allocation:
     put:
       tags:
       - Allocations
-      summary: null
+      summary: Update single allocation
       description: '/v1/allocations/{id}
 
 
-        Update an existing allocation based on the input parameters.
-
-        '
+        Update an existing allocation based on the input parameters.'
       operationId: UpdateSingleAllocation
       parameters:
       - name: id
@@ -517,16 +513,15 @@ paths:
           description: Failed to create the allocation.
         '422':
           description: The date entered should have the format yyyy-mm-dd.
+      x-summary-source: derived
   Delete A Single Allocation:
     delete:
       tags:
       - Allocations
-      summary: null
+      summary: Delete single allocation
       description: '/v1/allocations/{id}
 
-        Delete a specific allocation by its ID.
-
-        '
+        Delete a specific allocation by its ID.'
       operationId: DeleteSingleAllocation
       parameters:
       - name: id
@@ -576,6 +571,7 @@ paths:
                 items:
                   example:
                     message: Failed to delete the Allocation {$id}.
+      x-summary-source: derived
   /v1/allocations:
     get:
       tags:
@@ -1519,282 +1515,6 @@ components:
           type: string
           description: The extraction status of the allocation.
           example: Ready For Extract
-    Allocations_3:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the allocation.
-          example: '2'
-        entity:
-          type: string
-          description: The name of the entity associated with the allocation.
-          example: test_entity_1
-        entity_id:
-          type: string
-          description: The ID of the entity associated with the allocation.
-          example: '10'
-        investment:
-          type: string
-          description: The name of the investment associated with the allocation.
-          example: Fund One - Class A
-        investment_id:
-          type: string
-          description: The ID of the investment associated with the allocation.
-          example: '11'
-        account:
-          type: string
-          description: The name of the account associated with the allocation.
-          example: Account One
-        account_id:
-          type: string
-          description: The ID of the account associated with the allocation.
-          example: '12'
-        initial_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The date of when the allocation first becomes active.
-          example: '2021-01-01'
-        initial_amount:
-          type: string
-          description: The commitment amount of the allocation.
-          example: '500000'
-        status:
-          type: string
-          description: The current status of the allocation. It can be either active or inactive.
-          example: active
-        custom_allocation_id:
-          type: string
-          description: The custom ID of the allocation.
-          example: '13'
-        created_at:
-          type: string
-          format: date-time
-          description: The datetime of when the allocation was created.
-          example: '2020-12-01 00:00:00'
-        updated_at:
-          type: string
-          format: date-time
-          description: The datetime of when the allocation was last updated.
-          example: '2020-12-02 00:00:00'
-        retired_at:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The date of when the allocation retires.
-          example: '2022-01-01'
-        downstream_ids:
-          type: array
-          description: The allocation's downstream information.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the downstream system.
-                example: investment_metrics_account_short_name
-              name:
-                type: string
-                description: The name of the downstream system.
-                example: Account Short Name
-              type:
-                type: string
-                description: The type of ID associated with the downstream system.
-                example: Investment Metrics
-              value:
-                type: string
-                description: The value of the downstream ID.
-                example: '101112'
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the allocation.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-                example: CLIENT_ID
-              value:
-                type: string
-                description: The value of the custom field.
-                example: null
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-                example: '2'
-        allocation_entity_aliases:
-          type: array
-          description: The allocation entity aliases.
-          items:
-            type: string
-            example: entity_alias_1
-        allocation_fund_aliases:
-          type: array
-          description: The allocation fund aliases.
-          items:
-            type: string
-            example: fund_alias_1
-        fund_name:
-          type: string
-          description: The fund associated with the allocation.
-          example: Fund One
-        term_id:
-          type: string
-          description: The term id with the allocation.
-          example: term_1
-        term_name:
-          type: string
-          description: The term associated with the allocation.
-          example: Class A
-        extraction_status:
-          type: string
-          description: The extraction status of the allocation.
-          example: Ready For Extract
-    SingleAllocation_3:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the allocation.
-          example: '1'
-        entity:
-          type: string
-          description: The name of the entity associated with the allocation.
-          example: Sample Entity
-        entity_id:
-          type: string
-          description: The ID of the entity associated with the allocation.
-          example: entity_1
-        investment:
-          type: string
-          description: The name of the investment associated with the allocation.
-          example: Sample Investment
-        investment_id:
-          type: string
-          description: The ID of the investment associated with the allocation.
-          example: investment_1
-        account:
-          type: string
-          description: The name of the account associated with the allocation.
-          example: Sample Account One
-        account_id:
-          type: string
-          description: The ID of the account associated with the allocation.
-          example: account_1
-        initial_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The date of when the allocation first becomes active.
-          example: '2021-01-01'
-        initial_amount:
-          type: string
-          description: The commitment amount of the allocation.
-          example: '10000'
-        status:
-          type: string
-          description: The current status of the allocation. It can be either active or inactive.
-          example: active
-        custom_allocation_id:
-          type: string
-          description: The custom ID of the allocation.
-          example: '700'
-        created_at:
-          type: string
-          format: date-time
-          description: The datetime of when the allocation was created.
-          example: '2021-01-01 12:00:15'
-        updated_at:
-          type: string
-          format: date-time
-          description: The datetime of when the allocation was last updated.
-          example: '2021-01-01 12:00:15'
-        retired_at:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The date of when the allocation retires.
-          example: '2022-01-01'
-        downstream_ids:
-          type: array
-          description: The allocation's downstream information.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the downstream system.
-              name:
-                type: string
-                description: The name of the downstream system.
-              type:
-                type: string
-                description: The type of ID associated with the downstream system.
-              value:
-                type: string
-                description: The value of the downstream ID.
-          example:
-          - id: black_diamond_account_name
-            name: Black Diamond
-            type: Account Name
-            value: sample_name
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the allocation.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-              value:
-                type: string
-                description: The value of the custom field.
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-          example:
-          - name: Sample Allocation Custom Field
-            value: '1000'
-            custom_field_id: '1'
-        allocation_entity_aliases:
-          type: array
-          description: The allocation entity aliases.
-          items:
-            type: string
-          example:
-          - entity_alias_1
-          - entity_alias_2
-        allocation_fund_aliases:
-          type: array
-          description: The allocation fund aliases.
-          items:
-            type: string
-          example:
-          - fund_alias_1
-          - fund_alias_2
-        fund_name:
-          type: string
-          description: The fund associated with the allocation.
-          example: Sample Investment
-        term_id:
-          type: string
-          description: The term id with the allocation.
-          example: term_1
-        term_name:
-          type: string
-          description: The term associated with the allocation.
-          example: Sample Term
-        extraction_status:
-          type: string
-          description: The extraction status of the allocation.
-          example: Ready For Extract
   securitySchemes:
     bearerAuth:
       type: http
@@ -1818,7 +1538,6 @@ externalDocs:
 x-refined-from:
 - canoe-intelligence-api-docs-v1-original.yaml
 - canoe-intelligence-api-openapi-original.json
-- canoe-intelligence-api-openapi.yml
 x-tagGroups:
 - name: Getting Started
   tags:
