@@ -835,7 +835,7 @@ paths:
         as well as the first, next, prev, and last page responses for your result set.
 
         To enable pagination pass a header parameter of X-API-VERSION with a value of 2022-02-24.'
-      operationId: GetFunds
+      operationId: getV1Funds
       parameters:
       - name: page
         in: query
@@ -921,12 +921,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"name\", \"Sample Hedge Fund Detail 1\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetFunds
     post:
       tags:
       - Funds
       summary: Create A Single Fund
       description: Create a new fund based on the input parameters.
-      operationId: CreateSingleFund
+      operationId: postV1Funds
       requestBody:
         required: false
         content:
@@ -1003,12 +1005,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader)\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {   \n          type = \"drawdown_fund\",\n          status = \"active\",\n          name = \"Sample fund 1\",\n          sponsor = \"Sample sponsor 1\"\n          start_date = \"2021-01-01\",\n          aliases = \"Sample Alias 1, Sample Alias 2\",\n          legal_name = \"Sample Fund V,Sample Capital LP\"\n      };\n      request.AddJsonBody(body);\n      request.AddParameter(\"custom_fields\", custom_fields);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: CreateSingleFund
     delete:
       tags:
       - Funds
       summary: Delete Multiple Funds
       description: 'Bulk delete up to 100 funds at once based on fund ids. WARNING: This will delete all funds associated with the ids passed in, as well as their related documents, allocations, and terms.'
-      operationId: DeleteMultipleFunds
+      operationId: deleteV1Funds
       responses:
         '200':
           description: Success
@@ -1038,6 +1042,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      request.AddParameter(\"fund_id\",\"id_1,id_2,id_3\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DeleteMultipleFunds
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1149,7 +1155,7 @@ paths:
       - Funds
       summary: Get A Single Fund
       description: Fetch a specific fund by the fund's ID.
-      operationId: GetSingleFunds
+      operationId: getV1FundsById
       parameters:
       - name: id
         in: path
@@ -1191,12 +1197,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetSingleFunds
     put:
       tags:
       - Funds
       summary: Update A Single Fund
       description: Update an existing fund based on the input parameters.
-      operationId: UpdateSingleFund
+      operationId: putV1FundsById
       parameters:
       - name: id
         in: path
@@ -1281,12 +1289,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {   \n          type = \"drawdown_fund\",\n          status = \"active\",\n          name = \"Sample fund 1\",\n          sponsor = \"Sample sponsor 1\"\n          start_date = \"2021-01-01\",\n          aliases = \"Sample Alias 1, Sample Alias 2\",\n          legal_name = \"Sample Fund V,Sample Capital LP\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: UpdateSingleFund
     delete:
       tags:
       - Funds
       summary: Delete A Single Fund
       description: 'Delete a single fund based on the fund''s id. WARNING: This will delete the fund, as well as it''s associated documents, allocations, and terms.'
-      operationId: DeleteSingleFund
+      operationId: deleteV1FundsById
       parameters:
       - name: id
         in: path
@@ -1324,6 +1334,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DeleteSingleFund
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1350,7 +1362,7 @@ paths:
         as well as the first, next, prev, and last page responses for your result set.
 
         To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.'
-      operationId: GetSingleFundsDocumentdata
+      operationId: getV1FundsByIdDocumentData
       parameters:
       - name: id
         in: path
@@ -1430,6 +1442,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1/document-data\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"fields\", \"name,validated_data\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetSingleFundsDocumentdata
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1439,7 +1453,7 @@ paths:
       - Funds
       summary: Download A Single Fund's Documents
       description: Download a specific Fund's documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.
-      operationId: DownloadSingleFundsDocumentdata
+      operationId: getV1FundsByIdDocuments
       parameters:
       - name: id
         in: path
@@ -1507,6 +1521,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1/documents\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader)\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"50\");\n      request.AddQueryParameter(\"file_name_type\", \"original_file_name\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DownloadSingleFundsDocumentdata
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1516,7 +1532,7 @@ paths:
       - Funds
       summary: Get A Single Fund's Document IDs
       description: Get a specific fund's documents IDs for downloading the documents one by one.
-      operationId: GetSingleFundsDocumentId
+      operationId: getV1FundsByIdDocumentIds
       parameters:
       - name: id
         in: path
@@ -1563,125 +1579,36 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/funds/1/document-ids\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetSingleFundsDocumentId
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
 components:
   schemas:
-    DeleteFunds:
+    FundDocumentId:
       type: object
       properties:
+        total:
+          type: integer
+          description: The total number of document IDs.
+          example: 10
         ids:
           type: array
-          description: An array of fund IDs that were deleted.
+          description: An array of document IDs.
           items:
             type: string
           example:
-          - id_1
-          - id_2
-          - id_3
-        deleted:
-          type: integer
-          description: The total number of funds deleted.
-          example: 3
-    GetFunds:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The fund's ID.
-          example: '1'
-        organization_id:
-          type: string
-          description: The ID of the organization that the fund is associated with.
-          example: '12'
-        type:
-          type: string
-          description: The fund's investment type.
-          example: direct_investment
-        status:
-          type: string
-          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
-          example: active
-        name:
-          type: string
-          description: The name of the investment (fund + term).
-          example: Sample Direct Deal 1
-        sponsor:
-          type: string
-          description: The sponsor of the fund.
-          example: Sample Sponsor 1
-        start_date:
-          type: string
-          description: Fund Inception Date. The date on which the fund began its operations.
-          example: '2015-11-10'
-        aliases:
-          type: array
-          description: Aliases of the investment name. These are user-created.
-          items:
-            type: string
-          example:
-          - Sample Direct 1
-          - SDD1
-        legal_name:
-          type: string
-          description: The legal name of the fund.
-          example: Sample Direct Deal 1 LP
-        updated_at:
-          type: string
-          description: A timestamp of when the fund was updated.
-          example: '2018-04-30 20:40:19'
-        created_at:
-          type: string
-          description: A timestamp of when the fund was created.
-          example: '2018-04-30 20:40:19'
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the fund.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-              value:
-                type: string
-                description: The value of the custom field.
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-          example:
-          - name: CLIENT_ID
-            value: BOX1
-            custom_field_id: '1'
-        requirements_preference:
-          type: object
-          description: The requirements preference of the fund.
-          properties:
-            account_statements:
-              type: object
-              properties:
-                balance:
-                  type: string
-                  description: Either ending_balance or price_units.
-          example:
-          - account_statements:
-              balance: price_units
-        term_id:
-          type: string
-          description: The ID of the term that is associated with the fund.
-          example: '1'
-        fund_name:
-          type: string
-          description: The name of the fund.
-          example: Sample Direct
-    DeleteFund:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A confirmation that the fund ID was deleted.
-          example: The Fund 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
+          - 2345abcd-1234-1111-9876-1234567abc89
+          - 2345abcd-1234-1111-9876-1234567abc88
+          - 2345abcd-1234-1111-9876-1234567abc87
+          - 2345abcd-1234-1111-9876-1234567abc86
+          - 2345abcd-1234-1111-9876-1234567abc85
+          - 2345abcd-1234-1111-9876-1234567abc84
+          - 2345abcd-1234-1111-9876-1234567abc83
+          - 2345abcd-1234-1111-9876-1234567abc82
+          - 2345abcd-1234-1111-9876-1234567abc81
+          - 2345abcd-1234-1111-9876-1234567abc80
     SingleFund:
       type: object
       properties:
@@ -2045,30 +1972,30 @@ components:
               type: string
               description: The ID of the term that is associated with the fund.
               example: ''
-    FundDocumentId:
+    DeleteFunds:
       type: object
       properties:
-        total:
-          type: integer
-          description: The total number of document IDs.
-          example: 10
         ids:
           type: array
-          description: An array of document IDs.
+          description: An array of fund IDs that were deleted.
           items:
             type: string
           example:
-          - 2345abcd-1234-1111-9876-1234567abc89
-          - 2345abcd-1234-1111-9876-1234567abc88
-          - 2345abcd-1234-1111-9876-1234567abc87
-          - 2345abcd-1234-1111-9876-1234567abc86
-          - 2345abcd-1234-1111-9876-1234567abc85
-          - 2345abcd-1234-1111-9876-1234567abc84
-          - 2345abcd-1234-1111-9876-1234567abc83
-          - 2345abcd-1234-1111-9876-1234567abc82
-          - 2345abcd-1234-1111-9876-1234567abc81
-          - 2345abcd-1234-1111-9876-1234567abc80
-    GetFunds_2:
+          - id_1
+          - id_2
+          - id_3
+        deleted:
+          type: integer
+          description: The total number of funds deleted.
+          example: 3
+    DeleteFund:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A confirmation that the fund ID was deleted.
+          example: The Fund 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
+    GetFunds:
       type: object
       properties:
         id:
@@ -2131,13 +2058,13 @@ components:
               value:
                 type: string
                 description: The value of the custom field.
-              ID:
+              custom_field_id:
                 type: string
                 description: The ID of the custom field.
           example:
           - name: CLIENT_ID
             value: BOX1
-            ID: '1'
+            custom_field_id: '1'
         requirements_preference:
           type: object
           description: The requirements preference of the fund.
@@ -2694,6 +2621,97 @@ components:
                           type: string
                         custom_field_id:
                           type: string
+    GetFunds_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The fund's ID.
+          example: '1'
+        organization_id:
+          type: string
+          description: The ID of the organization that the fund is associated with.
+          example: '12'
+        type:
+          type: string
+          description: The fund's investment type.
+          example: direct_investment
+        status:
+          type: string
+          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
+          example: active
+        name:
+          type: string
+          description: The name of the investment (fund + term).
+          example: Sample Direct Deal 1
+        sponsor:
+          type: string
+          description: The sponsor of the fund.
+          example: Sample Sponsor 1
+        start_date:
+          type: string
+          description: Fund Inception Date. The date on which the fund began its operations.
+          example: '2015-11-10'
+        aliases:
+          type: array
+          description: Aliases of the investment name. These are user-created.
+          items:
+            type: string
+          example:
+          - Sample Direct 1
+          - SDD1
+        legal_name:
+          type: string
+          description: The legal name of the fund.
+          example: Sample Direct Deal 1 LP
+        updated_at:
+          type: string
+          description: A timestamp of when the fund was updated.
+          example: '2018-04-30 20:40:19'
+        created_at:
+          type: string
+          description: A timestamp of when the fund was created.
+          example: '2018-04-30 20:40:19'
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the fund.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              ID:
+                type: string
+                description: The ID of the custom field.
+          example:
+          - name: CLIENT_ID
+            value: BOX1
+            ID: '1'
+        requirements_preference:
+          type: object
+          description: The requirements preference of the fund.
+          properties:
+            account_statements:
+              type: object
+              properties:
+                balance:
+                  type: string
+                  description: Either ending_balance or price_units.
+          example:
+          - account_statements:
+              balance: price_units
+        term_id:
+          type: string
+          description: The ID of the term that is associated with the fund.
+          example: '1'
+        fund_name:
+          type: string
+          description: The name of the fund.
+          example: Sample Direct
   securitySchemes:
     bearerAuth:
       type: http

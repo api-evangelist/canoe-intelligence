@@ -947,7 +947,7 @@ paths:
         as well as the first, next, prev, and last page responses for your result set.
 
         To enable pagination pass a header parameter of X-API-VERSION with a value of 2023-08-07.'
-      operationId: Organizations
+      operationId: getV1Organizations
       parameters:
       - name: page
         in: query
@@ -1041,6 +1041,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"type\", \"account\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: Organizations
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1050,7 +1052,7 @@ paths:
       - Organizations
       summary: Get A Single Organization
       description: Fetch organization by the organization's ID
-      operationId: FindById
+      operationId: getV1OrganizationsById
       parameters:
       - name: id
         in: path
@@ -1092,6 +1094,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: FindById
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1115,7 +1119,7 @@ paths:
         as well as the first, next, prev, and last page responses for your result set.
 
         To enable pagination pass a header parameter of X-API-VERSION with a value of 2024-10-07.'
-      operationId: FindBySingleOrganizationId
+      operationId: getV1OrganizationsByIdDocumentData
       parameters:
       - name: id
         in: path
@@ -1195,6 +1199,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1/document-data\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"fields\", \"name,validated_data\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: FindBySingleOrganizationId
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1204,7 +1210,7 @@ paths:
       - Organizations
       summary: Download A Single Organization's Documents
       description: Download a specific Organization's documents in a ZIP file. Each fetch will download up to 100 documents. By default, this will fetch the first 100 documents in the Intelligent Document Center. A successful call to this endpoint will only contain the binary file and not the JSON data.
-      operationId: DownloadOrganizationDocuments
+      operationId: getV1OrganizationsByIdDocuments
       parameters:
       - name: id
         in: path
@@ -1276,6 +1282,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1/documents\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"50\");\n      request.AddQueryParameter(\"file_name_type\", \"original_file_name\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DownloadOrganizationDocuments
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1285,7 +1293,7 @@ paths:
       - Organizations
       summary: Get A Single Organization's Document IDs
       description: Get a specific organization's document IDs for downloading the documents one by one.
-      operationId: DownloadBySingleOrganizationId
+      operationId: getV1OrganizationsByIdDocumentIds
       parameters:
       - name: id
         in: path
@@ -1336,6 +1344,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/1/document-ids\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"start_time\", \"2019-03-30T04:00:00Z\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DownloadBySingleOrganizationId
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1345,7 +1355,7 @@ paths:
       - Organizations
       summary: Create A Single Entity
       description: Create a new entity based on the input parameters.
-      operationId: CreateASingleEntity
+      operationId: postV1OrganizationsEntities
       requestBody:
         required: true
         content:
@@ -1417,6 +1427,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/entities\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader)\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          aliases = \"Sample alias 1\",\n          downstream_ids = new[]\n          {\n              new { id = addepar_owner_id, value = sample_name }\n          },\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: CreateASingleEntity
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1426,7 +1438,7 @@ paths:
       - Organizations
       summary: Update A Single Entity
       description: Update an existing entity based on the input parameters.
-      operationId: UpdateASingleEntity
+      operationId: putV1OrganizationsEntitiesById
       parameters:
       - name: id
         in: path
@@ -1519,6 +1531,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/entities/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          aliases = \"Sample alias 1\",\n          downstream_ids = new[]\n          {\n              new { id = addepar_owner_id, value = sample_name }\n          },\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: UpdateASingleEntity
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1528,7 +1542,7 @@ paths:
       - Organizations
       summary: Create A Single Account
       description: Create a new account based on the input parameters.
-      operationId: CreateASingleAccount
+      operationId: postV1OrganizationsAccounts
       requestBody:
         required: false
         content:
@@ -1589,6 +1603,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/accounts\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: CreateASingleAccount
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1598,7 +1614,7 @@ paths:
       - Organizations
       summary: Update A Single Account
       description: Update an existing account based on the input parameters.
-      operationId: UpdateASingleAccount
+      operationId: putV1OrganizationsAccountsById
       parameters:
       - name: id
         in: path
@@ -1667,6 +1683,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/organizations/accounts/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          parent_account = \"account_1\",\n          name = \"Sample account 1\",\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: UpdateASingleAccount
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -1747,29 +1765,6 @@ components:
                 type: string
                 description: The ID of the custom field.
                 example: '1'
-    GetSingleOrganizationId:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: The total number of document IDs.
-          example: 10
-        ids:
-          type: array
-          description: An array of document IDs.
-          items:
-            type: string
-            example:
-            - 2345abcd-1234-1111-9876-1234567abc89
-            - 2345abcd-1234-1111-9876-1234567abc88
-            - 2345abcd-1234-1111-9876-1234567abc87
-            - 2345abcd-1234-1111-9876-1234567abc86
-            - 2345abcd-1234-1111-9876-1234567abc85
-            - 2345abcd-1234-1111-9876-1234567abc84
-            - 2345abcd-1234-1111-9876-1234567abc83
-            - 2345abcd-1234-1111-9876-1234567abc82
-            - 2345abcd-1234-1111-9876-1234567abc81
-            - 2345abcd-1234-1111-9876-1234567abc80
     GetOrganization:
       type: object
       properties:
@@ -2143,6 +2138,29 @@ components:
                 type: string
                 description: The date of when the allocation retires.
                 example: '2017-12-31'
+    GetSingleOrganizationId:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: The total number of document IDs.
+          example: 10
+        ids:
+          type: array
+          description: An array of document IDs.
+          items:
+            type: string
+            example:
+            - 2345abcd-1234-1111-9876-1234567abc89
+            - 2345abcd-1234-1111-9876-1234567abc88
+            - 2345abcd-1234-1111-9876-1234567abc87
+            - 2345abcd-1234-1111-9876-1234567abc86
+            - 2345abcd-1234-1111-9876-1234567abc85
+            - 2345abcd-1234-1111-9876-1234567abc84
+            - 2345abcd-1234-1111-9876-1234567abc83
+            - 2345abcd-1234-1111-9876-1234567abc82
+            - 2345abcd-1234-1111-9876-1234567abc81
+            - 2345abcd-1234-1111-9876-1234567abc80
     SingleEntity_2:
       type: object
       properties:

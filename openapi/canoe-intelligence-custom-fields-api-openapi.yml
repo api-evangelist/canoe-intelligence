@@ -84,7 +84,7 @@ paths:
       - Custom Fields
       summary: Get Custom Fields
       description: Returns a list of custom fields available for the authenticated tenant. Optionally filter by ownership_level.
-      operationId: GetCustomFields
+      operationId: getV1CustomFields
       parameters:
       - name: ownership_level
         in: query
@@ -122,6 +122,8 @@ paths:
           description: Invalid ownership_level provided.
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetCustomFields
     servers:
     - url: https://api.canoesoftware.com
       description: Production API

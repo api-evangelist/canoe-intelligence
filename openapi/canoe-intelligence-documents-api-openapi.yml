@@ -1742,7 +1742,7 @@ paths:
         as well as the first, next, prev, and last page responses for your result set.
 
         To enable pagination pass a header parameter of X-API-VERSION with a value of 2022-09-19.'
-      operationId: GetDocuments
+      operationId: getV1DocumentsData
       parameters:
       - name: page
         in: query
@@ -2088,6 +2088,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/data\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"100\");\n      request.AddQueryParameter(\"fields\", \"name,validated_data\");\n      request.AddQueryParameter(\"document_id\", \"document_1,document_2\");\n      request.AddQueryParameter(\"client_document_id\", \"custom_id_16,custom_id_17\");\n      request.AddQueryParameter(\"fund_id\", \"fund_1,fund_2\");\n      request.AddQueryParameter(\"account_id\", \"account_1,account_2\");\n      request.AddQueryParameter(\"investment_entity_id\", \"entity_1,entity_2\");\n      request.AddQueryParameter(\"document_type\", \"Account Statement,Capital Call Notice\");\n      request.AddQueryParameter(\"fund_sponsor\", \"fund_sponsor_1,fund_sponsor_2\");\n      request.AddQueryParameter(\"data_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"data_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"document_status\", \"Complete,Storage Only\");\n      request.AddQueryParameter(\"document_source\", \"Email,Upload Engine\");\n      request.AddQueryParameter(\"document_tag_id\", \"tag_1,tag_2\");\n      request.AddQueryParameter(\"file_upload_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"file_upload_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"account_group\", \"Geography: North America,Geography: Europe\");\n      request.AddQueryParameter(\"last_modified_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"last_modified_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"is_locked\", \"false\");\n      request.AddQueryParameter(\"ready_for_extract\", \"false\");\n      request.AddQueryParameter(\"sum_values\", \"false\");\n      request.AddQueryParameter(\"approval_status\", \"Approved\");\n      request.AddQueryParameter(\"approved_by\", \"user_1,user_2\");\n      request.AddQueryParameter(\"approval_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"approval_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"assignee\", \"user_1,user_2\");\n      request.AddQueryParameter(\"not_document_tag_id\", \"tag_1,tag_2\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetDocuments
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -2100,7 +2102,7 @@ paths:
 
 
         Document types are dynamically managed and organized by category. The response includes document type information including ID, key, level (''client_document'' or ''general_document''), category, and display name.'
-      operationId: GetDocumentsType
+      operationId: getV1DocumentsTypes
       responses:
         '200':
           description: Success
@@ -2138,6 +2140,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/types\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetDocumentsType
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -2147,7 +2151,7 @@ paths:
       - Documents
       summary: Get Document Tags
       description: Fetch all available document tags.
-      operationId: GetDocumentTags
+      operationId: getV1DocumentsTags
       parameters:
       - name: page
         in: query
@@ -2213,6 +2217,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/tags\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"100\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetDocumentTags
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -2222,7 +2228,7 @@ paths:
       - Documents
       summary: Get Document Allocation Tags
       description: Fetch all available document allocation tags.
-      operationId: GetDocumentAllocationTags
+      operationId: getV1DocumentsAllocationTags
       parameters:
       - name: page
         in: query
@@ -2288,6 +2294,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/allocation-tags\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"100\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetDocumentAllocationTags
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -2297,7 +2305,7 @@ paths:
       - Documents
       summary: Delete Multiple Documents
       description: Delete up to 100 documents by filtering with the current parameters. At least one parameter is required in the request.
-      operationId: DeleteMultipleDocuments
+      operationId: postV1DocumentsDeleteDocuments
       requestBody:
         required: false
         content:
@@ -2419,6 +2427,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/delete-documents\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          document_id = \"document_1,document_2\",\n          client_document_id = \"custom_id_16,custom_id_17\",\n          fund_id = \"fund_1,fund_2\",\n          account_id = \"account_1,account_2\",\n          document_type = \"Account Statement,Capital Call Notice\",\n          fund_sponsor = \"fund_sponsor_1,fund_sponsor_2\",\n          data_date_start = \"2019-03-30\",\n          data_date_end = \"2019-07-31\",\n          document_status = \"Complete,Storage Only\",\n          document_source = \"Email,Upload Engine\",\n          document_tag_id = \"tag_1,tag_2\",\n          file_upload_time_start = \"2019-03-30T04:00:00Z\",\n          file_upload_time_end = \"2019-07-31T04:00:00Z\",\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DeleteMultipleDocuments
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -2428,7 +2438,7 @@ paths:
       - Documents
       summary: Get A Single Document
       description: Download a specific document by the document's ID. A successful call to this endpoint will only contain the binary file, not the JSON data.
-      operationId: GetASingleDocument
+      operationId: getV1DocumentsById
       parameters:
       - name: id
         in: path
@@ -2460,12 +2470,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/1\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetASingleDocument
     delete:
       tags:
       - Documents
       summary: Delete A Single Document
       description: Delete a specific document by using the document's Canoe ID.
-      operationId: DeleteDocument
+      operationId: deleteV1DocumentsById
       parameters:
       - name: id
         in: path
@@ -2497,6 +2509,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/1\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DeleteDocument
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -2506,7 +2520,7 @@ paths:
       - Documents
       summary: Bulk Set Document Metadata
       description: Update metadata fields for up to 100 documents in a single request. Processing continues even if individual documents fail.
-      operationId: BulkSetDocumentMetadata
+      operationId: postV1DocumentsMetadata
       parameters:
       - name: document_ids
         in: body
@@ -2561,6 +2575,8 @@ paths:
           description: Validation error — invalid request body (returned before processing starts).
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: BulkSetDocumentMetadata
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -2570,7 +2586,7 @@ paths:
       - Documents
       summary: Set Document Metadata
       description: Set document metadata.
-      operationId: SetDocumentMetadata
+      operationId: putV1DocumentsByIdMetadata
       parameters:
       - name: id
         in: path
@@ -2649,6 +2665,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents/3/metadata\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {   \n          approval_status = \"Approved\",\n          comment = \"Sample Comment\",\n          tags = new { names = new [] { \"tag name 1\", \"tag name 2\" }, overwrite = false }\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: SetDocumentMetadata
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -2661,7 +2679,7 @@ paths:
 
 
         To retrieve additional information, you can inspect the response header data. There, you can find the total number of documents filtered by current query parameters.'
-      operationId: DownloadDocuments
+      operationId: getV1Documents
       parameters:
       - name: page
         in: query
@@ -2967,12 +2985,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"limit\", \"50\");\n      request.AddQueryParameter(\"document_id\", \"document_1,document_2\");\n      request.AddQueryParameter(\"client_document_id\", \"custom_id_16,custom_id_17\");\n      request.AddQueryParameter(\"fund_id\", \"fund_1,fund_2\");\n      request.AddQueryParameter(\"account_id\", \"account_1,account_2\");\n      request.AddQueryParameter(\"investment_entity_id\", \"entity_1,entity_2\");\n      request.AddQueryParameter(\"document_type\", \"Account Statement,Capital Call Notice\");\n      request.AddQueryParameter(\"fund_sponsor\", \"fund_sponsor_1,fund_sponsor_2\");\n      request.AddQueryParameter(\"data_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"data_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"document_status\", \"Complete,Storage Only\");\n      request.AddQueryParameter(\"document_source\", \"Email,Upload Engine\");\n      request.AddQueryParameter(\"document_tag_id\", \"tag_1,tag_2\");\n      request.AddQueryParameter(\"file_upload_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"file_upload_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"last_modified_time_start\", \"2019-03-30T04:00:00Z\");\n      request.AddQueryParameter(\"last_modified_time_end\", \"2019-07-31T04:00:00Z\");\n      request.AddQueryParameter(\"is_locked\", \"false\");\n      request.AddQueryParameter(\"ready_for_extract\", \"true\");\n      request.AddQueryParameter(\"approval_status\", \"Approved\");\n      request.AddQueryParameter(\"approved_by\", \"user_1,user_2\");\n      request.AddQueryParameter(\"approval_date_start\", \"2019-03-30\");\n      request.AddQueryParameter(\"approval_date_end\", \"2019-07-31\");\n      request.AddQueryParameter(\"account_group\", \"Geography: North America,Geography: Europe\");\n      request.AddQueryParameter(\"skip_downloaded\", \"false\");\n      request.AddQueryParameter(\"file_name_type\", \"original_file_name\");\n      request.AddQueryParameter(\"category\", \"Capital Activity\");\n      var response = client.Execute(request);\n      foreach (var h in response.ContentHeaders) {\n          if (h.Name==\"Content-Disposition\") {\n              var disposition = h.Value.ToString();\n              var filename = disposition.Substring(disposition.IndexOf(\"filename=\") + \"filename=\".Length);\n              File.WriteAllBytes(filename, response.RawBytes);\n          }\n      }"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DownloadDocuments
     post:
       tags:
       - Documents
       summary: Upload A Single Document
       description: Upload a Single Document
-      operationId: UploadDocuments
+      operationId: postV1Documents
       requestBody:
         required: true
         content:
@@ -3048,6 +3068,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/documents\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"multipart/form-data\");\n      request.AddFile(\"file\",\"path_to_file\");\n      var body = new\n      {   \n          storage_only = \"1\",\n          term_id = \"term_id\",\n          organization_id = \"organization_1\",\n          term_sheet_id = \"term_sheet_id\"\n          client_document_id = \"123\",\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: UploadDocuments
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -3161,43 +3183,6 @@ paths:
       description: Production API
 components:
   schemas:
-    DocumentMetaData:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the document that was updated.
-          example: '3'
-        document_status:
-          type: string
-          description: The updated document status.
-          example: Complete
-        approval_status:
-          type: string
-          description: The updated approval status of the document.
-          example: Approved
-        comment:
-          type: string
-          description: The updated comment on the document.
-          example: Sample Comment.
-        tags:
-          type: array
-          description: The array of tags associated with the document.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The id of the tag.
-                example: '1'
-              name:
-                type: string
-                description: The name of the tag.
-                example: tag_1
-        client_document_id:
-          type: string
-          description: The client document id.
-          example: custom_document_id.
     UploadSingleDocument:
       type: object
       properties:
@@ -3621,6 +3606,43 @@ components:
                 type: string
                 description: The date of when the allocation retires.
                 example: '2017-12-31'
+    DocumentMetaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the document that was updated.
+          example: '3'
+        document_status:
+          type: string
+          description: The updated document status.
+          example: Complete
+        approval_status:
+          type: string
+          description: The updated approval status of the document.
+          example: Approved
+        comment:
+          type: string
+          description: The updated comment on the document.
+          example: Sample Comment.
+        tags:
+          type: array
+          description: The array of tags associated with the document.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The id of the tag.
+                example: '1'
+              name:
+                type: string
+                description: The name of the tag.
+                example: tag_1
+        client_document_id:
+          type: string
+          description: The client document id.
+          example: custom_document_id.
     Document_2:
       type: object
       properties:

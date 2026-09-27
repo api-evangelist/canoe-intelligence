@@ -53,7 +53,7 @@ tags:
 - capital-calls
 - k-1-tax-documents
 - Portfolio Reporting
-- Financial-Services
+- Financial Services
 - Fintech
 - Wealth Management
 - Institutional Investors
@@ -70,6 +70,7 @@ tags_raw:
 - fintech
 - wealth-management
 - institutional-investors
+- Financial-Services
 apis:
 - aid: canoe-intelligence:canoe-intelligence-allocations-api
   name: Canoe Intelligence Allocations API

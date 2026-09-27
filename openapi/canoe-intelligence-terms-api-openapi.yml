@@ -426,7 +426,7 @@ paths:
       - Terms
       summary: Get Terms
       description: Fetch all terms accessible by the current API user.
-      operationId: GetTerms
+      operationId: getV1Terms
       parameters:
       - name: term_id
         in: query
@@ -539,12 +539,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/terms\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetTerms
     post:
       tags:
       - Terms
       summary: Create A Single Term
       description: Create a new term based on the input parameters.
-      operationId: CreateSingleTerm
+      operationId: postV1Terms
       requestBody:
         required: true
         content:
@@ -605,6 +607,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"/v1/terms\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          name = \"Sample Term 1\",\n          designation = \"draw\",\n          aliases = \"Sample Alias 1, Sample Alias 2\",\n          fund_id = \"fund_id_1\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: CreateSingleTerm
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -614,7 +618,7 @@ paths:
       - Terms
       summary: Update A Single Term
       description: Update the specified term based on the input parameters.
-      operationId: UpdateSingleTerm
+      operationId: putV1TermsById
       parameters:
       - name: id
         in: path
@@ -675,12 +679,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"/v1/terms/term_1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          name = \"Sample Term 1\",\n          designation = \"draw\",\n          aliases = \"Sample Alias 1, Sample Alias 2\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: UpdateSingleTerm
     delete:
       tags:
       - Terms
       summary: Delete A Single Term
       description: Delete a single term based on the term's id.
-      operationId: DeleteSingleTerm
+      operationId: deleteV1TermsById
       parameters:
       - name: id
         in: path
@@ -726,18 +732,13 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/terms/1\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DeleteSingleTerm
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
 components:
   schemas:
-    DeleteTerm:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A confirmation that the term id was deleted.
-          example: The Term 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
     GetTerms:
       type: object
       properties:
@@ -808,6 +809,13 @@ components:
           type: string
           description: The extraction status of the term.
           example: Ready For Extract
+    DeleteTerm:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A confirmation that the term id was deleted.
+          example: The Term 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
     GetTerms_2:
       type: object
       properties:

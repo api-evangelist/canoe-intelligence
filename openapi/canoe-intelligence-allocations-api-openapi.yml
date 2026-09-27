@@ -578,7 +578,7 @@ paths:
       - Allocations
       summary: Get Allocations
       description: Fetch all allocations accessible by the current API user.
-      operationId: GetAllocation
+      operationId: getV1Allocations
       parameters:
       - name: page
         in: query
@@ -706,12 +706,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/allocations\", Method.Get);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddQueryParameter(\"page\", \"1\");\n      request.AddQueryParameter(\"perPage\", \"50\");\n      request.AddQueryParameter(\"allocation_id\", \"investment_1\");\n      request.AddQueryParameter(\"entity_id\", \"entity_3\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: GetAllocation
     post:
       tags:
       - Allocations
       summary: Create A Single Allocation
       description: Create a new allocation based on the input parameters.
-      operationId: CreateSingleAllocation
+      operationId: postV1Allocations
       requestBody:
         required: true
         content:
@@ -809,6 +811,8 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/allocations\", Method.Post);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n        entity_id = \"entity_1\",\n        fund_id = \"investment_1\",\n        initial_date = \"2021-01-01\",\n        initial_amount = \"10000\",\n        status = \"active\",\n        custom_allocation_id = 700,\n        downstream_ids = new[]\n        {\n          new { id = black_diamond_account_name, value = sample_name }\n        },\n        custom_fields = new[]\n        {\n          new { id = 1, value = 100 }\n        },\n        allocation_entity_aliases = \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n        allocation_fund_aliases = \"Sample allocation fund alias 1,Sample allocation fund alias 2\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: CreateSingleAllocation
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
@@ -818,7 +822,7 @@ paths:
       - Allocations
       summary: Update A Single Allocation
       description: Update an existing allocation based on the input parameters.
-      operationId: UpdateSingleAllocation
+      operationId: putV1AllocationsById
       parameters:
       - name: id
         in: path
@@ -907,12 +911,14 @@ paths:
         source: "using RestSharp;\n\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/allocations/1\", Method.Put);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      request.AddHeader(\"Content-Type\", \"application/json\");\n      var body = new\n      {\n          initial_date = \"2021-01-01\",\n          initial_amount = \"10000\",\n          status = \"active\",\n          custom_allocation_id = 700,\n          downstream_ids = new[]\n          {\n              new { id = black_diamond_account_name, value = sample_name }\n          },\n          custom_fields = new[]\n          {\n              new { id = 1, value = 100 }\n          },\n          allocation_entity_aliases = \"Sample allocation entity alias 1,Sample allocation entity alias 2\",\n          allocation_fund_aliases = \"Sample allocation fund alias 1,Sample allocation fund alias 2\"\n      };\n      request.AddJsonBody(body);\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: UpdateSingleAllocation
     delete:
       tags:
       - Allocations
       summary: Delete A Single Allocation
       description: Delete a specific allocation by its ID.
-      operationId: DeleteSingleAllocation
+      operationId: deleteV1AllocationsById
       parameters:
       - name: id
         in: path
@@ -958,146 +964,13 @@ paths:
         source: "using RestSharp;\n      var client = new RestClient(\"https://api.canoesoftware.com/\");\n      var request = new RestRequest(\"v1/allocations/1\", Method.Delete);\n      request.AddParameter(\"Authorization\", string.Format(\"Bearer {token}\"), ParameterType.HttpHeader);\n      request.AddHeader(\"Accept\", \"application/json\");\n      request.AddHeader(\"X-Requested-With\", \"XMLHttpRequest\");\n      var response = client.Execute(request);\n      Console.WriteLine(response.Content);"
       security:
       - bearerAuth: []
+      x-operation-id-source: normalized
+      x-operation-id-original: DeleteSingleAllocation
     servers:
     - url: https://api.canoesoftware.com
       description: Production API
 components:
   schemas:
-    Allocations:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the allocation.
-          example: '2'
-        entity:
-          type: string
-          description: The name of the entity associated with the allocation.
-          example: test_entity_1
-        entity_id:
-          type: string
-          description: The ID of the entity associated with the allocation.
-          example: '10'
-        investment:
-          type: string
-          description: The name of the investment associated with the allocation.
-          example: Fund One - Class A
-        investment_id:
-          type: string
-          description: The ID of the investment associated with the allocation.
-          example: '11'
-        account:
-          type: string
-          description: The name of the account associated with the allocation.
-          example: Account One
-        account_id:
-          type: string
-          description: The ID of the account associated with the allocation.
-          example: '12'
-        initial_date:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The date when the allocation first becomes active.
-          example: '2020-01-01'
-        initial_amount:
-          type: string
-          description: The commitment amount of the allocation.
-          example: '500000'
-        status:
-          type: string
-          description: The current status of the allocation. It can be either active, pending, retired, or transitional.
-          example: active
-        custom_allocation_id:
-          type: string
-          description: The custom ID of the allocation.
-          example: '13'
-        created_at:
-          type: string
-          format: date-time
-          description: The datetime of when the allocation was created.
-          example: '2020-12-01T00:00:00Z'
-        updated_at:
-          type: string
-          format: date-time
-          description: The datetime of when the allocation was last updated.
-          example: '2020-12-02T00:00:00Z'
-        retired_at:
-          type:
-          - string
-          - 'null'
-          format: date
-          description: The date when the allocation retires.
-          example: null
-        downstream_ids:
-          type: array
-          description: The allocation's downstream information.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the downstream system.
-                example: investment_metrics_account_short_name
-              name:
-                type: string
-                description: The name of the downstream system.
-                example: Account Short Name
-              type:
-                type: string
-                description: The type of ID associated with the downstream system.
-                example: Investment Metrics
-              value:
-                type: string
-                description: The value of the downstream ID.
-                example: '101112'
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the allocation.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-                example: CLIENT_ID
-              value:
-                type: string
-                description: The value of the custom field.
-                example: null
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-                example: '2'
-        allocation_entity_aliases:
-          type: array
-          description: The allocation entity aliases.
-          items:
-            type: string
-            example: entity_alias_1
-        allocation_fund_aliases:
-          type: array
-          description: The allocation fund aliases.
-          items:
-            type: string
-            example: fund_alias_1
-        fund_name:
-          type: string
-          description: The fund associated with the allocation.
-          example: Fund One
-        term_id:
-          type: string
-          description: The term id with the allocation.
-          example: term_1
-        term_name:
-          type: string
-          description: The term associated with the allocation.
-          example: Class A
-        extraction_status:
-          type: string
-          description: The extraction status of the allocation.
-          example: Ready For Extract
     SingleAllocation:
       type: object
       properties:
@@ -1239,7 +1112,7 @@ components:
           type: string
           description: the extraction status on the allocation
           example: Ready For Extract
-    Allocations_2:
+    Allocations:
       type: object
       properties:
         id:
@@ -1275,15 +1148,15 @@ components:
           - string
           - 'null'
           format: date
-          description: The date of when the allocation first becomes active.
-          example: '2021-01-01'
+          description: The date when the allocation first becomes active.
+          example: '2020-01-01'
         initial_amount:
           type: string
           description: The commitment amount of the allocation.
           example: '500000'
         status:
           type: string
-          description: The current status of the allocation. It can be either active or inactive.
+          description: The current status of the allocation. It can be either active, pending, retired, or transitional.
           example: active
         custom_allocation_id:
           type: string
@@ -1293,19 +1166,19 @@ components:
           type: string
           format: date-time
           description: The datetime of when the allocation was created.
-          example: '2020-12-01 00:00:00'
+          example: '2020-12-01T00:00:00Z'
         updated_at:
           type: string
           format: date-time
           description: The datetime of when the allocation was last updated.
-          example: '2020-12-02 00:00:00'
+          example: '2020-12-02T00:00:00Z'
         retired_at:
           type:
           - string
           - 'null'
           format: date
-          description: The date of when the allocation retires.
-          example: '2022-01-01'
+          description: The date when the allocation retires.
+          example: null
         downstream_ids:
           type: array
           description: The allocation's downstream information.
@@ -1511,6 +1384,141 @@ components:
           type: string
           description: The term associated with the allocation.
           example: Sample Term
+        extraction_status:
+          type: string
+          description: The extraction status of the allocation.
+          example: Ready For Extract
+    Allocations_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the allocation.
+          example: '2'
+        entity:
+          type: string
+          description: The name of the entity associated with the allocation.
+          example: test_entity_1
+        entity_id:
+          type: string
+          description: The ID of the entity associated with the allocation.
+          example: '10'
+        investment:
+          type: string
+          description: The name of the investment associated with the allocation.
+          example: Fund One - Class A
+        investment_id:
+          type: string
+          description: The ID of the investment associated with the allocation.
+          example: '11'
+        account:
+          type: string
+          description: The name of the account associated with the allocation.
+          example: Account One
+        account_id:
+          type: string
+          description: The ID of the account associated with the allocation.
+          example: '12'
+        initial_date:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The date of when the allocation first becomes active.
+          example: '2021-01-01'
+        initial_amount:
+          type: string
+          description: The commitment amount of the allocation.
+          example: '500000'
+        status:
+          type: string
+          description: The current status of the allocation. It can be either active or inactive.
+          example: active
+        custom_allocation_id:
+          type: string
+          description: The custom ID of the allocation.
+          example: '13'
+        created_at:
+          type: string
+          format: date-time
+          description: The datetime of when the allocation was created.
+          example: '2020-12-01 00:00:00'
+        updated_at:
+          type: string
+          format: date-time
+          description: The datetime of when the allocation was last updated.
+          example: '2020-12-02 00:00:00'
+        retired_at:
+          type:
+          - string
+          - 'null'
+          format: date
+          description: The date of when the allocation retires.
+          example: '2022-01-01'
+        downstream_ids:
+          type: array
+          description: The allocation's downstream information.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the downstream system.
+                example: investment_metrics_account_short_name
+              name:
+                type: string
+                description: The name of the downstream system.
+                example: Account Short Name
+              type:
+                type: string
+                description: The type of ID associated with the downstream system.
+                example: Investment Metrics
+              value:
+                type: string
+                description: The value of the downstream ID.
+                example: '101112'
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the allocation.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+                example: CLIENT_ID
+              value:
+                type: string
+                description: The value of the custom field.
+                example: null
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+                example: '2'
+        allocation_entity_aliases:
+          type: array
+          description: The allocation entity aliases.
+          items:
+            type: string
+            example: entity_alias_1
+        allocation_fund_aliases:
+          type: array
+          description: The allocation fund aliases.
+          items:
+            type: string
+            example: fund_alias_1
+        fund_name:
+          type: string
+          description: The fund associated with the allocation.
+          example: Fund One
+        term_id:
+          type: string
+          description: The term id with the allocation.
+          example: term_1
+        term_name:
+          type: string
+          description: The term associated with the allocation.
+          example: Class A
         extraction_status:
           type: string
           description: The extraction status of the allocation.
