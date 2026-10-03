@@ -1690,164 +1690,6 @@ paths:
       description: Production API
 components:
   schemas:
-    SingleEntity:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The ID of the entity.
-          example: '1'
-        parent_id:
-          type: string
-          description: The ID of the entity's parent account.
-          example: '00'
-        name:
-          type: string
-          description: The name of the entity.
-          example: Demo
-        status:
-          type: string
-          description: The status of the entity.
-          example: active
-        aliases:
-          type: array
-          description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
-          items:
-            type: string
-          example: []
-        created_at:
-          type: string
-          format: date-time
-          description: The datetime of when the entity was created.
-          example: '2017-06-18T23:42:52Z'
-        updated_at:
-          type: string
-          format: date-time
-          description: The datetime of when the entity was last updated.
-          example: '2019-04-09T10:18:05Z'
-        downstream_ids:
-          type: array
-          description: The entity's downstream information.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the downstream system.
-                example: addepar_owner_id
-              name:
-                type: string
-                description: The name of the downstream system.
-                example: Addepar
-              type:
-                type: string
-                description: The type of ID associated with the downstream system.
-                example: Owner ID
-              value:
-                type: string
-                description: The value of the downstream ID.
-                example: sample_name
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the entity.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-                example: CLIENT_ID
-              value:
-                type: string
-                description: The value of the custom field.
-                example: BOX1
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-                example: '1'
-    GetOrganization:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The organization's ID. The organization includes the accounts and entities.
-          example: '1'
-        parent_id:
-          type: string
-          description: The ID of the organization's parent. The parent is also an organization.
-          example: '00'
-        status:
-          type: string
-          description: Whether an organization is active or inactive.
-          example: active
-        type:
-          type: string
-          description: The type of organization; this will be either account or entity.
-          example: account
-        name:
-          type: string
-          description: The name of the organization.
-          example: Demo
-        aliases:
-          type: array
-          description: Aliases of the organization name. These are user-created.
-          items:
-            type: string
-          example: []
-        description:
-          type: string
-          description: A description of the organization specified by the user.
-          example: Ex quia enim rem aut rerum. Quis eius consequatur impedit dolorem mollitia sed. Voluptate natus sed dolor quaerat. Et blanditiis ut unde aut qui.
-        created_at:
-          type: string
-          description: A timestamp of when the organization was created.
-          example: '2017-06-18 23:42:52'
-        updated_at:
-          type: string
-          description: A timestamp of when the organization was last updated.
-          example: '2019-04-09 10:18:05'
-        custom_fields:
-          type: array
-          description: The list of custom field objects (name, value, ID) of the organization.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-              value:
-                type: string
-                description: The value of the custom field.
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-          example:
-          - name: CLIENT_ID
-            value: BOX1
-            custom_field_id: '1'
-        downstream_ids:
-          type: array
-          description: The organizations downstream information.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The ID of the downstream system
-              name:
-                type: string
-                description: The name of the downstream system.
-              type:
-                type: string
-                description: The type of ID associated with the downstream system
-              value:
-                type: string
-                description: The value of the downstream ID.
-          example:
-          - id: downstream_system_id
-            name: downstream_system
-            type: downstream
-            value: '123'
     GetSingleOrganizationData:
       type: object
       properties:
@@ -2138,30 +1980,90 @@ components:
                 type: string
                 description: The date of when the allocation retires.
                 example: '2017-12-31'
-    GetSingleOrganizationId:
+    GetOrganization:
       type: object
       properties:
-        total:
-          type: integer
-          description: The total number of document IDs.
-          example: 10
-        ids:
+        id:
+          type: string
+          description: The organization's ID. The organization includes the accounts and entities.
+          example: '1'
+        parent_id:
+          type: string
+          description: The ID of the organization's parent. The parent is also an organization.
+          example: '00'
+        status:
+          type: string
+          description: Whether an organization is active or inactive.
+          example: active
+        type:
+          type: string
+          description: The type of organization; this will be either account or entity.
+          example: account
+        name:
+          type: string
+          description: The name of the organization.
+          example: Demo
+        aliases:
           type: array
-          description: An array of document IDs.
+          description: Aliases of the organization name. These are user-created.
           items:
             type: string
-            example:
-            - 2345abcd-1234-1111-9876-1234567abc89
-            - 2345abcd-1234-1111-9876-1234567abc88
-            - 2345abcd-1234-1111-9876-1234567abc87
-            - 2345abcd-1234-1111-9876-1234567abc86
-            - 2345abcd-1234-1111-9876-1234567abc85
-            - 2345abcd-1234-1111-9876-1234567abc84
-            - 2345abcd-1234-1111-9876-1234567abc83
-            - 2345abcd-1234-1111-9876-1234567abc82
-            - 2345abcd-1234-1111-9876-1234567abc81
-            - 2345abcd-1234-1111-9876-1234567abc80
-    SingleEntity_2:
+          example: []
+        description:
+          type: string
+          description: A description of the organization specified by the user.
+          example: Ex quia enim rem aut rerum. Quis eius consequatur impedit dolorem mollitia sed. Voluptate natus sed dolor quaerat. Et blanditiis ut unde aut qui.
+        created_at:
+          type: string
+          description: A timestamp of when the organization was created.
+          example: '2017-06-18 23:42:52'
+        updated_at:
+          type: string
+          description: A timestamp of when the organization was last updated.
+          example: '2019-04-09 10:18:05'
+        custom_fields:
+          type: array
+          description: The list of custom field objects (name, value, ID) of the organization.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+          example:
+          - name: CLIENT_ID
+            value: BOX1
+            custom_field_id: '1'
+        downstream_ids:
+          type: array
+          description: The organizations downstream information.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the downstream system
+              name:
+                type: string
+                description: The name of the downstream system.
+              type:
+                type: string
+                description: The type of ID associated with the downstream system
+              value:
+                type: string
+                description: The value of the downstream ID.
+          example:
+          - id: downstream_system_id
+            name: downstream_system
+            type: downstream
+            value: '123'
+    SingleEntity:
       type: object
       properties:
         id:
@@ -2176,26 +2078,26 @@ components:
           type: string
           description: The name of the entity.
           example: Demo
+        status:
+          type: string
+          description: The status of the entity.
+          example: active
         aliases:
           type: array
           description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
           items:
             type: string
           example: []
-        status:
-          type: string
-          description: The status of the entity.
-          example: active
         created_at:
           type: string
           format: date-time
           description: The datetime of when the entity was created.
-          example: '2017-06-18 23:42:52'
+          example: '2017-06-18T23:42:52Z'
         updated_at:
           type: string
           format: date-time
           description: The datetime of when the entity was last updated.
-          example: '2019-04-09 10:18:05'
+          example: '2019-04-09T10:18:05Z'
         downstream_ids:
           type: array
           description: The entity's downstream information.
@@ -2236,6 +2138,29 @@ components:
                 type: string
                 description: The ID of the custom field.
                 example: '1'
+    GetSingleOrganizationId:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: The total number of document IDs.
+          example: 10
+        ids:
+          type: array
+          description: An array of document IDs.
+          items:
+            type: string
+            example:
+            - 2345abcd-1234-1111-9876-1234567abc89
+            - 2345abcd-1234-1111-9876-1234567abc88
+            - 2345abcd-1234-1111-9876-1234567abc87
+            - 2345abcd-1234-1111-9876-1234567abc86
+            - 2345abcd-1234-1111-9876-1234567abc85
+            - 2345abcd-1234-1111-9876-1234567abc84
+            - 2345abcd-1234-1111-9876-1234567abc83
+            - 2345abcd-1234-1111-9876-1234567abc82
+            - 2345abcd-1234-1111-9876-1234567abc81
+            - 2345abcd-1234-1111-9876-1234567abc80
     GetSingleOrganizationData_2:
       type: object
       properties:
@@ -2525,6 +2450,81 @@ components:
                 type: string
                 description: The date of when the allocation retires.
                 example: '2017-12-31'
+    SingleEntity_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the entity.
+          example: '1'
+        parent_id:
+          type: string
+          description: The ID of the entity's parent account.
+          example: '00'
+        name:
+          type: string
+          description: The name of the entity.
+          example: Demo
+        aliases:
+          type: array
+          description: Aliases of the entity name. These are user-created. If there are multiple aliases, they should be separated by commas.
+          items:
+            type: string
+          example: []
+        status:
+          type: string
+          description: The status of the entity.
+          example: active
+        created_at:
+          type: string
+          format: date-time
+          description: The datetime of when the entity was created.
+          example: '2017-06-18 23:42:52'
+        updated_at:
+          type: string
+          format: date-time
+          description: The datetime of when the entity was last updated.
+          example: '2019-04-09 10:18:05'
+        downstream_ids:
+          type: array
+          description: The entity's downstream information.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The ID of the downstream system.
+                example: addepar_owner_id
+              name:
+                type: string
+                description: The name of the downstream system.
+                example: Addepar
+              type:
+                type: string
+                description: The type of ID associated with the downstream system.
+                example: Owner ID
+              value:
+                type: string
+                description: The value of the downstream ID.
+                example: sample_name
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the entity.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+                example: CLIENT_ID
+              value:
+                type: string
+                description: The value of the custom field.
+                example: BOX1
+              custom_field_id:
+                type: string
+                description: The ID of the custom field.
+                example: '1'
   securitySchemes:
     bearerAuth:
       type: http

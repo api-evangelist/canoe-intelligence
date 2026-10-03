@@ -791,57 +791,6 @@ paths:
       description: Production API
 components:
   schemas:
-    User:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Whether a user is active or inactive.
-          example: active
-        email:
-          type: string
-          description: A user's email address.
-          example: your-email@gmail.com
-        phone:
-          type: string
-          description: A user's phone number.
-          example: '1234567890'
-        first_name:
-          type: string
-          description: A user's first name.
-          example: Jane
-        last_name:
-          type: string
-          description: A user's last name.
-          example: Doe
-        created_at:
-          type: string
-          description: A timestamp of when this user was created.
-          example: '2017-03-17 12:05:59'
-        access_level:
-          type: array
-          description: Roles assigned to the user.
-          items:
-            type: object
-            properties:
-              role_id:
-                type: string
-                description: Id of the role.
-                example: role_1
-              role_name:
-                type: string
-                description: Description of the role.
-                example: Canoe Role
-              role_organization_ids:
-                type: array
-                description: Ids of the organizations the role is attached to.
-                items:
-                  type: string
-                  example: organization_1
-              role_linked_to:
-                type: string
-                description: Whether the role is linked to account or entity.
-                example: account
     Users:
       type: object
       properties:
@@ -897,6 +846,68 @@ components:
                 type: string
                 description: Whether the role is linked to account or entity.
                 example: account
+    User:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Whether a user is active or inactive.
+          example: active
+        email:
+          type: string
+          description: A user's email address.
+          example: your-email@gmail.com
+        phone:
+          type: string
+          description: A user's phone number.
+          example: '1234567890'
+        first_name:
+          type: string
+          description: A user's first name.
+          example: Jane
+        last_name:
+          type: string
+          description: A user's last name.
+          example: Doe
+        created_at:
+          type: string
+          description: A timestamp of when this user was created.
+          example: '2017-03-17 12:05:59'
+        access_level:
+          type: array
+          description: Roles assigned to the user.
+          items:
+            type: object
+            properties:
+              role_id:
+                type: string
+                description: Id of the role.
+                example: role_1
+              role_name:
+                type: string
+                description: Description of the role.
+                example: Canoe Role
+              role_organization_ids:
+                type: array
+                description: Ids of the organizations the role is attached to.
+                items:
+                  type: string
+                  example: organization_1
+              role_linked_to:
+                type: string
+                description: Whether the role is linked to account or entity.
+                example: account
+    Roles:
+      type: object
+      properties:
+        role_id:
+          type: string
+          description: The ID of the role.
+          example: role_1
+        access_level_name:
+          type: string
+          description: The name of the role.
+          example: Tenant Admin
     UserWithId:
       type: object
       properties:
@@ -952,44 +963,6 @@ components:
           type: string
           description: Id of User.
           example: user_1
-    Roles:
-      type: object
-      properties:
-        role_id:
-          type: string
-          description: The ID of the role.
-          example: role_1
-        access_level_name:
-          type: string
-          description: The name of the role.
-          example: Tenant Admin
-    User_2:
-      type: object
-      properties:
-        status:
-          type: string
-          description: Whether a user is active or inactive.
-          example: active
-        email:
-          type: string
-          description: A user's email address.
-          example: your-email@gmail.com
-        phone:
-          type: string
-          description: A user's phone number.
-          example: '1234567890'
-        first_name:
-          type: string
-          description: A user's first name.
-          example: Jane
-        last_name:
-          type: string
-          description: A user's last name.
-          example: Doe
-        created_at:
-          type: string
-          description: A timestamp of when this user was created.
-          example: '2017-03-17 12:05:59'
     Users_2:
       type: object
       properties:
@@ -1021,6 +994,33 @@ components:
           type: string
           description: The timestamp of when this user was created.
           example: '2020-11-02 13:20:47'
+    User_2:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Whether a user is active or inactive.
+          example: active
+        email:
+          type: string
+          description: A user's email address.
+          example: your-email@gmail.com
+        phone:
+          type: string
+          description: A user's phone number.
+          example: '1234567890'
+        first_name:
+          type: string
+          description: A user's first name.
+          example: Jane
+        last_name:
+          type: string
+          description: A user's last name.
+          example: Doe
+        created_at:
+          type: string
+          description: A timestamp of when this user was created.
+          example: '2017-03-17 12:05:59'
   securitySchemes:
     bearerAuth:
       type: http
