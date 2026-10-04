@@ -3183,6 +3183,58 @@ paths:
       description: Production API
 components:
   schemas:
+    DocumentMetaData:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The id of the document that was updated.
+          example: '3'
+        document_status:
+          type: string
+          description: The updated document status.
+          example: Complete
+        approval_status:
+          type: string
+          description: The updated approval status of the document.
+          example: Approved
+        comment:
+          type: string
+          description: The updated comment on the document.
+          example: Sample Comment.
+        tags:
+          type: array
+          description: The array of tags associated with the document.
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                description: The id of the tag.
+                example: '1'
+              name:
+                type: string
+                description: The name of the tag.
+                example: tag_1
+        client_document_id:
+          type: string
+          description: The client document id.
+          example: custom_document_id.
+    UploadSingleDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The document's ID at Canoe.
+          example: canoe_document_id
+        name:
+          type: string
+          description: The name of the uploaded document.
+          example: uploaded_document_name
+        client_document_id:
+          type: string
+          description: The custom document ID user specified for the uploaded document.
+          example: '123'
     Document:
       type: object
       properties:
@@ -3591,58 +3643,6 @@ components:
                 type: string
                 description: The date of when the allocation retires.
                 example: '2017-12-31'
-    UploadSingleDocument:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The document's ID at Canoe.
-          example: canoe_document_id
-        name:
-          type: string
-          description: The name of the uploaded document.
-          example: uploaded_document_name
-        client_document_id:
-          type: string
-          description: The custom document ID user specified for the uploaded document.
-          example: '123'
-    DocumentMetaData:
-      type: object
-      properties:
-        id:
-          type: string
-          description: The id of the document that was updated.
-          example: '3'
-        document_status:
-          type: string
-          description: The updated document status.
-          example: Complete
-        approval_status:
-          type: string
-          description: The updated approval status of the document.
-          example: Approved
-        comment:
-          type: string
-          description: The updated comment on the document.
-          example: Sample Comment.
-        tags:
-          type: array
-          description: The array of tags associated with the document.
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                description: The id of the tag.
-                example: '1'
-              name:
-                type: string
-                description: The name of the tag.
-                example: tag_1
-        client_document_id:
-          type: string
-          description: The client document id.
-          example: custom_document_id.
     Document_2:
       type: object
       properties:
