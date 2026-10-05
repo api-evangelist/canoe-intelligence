@@ -1,0 +1,12 @@
+{
+ "url": "https://api.canoesoftware.com/api/docs?api-docs-v1.yaml",
+ "requested_url": "https://api.canoesoftware.com/api/docs?api-docs-v1.yaml",
+ "status": 200,
+ "content_type": "application/yaml",
+ "bytes": 522416,
+ "sha256": "d800de09c29c1c14d0f69c71202583088fe7cb0ddc96a52e99b0e6ff7c7fe237",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
