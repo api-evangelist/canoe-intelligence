@@ -739,6 +739,13 @@ paths:
       description: Production API
 components:
   schemas:
+    DeleteTerm:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A confirmation that the term id was deleted.
+          example: The Term 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
     GetTerms:
       type: object
       properties:
@@ -809,13 +816,6 @@ components:
           type: string
           description: The extraction status of the term.
           example: Ready For Extract
-    DeleteTerm:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A confirmation that the term id was deleted.
-          example: The Term 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
     GetTerms_2:
       type: object
       properties:

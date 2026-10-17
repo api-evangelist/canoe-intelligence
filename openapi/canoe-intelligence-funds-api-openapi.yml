@@ -1586,97 +1586,29 @@ paths:
       description: Production API
 components:
   schemas:
-    GetFunds:
+    FundDocumentId:
       type: object
       properties:
-        id:
-          type: string
-          description: The fund's ID.
-          example: '1'
-        organization_id:
-          type: string
-          description: The ID of the organization that the fund is associated with.
-          example: '12'
-        type:
-          type: string
-          description: The fund's investment type.
-          example: direct_investment
-        status:
-          type: string
-          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
-          example: active
-        name:
-          type: string
-          description: The name of the investment (fund + term).
-          example: Sample Direct Deal 1
-        sponsor:
-          type: string
-          description: The sponsor of the fund.
-          example: Sample Sponsor 1
-        start_date:
-          type: string
-          description: Fund Inception Date. The date on which the fund began its operations.
-          example: '2015-11-10'
-        aliases:
+        total:
+          type: integer
+          description: The total number of document IDs.
+          example: 10
+        ids:
           type: array
-          description: Aliases of the investment name. These are user-created.
+          description: An array of document IDs.
           items:
             type: string
           example:
-          - Sample Direct 1
-          - SDD1
-        legal_name:
-          type: string
-          description: The legal name of the fund.
-          example: Sample Direct Deal 1 LP
-        updated_at:
-          type: string
-          description: A timestamp of when the fund was updated.
-          example: '2018-04-30 20:40:19'
-        created_at:
-          type: string
-          description: A timestamp of when the fund was created.
-          example: '2018-04-30 20:40:19'
-        custom_fields:
-          type: array
-          description: The list of custom fields associated with the fund.
-          items:
-            type: object
-            properties:
-              name:
-                type: string
-                description: The name of the custom field.
-              value:
-                type: string
-                description: The value of the custom field.
-              custom_field_id:
-                type: string
-                description: The ID of the custom field.
-          example:
-          - name: CLIENT_ID
-            value: BOX1
-            custom_field_id: '1'
-        requirements_preference:
-          type: object
-          description: The requirements preference of the fund.
-          properties:
-            account_statements:
-              type: object
-              properties:
-                balance:
-                  type: string
-                  description: Either ending_balance or price_units.
-          example:
-          - account_statements:
-              balance: price_units
-        term_id:
-          type: string
-          description: The ID of the term that is associated with the fund.
-          example: '1'
-        fund_name:
-          type: string
-          description: The name of the fund.
-          example: Sample Direct
+          - 2345abcd-1234-1111-9876-1234567abc89
+          - 2345abcd-1234-1111-9876-1234567abc88
+          - 2345abcd-1234-1111-9876-1234567abc87
+          - 2345abcd-1234-1111-9876-1234567abc86
+          - 2345abcd-1234-1111-9876-1234567abc85
+          - 2345abcd-1234-1111-9876-1234567abc84
+          - 2345abcd-1234-1111-9876-1234567abc83
+          - 2345abcd-1234-1111-9876-1234567abc82
+          - 2345abcd-1234-1111-9876-1234567abc81
+          - 2345abcd-1234-1111-9876-1234567abc80
     FundDocumentData:
       type: object
       properties:
@@ -1945,29 +1877,29 @@ components:
               type: string
               description: The ID of the term that is associated with the fund.
               example: ''
-    FundDocumentId:
+    DeleteFunds:
       type: object
       properties:
-        total:
-          type: integer
-          description: The total number of document IDs.
-          example: 10
         ids:
           type: array
-          description: An array of document IDs.
+          description: An array of fund IDs that were deleted.
           items:
             type: string
           example:
-          - 2345abcd-1234-1111-9876-1234567abc89
-          - 2345abcd-1234-1111-9876-1234567abc88
-          - 2345abcd-1234-1111-9876-1234567abc87
-          - 2345abcd-1234-1111-9876-1234567abc86
-          - 2345abcd-1234-1111-9876-1234567abc85
-          - 2345abcd-1234-1111-9876-1234567abc84
-          - 2345abcd-1234-1111-9876-1234567abc83
-          - 2345abcd-1234-1111-9876-1234567abc82
-          - 2345abcd-1234-1111-9876-1234567abc81
-          - 2345abcd-1234-1111-9876-1234567abc80
+          - id_1
+          - id_2
+          - id_3
+        deleted:
+          type: integer
+          description: The total number of funds deleted.
+          example: 3
+    DeleteFund:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A confirmation that the fund ID was deleted.
+          example: The Fund 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
     SingleFund:
       type: object
       properties:
@@ -2063,30 +1995,7 @@ components:
           type: string
           description: The name of the term
           example: Deal 1
-    DeleteFund:
-      type: object
-      properties:
-        message:
-          type: string
-          description: A confirmation that the fund ID was deleted.
-          example: The Fund 5a2044f0-4db9-11ed-a40f-0242ac120004 was deleted.
-    DeleteFunds:
-      type: object
-      properties:
-        ids:
-          type: array
-          description: An array of fund IDs that were deleted.
-          items:
-            type: string
-          example:
-          - id_1
-          - id_2
-          - id_3
-        deleted:
-          type: integer
-          description: The total number of funds deleted.
-          example: 3
-    GetFunds_2:
+    GetFunds:
       type: object
       properties:
         id:
@@ -2149,13 +2058,13 @@ components:
               value:
                 type: string
                 description: The value of the custom field.
-              ID:
+              custom_field_id:
                 type: string
                 description: The ID of the custom field.
           example:
           - name: CLIENT_ID
             value: BOX1
-            ID: '1'
+            custom_field_id: '1'
         requirements_preference:
           type: object
           description: The requirements preference of the fund.
@@ -2712,6 +2621,97 @@ components:
           type: string
           description: The name of the term
           example: Deal 1
+    GetFunds_2:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The fund's ID.
+          example: '1'
+        organization_id:
+          type: string
+          description: The ID of the organization that the fund is associated with.
+          example: '12'
+        type:
+          type: string
+          description: The fund's investment type.
+          example: direct_investment
+        status:
+          type: string
+          description: Indicates whether or not a fund is active. The status can be active, retired, or transitional.
+          example: active
+        name:
+          type: string
+          description: The name of the investment (fund + term).
+          example: Sample Direct Deal 1
+        sponsor:
+          type: string
+          description: The sponsor of the fund.
+          example: Sample Sponsor 1
+        start_date:
+          type: string
+          description: Fund Inception Date. The date on which the fund began its operations.
+          example: '2015-11-10'
+        aliases:
+          type: array
+          description: Aliases of the investment name. These are user-created.
+          items:
+            type: string
+          example:
+          - Sample Direct 1
+          - SDD1
+        legal_name:
+          type: string
+          description: The legal name of the fund.
+          example: Sample Direct Deal 1 LP
+        updated_at:
+          type: string
+          description: A timestamp of when the fund was updated.
+          example: '2018-04-30 20:40:19'
+        created_at:
+          type: string
+          description: A timestamp of when the fund was created.
+          example: '2018-04-30 20:40:19'
+        custom_fields:
+          type: array
+          description: The list of custom fields associated with the fund.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the custom field.
+              value:
+                type: string
+                description: The value of the custom field.
+              ID:
+                type: string
+                description: The ID of the custom field.
+          example:
+          - name: CLIENT_ID
+            value: BOX1
+            ID: '1'
+        requirements_preference:
+          type: object
+          description: The requirements preference of the fund.
+          properties:
+            account_statements:
+              type: object
+              properties:
+                balance:
+                  type: string
+                  description: Either ending_balance or price_units.
+          example:
+          - account_statements:
+              balance: price_units
+        term_id:
+          type: string
+          description: The ID of the term that is associated with the fund.
+          example: '1'
+        fund_name:
+          type: string
+          description: The name of the fund.
+          example: Sample Direct
   securitySchemes:
     bearerAuth:
       type: http
