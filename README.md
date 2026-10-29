@@ -64,41 +64,137 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Canoe Intelligence is an alternative-investment data infrastructure platform that automates the
-collection, extraction, and validation of private-markets documents for institutional allocators,
-fund-of-funds, family offices, RIAs, fund administrators, and asset servicers.
+Canoe Intelligence is an alternative-investment data infrastructure platform that automates the collection, extraction, and validation of private-markets documents for institutional allocators, fund-of-funds, family offices, RIAs, fund administrators, and asset servicers. The platform retrieves capital call notices, distribution notices, capital account statements, K-1 tax documents, and related fund communications from GP portals and email, applies AI-based extraction across 50+ document types and a 2,586-field data library, validates the results against fund and LP records, and delivers structured data downstream. Canoe publishes a public REST API (Canoe API v1) at api.canoesoftware.com covering documents, funds, terms, organizations, entities, accounts, allocations, custom fields, and user management, documented with a public OpenAPI 3.0 definition and authenticated with OAuth 2.0 bearer/JWT access tokens.
 
-- Company: https://canoeintelligence.com/
-- API documentation: https://api.canoesoftware.com/docs
-- OpenAPI (live): https://api.canoesoftware.com/api/docs.json
-- API Terms of Use: https://canoeintelligence.com/api-terms-of-use/
-- Trust center: https://trust.canoeintelligence.com/
+**Areas:** Alternative Investments · Private Markets · Document Automation · Data Extraction · Fund Administration · capital-calls · k-1-tax-documents · Portfolio Reporting · Financial Services · Fintech · Wealth Management · Institutional Investors
 
-## What is in this repo
+## Canoe Intelligence on APIs.io
 
-| Artifact | What it holds |
+Everything profiled for Canoe Intelligence is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/canoe-intelligence/](https://apis.io/providers/canoe-intelligence/)** — or go straight to one of the APIs or properties below.
+
+### APIs (10)
+
+- [Canoe Intelligence Allocations API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-allocations-api/) — The Allocations API from Canoe Intelligence — 2 operation(s) for allocations.
+- [Canoe Intelligence Authentication API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-authentication-api/) — The Authentication API from Canoe Intelligence — 4 operation(s) for authentication.
+- [Canoe Intelligence Custom Fields API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-custom-fields-api/) — The Custom Fields API from Canoe Intelligence — 1 operation(s) for custom fields.
+- [Canoe Intelligence Documents API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-documents-api/) — The Documents API from Canoe Intelligence — 10 operation(s) for documents.
+- [Canoe Intelligence Funds API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-funds-api/) — The Funds API from Canoe Intelligence — 6 operation(s) for funds.
+- [Canoe Intelligence Organizations API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-organizations-api/) — The Organizations API from Canoe Intelligence — 9 operation(s) for organizations.
+- [Canoe Intelligence Password Grant Tokens API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-password-grant-tokens-api/) — The Password Grant Tokens API from Canoe Intelligence — 1 operation(s) for password grant tokens.
+- [Canoe Intelligence Terms API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-terms-api/) — The Terms API from Canoe Intelligence — 2 operation(s) for terms.
+- [Canoe Intelligence User API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-user-api/) — The User API from Canoe Intelligence — 4 operation(s) for user.
+- [Canoe Intelligence Introduction API](https://apis.io/apis/canoe-intelligence/canoe-intelligence-introduction-api/) — The Introduction API from Canoe Intelligence — 2 operation(s) for introduction.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Canoe Intelligence Agentic Access](https://apis.io/agentic-access/canoe-intelligence/canoe-intelligence-agentic-access/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Canoe API v1 Allocations API](https://apis.io/collections/canoe-intelligence/open-canoe-intelligence-allocations-api/)
+- [Canoe API v1 Authentication API](https://apis.io/collections/canoe-intelligence/open-canoe-intelligence-authentication-api/)
+- [Canoe API v1 Custom Fields API](https://apis.io/collections/canoe-intelligence/open-canoe-intelligence-custom-fields-api/)
+- [Canoe API v1 Documents API](https://apis.io/collections/canoe-intelligence/open-canoe-intelligence-documents-api/)
+- [Canoe API v1 Funds API](https://apis.io/collections/canoe-intelligence/open-canoe-intelligence-funds-api/)
+- [Canoe API v1 Organizations API](https://apis.io/collections/canoe-intelligence/open-canoe-intelligence-organizations-api/)
+- [Canoe API v1 Password Grant Tokens API](https://apis.io/collections/canoe-intelligence/open-canoe-intelligence-password-grant-tokens-api/)
+- [Canoe API v1 Terms API](https://apis.io/collections/canoe-intelligence/open-canoe-intelligence-terms-api/)
+- [Canoe API v1 User API](https://apis.io/collections/canoe-intelligence/open-canoe-intelligence-user-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Canoe Intelligence Api Overlay](https://apis.io/overlays/canoe-intelligence/canoe-intelligence-api-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Canoe Intelligence Authentication](https://apis.io/security/canoe-intelligence/canoe-intelligence-authentication/)
+- [Canoe Intelligence Domain Security](https://apis.io/security/canoe-intelligence/canoe-intelligence-domain-security/)
+- [Canoe Intelligence Trust Center](https://apis.io/security/canoe-intelligence/canoe-intelligence-trust-center/)
+- [Canoe Intelligence Vulnerability Disclosure](https://apis.io/security/canoe-intelligence/canoe-intelligence-vulnerability-disclosure/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Canoe Intelligence Scopes](https://apis.io/scopes/canoe-intelligence/canoe-intelligence-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://canoeintelligence.com/)
+- [Documentation](https://api.canoesoftware.com/docs)
+- [API reference](https://api.canoesoftware.com/docs)
+- [Support](https://canoeintelligence.com/contact-us/)
+- [Blog](https://canoeintelligence.com/category/insights/)
+- [Compliance](https://canoeintelligence.com/implementation-data-security/)
+- [Trust centre](https://trust.canoeintelligence.com/)
+- [Terms of service](https://canoeintelligence.com/api-terms-of-use/)
+- [Privacy policy](https://canoeintelligence.com/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 40.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
 |---|---|
-| `openapi/` | Canoe API v1 — OpenAPI 3.0.0, 39 paths / 50 operations, harvested verbatim from the live docs host |
-| `authentication/` | OAuth 2.0 profile: bearer/JWT, four grants, 24-hour tokens |
-| `scopes/` | The honest zero — both OAuth flows declare an empty scopes map |
-| `conventions/` | Headers, opt-in dated pagination, `fields` selection, versioning, rate-limit signalling |
-| `errors/` | Documented status codes plus the `error_code` / `error_description` / `hint` auth envelope |
-| `lifecycle/` | `X-API-VERSION` date train, and the status page / changelog that do not exist |
-| `data-model/` | Organization → Entity → Account → Fund → Term → Allocation → Document graph |
-| `examples/` | Index of the `x-codeSamples` (5 languages) and parameter examples Canoe ships in-spec |
-| `conformance/` | Standards asserted and denied, each with evidence |
-| `security/` | Probed TLS/DNS posture, the Vanta trust center, and the absent disclosure program |
-| `well-known/` | Every `/.well-known/` probe, including the SPA catch-alls that were rejected |
-| `llms/` | Canoe's own `llms.txt`, saved verbatim |
-| `mcp/` | Candidate tool surface derived from the OpenAPI — Canoe ships no MCP server |
-| `skills/` | Three agent skills grounded in verified `operationId`s |
-| `agentic-access/`, `overlays/` | Generated governance and enhancement layers |
+| Discoverability | 73.2 |
+| Contract quality | 49.1 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 47.0 |
+| Access clarity | 35.5 |
 
-## The notable finding
+**Agent readiness 28.4** — agent-aware
 
-Canoe's machine-readable contract is public and complete, but it is not where a crawler would look.
-`api.canoesoftware.com` returns `500` at the root and `404` for `/openapi.json`; the real OpenAPI
-sits at `https://api.canoesoftware.com/api/docs.json`, referenced only from a `SwaggerUIBundle`
-call inside the `/docs` HTML. Nothing on `canoeintelligence.com` links to it. The company also
-publishes an `llms.txt` and an `llms-full.txt` that describe the product in detail and never mention
-the API at all.
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | documented (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | partial |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 39.2** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/canoe-intelligence/](https://apis.io/providers/canoe-intelligence/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Canoe Intelligence: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/canoe-intelligence/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
